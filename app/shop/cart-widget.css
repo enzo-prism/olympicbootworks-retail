@@ -1,0 +1,64 @@
+/* Custom styling for the Ecwid cart widget */
+.ec-cart-widget {
+  z-index: 10;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the cart icon to match the site's design */
+.ec-cart-widget div[class^="ec-cart-widget--"] {
+  font-family: inherit !important;
+}
+
+/* Style the cart icon */
+.ec-cart-widget .ec-minicart {
+  border: none !important;
+  background: transparent !important;
+  color: var(--primary) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Style the cart icon when it has items */
+.ec-cart-widget .ec-minicart--has-items {
+  color: var(--primary) !important;
+}
+
+/* Style the cart counter badge */
+.ec-cart-widget .ec-minicart__counter {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  min-width: 1.25rem !important;
+  height: 1.25rem !important;
+  border-radius: 9999px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  top: -0.25rem !important;
+  right: -0.25rem !important;
+}
+
+/* Ensure the cart widget doesn't break the layout */
+.ec-cart-widget * {
+  box-sizing: border-box !important;
+}
+
+/* Style the cart popup to match the site's design */
+.ecwid-popup-container {
+  font-family: inherit !important;
+}
+
+/* Ensure the cart widget is properly sized on mobile */
+@media (max-width: 768px) {
+  .ec-cart-widget {
+    min-width: 32px;
+    min-height: 32px;
+  }
+}

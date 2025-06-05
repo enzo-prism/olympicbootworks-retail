@@ -1,0 +1,166 @@
+/* Video background styles */
+.vimeo-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.vimeo-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.77777778vh; /* 16:9 aspect ratio */
+  height: 56.25vw; /* 16:9 aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  object-fit: cover;
+}
+
+/* For Safari compatibility */
+@supports (-webkit-appearance: none) {
+  .vimeo-iframe,
+  .vimeo-fullwidth-iframe {
+    width: 177.77777778vh;
+    height: 56.25vw;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
+/* For Firefox compatibility */ \
+@-moz-document url-prefix() {
+  .vimeo-iframe, .vimeo-fullwidth-iframe {
+    width: 177.77777778vh;
+    height: 56.25vw;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 768px) {
+  .vimeo-iframe,
+  .vimeo-fullwidth-iframe {
+    width: 100%;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+  }
+}
+
+/* Full viewport width video styles */
+.full-width-video-container {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  position: relative;
+  overflow: hidden;
+}
+
+.vimeo-fullwidth-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.77777778vh; /* 16:9 aspect ratio */
+  height: 56.25vw; /* 16:9 aspect ratio */
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  object-fit: cover;
+}
+
+/* Fix for mobile devices with notches/cutouts */
+@supports (padding: max(0px)) {
+  .full-width-video-container {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Fix for Safari */
+@media not all and (min-resolution: .001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .vimeo-fullwidth-iframe {
+      width: 110vw;
+      height: 61.875vw; /* 16:9 aspect ratio + 10% */
+    }
+  }
+}
+
+/* Enhanced text shadow for better readability on video backgrounds */
+.video-hero-title {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.video-hero-subtitle {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Ensure all hero elements are white and visible */
+.full-width-hero h1,
+.full-width-hero h2,
+.full-width-hero h3,
+.full-width-hero p,
+.full-width-hero span,
+.full-width-hero div {
+  color: white !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Ensure all icons in hero sections are white */
+.full-width-hero svg,
+.full-width-hero .lucide {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Ensure buttons have good visibility and white text */
+.full-width-hero button,
+.full-width-hero a[role="button"],
+.full-width-hero a {
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 20;
+}
+
+.full-width-hero button svg,
+.full-width-hero a svg {
+  color: white !important;
+  fill: white !important;
+}
+
+/* Force white text on all interactive elements */
+.full-width-hero button *,
+.full-width-hero a * {
+  color: white !important;
+}
+
+/* Add a new class for the video container to ensure proper aspect ratio */
+.video-container-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* Fix for Safari */
+@media not all and (min-resolution: .001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .vimeo-fullwidth-iframe,
+    .vimeo-iframe {
+      width: 200vw !important;
+      height: 200vh !important;
+      min-width: 200% !important;
+      min-height: 200% !important;
+    }
+  }
+}

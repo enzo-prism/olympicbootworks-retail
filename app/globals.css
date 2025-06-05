@@ -1,0 +1,409 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 201 100% 36%;
+    --primary-light: 201 100% 50%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 201 100% 36%;
+    --radius: 0.5rem;
+    --banner-height: 2.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 201 100% 50%;
+    --primary-light: 201 100% 65%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 201 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    /* Add this to ensure scroll to top on page load */
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(4rem + var(--banner-height, 2.5rem));
+  }
+
+  /* Force scroll to top on page load */
+  html {
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    /* This ensures the browser scrolls to top on page refresh */
+    scroll-top: 0;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 border border-primary/10 transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border border-secondary/10 transition-colors duration-200;
+  }
+
+  .btn-outline {
+    @apply border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground transition-colors duration-200;
+  }
+
+  .btn-outline-on-dark {
+    @apply border border-white/30 bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 shadow-sm transition-colors duration-200;
+  }
+
+  .btn-outline-on-light {
+    @apply border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 shadow-sm transition-colors duration-200;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-accent hover:text-accent-foreground transition-colors duration-200;
+  }
+
+  .btn-link {
+    @apply text-primary underline-offset-4 hover:underline transition-colors duration-200;
+  }
+
+  /* Button sizes */
+  .btn-sm {
+    @apply h-9 rounded-md px-3 py-1.5 text-xs;
+  }
+
+  .btn-default {
+    @apply h-10 px-4 py-2 text-sm;
+  }
+
+  .btn-lg {
+    @apply h-11 rounded-md px-8 py-2.5 text-base;
+  }
+
+  .btn-icon {
+    @apply h-10 w-10 p-0;
+  }
+
+  /* Button states */
+  .btn-disabled {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  /* Button with icon */
+  .btn-with-icon {
+    @apply inline-flex items-center gap-2;
+  }
+}
+
+/* Add consistent hover effects for all buttons */
+button,
+.btn,
+a[role="button"],
+.button {
+  @apply transition-all duration-200;
+}
+
+/* Add subtle hover transform effect to all buttons */
+button:not(.no-transform):hover,
+.btn:not(.no-transform):hover,
+a[role="button"]:not(.no-transform):hover,
+.button:not(.no-transform):hover {
+  @apply transform -translate-y-0.5;
+}
+
+/* Add subtle active transform effect to all buttons */
+button:not(.no-transform):active,
+.btn:not(.no-transform):active,
+a[role="button"]:not(.no-transform):active,
+.button:not(.no-transform):active {
+  @apply transform translate-y-0.5;
+}
+
+/* Mobile header adjustments */
+@media (max-width: 768px) {
+  .location-banner {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .location-banner-content {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* Hero section adjustments for mobile */
+.hero-section {
+  padding-top: calc(4rem + var(--banner-height, 2.5rem));
+  min-height: 100vh;
+}
+
+/* Smooth transitions for banner height changes */
+main {
+  transition: padding-top 0.3s ease;
+}
+
+/* Hero section centering */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+/* Responsive adjustments for hero content */
+@media (max-width: 640px) {
+  .hero-content h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-buttons button,
+  .hero-buttons a {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Ensure the hero section takes appropriate space */
+.youtube-video-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+/* Location banner styling */
+.location-banner {
+  width: 100%;
+  z-index: 50;
+}
+
+.location-banner-content {
+  width: 100%;
+}
+
+/* Ensure proper spacing in the header */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s ease forwards;
+}
+
+.animate-pulse-white {
+  animation: pulse 2s infinite;
+}
+
+/* Hero button styles */
+.hero-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.hero-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.hero-button:hover::after {
+  transform: translateX(100%);
+}
+
+/* New animations for the redesigned hero */
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
+}
+
+/* Vimeo video background styles */
+.vimeo-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Gradient text effect */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #ffffff, #f0f0f0);
+}
+
+/* Animated underline effect */
+.animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+/* Frosted glass effect */
+.frosted-glass {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Full-width hero styles */
+.full-width-hero {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Fix for container within full-width sections */
+.full-width-hero .container {
+  width: 100%;
+  max-width: var(--container-width, 1400px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Ensure content is properly positioned */
+.full-width-hero .relative.z-10 {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+/* Fix for mobile devices */
+@media (max-width: 768px) {
+  .full-width-hero .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
