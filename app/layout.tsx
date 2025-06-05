@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+// Remove Google Font import to avoid build-time fetch errors
 import Script from "next/script"
 import "./globals.css"
 import "./shop/cart-widget.css"
@@ -15,7 +15,7 @@ import LocationBanner from "@/components/location-banner"
 import ScrollToTop from "@/components/scroll-to-top"
 import ImagePreloader from "@/components/image-preloader"
 
-const inter = Inter({ subsets: ["latin"] })
+// Using system sans-serif fonts instead of fetching Inter from Google
 
 export const metadata: Metadata = {
   title: "Olympic Bootworks | Ski & Mountain Bike Shop",
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>{/* No environment variable scripts needed */}</head>
-      <body className={inter.className}>
+      <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ImagePreloader />
           <ScrollToTop />
