@@ -31,6 +31,25 @@ export default function ContactPage() {
     setIsPending(false)
   }
 
+  const faqs = [
+    {
+      question: "Do I need an appointment for equipment service?",
+      answer:
+        "While we accept walk-ins, we recommend scheduling an appointment for services like boot fitting and bike service, especially during peak season.",
+    },
+    {
+      question: "How far in advance should I book lessons?",
+      answer:
+        "We recommend booking lessons at least 48 hours in advance, especially during holidays and weekends. For private lessons with specific instructors, booking 1-2 weeks ahead is advised.",
+    },
+    {
+      question: "What is your cancellation policy?",
+      answer:
+        "For services and lessons, we require 24-hour notice for cancellations. Late cancellations or no-shows may be subject to a fee.",
+    },
+    // Removed FAQ about season-long rentals
+  ]
+
   return (
     <div className="flex flex-col">
       {/* Load Vimeo API */}
@@ -197,28 +216,7 @@ export default function ContactPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                question: "Do I need an appointment for equipment service?",
-                answer:
-                  "While we accept walk-ins, we recommend scheduling an appointment for ski tuning, boot fitting, and bike service, especially during peak season.",
-              },
-              {
-                question: "How far in advance should I book lessons?",
-                answer:
-                  "We recommend booking lessons at least 48 hours in advance, especially during holidays and weekends. For private lessons with specific instructors, booking 1-2 weeks ahead is advised.",
-              },
-              {
-                question: "What is your cancellation policy?",
-                answer:
-                  "For services and lessons, we require 24-hour notice for cancellations. Late cancellations or no-shows may be subject to a fee.",
-              },
-              {
-                question: "Do you offer season-long rentals?",
-                answer:
-                  "Yes, we offer season-long ski and snowboard rentals for both adults and growing children. Our kids' program includes a mid-season size adjustment if needed.",
-              },
-            ].map((faq, index) => (
+            {faqs.map((faq, index) => (
               <div key={index} className="border rounded-lg p-6 bg-card shadow-sm">
                 <h3 className="text-lg font-semibold mb-2">{faq.question}</h3>
                 <p className="text-muted-foreground">{faq.answer}</p>

@@ -59,13 +59,13 @@ export const locations: LocationData[] = [
     },
     contact: {
       phone: "(530) 600-4056",
-      email: "SouthLakeOlympic@gmail.com",
+      email: "buck@olympicbootworks.com", // Corrected email from previous step
     },
     hours: [
       { day: "Summer Hours", hours: "Open by appointment only" },
       { day: "Fall Re-opening", hours: "Regular hours resume in Fall" },
     ],
     description:
-      "Our South Lake Tahoe location provides expert boot fitting, equipment tuning, and a full range of outdoor gear for skiers and mountain bikers.",
+      "Our South Lake Tahoe location provides expert boot fitting and a full range of outdoor gear for skiers and mountain bikers.", // Removed "equipment tuning"
   },
 ]
