@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-// Remove Google Font import to avoid build-time fetch errors
 import Script from "next/script"
 import "./globals.css"
 import "./shop/cart-widget.css"
@@ -14,6 +13,8 @@ import Footer from "@/components/footer"
 import LocationBanner from "@/components/location-banner"
 import ScrollToTop from "@/components/scroll-to-top"
 import ImagePreloader from "@/components/image-preloader"
+import { Analytics } from "@/components/analytics"
+import { Suspense } from "react"
 
 // Using system sans-serif fonts instead of fetching Inter from Google
 
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -46,16 +47,23 @@ export default function RootLayout({
           <div className="flex min-h-screen flex-col">
             <div className="fixed top-0 left-0 right-0 z-50 flex flex-col header-container">
               <LocationBanner />
-              <Navigation />
+              <Suspense fallback={null}>
+                <Navigation />
+              </Suspense>
             </div>
             {/* The main content area with proper spacing for fixed header */}
-            <main className="flex-1 pt-[calc(4rem+var(--banner-height,2.5rem))]">{children}</main>
-            <Footer />
+            <main className="flex-1 pt-[calc(4rem+var(--banner-height,2.5rem))]">
+              <Suspense fallback={null}>{children}</Suspense>
+            </main>
+            <Suspense fallback={null}>
+              <Footer />
+            </Suspense>
           </div>
         </ThemeProvider>
 
         {/* Load Vimeo API globally */}
         <Script src="https://player.vimeo.com/api/player.js" strategy="lazyOnload" />
+        <Analytics />
       </body>
     </html>
   )
