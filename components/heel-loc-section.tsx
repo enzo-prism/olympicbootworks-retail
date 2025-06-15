@@ -1,9 +1,20 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Zap, Footprints, Shield, Calendar } from "lucide-react"
+import { Calendar } from "lucide-react" // Keep Calendar for the button
 import DirectImage from "@/components/direct-image"
 
 export default function HeelLocSection() {
+  // Define sports with their corresponding emojis
+  const sports = [
+    { emoji: "⛷️", name: "Skiing" },
+    { emoji: "🚴", name: "Cycling" },
+    { emoji: "🏃", name: "Running" },
+    { emoji: "🏅", name: "Pickleball" }, // Using Sports Medal as a general sport/achievement emoji
+    { emoji: "⛳", name: "Golf" },
+    { emoji: "🎾", name: "Tennis" },
+    { emoji: "⛰️", name: "Hiking" },
+  ]
+
   return (
     <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
       <div className="container mx-auto px-4">
@@ -23,27 +34,44 @@ export default function HeelLocSection() {
               positioning, maximizing power transfer while reducing fatigue and preventing injury.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
+            {/* Main benefits - keeping Lucide icons here for consistency with other sections if desired, or could also be emojis */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               <div className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
-                <Footprints className="h-8 w-8 text-primary mb-2" />
+                <span className="text-3xl mb-2" role="img" aria-label="Footprints">
+                  👣
+                </span>
                 <h3 className="font-semibold">Optimal Alignment</h3>
                 <p className="text-xs text-muted-foreground">Supports natural biomechanics</p>
               </div>
               <div className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
-                <Zap className="h-8 w-8 text-primary mb-2" />
+                <span className="text-3xl mb-2" role="img" aria-label="Zap">
+                  ⚡
+                </span>
                 <h3 className="font-semibold">Enhanced Performance</h3>
                 <p className="text-xs text-muted-foreground">Maximizes power transfer</p>
               </div>
               <div className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
-                <Shield className="h-8 w-8 text-primary mb-2" />
+                <span className="text-3xl mb-2" role="img" aria-label="Shield">
+                  🛡️
+                </span>
                 <h3 className="font-semibold">Injury Prevention</h3>
                 <p className="text-xs text-muted-foreground">Reduces strain and fatigue</p>
               </div>
-              <div className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
-                <Footprints className="h-8 w-8 text-primary mb-2" />
-                <h3 className="font-semibold">Pickleball Performance</h3>
-                <p className="text-xs text-muted-foreground">Superior stability for lateral movements</p>
-              </div>
+            </div>
+
+            <h3 className="text-xl font-semibold mt-6 mb-4 text-foreground">Proven Benefits For Athletes In:</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-5 mb-6">
+              {sports.map((sport, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center text-center p-3 rounded-lg bg-background hover:bg-muted/50 border transition-colors"
+                >
+                  <span className="text-3xl mb-1.5" role="img" aria-label={sport.name}>
+                    {sport.emoji}
+                  </span>
+                  <p className="text-sm font-medium text-foreground">{sport.name}</p>
+                </div>
+              ))}
             </div>
 
             <p className="text-muted-foreground mb-6">
