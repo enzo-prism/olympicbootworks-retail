@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ShopButton } from "@/components/ui/shop-button"
+import { Facebook, Instagram, Star } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -25,6 +26,35 @@ export default function Footer() {
             <ShopButton href="/shop" size="sm" className="shadow-sm">
               Shop Now
             </ShopButton>
+            <div className="flex items-center space-x-4 mt-6">
+              <Link
+                href="https://www.facebook.com/olympicbootworks/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on Facebook"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Facebook className="h-6 w-6" />
+              </Link>
+              <Link
+                href="https://www.instagram.com/olympicbootworks/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow us on Instagram"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Instagram className="h-6 w-6" />
+              </Link>
+              <Link
+                href="https://www.yelp.com/biz/olympic-bootworks-squaw-valley"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Check us out on Yelp"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Star className="h-6 w-6" />
+              </Link>
+            </div>
           </div>
 
           <div className="md:col-span-2 space-y-4">
