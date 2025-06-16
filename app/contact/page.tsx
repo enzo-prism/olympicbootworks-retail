@@ -131,26 +131,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* Newsletter Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p className="max-w-2xl mx-auto mb-8">Subscribe to our newsletter for updates, special offers, and events.</p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            {/* The Input component was removed from imports, ensure it's re-added if needed or this section is updated */}
-            {/* For now, assuming Input is still available from a global context or needs to be re-imported if this section is kept */}
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="bg-primary-foreground text-primary p-2 rounded-md border border-primary-foreground/50 focus:ring-2 focus:ring-secondary"
-            />
-            <Button variant="secondary" className="text-secondary-foreground shadow-sm">
-              Subscribe
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
