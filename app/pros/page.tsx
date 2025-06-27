@@ -38,10 +38,10 @@ export default function ProsPage() {
     <div className="flex flex-col">
       {/* Hero Section with Vimeo Background */}
       <VimeoVideoHero
-        title="Trusted by the World's Best"
-        subtitle="Our technology and expertise have helped professional athletes reach the pinnacle of their sports. We provide the custom solutions they need to perform at their peak."
+        title="Our Pro Athletes"
+        subtitle="World-class athletes who trust Olympic Bootworks for peak performance"
         videoId="1096995547"
-        height="medium"
+        height="small"
       />
 
       {/* Pro Services Section */}
