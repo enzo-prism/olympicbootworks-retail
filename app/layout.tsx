@@ -19,8 +19,55 @@ import { Suspense } from "react"
 // Using system sans-serif fonts instead of fetching Inter from Google
 
 export const metadata: Metadata = {
-  title: "Olympic Bootworks | Ski & Mountain Bike Shop",
-  description: "Premier ski and mountain bike shop serving athletes of all levels",
+  title: "Olympic Bootworks | Ski & Mountain Bike Shop | Fantic E-Bike Dealer",
+  description: "Premier ski and mountain bike shop serving athletes of all levels. Authorized Fantic e-bike dealer with largest USA inventory. Expert fitting and nationwide shipping.",
+  keywords: "ski shop, mountain bike, Fantic e-bikes, Lake Tahoe, Truckee, ski equipment, e-bike dealer, affordable e-bikes",
+  authors: [{ name: "Olympic Bootworks" }],
+  creator: "Olympic Bootworks",
+  publisher: "Olympic Bootworks",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://olympicbootworks.com"),
+  alternates: {
+    canonical: "https://olympicbootworks.com",
+  },
+  openGraph: {
+    title: "Olympic Bootworks | Ski & Mountain Bike Shop | Fantic E-Bike Dealer",
+    description: "Premier ski and mountain bike shop serving athletes of all levels. Authorized Fantic e-bike dealer with largest USA inventory.",
+    url: "https://olympicbootworks.com",
+    siteName: "Olympic Bootworks",
+    images: [
+      {
+        url: "/images/olympic-bootworks-transparent-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Olympic Bootworks - Ski & Mountain Bike Shop",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Olympic Bootworks | Ski & Mountain Bike Shop",
+    description: "Premier ski and mountain bike shop. Authorized Fantic e-bike dealer with largest USA inventory.",
+    images: ["/images/olympic-bootworks-transparent-logo.png"],
+    creator: "@olympicbootworks",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: [
       {
@@ -29,7 +76,9 @@ export const metadata: Metadata = {
       },
     ],
   },
-  generator: "v0.dev",
+  verification: {
+    google: "your-google-verification-code-here",
+  },
 }
 
 export default function RootLayout({

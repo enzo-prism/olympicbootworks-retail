@@ -270,27 +270,42 @@ export default function ShopPage() {
       <div className="container mx-auto px-4">
         {/* Shop Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold mb-2">Our Shop</h1>
-          <p className="text-muted-foreground">Browse our selection of premium ski and mountain bike equipment</p>
+          <h1 className="text-3xl font-bold mb-2">Shop Premium Ski & E-Bike Equipment</h1>
+          <p className="text-muted-foreground">Browse our selection of affordable Fantic mountain e-bikes, premium ski equipment, and mountain bike gear</p>
         </div>
 
         {/* Fantic Dealer & Shipping Announcement */}
         <div className="mb-6 text-center p-6 bg-secondary/50 rounded-lg shadow">
           <p className="text-xl font-semibold text-primary mb-3">
-            Authorized Fantic dealer! Largest inventory in the USA
+            🇮🇹 Authorized Fantic E-Bike Dealer | Largest USA Inventory | 8+ Years Experience
           </p>
           <p className="text-muted-foreground mb-4">
-            Email us any questions about these very special bikes, as we have been Fantic dealers for 8 years!
+            Discover affordable Fantic mountain e-bikes including XTF Carbon, Trail, and Enduro models. 
+            Italian engineering meets American adventure. Expert fitting and service available.
           </p>
+          <div className="grid md:grid-cols-3 gap-4 mb-4">
+            <div className="text-sm">
+              <h3 className="font-semibold text-primary">Premium Models</h3>
+              <p className="text-muted-foreground">XTF Carbon Factory, Trail, All Mountain, Enduro</p>
+            </div>
+            <div className="text-sm">
+              <h3 className="font-semibold text-primary">Affordable Pricing</h3>
+              <p className="text-muted-foreground">Competitive prices on all Fantic e-bike models</p>
+            </div>
+            <div className="text-sm">
+              <h3 className="font-semibold text-primary">Expert Service</h3>
+              <p className="text-muted-foreground">Professional setup and ongoing maintenance</p>
+            </div>
+          </div>
           <Button asChild className="mb-4">
             <a href="mailto:buck@olympicbootworks.com">
-              <Mail className="mr-2 h-4 w-4" /> Email Us About Fantic Bikes
+              <Mail className="mr-2 h-4 w-4" /> Email Us About Fantic E-Bikes
             </a>
           </Button>
           <div className="mt-4 pt-4 border-t border-border/50">
             <p className="text-lg font-medium text-foreground flex items-center justify-center">
               <Truck className="mr-2 h-5 w-5 text-primary" />
-              Nationwide shipping $299 (add to checkout)
+              Nationwide shipping $299 | Free local delivery Lake Tahoe area
             </p>
           </div>
         </div>
@@ -330,6 +345,37 @@ export default function ShopPage() {
 
           {/* E-commerce container */}
           <div id="my-store-115212795" ref={shopContainerRef} className="shop-embed-container"></div>
+          
+          {/* Fantic E-Bike Information Section */}
+          <div className="mt-12 grid md:grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Why Choose Fantic Mountain E-Bikes?</h2>
+              <ul className="space-y-3 text-muted-foreground">
+                <li className="flex items-start"><span className="text-primary mr-2">•</span>Italian engineering with motorcycle heritage since 1968</li>
+                <li className="flex items-start"><span className="text-primary mr-2">•</span>XTF Carbon Factory: Lightest at just 19.9kg</li>
+                <li className="flex items-start"><span className="text-primary mr-2">•</span>Full suspension models with 170mm travel</li>
+                <li className="flex items-start"><span className="text-primary mr-2">•</span>Trail, All Mountain, and Enduro configurations</li>
+                <li className="flex items-start"><span className="text-primary mr-2">•</span>Professional setup and ongoing maintenance included</li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-primary">Are Fantic e-bikes affordable?</h3>
+                  <p className="text-sm text-muted-foreground">Yes! We offer competitive pricing on all Fantic models with financing options available.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-primary">Do you ship nationwide?</h3>
+                  <p className="text-sm text-muted-foreground">Yes, nationwide shipping is $299 with free local delivery in the Lake Tahoe area.</p>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-primary">What's included with purchase?</h3>
+                  <p className="text-sm text-muted-foreground">Professional setup, safety check, and ongoing maintenance support from our expert team.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Fallback static content for very slow connections */}
