@@ -16,24 +16,24 @@ function ServiceItem({ icon, title, description, className }: ServiceItemProps) 
   return (
     <div
       className={cn(
-        "group flex flex-col items-start p-6 rounded-lg transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700",
+        "group flex flex-col items-start p-6 md:p-8 rounded-lg transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700",
         className,
       )}
     >
-      <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{title}</h3>
-      <p className="text-muted-foreground text-sm">{description}</p>
+      <div className="mb-4 md:mb-6 p-3 md:p-4 rounded-full bg-primary/10 text-primary">{icon}</div>
+      <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3 md:mb-4 group-hover:text-primary transition-colors leading-tight">{title}</h3>
+      <p className="text-muted-foreground text-sm md:text-base leading-relaxed">{description}</p>
     </div>
   )
 }
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="py-20">
+    <section id="services" className="py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Performance-Driven Solutions</h2>
-          <p className="text-muted-foreground">
+        <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 lg:mb-20">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 leading-tight">Performance-Driven Solutions</h2>
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
             At Olympic Bootworks, we're dedicated to enhancing your performance through precision-engineered solutions
             that optimize comfort, control, and power transfer across all your outdoor pursuits and court sports like
             pickleball.
@@ -46,7 +46,7 @@ export default function ServicesSection() {
         </div>
 
         {/* Desktop Grid View - Hidden on mobile */}
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           <ServiceItem
             icon={<Footprints className="h-6 w-6" />}
             title="Custom Boot Fitting"
@@ -78,12 +78,12 @@ export default function ServicesSection() {
           />
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-12 md:mt-16 lg:mt-20 text-center">
           <Button
             asChild
             variant="outline"
             size="lg"
-            className="bg-primary/5 border-primary/20 hover:bg-primary/10 text-primary font-medium px-8 py-3 h-auto rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 group"
+            className="bg-primary/5 border-primary/20 hover:bg-primary/10 text-primary font-medium px-8 py-3 h-12 md:h-14 text-base rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 group"
           >
             <Link href="/contact" className="flex items-center gap-2">
               Contact Us
