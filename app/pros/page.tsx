@@ -2,26 +2,97 @@ import "./pros.css"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
-import { Instagram, Twitter, Globe, ArrowRight, Calendar, Users, Award } from "lucide-react"
+import ProServicesSection from "./pro-services-section"
 import AthleteProfileCard from "@/components/athlete-profile-card"
-import VimeoApiScript from "@/components/vimeo-api-script"
+import { ArrowRight, Calendar, Users, Award } from "lucide-react"
+import NextImage from "@/components/next-image"
+
+const proAthletes = [
+  {
+    name: "Travis Ganong",
+    discipline: "Alpine Ski Racer",
+    achievements: ["Olympian", "World Cup Winner", "X Games Medalist"],
+    imageUrl: "/images/travis-ganong.jpeg",
+    bio: "A local hero from Olympic Valley, Travis has represented the USA on the world's biggest stages, known for his speed and fearless approach to downhill racing.",
+  },
+  {
+    name: "Michelle Parker",
+    discipline: "Freeskier & Adventurer",
+    achievements: ["Featured in major ski films", "Co-founder of SAFE AS"],
+    imageUrl: "/images/pro-with-skis.jpeg",
+    bio: "Michelle is one of the most influential women in skiing, pushing the boundaries of the sport in big mountain terrain and inspiring the next generation of female athletes.",
+  },
+  {
+    name: "JT Holmes",
+    discipline: "Professional Skier & Stuntman",
+    achievements: ["Pioneered ski-BASE jumping", "Stunt work in major Hollywood films"],
+    imageUrl: "/images/elite-skier.jpg",
+    bio: "JT is a legend in the action sports world, combining high-level skiing with aerial acrobatics and stunt performance, constantly redefining what's possible.",
+  },
+]
 
 export default function ProsPage() {
   return (
     <div className="flex flex-col">
-      {/* Load Vimeo API */}
-      <VimeoApiScript />
-
       {/* Hero Section with Vimeo Background */}
       <VimeoVideoHero
-        title="Our Pro Athletes"
-        subtitle="World-class athletes who trust Olympic Bootworks for peak performance"
-        videoId="1085840202"
-        height="small"
+        title="Trusted by the World's Best"
+        subtitle="Our technology and expertise have helped professional athletes reach the pinnacle of their sports. We provide the custom solutions they need to perform at their peak."
+        videoId="1096995547"
+        height="medium"
       />
+
+      {/* Pro Services Section */}
+      <ProServicesSection />
+
+      {/* Featured Athlete Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight">Our Pro Team</h2>
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+              We're honored to work with some of the most talented and dedicated athletes in the world.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {proAthletes.map((athlete) => (
+              <AthleteProfileCard key={athlete.name} athlete={athlete} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Behind the Scenes Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="text-3xl font-bold mb-4">The Winning Edge</h2>
+              <p className="text-muted-foreground mb-6">
+                For professional athletes, the smallest details make the biggest difference. Our founder, Buck Brown,
+                works closely with pros to engineer custom solutions that provide more power, precision, and comfort.
+                This collaboration not only helps them win but also drives the innovation that benefits all our
+                customers.
+              </p>
+              <Button asChild size="lg">
+                <Link href="/about">
+                  Learn About Our Philosophy <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+            <div className="order-1 lg:order-2 relative h-80 rounded-lg overflow-hidden shadow-lg">
+              <NextImage
+                src="/images/buck-with-boot.jpg"
+                alt="Buck Brown working with a pro athlete"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Enhanced Intro Section */}
       <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
@@ -74,84 +145,9 @@ export default function ProsPage() {
                     Book a Pro-Level Fitting
                   </Link>
                 </Button>
-                <Button asChild variant="outline" className="shadow-sm">
+                <Button asChild variant="outline" className="shadow-sm bg-transparent">
                   <Link href="#alpine">View Our Athletes</Link>
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Athlete Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[500px] rounded-lg overflow-hidden">
-              <Image
-                src="/images/travis-ganong.jpeg"
-                alt="Travis Ganong, Professional Ski Racer"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-
-            <div className="space-y-6">
-              <Badge className="px-3 py-1 text-sm bg-primary text-primary-foreground">Featured Athlete</Badge>
-              <h2 className="text-4xl font-bold">Travis Ganong</h2>
-              <p className="text-xl font-medium text-muted-foreground">World Cup Alpine Ski Racer</p>
-
-              <div className="flex flex-wrap gap-3">
-                <Badge variant="outline" className="px-3 py-1">
-                  Olympic Athlete
-                </Badge>
-                <Badge variant="outline" className="px-3 py-1">
-                  World Cup Podiums
-                </Badge>
-                <Badge variant="outline" className="px-3 py-1">
-                  US National Champion
-                </Badge>
-              </div>
-
-              <p className="text-muted-foreground">
-                Travis Ganong is one of America's premier downhill skiers, competing at the highest level of alpine
-                racing. With multiple World Cup podiums and Olympic appearances, Travis relies on Olympic Bootworks to
-                give him the precision and performance he needs on race day.
-              </p>
-
-              <blockquote className="border-l-4 border-primary pl-4 italic">
-                "The team at Olympic Bootworks understands what it takes to make a boot perform at the highest level.
-                Their attention to detail and expertise have been crucial to my success on the World Cup circuit."
-              </blockquote>
-
-              <div className="flex items-center gap-4">
-                <Button asChild className="gap-2 shadow-sm">
-                  <Link href="/contact">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    Book a Pro Fitting
-                  </Link>
-                </Button>
-                <div className="flex gap-2">
-                  <Button variant="ghost" size="icon" asChild className="shadow-sm">
-                    <Link href="https://www.instagram.com/travisganong/" target="_blank">
-                      <Instagram className="h-5 w-5" />
-                      <span className="sr-only">Instagram</span>
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" size="icon" asChild className="shadow-sm">
-                    <Link href="https://twitter.com/travisganong" target="_blank">
-                      <Twitter className="h-5 w-5" />
-                      <span className="sr-only">Twitter</span>
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" size="icon" asChild className="shadow-sm">
-                    <Link href="https://www.travisganong.com/" target="_blank">
-                      <Globe className="h-5 w-5" />
-                      <span className="sr-only">Website</span>
-                    </Link>
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
@@ -211,7 +207,7 @@ export default function ProsPage() {
               </div>
 
               <div className="text-center">
-                <Button variant="outline" className="gap-2 shadow-sm">
+                <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
                   View All Alpine Athletes
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -245,7 +241,7 @@ export default function ProsPage() {
               </div>
 
               <div className="text-center">
-                <Button variant="outline" className="gap-2 shadow-sm">
+                <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
                   View All Freeride Athletes
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -303,7 +299,7 @@ export default function ProsPage() {
               </div>
 
               <div className="text-center">
-                <Button variant="outline" className="gap-2 shadow-sm">
+                <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
                   View All Expedition Athletes
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -342,7 +338,7 @@ export default function ProsPage() {
                 Our proprietary Heel-Loc technology provides unmatched heel hold and alignment, creating a solid
                 foundation for power transfer and control in demanding conditions.
               </p>
-              <Button asChild variant="outline" className="w-full">
+              <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/contact">Learn More</Link>
               </Button>
             </div>
@@ -361,7 +357,7 @@ export default function ProsPage() {
                 As the #1 worldwide dealer for ZipFit liners, we provide professional athletes with cork-composite
                 liners that offer superior performance and adaptability.
               </p>
-              <Button asChild variant="outline" className="w-full">
+              <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/contact">Learn More</Link>
               </Button>
             </div>
@@ -375,7 +371,7 @@ export default function ProsPage() {
                 Our advanced shell modification techniques allow us to create the perfect fit for each athlete's unique
                 foot shape and performance requirements.
               </p>
-              <Button asChild variant="outline" className="w-full">
+              <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/contact">Learn More</Link>
               </Button>
             </div>
@@ -398,7 +394,7 @@ export default function ProsPage() {
                 Book a Pro Fitting
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="shadow-sm">
+            <Button size="lg" variant="outline" asChild className="shadow-sm bg-transparent">
               <Link href="/gallery">View Our Work</Link>
             </Button>
           </div>
