@@ -19,7 +19,7 @@ export default function VimeoVideoHeroRobust({
   title,
   subtitle,
   children,
-  videoId = "1085840202",
+  videoId = "1096995547",
   overlayOpacity = 0.7, // Increased from 0.4 to 0.7 for better contrast
   height = "large",
   className = "",

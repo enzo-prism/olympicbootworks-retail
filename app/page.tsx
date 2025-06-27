@@ -19,7 +19,7 @@ export default function Home() {
       <VimeoVideoHero
         title="Olympic Bootworks"
         subtitle="Performance Solutions for Skiers, Cyclists, Pickleball & Tennis Players, Golfers, and Outdoor Enthusiasts"
-        videoId="1085840202"
+        videoId="1096995547"
         height="small"
         className="full-width-hero"
       >
