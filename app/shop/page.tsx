@@ -234,7 +234,7 @@ export default function ShopPage() {
       <ShopVideoHero
         videoId="1098348289"
         title="Our Shop"
-        subtitle="Browse our selection of premium ski and mountain bike equipment"
+        subtitle="Browse our selection of premium Fantic bikes and products"
       />
       <div className="min-h-screen py-12">
         <div className="container mx-auto px-4">
@@ -317,7 +317,7 @@ export default function ShopPage() {
                 href="tel:+15306004056"
                 className="inline-block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
               >
-                Call South Lake: (530) 600-4056
+                Call South Lake: (530) 6004056
               </a>
             </div>
           )}
