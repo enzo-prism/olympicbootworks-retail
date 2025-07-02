@@ -118,12 +118,12 @@ export default function ServicesCarousel() {
         >
           {services.map((service, index) => (
             <div key={index} className="w-full flex-shrink-0 px-4 py-6">
-              <div className="bg-card border rounded-lg p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
-                <div className="mb-4 md:mb-6 p-3 md:p-4 rounded-full bg-primary/10 text-primary inline-block self-start">
+              <div className="bg-card border rounded-lg p-6 shadow-sm h-full flex flex-col">
+                <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary inline-block self-start">
                   {service.icon}
                 </div>
-                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3 md:mb-4 leading-tight">{service.title}</h3>
-                <p className="text-muted-foreground text-sm md:text-base leading-relaxed flex-grow">{service.description}</p>
+                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <p className="text-muted-foreground text-sm flex-grow">{service.description}</p>
               </div>
             </div>
           ))}
@@ -152,15 +152,13 @@ export default function ServicesCarousel() {
       </Button>
 
       {/* Pagination Indicators */}
-      <div className="flex justify-center mt-6 md:mt-8 gap-2">
+      <div className="flex justify-center mt-4 gap-2">
         {services.map((_, index) => (
           <button
             key={index}
             className={cn(
-              "w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 touch-manipulation",
-              currentIndex === index 
-                ? "bg-primary scale-110 shadow-sm" 
-                : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500",
+              "w-2 h-2 rounded-full transition-all",
+              currentIndex === index ? "bg-primary w-6" : "bg-gray-300 dark:bg-gray-600",
             )}
             onClick={() => {
               setCurrentIndex(index)
@@ -170,16 +168,8 @@ export default function ServicesCarousel() {
         ))}
       </div>
 
-      {/* Progress bar */}
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1 mt-4 md:mt-6 overflow-hidden">
-        <div 
-          className="bg-primary h-full transition-all duration-300 ease-out rounded-full"
-          style={{ width: `${((currentIndex + 1) / services.length) * 100}%` }}
-        />
-      </div>
-
       {/* Swipe Instructions - only shown on first load on mobile */}
-      <div className="text-center text-xs text-muted-foreground mt-3 md:hidden">
+      <div className="text-center text-xs text-muted-foreground mt-2 md:hidden">
         Swipe left or right to see more services
       </div>
     </div>
