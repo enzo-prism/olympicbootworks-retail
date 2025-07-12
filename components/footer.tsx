@@ -130,6 +130,16 @@ export default function Footer() {
 
         <div className="border-t border-gray-200 dark:border-gray-800 mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Olympic Bootworks. All rights reserved.</p>
+          <div className="mt-2">
+            <Link
+              href="https://www.design-prism.com/?utm_source=olympicbootworks&utm_medium=referral&utm_campaign=olympicbootworks_2025-07"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-muted-foreground/70 hover:text-muted-foreground transition-colors"
+            >
+              website design
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
