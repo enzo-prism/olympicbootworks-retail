@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
+import MinimalHeroContent from "@/components/minimal-hero-content"
 import { Instagram, Twitter, Globe, ArrowRight, Calendar, Users, Award } from 'lucide-react'
 import AthleteProfileCard from "@/components/athlete-profile-card"
 import VimeoApiScript from "@/components/vimeo-api-script"
@@ -22,20 +23,23 @@ export default function ProsPage() {
       {/* Load Vimeo API */}
       <VimeoApiScript />
 
-      {/* Hero Section with Vimeo Background */}
+      {/* Minimal, elegant hero */}
       <VimeoVideoHero
-        title="Our Pro Athletes"
-        subtitle="World-class athletes who trust Olympic Bootworks for peak performance"
         videoId="1096995547"
-        height="small"
+        height="large"
+        customContent={
+          <MinimalHeroContent
+            eyebrow="Trusted by Pros"
+            title="Our Pro Athletes"
+            subtitle="Precision that wins."
+            actions={[
+              { href: "/contact", label: "Book a pro fitting", variant: "solid" },
+              { href: "#alpine", label: "View athletes", variant: "outline" },
+            ]}
+            logoHeight={52}
+          />
+        }
       />
-      <noscript>
-        <section className="container mx-auto px-4 py-6 text-sm">
-          <p>
-            Our pro athletes rely on custom boot fitting, Heel-Loc technology, and ZipFit liners for podium-level performance. Explore featured athletes and the tech behind their setups.
-          </p>
-        </section>
-      </noscript>
 
       {/* Enhanced Intro Section */}
       <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
@@ -172,7 +176,7 @@ export default function ProsPage() {
         </div>
       </section>
 
-      {/* Athlete Categories - Enhanced with more details */}
+      {/* Athlete Categories */}
       <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -201,7 +205,6 @@ export default function ProsPage() {
             {/* Alpine Athletes */}
             <TabsContent value="alpine" className="space-y-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Bryce Bennett */}
                 <AthleteProfileCard
                   name="Bryce Bennett"
                   title="World Cup Downhill Specialist"
@@ -211,8 +214,6 @@ export default function ProsPage() {
                   shopLabel="Book a Fitting"
                   gradientColors="linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)"
                 />
-
-                {/* KC Oakley */}
                 <AthleteProfileCard
                   name="KC Oakley"
                   title="Freestyle & Mogul Specialist"
@@ -235,7 +236,6 @@ export default function ProsPage() {
             {/* Freeride Athletes */}
             <TabsContent value="freeride" className="space-y-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Ralph Backstrom */}
                 <AthleteProfileCard
                   name="Ralph Backstrom"
                   title="Professional Snowboarder"
@@ -245,8 +245,6 @@ export default function ProsPage() {
                   shopLabel="Book a Fitting"
                   gradientColors="linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%)"
                 />
-
-                {/* Shelley Robertson */}
                 <AthleteProfileCard
                   name="Shelley Robertson"
                   title="Professional Freeskier"
@@ -269,7 +267,6 @@ export default function ProsPage() {
             {/* Expedition Athletes */}
             <TabsContent value="expedition" className="space-y-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Adrian Ballinger */}
                 <AthleteProfileCard
                   name="Adrian Ballinger"
                   title="Professional Mountaineer"
@@ -279,8 +276,6 @@ export default function ProsPage() {
                   shopLabel="Book a Fitting"
                   gradientColors="linear-gradient(135deg, #064e3b 0%, #10b981 100%)"
                 />
-
-                {/* Doug Stoup */}
                 <AthleteProfileCard
                   name="Doug Stoup"
                   title="Polar Explorer"
@@ -293,7 +288,6 @@ export default function ProsPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                {/* Tom Day */}
                 <AthleteProfileCard
                   name="Tom Day"
                   title="Ski Filmmaker"
@@ -303,8 +297,6 @@ export default function ProsPage() {
                   shopLabel="Book a Fitting"
                   gradientColors="linear-gradient(135deg, #0f766e 0%, #2dd4bf 100%)"
                 />
-
-                {/* Andrew Draper */}
                 <AthleteProfileCard
                   name="Andrew Draper"
                   title="Professional Mountain Guide"
@@ -327,77 +319,7 @@ export default function ProsPage() {
         </div>
       </section>
 
-      {/* New Pro Technology Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-4">
-              Pro-Level Technology
-            </div>
-            <h2 className="text-3xl font-bold mb-4">The Competitive Edge</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Discover the advanced technologies and techniques that give our professional athletes the edge in
-              competition and extreme environments.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-card border rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <div className="h-48 relative rounded-lg overflow-hidden mb-6">
-                <Image
-                  src="/images/fitting-process-2.jpg"
-                  alt="Custom Boot Fitting Process"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Heel-Loc Technology</h3>
-              <p className="text-muted-foreground mb-4">
-                Our proprietary Heel-Loc technology provides unmatched heel hold and alignment, creating a solid
-                foundation for power transfer and control in demanding conditions.
-              </p>
-              <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/contact">Learn More</Link>
-              </Button>
-            </div>
-
-            <div className="bg-card border rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <div className="h-48 relative rounded-lg overflow-hidden mb-6">
-                <Image
-                  src="/images/buck-with-boot.jpg"
-                  alt="ZipFit Liner Customization"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-xl font-bold mb-3">ZipFit Liner Customization</h3>
-              <p className="text-muted-foreground mb-4">
-                As the #1 worldwide dealer for ZipFit liners, we provide professional athletes with cork-composite
-                liners that offer superior performance and adaptability.
-              </p>
-              <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/contact">Learn More</Link>
-              </Button>
-            </div>
-
-            <div className="bg-card border rounded-lg p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
-              <div className="h-48 relative rounded-lg overflow-hidden mb-6">
-                <Image src="/images/fitting-process.jpg" alt="Pro Shell Modification" fill className="object-cover" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">Pro Shell Modification</h3>
-              <p className="text-muted-foreground mb-4">
-                Our advanced shell modification techniques allow us to create the perfect fit for each athlete's unique
-                foot shape and performance requirements.
-              </p>
-              <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/contact">Learn More</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section - Enhanced */}
+      {/* CTA Section */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Experience Pro-Level Service</h2>

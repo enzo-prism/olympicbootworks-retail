@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Info, ChevronDown, ChevronUp, Bike } from "lucide-react"
+import { Info, ChevronDown, ChevronUp, Bike } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -34,7 +34,7 @@ export default function HeroButtons({ className, showDescription = true }: HeroB
           asChild
           variant="outline-on-dark"
           size="lg"
-          className="w-full shadow-md backdrop-blur-sm border border-white/20 hover:bg-white/30 transition-all"
+          className="w-full shadow-md backdrop-blur-sm border border-white/20 hover:bg-white/30 transition-all font-semibold ring-1 ring-inset ring-white/25"
         >
           <Link href="/shop">
             <span className="flex items-center justify-center">
@@ -48,7 +48,7 @@ export default function HeroButtons({ className, showDescription = true }: HeroB
           asChild
           variant="outline-on-dark"
           size="lg"
-          className="w-full shadow-md backdrop-blur-sm border border-white/20 hover:bg-white/30 transition-all"
+          className="w-full shadow-md backdrop-blur-sm border border-white/20 hover:bg-white/30 transition-all font-semibold ring-1 ring-inset ring-white/25"
         >
           <Link href="/about">
             <span className="flex items-center justify-center">

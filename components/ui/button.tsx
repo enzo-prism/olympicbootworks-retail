@@ -18,6 +18,14 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // High-contrast filled button for dark backgrounds
+        "on-dark":
+          "bg-white text-gray-900 hover:bg-white/90 shadow-lg " +
+          "focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+        // High-contrast outline for dark backgrounds
+        "outline-on-dark":
+          "border border-white/70 bg-transparent text-white hover:bg-white/12 shadow-sm backdrop-blur-sm " +
+          "focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
       },
       size: {
         default: "h-10 px-4 py-2",

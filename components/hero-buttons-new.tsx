@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ChevronDown, ChevronUp, Bike, MessageCircle } from "lucide-react"
+import { ChevronDown, ChevronUp, Bike, MessageCircle } from 'lucide-react'
 import { cn } from "@/lib/utils"
 
 interface HeroButtonsNewProps {
@@ -19,20 +19,20 @@ export default function HeroButtonsNew({ className, showDescription = true }: He
       <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
         <Link
           href="/shop"
-          className="group relative overflow-hidden rounded-full bg-white/20 backdrop-blur-sm border border-white/30 px-8 py-4 text-white font-medium transition-all hover:bg-white/30 hover:scale-105 flex items-center justify-center shadow-lg"
+          className="group relative overflow-hidden rounded-full bg-white/25 backdrop-blur-sm border border-white/35 ring-1 ring-inset ring-white/25 px-8 py-4 text-white font-semibold transition-all hover:bg-white/35 hover:scale-105 flex items-center justify-center shadow-lg"
         >
           <Bike className="h-5 w-5 mr-3 flex-shrink-0 text-white" />
           <span className="text-white font-semibold">Shop Now</span>
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-shimmer"></div>
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover:animate-shimmer"></div>
         </Link>
 
         <Link
           href="/contact"
-          className="group relative overflow-hidden rounded-full bg-white/20 backdrop-blur-sm border border-white/30 px-8 py-4 text-white font-medium transition-all hover:bg-white/30 hover:scale-105 flex items-center justify-center shadow-lg"
+          className="group relative overflow-hidden rounded-full bg-white/25 backdrop-blur-sm border border-white/35 ring-1 ring-inset ring-white/25 px-8 py-4 text-white font-semibold transition-all hover:bg-white/35 hover:scale-105 flex items-center justify-center shadow-lg"
         >
           <MessageCircle className="h-5 w-5 mr-3 flex-shrink-0 text-white" strokeWidth={2} />
           <span className="text-white font-semibold">Contact Us</span>
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:animate-shimmer"></div>
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/25 to-white/0 -translate-x-full group-hover:animate-shimmer"></div>
         </Link>
       </div>
 

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import ImageGallery from "@/components/image-gallery"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
+import MinimalHeroContent from "@/components/minimal-hero-content"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import NextImage from "@/components/next-image"
@@ -83,24 +84,26 @@ export default function GalleryPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section with Vimeo Background */}
+      {/* Minimal, elegant hero */}
       <VimeoVideoHero
-        title="Our Gallery"
-        subtitle="Experience Olympic Bootworks through the years"
         videoId="1085840202"
-        height="small"
+        height="large"
+        customContent={
+          <MinimalHeroContent
+            eyebrow="Inside the shop"
+            title="Gallery"
+            subtitle="People, process, and the mountains."
+            actions={[
+              { href: "#gallery", label: "Explore gallery", variant: "solid" },
+              { href: "/contact", label: "Book a fitting", variant: "outline" },
+            ]}
+            logoHeight={52}
+          />
+        }
       />
-      {/* Noscript Fallback */}
-      <noscript>
-        <section className="container mx-auto px-4 py-6 text-sm">
-          <p>
-            Explore our shop and community gallery: custom boot fitting in action, athlete stories, and life on the mountain. Enable JavaScript to see the full interactive gallery.
-          </p>
-        </section>
-      </noscript>
 
       {/* Gallery Section */}
-      <section className="py-16">
+      <section id="gallery" className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Shop & Customer Gallery</h2>

@@ -1,8 +1,10 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { ShopButton } from "@/components/ui/shop-button"
 import EnhancedTestimonialCard from "@/components/enhanced-testimonial-card"
 import { testimonials } from "@/data/testimonials"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
+import MinimalHeroContent from "@/components/minimal-hero-content"
 import VimeoApiScript from "@/components/vimeo-api-script"
 import type { Metadata } from "next"
 
@@ -18,22 +20,23 @@ export default function TestimonialsPage() {
       {/* Load Vimeo API */}
       <VimeoApiScript />
 
-      {/* Hero Section with Vimeo Background */}
+      {/* Minimal, elegant hero */}
       <VimeoVideoHero
-        title="Customer Testimonials"
-        subtitle="Read what our customers have to say about their experiences with Olympic Bootworks"
         videoId="1085840202"
-        height="small"
+        height="large"
+        customContent={
+          <MinimalHeroContent
+            eyebrow="Real results"
+            title="Testimonials"
+            subtitle="Comfort, performance, and support."
+            actions={[
+              { href: "/contact", label: "Book a fitting", variant: "solid" },
+              { href: "/shop", label: "Shop products", variant: "shop" },
+            ]}
+            logoHeight={52}
+          />
+        }
       />
-
-      {/* Noscript Fallback */}
-      <noscript>
-        <section className="container mx-auto px-4 py-6 text-sm">
-          <p>
-            Read real customer reviews about comfort, performance, and our lifetime fit support. JavaScript is disabled, so some interactive elements may be unavailable.
-          </p>
-        </section>
-      </noscript>
 
       <main className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold">Testimonials</h1>
@@ -61,9 +64,9 @@ export default function TestimonialsPage() {
               <Button asChild size="lg" className="shadow-sm">
                 <Link href="/contact">Book a Fitting</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="shadow-sm">
-                <Link href="/shop">Shop Our Products</Link>
-              </Button>
+              <ShopButton href="/shop" className="shadow-sm" size="lg">
+                Shop Our Products
+              </ShopButton>
             </div>
           </div>
         </div>

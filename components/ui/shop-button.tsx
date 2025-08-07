@@ -1,6 +1,6 @@
 import * as React from "react"
 import Link from "next/link"
-import { ShoppingBag } from "lucide-react"
+import { ShoppingBag } from 'lucide-react'
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
@@ -11,11 +11,17 @@ const shopButtonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm border border-primary/10",
-        outline: "border border-primary/30 bg-transparent text-primary hover:bg-primary/10 shadow-sm",
+        outline: "border border-primary/40 bg-transparent text-primary hover:bg-primary/10 shadow-sm",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm border border-secondary/10",
         ghost: "bg-transparent text-primary hover:bg-primary/10",
-        "on-dark": "bg-white/20 text-white hover:bg-white/30 shadow-sm border border-white/20 backdrop-blur-sm",
-        "outline-on-dark": "border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/30 shadow-sm",
+        // Updated: filled on-dark for maximum contrast on videos/images
+        "on-dark":
+          "bg-white text-gray-900 hover:bg-white/90 shadow-lg " +
+          "focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+        // Updated: outline on-dark with stronger border and translucent hover
+        "outline-on-dark":
+          "border border-white/70 bg-transparent text-white hover:bg-white/12 shadow-sm backdrop-blur-sm " +
+          "focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
         "primary-accent":
           "bg-gradient-to-r from-primary to-primary-light text-primary-foreground hover:opacity-90 shadow-sm border border-primary/10",
       },
@@ -34,7 +40,7 @@ const shopButtonVariants = cva(
       size: "default",
       fullWidth: false,
     },
-  },
+  }
 )
 
 export interface ShopButtonProps

@@ -2,23 +2,30 @@ import type React from "react"
 import Script from "next/script"
 
 interface VimeoVideoHeroProps {
-  title: string
+  title?: string
   subtitle?: string
   children?: React.ReactNode
   videoId?: string
   overlayOpacity?: number
   height?: "small" | "medium" | "large" | "full"
   className?: string
+  /**
+   * When provided, the hero will render this content instead of the default
+   * title/subtitle/children stack. This gives full control of above-the-fold
+   * composition while keeping the video background and overlay behavior.
+   */
+  customContent?: React.ReactNode
 }
 
 export default function VimeoVideoHero({
-  title,
+  title = "",
   subtitle,
   children,
   videoId = "1096995547",
   overlayOpacity = 0.7,
   height = "large",
   className = "",
+  customContent,
 }: VimeoVideoHeroProps) {
   // Height classes based on the height prop
   const heightClasses = {
@@ -45,8 +52,8 @@ export default function VimeoVideoHero({
               position: "absolute",
               top: "50%",
               left: "50%",
-              width: "177.77777778vh" /* 16:9 aspect ratio (9/16 = 0.5625) */,
-              height: "56.25vw" /* 16:9 aspect ratio (9/16 = 0.5625) */,
+              width: "177.77777778vh" /* 16:9 aspect ratio coverage */,
+              height: "56.25vw" /* 16:9 aspect ratio coverage */,
               minWidth: "100%",
               minHeight: "100%",
               transform: "translate(-50%, -50%)",
@@ -59,31 +66,37 @@ export default function VimeoVideoHero({
           ></iframe>
         </div>
 
-        {/* Enhanced Overlay - Darker and with stronger gradient */}
+        {/* Enhanced Overlay */}
         <div
           className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80 z-[2]"
           style={{ opacity: overlayOpacity }}
         ></div>
-
-        {/* Additional dark layer for better text contrast */}
         <div className="absolute inset-0 bg-black/30 z-[3]"></div>
 
-        {/* Content with proper z-index */}
+        {/* Content */}
         <div className="relative z-20 container mx-auto px-6 py-12 flex flex-col items-center justify-center text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg">
-              {title}
-            </h1>
-
-            {subtitle && (
-              <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto drop-shadow-lg">{subtitle}</p>
+            {customContent ? (
+              customContent
+            ) : (
+              <>
+                {title && (
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg">
+                    {title}
+                  </h1>
+                )}
+                {subtitle && (
+                  <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-lg">
+                    {subtitle}
+                  </p>
+                )}
+                {children && <div className="mt-8 w-full relative z-20">{children}</div>}
+              </>
             )}
-
-            {children && <div className="mt-8 w-full relative z-20">{children}</div>}
           </div>
         </div>
 
-        {/* Decorative Elements */}
+        {/* Edge gradients */}
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-background to-transparent z-[5] pointer-events-none"></div>
         <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black/60 to-transparent z-[5] pointer-events-none"></div>
       </div>

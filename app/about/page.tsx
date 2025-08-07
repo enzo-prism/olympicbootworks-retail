@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
+import MinimalHeroContent from "@/components/minimal-hero-content"
 import { Award, Footprints, Heart, ShieldCheck, Zap, UserCheck, Trophy, Package, Clock } from 'lucide-react'
 import FeatureCard from "@/components/feature-card"
 import LocationsSection from "@/app/about/locations-section"
@@ -27,20 +28,23 @@ export default function AboutPage() {
       {/* Load Vimeo API */}
       <VimeoApiScript />
 
-      {/* Hero Section with Vimeo Background */}
+      {/* Minimal, elegant hero */}
       <VimeoVideoHero
-        title="About Olympic Bootworks"
-        subtitle="Your Foundation for Performance and Comfort"
         videoId="1085840202"
-        height="small"
+        height="large"
+        customContent={
+          <MinimalHeroContent
+            eyebrow="Lake Tahoe • Since 1985"
+            title="About Olympic Bootworks"
+            subtitle="Expert boot fitting. Precision alignment. Lifetime support."
+            actions={[
+              { href: "/contact", label: "Visit our locations", variant: "solid" },
+              { href: "/shop", label: "Shop products", variant: "shop" },
+            ]}
+            logoHeight={56}
+          />
+        }
       />
-      <noscript>
-        <section className="container mx-auto px-4 py-6 text-sm">
-          <p>
-            Olympic Bootworks was founded in 1985 by Buck Brown. We specialize in precision ski boot fitting, custom footbeds, and ZipFit liners that improve alignment, comfort, and performance.
-          </p>
-        </section>
-      </noscript>
 
       {/* Introduction Section */}
       <main className="max-w-4xl mx-auto px-4 py-12">
@@ -179,144 +183,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Beyond the Slopes Section - Redesigned without images/icons */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-4">
-              Beyond the Slopes
-            </div>
-            <h2 className="text-3xl font-bold mb-4">Multisport Mastery</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              While our heritage lies in crafting the ultimate fit for elite skiers and snowboarders, our expertise
-              benefits athletes across disciplines.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Skiers & Snowboarders */}
-            <div className="rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="h-24 bg-gradient-to-r from-blue-600 to-blue-400"></div>
-              <div className="p-6 border border-t-0 rounded-b-lg">
-                <h3 className="text-xl font-bold mb-2">Skiers & Snowboarders</h3>
-                <p className="text-sm text-muted-foreground">
-                  From weekend warriors to professionals seeking the winning edge
-                </p>
-              </div>
-            </div>
-
-            {/* Cyclists */}
-            <div className="rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="h-24 bg-gradient-to-r from-green-600 to-green-400"></div>
-              <div className="p-6 border border-t-0 rounded-b-lg">
-                <h3 className="text-xl font-bold mb-2">Cyclists</h3>
-                <p className="text-sm text-muted-foreground">Enhancing power transfer and endurance on road or trail</p>
-              </div>
-            </div>
-
-            {/* Runners */}
-            <div className="rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="h-24 bg-gradient-to-r from-red-600 to-red-400"></div>
-              <div className="p-6 border border-t-0 rounded-b-lg">
-                <h3 className="text-xl font-bold mb-2">Runners</h3>
-                <p className="text-sm text-muted-foreground">
-                  Improving form, reducing impact, and preventing common injuries
-                </p>
-              </div>
-            </div>
-
-            {/* Golfers */}
-            <div className="rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="h-24 bg-gradient-to-r from-emerald-600 to-emerald-400"></div>
-              <div className="p-6 border border-t-0 rounded-b-lg">
-                <h3 className="text-xl font-bold mb-2">Golfers</h3>
-                <p className="text-sm text-muted-foreground">Providing a stable base for a more consistent swing</p>
-              </div>
-            </div>
-
-            {/* Everyday Comfort */}
-            <div className="rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="h-24 bg-gradient-to-r from-amber-600 to-amber-400"></div>
-              <div className="p-6 border border-t-0 rounded-b-lg">
-                <h3 className="text-xl font-bold mb-2">Everyday Comfort</h3>
-                <p className="text-sm text-muted-foreground">
-                  Offering relief from foot, knee, or leg pain through custom footbeds
-                </p>
-              </div>
-            </div>
-
-            {/* Elite Athletes */}
-            <div className="rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="h-24 bg-gradient-to-r from-purple-600 to-purple-400"></div>
-              <div className="p-6 border border-t-0 rounded-b-lg">
-                <h3 className="text-xl font-bold mb-2">Elite Athletes</h3>
-                <p className="text-sm text-muted-foreground">Trusted by Olympic medalists and World Cup champions</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-4">
-              Why Choose Us
-            </div>
-            <h2 className="text-3xl font-bold mb-4">Olympic Bootworks Advantage</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              What sets us apart and why athletes and comfort-seekers trust us with their performance.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureCard
-              title="Pioneering Technology"
-              description="Benefit from the proven results of our exclusive Heel-loc system, developed and refined over decades."
-              icon={Zap}
-              className="hover:-translate-y-1 transition-transform duration-300"
-            />
-
-            <FeatureCard
-              title="Unrivaled Expertise"
-              description="Leverage Buck Brown's decades of experience and our team's deep knowledge of biomechanics."
-              icon={UserCheck}
-              className="hover:-translate-y-1 transition-transform duration-300"
-            />
-
-            <FeatureCard
-              title="Truly Custom Solutions"
-              description="Receive a fit tailored specifically to your unique foot shape, biomechanics, and performance needs."
-              icon={Footprints}
-              className="hover:-translate-y-1 transition-transform duration-300"
-            />
-
-            <FeatureCard
-              title="Elite Trust"
-              description="Join the ranks of world-class athletes who rely on our expertise for their competitive edge."
-              icon={Trophy}
-              className="hover:-translate-y-1 transition-transform duration-300"
-            />
-
-            <FeatureCard
-              title="Top-Tier Products"
-              description="Access the best gear, including being the #1 Worldwide Dealer for ZipFit Liners."
-              icon={Package}
-              className="hover:-translate-y-1 transition-transform duration-300"
-            />
-
-            <FeatureCard
-              title="Lasting Support"
-              description="Enjoy complimentary fitting adjustments for the lifetime of your boots or shoes purchased here."
-              icon={Clock}
-              className="hover:-translate-y-1 transition-transform duration-300"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Locations Section - Now using our new image-free component */}
+      {/* Locations Section */}
       <LocationsSection />
 
       {/* CTA Section */}

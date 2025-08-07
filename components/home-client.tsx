@@ -7,24 +7,67 @@ import { ShopButton } from "@/components/ui/shop-button"
 import { Button } from "@/components/ui/button"
 import ServicesSection from "@/components/services-section"
 import HeelLocSection from "@/components/heel-loc-section"
-import { Calendar, Zap, Mail } from 'lucide-react'
-import HeroButtonsNew from "@/components/hero-buttons-new"
+import { Calendar, Zap, ChevronDown, Mail, ShoppingBag } from 'lucide-react'
 import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
 import NextImage from "@/components/next-image"
+import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
 
 export default function HomeClient() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section with Full-Width Vimeo Background */}
+      {/* Minimal, elegant hero with full-bleed video background */}
       <VimeoVideoHero
-        title="Olympic Bootworks"
-        subtitle="Performance Solutions for Skiers, Cyclists, Pickleball & Tennis Players, Golfers, and Outdoor Enthusiasts"
         videoId="1096995547"
-        height="small"
+        height="full"
+        overlayOpacity={0.65}
         className="full-width-hero"
-      >
-        <HeroButtonsNew className="mt-8" />
-      </VimeoVideoHero>
+        customContent={
+          <div className="flex flex-col items-center justify-center text-center">
+            {/* Subtle frosted badge */}
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full frosted-glass px-4 py-1.5 text-white/90 text-xs md:text-sm border border-white/20 shadow-sm">
+              <span>Lake Tahoe</span>
+              <span className="opacity-60">{'•'}</span>
+              <span>Since 1994</span>
+            </div>
+
+            {/* Brand mark */}
+            <div className="mb-4">
+              {/* Use a static img tag here for simple sizing */}
+              <img
+                src="/images/olympic-bootworks-transparent-logo.png"
+                alt="Olympic Bootworks logo"
+                className="h-12 md:h-14 w-auto opacity-95"
+              />
+            </div>
+
+            {/* Tight headline and subheadline */}
+            <h1 className="text-white text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] drop-shadow-lg">
+              Move Better
+            </h1>
+            <p className="mt-3 text-white/85 text-base md:text-lg max-w-xl mx-auto drop-shadow">
+              Custom boot fitting and performance gear for snow, trail, and everyday comfort.
+            </p>
+
+            {/* Primary actions */}
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <HeroPrimaryCTA href="/shop" icon={<ShoppingBag className="h-5 w-5" aria-hidden="true" />}>
+                Shop Now
+              </HeroPrimaryCTA>
+              <HeroSecondaryCTA href="/contact" icon={<Calendar className="h-5 w-5" aria-hidden="true" />}>
+                Book a Fitting
+              </HeroSecondaryCTA>
+            </div>
+          </div>
+        }
+      />
+
+      {/* Scroll cue */}
+      <div className="-mt-10 mb-6 flex justify-center">
+        <div className="flex items-center gap-2 text-white/70 bg-black/30 backdrop-blur-sm rounded-full px-3 py-1 border border-white/15">
+          <ChevronDown className="h-4 w-4" />
+          <span className="text-xs">Scroll</span>
+        </div>
+      </div>
 
       {/* Services Section */}
       <ServicesSection />
@@ -105,7 +148,7 @@ export default function HomeClient() {
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold mb-4">Professional Athletes Trust Heel-Loc Technology</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Watch how Buck Brown's revolutionary Heel-Loc technology helps pros perform at their best
+              Watch how Buck Brown&apos;s revolutionary Heel-Loc technology helps pros perform at their best
             </p>
           </div>
 
@@ -131,8 +174,8 @@ export default function HomeClient() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Move at Your Best</h2>
           <p className="max-w-2xl mx-auto mb-8">
-            Whether you're carving down alpine slopes, dominating the pickleball court, exploring mountain trails, or
-            seeking relief from everyday discomfort, our performance-driven solutions help you move with greater
+            Whether you&apos;re carving down alpine slopes, dominating the pickleball court, exploring mountain trails,
+            or seeking relief from everyday discomfort, our performance-driven solutions help you move with greater
             efficiency, power, and comfort. Visit Olympic Bootworks today and experience the difference that proper
             alignment and custom fitting can make in your active life.
           </p>
