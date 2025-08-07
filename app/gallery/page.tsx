@@ -90,6 +90,14 @@ export default function GalleryPage() {
         videoId="1085840202"
         height="small"
       />
+      {/* Noscript Fallback */}
+      <noscript>
+        <section className="container mx-auto px-4 py-6 text-sm">
+          <p>
+            Explore our shop and community gallery: custom boot fitting in action, athlete stories, and life on the mountain. Enable JavaScript to see the full interactive gallery.
+          </p>
+        </section>
+      </noscript>
 
       {/* Gallery Section */}
       <section className="py-16">

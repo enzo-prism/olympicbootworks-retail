@@ -34,6 +34,13 @@ export default function AboutPage() {
         videoId="1085840202"
         height="small"
       />
+      <noscript>
+        <section className="container mx-auto px-4 py-6 text-sm">
+          <p>
+            Olympic Bootworks was founded in 1985 by Buck Brown. We specialize in precision ski boot fitting, custom footbeds, and ZipFit liners that improve alignment, comfort, and performance.
+          </p>
+        </section>
+      </noscript>
 
       {/* Introduction Section */}
       <main className="max-w-4xl mx-auto px-4 py-12">

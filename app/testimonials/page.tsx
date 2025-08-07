@@ -26,6 +26,15 @@ export default function TestimonialsPage() {
         height="small"
       />
 
+      {/* Noscript Fallback */}
+      <noscript>
+        <section className="container mx-auto px-4 py-6 text-sm">
+          <p>
+            Read real customer reviews about comfort, performance, and our lifetime fit support. JavaScript is disabled, so some interactive elements may be unavailable.
+          </p>
+        </section>
+      </noscript>
+
       <main className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold">Testimonials</h1>
         <p className="mt-4 text-muted-foreground">Real stories from real riders and skiers.</p>

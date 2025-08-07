@@ -29,6 +29,13 @@ export default function ProsPage() {
         videoId="1096995547"
         height="small"
       />
+      <noscript>
+        <section className="container mx-auto px-4 py-6 text-sm">
+          <p>
+            Our pro athletes rely on custom boot fitting, Heel-Loc technology, and ZipFit liners for podium-level performance. Explore featured athletes and the tech behind their setups.
+          </p>
+        </section>
+      </noscript>
 
       {/* Enhanced Intro Section */}
       <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
