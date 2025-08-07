@@ -9,6 +9,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: "https://www.olympicbootworks.com/sitemap.xml",
-    host: "https://www.olympicbootworks.com",
   }
 }
