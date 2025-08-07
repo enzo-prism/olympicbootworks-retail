@@ -15,11 +15,16 @@ import ScrollToTop from "@/components/scroll-to-top"
 import ImagePreloader from "@/components/image-preloader"
 import { Analytics } from "@/components/analytics"
 import { Suspense } from "react"
+import SeoJsonLd from "@/components/seo-jsonld"
 
 // Using system sans-serif fonts instead of fetching Inter from Google
 
 export const metadata: Metadata = {
-  title: "Olympic Bootworks | Ski & Mountain Bike Shop",
+  metadataBase: new URL("https://www.olympicbootworks.com"),
+  title: {
+    default: "Olympic Bootworks",
+    template: "%s | Olympic Bootworks",
+  },
   description: "Premier ski and mountain bike shop serving athletes of all levels",
   icons: {
     icon: [
@@ -28,6 +33,30 @@ export const metadata: Metadata = {
         href: "/images/olympic-bootworks-transparent-logo.png",
       },
     ],
+  },
+  openGraph: {
+    title: "Olympic Bootworks",
+    description: "Premier ski and mountain bike shop serving athletes of all levels",
+    url: "https://www.olympicbootworks.com",
+    siteName: "Olympic Bootworks",
+    type: "website",
+    images: [
+      {
+        url: "/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "Olympic Bootworks - Precision Boot Fitting and Mountain Bikes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Olympic Bootworks",
+    description: "Premier ski and mountain bike shop serving athletes of all levels",
+    images: ["/images/og-default.png"],
+  },
+  alternates: {
+    canonical: "/",
   },
   generator: "v0.dev",
 }
@@ -53,6 +82,7 @@ export default function RootLayout({
             })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
           `}
         </Script>
+        <SeoJsonLd />
       </head>
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>

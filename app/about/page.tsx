@@ -3,10 +3,23 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
-import { Award, Footprints, Heart, ShieldCheck, Zap, UserCheck, Trophy, Package, Clock } from "lucide-react"
+import { Award, Footprints, Heart, ShieldCheck, Zap, UserCheck, Trophy, Package, Clock } from 'lucide-react'
 import FeatureCard from "@/components/feature-card"
 import LocationsSection from "@/app/about/locations-section"
 import VimeoApiScript from "@/components/vimeo-api-script"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Learn about Olympic Bootworks, our history, and our commitment to expert boot fitting and bikes.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About | Olympic Bootworks",
+    description: "Learn about Olympic Bootworks, our history, and our commitment to expert boot fitting and bikes.",
+    url: "https://www.olympicbootworks.com/about",
+    type: "article",
+  },
+}
 
 export default function AboutPage() {
   return (
@@ -23,18 +36,12 @@ export default function AboutPage() {
       />
 
       {/* Introduction Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Welcome to Olympic Bootworks, where passion for mountain sports meets a deep understanding of
-              biomechanics. Born over a decade ago in the heart of Olympic Valley, California – with the iconic slopes
-              of Palisades Tahoe just outside our window – our mission is simple: to perfect the connection between your
-              body and your equipment, unlocking unparalleled performance, comfort, and endurance.
-            </p>
-          </div>
-        </div>
-      </section>
+      <main className="max-w-4xl mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold">About Olympic Bootworks</h1>
+        <p className="mt-4 text-muted-foreground">
+          We’ve been fitting ski boots and building great riding experiences since 1985.
+        </p>
+      </main>
 
       {/* Our Story Section */}
       <section className="py-16 bg-gray-50 dark:bg-gray-900">

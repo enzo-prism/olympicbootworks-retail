@@ -4,6 +4,13 @@ import VimeoVideoHero from "@/components/vimeo-video-hero"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import NextImage from "@/components/next-image"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Gallery",
+  description: "A look inside Olympic Bootworks and our community.",
+  alternates: { canonical: "/gallery" },
+}
 
 export default function GalleryPage() {
   const galleryImages = [
@@ -162,6 +169,12 @@ export default function GalleryPage() {
           </div>
         </div>
       </section>
+
+      {/* Updated Main Section */}
+      <main className="max-w-5xl mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold">Gallery</h1>
+        <p className="mt-4 text-muted-foreground">Photos from the shop and the mountains.</p>
+      </main>
     </div>
   )
 }

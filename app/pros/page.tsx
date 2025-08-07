@@ -5,9 +5,16 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
-import { Instagram, Twitter, Globe, ArrowRight, Calendar, Users, Award } from "lucide-react"
+import { Instagram, Twitter, Globe, ArrowRight, Calendar, Users, Award } from 'lucide-react'
 import AthleteProfileCard from "@/components/athlete-profile-card"
 import VimeoApiScript from "@/components/vimeo-api-script"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Pros",
+  description: "Pro services and partnerships at Olympic Bootworks.",
+  alternates: { canonical: "/pros" },
+}
 
 export default function ProsPage() {
   return (
