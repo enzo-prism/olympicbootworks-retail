@@ -59,7 +59,6 @@ export const locations: LocationData[] = [
     },
     contact: {
       phone: "(530) 600-4056",
-      email: "buck@olympicbootworks.com", // Corrected email from previous step
     },
     hours: [
       { day: "Summer Hours", hours: "Open by appointment only" },
