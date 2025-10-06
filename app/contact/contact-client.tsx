@@ -1,6 +1,5 @@
 "use client"
 import Link from "next/link"
-import Script from "next/script"
 import { Button } from "@/components/ui/button"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
 import LocationCard from "@/components/location-card"
@@ -55,15 +54,42 @@ export default function ContactClient() {
 
       <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-6 text-center">Contact Form</h3>
-            <div className="bg-card border rounded-lg p-6 shadow-sm min-h-[500px]">
-              <div data-tf-live="01JXV0J8RSVSNPNMFE402ZMF8X"></div>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold mb-4">Get in Touch</h3>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Contact us directly via email for appointments, questions, or equipment inquiries.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-card border rounded-lg p-8 shadow-sm">
+                <h4 className="text-2xl font-bold mb-4">North Lake Tahoe</h4>
+                <p className="text-muted-foreground mb-2">Olympic Valley Location</p>
+                <p className="text-sm text-muted-foreground mb-6">1602 Squaw Valley Road, Box 3514</p>
+                <Button asChild size="lg" className="w-full">
+                  <Link href="mailto:buck@olympicbootworks.com">
+                    Email buck@olympicbootworks.com
+                  </Link>
+                </Button>
+                <p className="text-sm text-muted-foreground mt-4">Phone: (530) 581-0747</p>
+              </div>
+
+              <div className="bg-card border rounded-lg p-8 shadow-sm">
+                <h4 className="text-2xl font-bold mb-4">South Lake Tahoe</h4>
+                <p className="text-muted-foreground mb-2">Ski Run Blvd Location</p>
+                <p className="text-sm text-muted-foreground mb-6">1235 Ski Run Blvd.</p>
+                <Button asChild size="lg" className="w-full">
+                  <Link href="mailto:SouthLakeOlympic@gmail.com">
+                    Email SouthLakeOlympic@gmail.com
+                  </Link>
+                </Button>
+                <p className="text-sm text-muted-foreground mt-4">Phone: (530) 600-4056</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <Script src="//embed.typeform.com/next/embed.js" strategy="lazyOnload" />
 
       <section className="py-16">
         <div className="container mx-auto px-4">
