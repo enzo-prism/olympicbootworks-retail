@@ -1,9 +1,11 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Phone, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { LocationData } from "@/data/locations"
+import { trackConversion } from "@/lib/track-conversion"
 
 interface LocationCardProps {
   location: LocationData
@@ -13,6 +15,7 @@ interface LocationCardProps {
 
 export default function LocationCard({ location, showHours = true, className = "" }: LocationCardProps) {
   const fullAddress = `${location.address.line1}, ${location.address.city}, ${location.address.state} ${location.address.zip}`
+  const locationSlug = location.name.toLowerCase().includes('north') ? 'north_lake_tahoe' : 'south_lake_tahoe'
 
   return (
     <div className={`bg-card border rounded-lg overflow-hidden shadow-md ${className}`}>
@@ -60,7 +63,11 @@ export default function LocationCard({ location, showHours = true, className = "
             {location.contact.email && (
               <div className="flex items-center gap-2 mt-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <a href={`mailto:${location.contact.email}`} className="text-sm text-primary hover:underline">
+                <a 
+                  href={`mailto:${location.contact.email}`} 
+                  className="text-sm text-primary hover:underline"
+                  onClick={() => trackConversion('email_click', { location: locationSlug })}
+                >
                   {location.contact.email}
                 </a>
               </div>
@@ -84,7 +91,10 @@ export default function LocationCard({ location, showHours = true, className = "
 
         {location.contact.email && (
           <Button asChild variant="outline" className="w-full">
-            <Link href={`mailto:${location.contact.email}`}>
+            <Link 
+              href={`mailto:${location.contact.email}`}
+              onClick={() => trackConversion('email_click', { location: locationSlug })}
+            >
               Email this Location - {location.contact.email}
             </Link>
           </Button>
