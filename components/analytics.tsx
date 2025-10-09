@@ -15,6 +15,7 @@ export function Analytics() {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-36WRRLZB2B');
+            gtag('config', 'AW-17608821238');
           `,
         }}
       />
