@@ -26,9 +26,9 @@ export default function BusinessHours({ hours, className = "", showAppointmentLi
 
       {showAppointmentLink && (
         <div className="text-sm text-primary">
-          <p>To request an appointment, please fill out our contact form.</p>
+          <p>To request an appointment, please email us.</p>
           <Link href="/contact" className="text-primary hover:underline mt-1 inline-block">
-            Request Appointment
+            Contact Us
           </Link>
         </div>
       )}

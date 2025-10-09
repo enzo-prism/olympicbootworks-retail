@@ -80,10 +80,10 @@ export default function LocationCardRobust({ location, showHours = true, classNa
               ))}
             </div>
             <div className="mt-3 text-sm text-primary">
-              <p>To request an appointment, please fill out our contact form below.</p>
+              <p>To request an appointment, please email us.</p>
             </div>
             <Button variant="link" asChild className="p-0 h-auto text-primary mt-1">
-              <Link href="/contact">Request Appointment</Link>
+              <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
         )}

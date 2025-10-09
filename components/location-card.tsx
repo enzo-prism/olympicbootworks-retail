@@ -79,9 +79,6 @@ export default function LocationCard({ location, showHours = true, className = "
                 </div>
               ))}
             </div>
-            <div className="mt-3 text-sm text-primary">
-              <p>To request an appointment, please fill out our contact form.</p>
-            </div>
           </div>
         )}
 
