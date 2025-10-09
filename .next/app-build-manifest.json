@@ -31,15 +31,21 @@
       "static/chunks/main-app.js",
       "static/chunks/app/contact/page.js"
     ],
-    "/testimonials/page": [
+    "/shop/error": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/testimonials/page.js"
+      "static/chunks/app/shop/error.js"
     ],
-    "/about/page": [
+    "/shop/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/about/page.js"
+      "static/chunks/app/shop/loading.js"
+    ],
+    "/shop/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/shop/page.css",
+      "static/chunks/app/shop/page.js"
     ]
   }
 }
