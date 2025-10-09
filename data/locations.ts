@@ -42,8 +42,13 @@ export const locations: LocationData[] = [
       email: "buck@olympicbootworks.com",
     },
     hours: [
-      { day: "Summer Hours", hours: "Open by appointment only" },
-      { day: "Fall Re-opening", hours: "Regular hours resume in Fall" },
+      { day: "Thursday", hours: "9 AM–3 PM" },
+      { day: "Friday", hours: "9 AM–3 PM" },
+      { day: "Saturday", hours: "9 AM–3 PM" },
+      { day: "Sunday", hours: "9 AM–3 PM" },
+      { day: "Monday", hours: "Closed" },
+      { day: "Tuesday", hours: "Closed" },
+      { day: "Wednesday", hours: "Closed" },
     ],
     description:
       "Our flagship store in Olympic Valley offers comprehensive ski boot fitting, bike services, and equipment for all your mountain adventures.",
@@ -63,10 +68,15 @@ export const locations: LocationData[] = [
       email: "SouthLakeOlympic@gmail.com",
     },
     hours: [
-      { day: "Summer Hours", hours: "Open by appointment only" },
-      { day: "Fall Re-opening", hours: "Regular hours resume in Fall" },
+      { day: "Thursday", hours: "9 AM–3 PM" },
+      { day: "Friday", hours: "9 AM–3 PM" },
+      { day: "Saturday", hours: "9 AM–3 PM" },
+      { day: "Sunday", hours: "9 AM–3 PM" },
+      { day: "Monday", hours: "Closed" },
+      { day: "Tuesday", hours: "Closed" },
+      { day: "Wednesday", hours: "Closed" },
     ],
     description:
-      "Our South Lake Tahoe location provides expert boot fitting and a full range of outdoor gear for skiers and mountain bikers.", // Removed "equipment tuning"
+      "Our South Lake Tahoe location provides expert boot fitting and a full range of outdoor gear for skiers and mountain bikers.",
   },
 ]
