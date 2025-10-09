@@ -93,6 +93,41 @@ Preferred communication style: Simple, everyday language.
 - Keyboard navigation support in custom components (carousels, modals)
 - Focus management in Sheet/Dialog components from Radix UI
 
+### Analytics & Conversion Tracking
+
+**Google Analytics (GA4)**
+- Tracking ID: `G-36WRRLZB2B`
+- Implemented via `Analytics` component in global layout
+- Loads gtag.js with `afterInteractive` strategy
+
+**Google Ads Conversion Tracking**
+- Conversion ID: `AW-17608821238`
+- Event snippet: `AW-17608821238/ZWXjCI_f_aUbEPaTxcxB`
+- Conservative approach tracking user intent since Ecwid handles checkout externally
+
+**Tracked Conversions (via `lib/track-conversion.ts`):**
+1. **Email clicks** - Primary conversion action
+   - Contact page email buttons (both locations)
+   - Location card email links
+   - Shop page email button
+   - Includes location identifier for segmentation
+
+2. **Phone clicks** - Secondary conversion action
+   - Contact page phone numbers (clickable tel: links)
+   - Location card phone numbers
+   - Shop page fallback phone numbers
+
+3. **Page views** - Engagement tracking
+   - Contact page view (`contact_page_view`)
+   - Shop page visit (`shop_visit`)
+
+**Technical Implementation:**
+- `waitForGtag()` helper polls for gtag availability (max 2 seconds, 100ms intervals)
+- Prevents race conditions where page view events fire before gtag loads
+- Graceful degradation with console warning if gtag unavailable after timeout
+- All conversion events route through centralized `trackConversion()` utility
+- Supports dynamic values and location-based segmentation
+
 ### External Dependencies
 
 **Third-Party Services**
