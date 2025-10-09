@@ -5,6 +5,7 @@ import Script from "next/script"
 import { Loader2, Mail, Truck } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import ShopVideoHero from "@/components/shop-video-hero"
+import { trackConversion } from "@/lib/track-conversion"
 import "./shop-embed.css"
 
 const DEBUG = true
@@ -166,6 +167,7 @@ export default function ShopClient() {
   useEffect(() => {
     debugLog("Shop client mounted")
     loadStartTimeRef.current = Date.now()
+    trackConversion('shop_visit')
     patchQuerySelectors()
     const cleanupResizeObserver = handleResizeObserverErrors()
 
@@ -262,7 +264,10 @@ export default function ShopClient() {
               Email us any questions about these very special bikes, as we have been Fantic dealers for 8 years!
             </p>
             <Button asChild className="mb-4">
-              <a href="mailto:buck@olympicbootworks.com">
+              <a 
+                href="mailto:buck@olympicbootworks.com"
+                onClick={() => trackConversion('email_click', { location: 'shop_page' })}
+              >
                 <Mail className="mr-2 h-4 w-4" /> Email Us About Fantic Bikes
               </a>
             </Button>
@@ -321,12 +326,14 @@ export default function ShopClient() {
               <a
                 href="tel:+15305810747"
                 className="inline-block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 mr-4"
+                onClick={() => trackConversion('phone_click', { location: 'north_lake_tahoe' })}
               >
                 Call North Lake: (530) 581-0747
               </a>
               <a
                 href="tel:+15306004056"
                 className="inline-block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
+                onClick={() => trackConversion('phone_click', { location: 'south_lake_tahoe' })}
               >
                 Call South Lake: (530) 600-4056
               </a>

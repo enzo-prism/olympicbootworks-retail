@@ -1,4 +1,5 @@
 "use client"
+import { useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
@@ -8,6 +9,9 @@ import VimeoApiScript from "@/components/vimeo-api-script"
 import { trackConversion } from "@/lib/track-conversion"
 
 export default function ContactClient() {
+  useEffect(() => {
+    trackConversion('contact_page_view')
+  }, [])
   const faqs = [
     {
       question: "Do I need an appointment for equipment service?",
