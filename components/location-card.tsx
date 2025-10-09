@@ -85,9 +85,13 @@ export default function LocationCard({ location, showHours = true, className = "
           </div>
         )}
 
-        <Button asChild variant="outline" className="w-full">
-          <Link href={`/contact?location=${location.id}`}>Contact This Location</Link>
-        </Button>
+        {location.contact.email && (
+          <Button asChild variant="outline" className="w-full">
+            <Link href={`mailto:${location.contact.email}`}>
+              Email this Location - {location.contact.email}
+            </Link>
+          </Button>
+        )}
       </div>
     </div>
   )
