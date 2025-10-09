@@ -5,6 +5,7 @@ import VimeoVideoHero from "@/components/vimeo-video-hero"
 import LocationCard from "@/components/location-card"
 import { locations } from "@/data/locations"
 import VimeoApiScript from "@/components/vimeo-api-script"
+import { trackConversion } from "@/lib/track-conversion"
 
 export default function ContactClient() {
   const faqs = [
@@ -68,7 +69,10 @@ export default function ContactClient() {
                 <p className="text-muted-foreground mb-2">Olympic Valley Location</p>
                 <p className="text-sm text-muted-foreground mb-6">1602 Squaw Valley Road, Box 3514</p>
                 <Button asChild size="lg" className="w-full">
-                  <Link href="mailto:buck@olympicbootworks.com">
+                  <Link 
+                    href="mailto:buck@olympicbootworks.com"
+                    onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
+                  >
                     Email buck@olympicbootworks.com
                   </Link>
                 </Button>
@@ -80,7 +84,10 @@ export default function ContactClient() {
                 <p className="text-muted-foreground mb-2">Ski Run Blvd Location</p>
                 <p className="text-sm text-muted-foreground mb-6">1235 Ski Run Blvd.</p>
                 <Button asChild size="lg" className="w-full">
-                  <Link href="mailto:SouthLakeOlympic@gmail.com">
+                  <Link 
+                    href="mailto:SouthLakeOlympic@gmail.com"
+                    onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
+                  >
                     Email SouthLakeOlympic@gmail.com
                   </Link>
                 </Button>
