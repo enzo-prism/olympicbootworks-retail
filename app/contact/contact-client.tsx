@@ -76,7 +76,15 @@ export default function ContactClient() {
                     Email buck@olympicbootworks.com
                   </Link>
                 </Button>
-                <p className="text-sm text-muted-foreground mt-4">Phone: (530) 581-0747</p>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Phone: <a 
+                    href="tel:+15305810747" 
+                    className="text-primary hover:underline"
+                    onClick={() => trackConversion('phone_click', { location: 'north_lake_tahoe' })}
+                  >
+                    (530) 581-0747
+                  </a>
+                </p>
               </div>
 
               <div className="bg-card border rounded-lg p-8 shadow-sm">
@@ -91,7 +99,15 @@ export default function ContactClient() {
                     Email SouthLakeOlympic@gmail.com
                   </Link>
                 </Button>
-                <p className="text-sm text-muted-foreground mt-4">Phone: (530) 600-4056</p>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Phone: <a 
+                    href="tel:+15306004056" 
+                    className="text-primary hover:underline"
+                    onClick={() => trackConversion('phone_click', { location: 'south_lake_tahoe' })}
+                  >
+                    (530) 600-4056
+                  </a>
+                </p>
               </div>
             </div>
           </div>
