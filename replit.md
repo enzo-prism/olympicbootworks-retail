@@ -96,7 +96,7 @@ Preferred communication style: Simple, everyday language.
 ### Analytics & Conversion Tracking
 
 **Google Analytics (GA4)**
-- Tracking ID: `G-36WRRLZB2B`
+- Tracking ID: `G-BDFVXXMY5Z`
 - Implemented via `Analytics` component in global layout
 - Loads gtag.js with `afterInteractive` strategy
 

@@ -5,7 +5,7 @@ import Script from "next/script"
 export function Analytics() {
   return (
     <>
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-36WRRLZB2B" />
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-BDFVXXMY5Z" />
       <Script
         id="gtag-init"
         strategy="afterInteractive"
@@ -14,7 +14,7 @@ export function Analytics() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-36WRRLZB2B');
+            gtag('config', 'G-BDFVXXMY5Z');
             gtag('config', 'AW-17608821238');
           `,
         }}
