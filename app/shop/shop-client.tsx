@@ -265,7 +265,7 @@ export default function ShopClient() {
             </p>
             <Button asChild className="mb-4">
               <a 
-                href="mailto:buck@olympicbootworks.com"
+                href="mailto:olympicbootworks@gmail.com"
                 onClick={() => trackConversion('email_click', { location: 'shop_page' })}
               >
                 <Mail className="mr-2 h-4 w-4" /> Email Us About Fantic Bikes

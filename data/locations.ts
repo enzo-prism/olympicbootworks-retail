@@ -39,7 +39,7 @@ export const locations: LocationData[] = [
     },
     contact: {
       phone: "(530) 581-0747",
-      email: "buck@olympicbootworks.com",
+      email: "olympicbootworks@gmail.com",
     },
     hours: [
       { day: "Thursday", hours: "9 AM–3 PM" },

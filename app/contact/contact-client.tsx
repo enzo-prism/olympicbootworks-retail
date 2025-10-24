@@ -74,10 +74,10 @@ export default function ContactClient() {
                 <p className="text-sm text-muted-foreground mb-6">1602 Squaw Valley Road, Box 3514</p>
                 <Button asChild size="lg" className="w-full">
                   <Link 
-                    href="mailto:buck@olympicbootworks.com"
+                    href="mailto:olympicbootworks@gmail.com"
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
-                    Email buck@olympicbootworks.com
+                    Email olympicbootworks@gmail.com
                   </Link>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-4">

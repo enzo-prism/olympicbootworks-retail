@@ -119,7 +119,7 @@ export default function Footer() {
                 <span className="font-medium">Call:</span> (530) 600-4056
               </p>
               <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Email:</span> buck@olympicbootworks.com
+                <span className="font-medium">Email:</span> olympicbootworks@gmail.com
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
                 View Hours & Map
