@@ -8,6 +8,15 @@ Olympic Bootworks is a Next.js-based e-commerce and informational website for a 
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+**October 31, 2025**
+- Updated North Lake Tahoe contact email from `buck@olympicbootworks.com` to `olympicbootworks@gmail.com` across all pages (contact, shop, home, footer, location data)
+- Updated business hours for both locations:
+  - **North Lake Tahoe**: Wednesday-Sunday 9 AM–4 PM (added Wednesday, extended closing to 4 PM)
+  - **South Lake Tahoe**: Thursday-Sunday 10 AM–4 PM (changed opening to 10 AM, extended closing to 4 PM)
+- All email links maintain Google Ads conversion tracking with location segmentation
+
 ## System Architecture
 
 ### Frontend Architecture
