@@ -74,10 +74,10 @@ export default function ContactClient() {
                 <p className="text-sm text-muted-foreground mb-6">1602 Squaw Valley Road, Box 3514</p>
                 <Button asChild size="lg" className="w-full">
                   <Link 
-                    href="mailto:olympicbootworks@gmail.com"
+                    href="mailto:buck@olympicbootworks.com"
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
-                    Email olympicbootworks@gmail.com
+                    Email buck@olympicbootworks.com
                   </Link>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-4">
@@ -97,10 +97,10 @@ export default function ContactClient() {
                 <p className="text-sm text-muted-foreground mb-6">1235 Ski Run Blvd.</p>
                 <Button asChild size="lg" className="w-full">
                   <Link 
-                    href="mailto:SouthLakeOlympic@gmail.com"
+                    href="mailto:SouthLake@Olympicbootworks.com"
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
-                    Email SouthLakeOlympic@gmail.com
+                    Email SouthLake@Olympicbootworks.com
                   </Link>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-4">

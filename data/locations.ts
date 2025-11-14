@@ -39,7 +39,7 @@ export const locations: LocationData[] = [
     },
     contact: {
       phone: "(530) 581-0747",
-      email: "olympicbootworks@gmail.com",
+      email: "buck@olympicbootworks.com",
     },
     hours: [
       { day: "Wednesday", hours: "9 AM–4 PM" },
@@ -65,7 +65,7 @@ export const locations: LocationData[] = [
     },
     contact: {
       phone: "(530) 600-4056",
-      email: "SouthLakeOlympic@gmail.com",
+      email: "SouthLake@Olympicbootworks.com",
     },
     hours: [
       { day: "Thursday", hours: "10 AM–4 PM" },

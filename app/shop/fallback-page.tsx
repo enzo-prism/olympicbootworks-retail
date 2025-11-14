@@ -63,8 +63,8 @@ export default function ShopFallbackPage() {
 
             <div className="flex items-center gap-3 mb-6">
               <Mail className="h-5 w-5 text-primary" />
-              <a href="mailto:SouthLakeOlympic@gmail.com" className="text-primary hover:underline">
-                SouthLakeOlympic@gmail.com
+              <a href="mailto:SouthLake@Olympicbootworks.com" className="text-primary hover:underline">
+                SouthLake@Olympicbootworks.com
               </a>
             </div>
 

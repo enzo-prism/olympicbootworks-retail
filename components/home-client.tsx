@@ -84,7 +84,7 @@ export default function HomeClient() {
             questions about these very special bikes, as we have been Fantic dealers for 8 years!
           </p>
           <Button asChild size="lg" className="shadow-md">
-            <a href="mailto:olympicbootworks@gmail.com">
+            <a href="mailto:buck@olympicbootworks.com">
               <Mail className="mr-2 h-5 w-5" /> Email Us About Fantic Bikes
             </a>
           </Button>
