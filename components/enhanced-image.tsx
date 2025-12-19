@@ -3,6 +3,7 @@ import type { ImageProps } from "next/image"
 
 export interface EnhancedImageProps extends Omit<ImageProps, "src"> {
   src: string | null | undefined
+  fallbackSrc?: string | null | undefined
 }
 
 export default function EnhancedImage(props: EnhancedImageProps) {
