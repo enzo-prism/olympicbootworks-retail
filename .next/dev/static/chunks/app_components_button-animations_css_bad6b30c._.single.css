@@ -1,0 +1,77 @@
+/* [project]/app/components/button-animations.css [app-client] (css) */
+.btn-hover-effect {
+  transition: all .2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hover-effect:after {
+  content: "";
+  opacity: 0;
+  background: #ffffff1a;
+  width: 100%;
+  height: 100%;
+  transition: opacity .2s;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btn-hover-effect:hover:after {
+  opacity: 1;
+}
+
+.lucide {
+  stroke-width: 2px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.shadow-sm {
+  transition: box-shadow .2s, transform .2s;
+  box-shadow: 0 1px 2px #0000000d;
+}
+
+.shadow-sm:hover {
+  box-shadow: 0 4px 6px #0000001a;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: 1.5s infinite shimmer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: .3s ease-out forwards fadeIn;
+}
+
+button:focus-visible, .btn:focus-visible, a[role="button"]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+button:disabled, .btn:disabled, a[role="button"][aria-disabled="true"] {
+  opacity: .5;
+  pointer-events: none;
+}
+
+/*# sourceMappingURL=app_components_button-animations_css_bad6b30c._.single.css.map*/

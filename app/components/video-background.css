@@ -32,8 +32,8 @@
   }
 }
 
-/* For Firefox compatibility */ \
-@-moz-document url-prefix() {
+/* For Firefox compatibility - using standard CSS */
+@supports (-moz-appearance: none) {
   .vimeo-iframe, .vimeo-fullwidth-iframe {
     width: 177.77777778vh;
     height: 56.25vw;

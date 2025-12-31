@@ -1,0 +1,59 @@
+/* [project]/app/shop/cart-widget.css [app-client] (css) */
+.ec-cart-widget {
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+}
+
+.ec-cart-widget div[class^="ec-cart-widget--"] {
+  font-family: inherit !important;
+}
+
+.ec-cart-widget .ec-minicart {
+  color: var(--primary) !important;
+  background: none !important;
+  border: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ec-cart-widget .ec-minicart--has-items {
+  color: var(--primary) !important;
+}
+
+.ec-cart-widget .ec-minicart__counter {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  border-radius: 9999px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-width: 1.25rem !important;
+  height: 1.25rem !important;
+  font-size: .75rem !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  top: -.25rem !important;
+  right: -.25rem !important;
+}
+
+.ec-cart-widget * {
+  box-sizing: border-box !important;
+}
+
+.ecwid-popup-container {
+  font-family: inherit !important;
+}
+
+@media (max-width: 768px) {
+  .ec-cart-widget {
+    min-width: 32px;
+    min-height: 32px;
+  }
+}
+
+/*# sourceMappingURL=app_shop_cart-widget_css_bad6b30c._.single.css.map*/
