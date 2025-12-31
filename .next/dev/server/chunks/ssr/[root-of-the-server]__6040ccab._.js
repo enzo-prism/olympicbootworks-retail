@@ -627,32 +627,32 @@ const locations = [
         },
         hours: [
             {
-                day: "Wednesday",
-                hours: "9 AM–4 PM"
-            },
-            {
-                day: "Thursday",
-                hours: "9 AM–4 PM"
-            },
-            {
-                day: "Friday",
-                hours: "9 AM–4 PM"
-            },
-            {
-                day: "Saturday",
-                hours: "9 AM–4 PM"
-            },
-            {
-                day: "Sunday",
-                hours: "9 AM–4 PM"
-            },
-            {
                 day: "Monday",
-                hours: "Closed"
+                hours: "8 AM–10 AM, 12:30 PM–5 PM"
             },
             {
                 day: "Tuesday",
-                hours: "Closed"
+                hours: "8 AM–10 AM, 12:30 PM–5 PM"
+            },
+            {
+                day: "Wednesday",
+                hours: "8 AM–10 AM, 12:30 PM–5 PM"
+            },
+            {
+                day: "Thursday",
+                hours: "8 AM–10 AM, 12:30 PM–5 PM"
+            },
+            {
+                day: "Friday",
+                hours: "8 AM–10 AM, 12:30 PM–5 PM"
+            },
+            {
+                day: "Saturday",
+                hours: "8 AM–5 PM"
+            },
+            {
+                day: "Sunday",
+                hours: "8 AM–5 PM"
             }
         ],
         description: "Our flagship store in Olympic Valley offers comprehensive ski boot fitting, bike services, and equipment for all your mountain adventures."
