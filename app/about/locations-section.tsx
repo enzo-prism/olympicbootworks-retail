@@ -17,8 +17,9 @@ export default function LocationsSection() {
           <h2 className="text-3xl font-bold mb-5">Feel the Difference</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Whether you're pushing your limits on the mountain, pounding the pavement, or simply seeking all-day
-            comfort, your journey to a better foundation starts here. This summer, we're open by appointment only at
-            both our Olympic Valley and South Lake Tahoe locations, with regular hours resuming in the fall.
+            comfort, your journey to a better foundation starts here. Both our Olympic Valley and South Lake Tahoe
+            locations are closed Tuesday and Wednesday, open Monday, Thursday, and Friday from 8 AM to 5 PM with a
+            skiesta from 10 AM to 12:30 PM, and open Saturday and Sunday from 8 AM to 5 PM.
           </p>
         </div>
 

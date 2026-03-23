@@ -19,6 +19,20 @@ export default function LocationCardNoImage({
   colorScheme = "blue",
 }: LocationCardNoImageProps) {
   const fullAddress = `${location.address.line1}, ${location.address.city}, ${location.address.state} ${location.address.zip}`
+  const groupedHours = location.hours.reduce<Array<{ label: string; hours: string }>>((groups, item) => {
+    const previous = groups[groups.length - 1]
+
+    if (!previous || previous.hours !== item.hours) {
+      groups.push({ label: item.day, hours: item.hours })
+      return groups
+    }
+
+    previous.label = previous.label.includes("–")
+      ? `${previous.label.split("–")[0]}–${item.day}`
+      : `${previous.label}–${item.day}`
+
+    return groups
+  }, [])
 
   // Color schemes for different locations
   const colorSchemes = {
@@ -128,9 +142,9 @@ export default function LocationCardNoImage({
             </div>
 
             <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm ml-10">
-              {location.hours.slice(0, 4).map((item, index) => (
+              {groupedHours.map((item, index) => (
                 <React.Fragment key={index}>
-                  <div className="font-medium">{item.day}</div>
+                  <div className="font-medium">{item.label}</div>
                   <div className="text-muted-foreground">{item.hours}</div>
                 </React.Fragment>
               ))}

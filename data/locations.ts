@@ -26,6 +26,16 @@ export interface LocationData {
   description?: string
 }
 
+const sharedStoreHours: LocationHours[] = [
+  { day: "Monday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
+  { day: "Tuesday", hours: "Closed" },
+  { day: "Wednesday", hours: "Closed" },
+  { day: "Thursday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
+  { day: "Friday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
+  { day: "Saturday", hours: "8 AM–5 PM" },
+  { day: "Sunday", hours: "8 AM–5 PM" },
+]
+
 export const locations: LocationData[] = [
   {
     id: "olympic-valley",
@@ -41,15 +51,7 @@ export const locations: LocationData[] = [
       phone: "(530) 581-0747",
       email: "buck@olympicbootworks.com",
     },
-    hours: [
-      { day: "Monday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Tuesday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Wednesday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Thursday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Friday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Saturday", hours: "8 AM–5 PM" },
-      { day: "Sunday", hours: "8 AM–5 PM" },
-    ],
+    hours: sharedStoreHours,
     description:
       "Our flagship store in Olympic Valley offers comprehensive ski boot fitting, bike services, and equipment for all your mountain adventures.",
   },
@@ -67,15 +69,7 @@ export const locations: LocationData[] = [
       phone: "(530) 600-4056",
       email: "SouthLake@Olympicbootworks.com",
     },
-    hours: [
-      { day: "Monday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Tuesday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Wednesday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Thursday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Friday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-      { day: "Saturday", hours: "8 AM–5 PM" },
-      { day: "Sunday", hours: "8 AM–5 PM" },
-    ],
+    hours: sharedStoreHours,
     description:
       "Our South Lake Tahoe location provides expert boot fitting and a full range of outdoor gear for skiers and mountain bikers.",
   },
