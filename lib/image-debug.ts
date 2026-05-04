@@ -13,6 +13,16 @@ export function logImageLoad(src: string, component: string): void {
 export function logImageError(src: string, component: string, error?: any): void {
   if (typeof window !== "undefined") {
     console.error(`[${component}] Failed to load image: ${src}`, error)
+    const connection =
+      "connection" in navigator
+        ? (navigator as Navigator & {
+            connection?: {
+              effectiveType?: string
+              downlink?: number
+              rtt?: number
+            }
+          }).connection
+        : undefined
 
     // Collect environment information
     const info = {
@@ -21,11 +31,11 @@ export function logImageError(src: string, component: string, error?: any): void
         width: window.innerWidth,
         height: window.innerHeight,
       },
-      connection: navigator.connection
+      connection: connection
         ? {
-            effectiveType: (navigator.connection as any).effectiveType,
-            downlink: (navigator.connection as any).downlink,
-            rtt: (navigator.connection as any).rtt,
+            effectiveType: connection.effectiveType,
+            downlink: connection.downlink,
+            rtt: connection.rtt,
           }
         : "Not available",
       timestamp: new Date().toISOString(),

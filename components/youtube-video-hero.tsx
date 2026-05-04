@@ -17,14 +17,6 @@ interface YouTubeVideoHeroProps {
   fallbackImage?: string
 }
 
-// Declare the YT variable to avoid TypeScript errors
-declare global {
-  interface Window {
-    YT: any
-    onYouTubeIframeAPIReady: () => void
-  }
-}
-
 export default function YouTubeVideoHero({
   title,
   subtitle,
@@ -65,7 +57,7 @@ export default function YouTubeVideoHero({
     }, 15000) // Increased to 15 seconds from 10 seconds
 
     // Check if YT is already available (might be loaded from another component)
-    if (window.YT && window.YT.Player) {
+    if (window.YT?.Player) {
       initializePlayer()
       return
     }
@@ -97,6 +89,8 @@ export default function YouTubeVideoHero({
   // Add this function to handle player initialization
   const initializePlayer = () => {
     if (!containerRef.current) return
+    const youTubeApi = window.YT
+    if (!youTubeApi?.Player) return
 
     try {
       // Remove any existing player element
@@ -109,7 +103,7 @@ export default function YouTubeVideoHero({
       playerDiv.id = "youtube-player"
       containerRef.current.appendChild(playerDiv)
 
-      playerRef.current = new window.YT.Player("youtube-player", {
+      playerRef.current = new youTubeApi.Player("youtube-player", {
         videoId: videoId,
         playerVars: {
           autoplay: 1,
@@ -140,7 +134,7 @@ export default function YouTubeVideoHero({
             handleResize()
           },
           onStateChange: (event) => {
-            if (event.data === window.YT.PlayerState.ENDED) {
+            if (event.data === youTubeApi.PlayerState.ENDED) {
               event.target.playVideo()
             }
           },

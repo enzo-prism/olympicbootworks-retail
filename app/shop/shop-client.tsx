@@ -13,6 +13,14 @@ const debugLog = (...args: any[]) => {
   if (DEBUG) console.log(`[Shop Debug ${new Date().toISOString()}]`, ...args)
 }
 
+const configureShopInventoryDisplay = () => {
+  window.ec = window.ec || {}
+  window.ec.storefront = window.ec.storefront || {}
+  window.ec.storefront.product_details_show_in_stock_label = true
+  window.ec.storefront.product_details_show_number_of_items_in_stock = false
+  window.Ecwid?.refreshConfig?.()
+}
+
 export default function ShopClient() {
   const [isScriptLoaded, setIsScriptLoaded] = useState(false)
   const [isScriptError, setIsScriptError] = useState(false)
@@ -76,7 +84,6 @@ export default function ShopClient() {
     debugLog("Setting up ResizeObserver error handling")
     const OriginalResizeObserver = window.ResizeObserver
 
-    // @ts-expect-error - we are intentionally monkey-patching for resiliency
     window.ResizeObserver = class PatchedResizeObserver extends OriginalResizeObserver {
       constructor(callback: ResizeObserverCallback) {
         const patchedCallback: ResizeObserverCallback = (entries, observer) => {
@@ -101,6 +108,7 @@ export default function ShopClient() {
   const injectScript = () =>
     new Promise<void>((resolve, reject) => {
       debugLog("Manually injecting Lightspeed script")
+      configureShopInventoryDisplay()
       const script = document.createElement("script")
       script.src = "https://app.business.shop/script.js?115212795&data_platform=code&data_date=2025-04-30"
       script.async = true
@@ -137,6 +145,8 @@ export default function ShopClient() {
     }
 
     try {
+      configureShopInventoryDisplay()
+
       debugLog("Initializing categories")
       setLoadingStatus("Loading categories...")
       w.xCategoriesV2("id=my-categories-115212795")
@@ -168,6 +178,7 @@ export default function ShopClient() {
     debugLog("Shop client mounted")
     loadStartTimeRef.current = Date.now()
     trackConversion('shop_visit')
+    configureShopInventoryDisplay()
     patchQuerySelectors()
     const cleanupResizeObserver = handleResizeObserverErrors()
 

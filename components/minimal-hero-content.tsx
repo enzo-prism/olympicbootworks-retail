@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 type Action = {
 href: string
 label: string
-variant?: 'solid' | 'outline'
+variant?: 'solid' | 'outline' | 'shop'
 ariaLabel?: string
 }
 

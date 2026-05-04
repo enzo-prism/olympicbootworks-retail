@@ -1,4 +1,5 @@
 "use client"
+import type React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -27,9 +28,14 @@ const CartWidget = () => {
   )
 }
 
+type NavLinkProps = React.ComponentProps<typeof Link> & {
+  isMobile?: boolean
+  isActive?: boolean
+}
+
 // Custom Link component that scrolls to top and handles mobile menu closing
-const NavLink = ({ href, className, children, onClick, isMobile = false, isActive = false, ...props }) => {
-  const handleClick = (e) => {
+const NavLink = ({ href, className, children, onClick, isMobile = false, isActive = false, ...props }: NavLinkProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Execute any passed onClick handler
     if (onClick) onClick(e)
 

@@ -45,7 +45,7 @@ export default function VimeoVideoHeroClient({
           player.on("loaded", () => {
             setIsLoaded(true)
             player.setVolume(0)
-            player.play().catch((err) => console.error("Error playing video:", err))
+            player.play().catch((err: unknown) => console.error("Error playing video:", err))
           })
 
           player.on("play", () => {

@@ -8,6 +8,7 @@ interface DirectImageProps {
   height?: string | number
   className?: string
   style?: React.CSSProperties
+  fallbackSrc?: string
 }
 
 export default function DirectImage({
@@ -17,13 +18,14 @@ export default function DirectImage({
   height = "auto",
   className = "",
   style = {},
+  fallbackSrc = "/placeholder.png",
 }: DirectImageProps) {
   // Standardize the path
-  const standardizedSrc = standardizePath(src || "")
+  const standardizedSrc = standardizePath(src || fallbackSrc)
 
   return (
     <img
-      src={standardizedSrc || "/placeholder.png"}
+      src={standardizedSrc || fallbackSrc}
       alt={alt}
       width={width}
       height={height}
