@@ -1,4 +1,5 @@
 import Link from "next/link"
+import type { ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import ButtonIcon from "@/components/button-icon"
 import { cn } from "@/lib/utils"
@@ -7,6 +8,10 @@ type HeroAction = {
   href: string
   label: string
   variant?: "primary" | "secondary"
+  /** Opens in a new tab (e.g. external review link) */
+  external?: boolean
+  /** When set, replaces automatic ButtonIcon */
+  leadingIcon?: ReactNode
 }
 
 type MinimalPageHeroProps = {
@@ -59,8 +64,13 @@ export default function MinimalPageHero({
                   variant={action.variant === "secondary" ? "outline" : "default"}
                   className="min-w-40 shadow-sm"
                 >
-                  <Link href={action.href}>
-                    <ButtonIcon label={action.label} href={action.href} />
+                  <Link
+                    href={action.href}
+                    {...(action.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    {action.leadingIcon ?? <ButtonIcon label={action.label} href={action.href} />}
                     {action.label}
                   </Link>
                 </Button>

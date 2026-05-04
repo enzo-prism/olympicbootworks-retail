@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ShopButton } from "@/components/ui/shop-button"
+import { GoogleReviewButton } from "@/components/google-review-button"
 import { Facebook, Instagram, Star } from "lucide-react"
 
 export default function Footer() {
@@ -26,6 +27,7 @@ export default function Footer() {
             <ShopButton href="/shop" size="sm" className="shadow-sm">
               Shop Now
             </ShopButton>
+            <GoogleReviewButton size="sm" analyticsItemId="google_review_footer" className="w-fit" />
             <div className="flex items-center space-x-4 mt-6">
               <Link
                 href="https://www.facebook.com/olympicbootworks/"

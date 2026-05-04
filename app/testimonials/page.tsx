@@ -5,6 +5,9 @@ import { ShopButton } from "@/components/ui/shop-button"
 import EnhancedTestimonialCard from "@/components/enhanced-testimonial-card"
 import { testimonials } from "@/data/testimonials"
 import MinimalPageHero from "@/components/minimal-page-hero"
+import { GoogleGIcon } from "@/components/google-g-icon"
+import { GoogleReviewButton } from "@/components/google-review-button"
+import { GOOGLE_BUSINESS_REVIEW_URL } from "@/lib/google-business"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -22,6 +25,13 @@ export default function TestimonialsPage() {
         title="Testimonials"
         description="Stories from skiers, riders, and athletes who came in looking for comfort and left with a better foundation."
         actions={[
+          {
+            href: GOOGLE_BUSINESS_REVIEW_URL,
+            label: "Leave a Google review",
+            variant: "secondary",
+            external: true,
+            leadingIcon: <GoogleGIcon className="h-[1.15rem] w-[0.8rem]" />,
+          },
           { href: "/contact", label: "Book a fitting" },
           { href: "/shop", label: "Shop products", variant: "secondary" },
         ]}
@@ -49,7 +59,8 @@ export default function TestimonialsPage() {
             <p className="text-muted-foreground mb-6">
               Ready to experience the Olympic Bootworks difference for yourself?
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
+              <GoogleReviewButton size="lg" analyticsItemId="google_review_testimonials_footer" />
               <Button asChild size="lg" className="shadow-sm">
                 <Link href="/contact">
                   <ButtonIcon label="Book a Fitting" href="/contact" />

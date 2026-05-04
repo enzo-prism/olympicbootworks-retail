@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import ContactClient from "./contact-client"
 import MinimalPageHero from "@/components/minimal-page-hero"
+import { GoogleGIcon } from "@/components/google-g-icon"
+import { GOOGLE_BUSINESS_REVIEW_URL } from "@/lib/google-business"
 
 export const metadata: Metadata = {
   title: "Contact & Lake Tahoe Locations",
@@ -26,6 +28,13 @@ export default function ContactPage() {
         actions={[
           { href: "mailto:buck@olympicbootworks.com", label: "Email North Lake" },
           { href: "tel:+15305810747", label: "Call North Lake", variant: "secondary" },
+          {
+            href: GOOGLE_BUSINESS_REVIEW_URL,
+            label: "Leave a Google review",
+            variant: "secondary",
+            external: true,
+            leadingIcon: <GoogleGIcon className="h-[1.15rem] w-[0.8rem]" />,
+          },
         ]}
       />
       <ContactClient />
