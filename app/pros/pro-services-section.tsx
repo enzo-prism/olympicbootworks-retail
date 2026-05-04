@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Award, Ruler, Wrench, ShoppingBag, Zap, Users } from "lucide-react"
+import { Award, Ruler, Wrench, ShoppingCart, Zap, Users } from "lucide-react"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import ProServiceCard from "@/components/pro-service-card"
 
@@ -75,14 +76,17 @@ export default function ProServicesSection() {
 
           <div className="relative overflow-hidden rounded-xl border border-dashed border-primary/50 bg-card/50 p-6 flex flex-col items-center justify-center text-center">
             <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-              <ShoppingBag className="h-7 w-7 text-primary" />
+              <ShoppingCart className="h-7 w-7 text-primary" />
             </div>
             <h3 className="mb-3 text-xl font-bold">Pro Equipment Shop</h3>
             <p className="mb-6 text-muted-foreground">
               Browse our selection of professional-grade equipment used by world-class athletes.
             </p>
             <Button asChild className="mt-auto">
-              <Link href="/shop/pro-equipment">Shop Pro Equipment</Link>
+              <Link href="/shop/pro-equipment">
+                <ButtonIcon label="Shop Pro Equipment" href="/shop/pro-equipment" />
+                Shop Pro Equipment
+              </Link>
             </Button>
           </div>
         </div>
@@ -90,8 +94,8 @@ export default function ProServicesSection() {
         <div className="mt-16 text-center">
           <Button asChild size="lg" variant="outline" className="gap-2 shadow-sm">
             <Link href="/services">
+              <ButtonIcon label="View All Services" href="/services" />
               View All Services
-              <span className="ml-2 text-lg">→</span>
             </Link>
           </Button>
         </div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { RotateCcw } from "lucide-react"
 
 export default function GlobalError({
   error,
@@ -36,6 +37,7 @@ export default function GlobalError({
             onClick={reset}
             style={{
               display: "inline-flex",
+              gap: "0.5rem",
               alignItems: "center",
               justifyContent: "center",
               borderRadius: "0.375rem",
@@ -50,6 +52,7 @@ export default function GlobalError({
               cursor: "pointer",
             }}
           >
+            <RotateCcw style={{ width: "1rem", height: "1rem" }} aria-hidden="true" />
             Try again
           </button>
         </div>

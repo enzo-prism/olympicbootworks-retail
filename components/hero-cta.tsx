@@ -24,8 +24,12 @@ export function HeroPrimaryCTA({
   ariaLabel,
 }: CTAProps) {
   const content = (
-    <span className="inline-flex items-center gap-2">
-      {icon}
+    <span className="relative z-10 inline-flex items-center gap-2">
+      {icon && (
+        <span className="inline-flex shrink-0 [&_svg]:h-5 [&_svg]:w-5">
+          {icon}
+        </span>
+      )}
       <span>{children}</span>
     </span>
   )
@@ -35,17 +39,17 @@ export function HeroPrimaryCTA({
       href={href}
       aria-label={ariaLabel || (typeof children === "string" ? children : "Primary action")}
       className={cn(
-        "group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold",
+        "hero-cta-primary group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold",
         // High contrast on dark backgrounds
-        "text-gray-900 bg-white/95 hover:bg-white",
+        "text-gray-950 bg-white/95 hover:bg-white",
         // Subtle glass + border + shadows
         "border border-white/80 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.25)]",
         // Focus styles for accessibility
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
         // Subtle inner highlight
-        "after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6)]",
+        "after:pointer-events-none after:absolute after:inset-0 after:z-0 after:rounded-full after:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.6)]",
         // Gentle shine on hover
-        "before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(120px_60px_at_0%_0%,rgba(255,255,255,0.25),transparent)] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500",
+        "before:absolute before:inset-0 before:z-0 before:rounded-full before:bg-[radial-gradient(120px_60px_at_0%_0%,rgba(255,255,255,0.25),transparent)] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500",
         "transition-colors",
         className,
       )}
@@ -67,8 +71,12 @@ export function HeroSecondaryCTA({
   ariaLabel,
 }: CTAProps) {
   const content = (
-    <span className="inline-flex items-center gap-2">
-      {icon}
+    <span className="relative z-10 inline-flex items-center gap-2">
+      {icon && (
+        <span className="inline-flex shrink-0 [&_svg]:h-5 [&_svg]:w-5">
+          {icon}
+        </span>
+      )}
       <span>{children}</span>
     </span>
   )
@@ -78,7 +86,7 @@ export function HeroSecondaryCTA({
       href={href}
       aria-label={ariaLabel || (typeof children === "string" ? children : "Secondary action")}
       className={cn(
-        "group inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold",
+        "hero-cta-secondary group relative inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-3 text-base font-semibold",
         // High contrast on dark backgrounds
         "text-white border border-white/75",
         // Glass background with gentle hover
@@ -86,7 +94,7 @@ export function HeroSecondaryCTA({
         // Shadow and focus ring
         "shadow-[0_8px_24px_rgba(0,0,0,0.20)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
         // Subtle inner highlight
-        "after:pointer-events-none after:absolute after:inset-0 after:rounded-full after:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.45)]",
+        "after:pointer-events-none after:absolute after:inset-0 after:z-0 after:rounded-full after:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.45)]",
         "transition-colors",
         className,
       )}

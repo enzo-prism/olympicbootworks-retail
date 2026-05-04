@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import ButtonIcon from '@/components/button-icon'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -121,7 +122,10 @@ return (
             className="px-5"
             aria-label={ariaLabel || label}
           >
-            <Link href={href}>{label}</Link>
+            <Link href={href}>
+              <ButtonIcon label={label} href={href} />
+              {label}
+            </Link>
           </Button>
         ))}
       </div>

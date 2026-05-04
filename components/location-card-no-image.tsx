@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { MapPin, Clock, Phone, ExternalLink, Award } from "lucide-react"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import type { LocationData } from "@/data/locations"
@@ -150,14 +151,20 @@ export default function LocationCardNoImage({
               ))}
             </div>
             <Button variant="link" asChild className={cn("p-0 h-auto ml-10 mt-3", colors.icon)}>
-              <Link href="/contact">View Full Hours</Link>
+              <Link href="/contact">
+                <ButtonIcon label="View Full Hours" href="/contact" />
+                View Full Hours
+              </Link>
             </Button>
           </div>
         )}
 
         {/* Contact Button - improved spacing */}
         <Button asChild variant="outline" className={cn("w-full border mt-2", colors.hover.replace("hover:", ""))}>
-          <Link href="/contact">Contact This Location</Link>
+          <Link href="/contact">
+            <ButtonIcon label="Contact This Location" href="/contact" />
+            Contact This Location
+          </Link>
         </Button>
       </div>
     </div>

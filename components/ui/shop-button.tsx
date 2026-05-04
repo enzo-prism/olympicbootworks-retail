@@ -1,6 +1,6 @@
 import * as React from "react"
 import Link from "next/link"
-import { ShoppingBag } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react'
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
@@ -57,9 +57,9 @@ const ShopButton = React.forwardRef<HTMLButtonElement, ShopButtonProps>(
     // Create button content with icon
     const buttonContent = (
       <>
-        {icon && iconPosition === "left" && <ShoppingBag className="h-4 w-4 mr-2 flex-shrink-0" aria-hidden="true" />}
+        {icon && iconPosition === "left" && <ShoppingCart className="h-4 w-4 mr-2 flex-shrink-0" aria-hidden="true" />}
         {children}
-        {icon && iconPosition === "right" && <ShoppingBag className="h-4 w-4 ml-2 flex-shrink-0" aria-hidden="true" />}
+        {icon && iconPosition === "right" && <ShoppingCart className="h-4 w-4 ml-2 flex-shrink-0" aria-hidden="true" />}
       </>
     )
 

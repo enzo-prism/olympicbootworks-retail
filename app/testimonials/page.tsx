@@ -1,11 +1,10 @@
 import Link from "next/link"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import EnhancedTestimonialCard from "@/components/enhanced-testimonial-card"
 import { testimonials } from "@/data/testimonials"
-import VimeoVideoHero from "@/components/vimeo-video-hero"
-import MinimalHeroContent from "@/components/minimal-hero-content"
-import VimeoApiScript from "@/components/vimeo-api-script"
+import MinimalPageHero from "@/components/minimal-page-hero"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -18,29 +17,18 @@ export const metadata: Metadata = {
 export default function TestimonialsPage() {
   return (
     <div className="flex flex-col">
-      {/* Load Vimeo API */}
-      <VimeoApiScript />
-
-      {/* Minimal, elegant hero */}
-      <VimeoVideoHero
-        videoId="1085840202"
-        height="large"
-        customContent={
-          <MinimalHeroContent
-            eyebrow="Real results"
-            title="Testimonials"
-            subtitle="Comfort, performance, and support."
-            actions={[
-              { href: "/contact", label: "Book a fitting", variant: "solid" },
-              { href: "/shop", label: "Shop products", variant: "shop" },
-            ]}
-            logoHeight={52}
-          />
-        }
+      <MinimalPageHero
+        eyebrow="Real results"
+        title="Testimonials"
+        description="Stories from skiers, riders, and athletes who came in looking for comfort and left with a better foundation."
+        actions={[
+          { href: "/contact", label: "Book a fitting" },
+          { href: "/shop", label: "Shop products", variant: "secondary" },
+        ]}
       />
 
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold">Testimonials</h1>
+        <h2 className="text-3xl font-bold">Customer stories</h2>
         <p className="mt-4 text-muted-foreground">Real stories from real riders and skiers.</p>
 
         <div className="container mx-auto px-4 py-16">
@@ -63,7 +51,10 @@ export default function TestimonialsPage() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg" className="shadow-sm">
-                <Link href="/contact">Book a Fitting</Link>
+                <Link href="/contact">
+                  <ButtonIcon label="Book a Fitting" href="/contact" />
+                  Book a Fitting
+                </Link>
               </Button>
               <ShopButton href="/shop" className="shadow-sm" size="lg">
                 Shop Our Products

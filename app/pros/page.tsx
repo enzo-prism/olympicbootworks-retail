@@ -1,12 +1,13 @@
 import "./pros.css"
 import Image from "next/image"
 import Link from "next/link"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
 import MinimalHeroContent from "@/components/minimal-hero-content"
-import { Instagram, Twitter, Globe, ArrowRight, Calendar, Users, Award } from 'lucide-react'
+import { Instagram, Twitter, Globe, Calendar, Users, Award, Mountain, Snowflake, Compass } from 'lucide-react'
 import AthleteProfileCard from "@/components/athlete-profile-card"
 import VimeoApiScript from "@/components/vimeo-api-script"
 import type { Metadata } from "next"
@@ -94,7 +95,10 @@ export default function ProsPage() {
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="shadow-sm bg-transparent">
-                  <Link href="#alpine">View Our Athletes</Link>
+                  <Link href="#alpine">
+                    <ButtonIcon label="View Our Athletes" href="#alpine" />
+                    View Our Athletes
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -192,12 +196,15 @@ export default function ProsPage() {
             <div className="flex justify-center mb-12">
               <TabsList className="grid grid-cols-3 w-full max-w-md">
                 <TabsTrigger value="alpine" id="alpine">
+                  <Mountain className="h-4 w-4" aria-hidden="true" />
                   Alpine
                 </TabsTrigger>
                 <TabsTrigger value="freeride" id="freeride">
+                  <Snowflake className="h-4 w-4" aria-hidden="true" />
                   Freeride
                 </TabsTrigger>
                 <TabsTrigger value="expedition" id="expedition">
+                  <Compass className="h-4 w-4" aria-hidden="true" />
                   Expedition
                 </TabsTrigger>
               </TabsList>
@@ -228,8 +235,8 @@ export default function ProsPage() {
 
               <div className="text-center">
                 <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
+                  <ButtonIcon label="View All Alpine Athletes" />
                   View All Alpine Athletes
-                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
             </TabsContent>
@@ -259,8 +266,8 @@ export default function ProsPage() {
 
               <div className="text-center">
                 <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
+                  <ButtonIcon label="View All Freeride Athletes" />
                   View All Freeride Athletes
-                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
             </TabsContent>
@@ -311,8 +318,8 @@ export default function ProsPage() {
 
               <div className="text-center">
                 <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
+                  <ButtonIcon label="View All Expedition Athletes" />
                   View All Expedition Athletes
-                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
             </TabsContent>
@@ -336,7 +343,10 @@ export default function ProsPage() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild className="shadow-sm bg-transparent">
-              <Link href="/gallery">View Our Work</Link>
+              <Link href="/gallery">
+                <ButtonIcon label="View Our Work" href="/gallery" />
+                View Our Work
+              </Link>
             </Button>
           </div>
         </div>

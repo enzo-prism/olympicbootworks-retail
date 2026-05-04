@@ -1,4 +1,5 @@
 import Link from "next/link"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { MapPin } from "lucide-react"
 import { locations } from "@/data/locations"
@@ -36,7 +37,10 @@ export default function LocationsSection() {
             Planning a visit? We recommend calling ahead to ensure our boot fitters are available.
           </p>
           <Button asChild className="shadow-sm px-8">
-            <Link href="/contact">Contact Us</Link>
+            <Link href="/contact">
+              <ButtonIcon label="Contact Us" href="/contact" />
+              Contact Us
+            </Link>
           </Button>
         </div>
       </div>

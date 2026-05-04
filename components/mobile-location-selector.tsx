@@ -71,7 +71,8 @@ export default function MobileLocationSelector({ className, onLocationSelect }: 
                   {location.contact.phone}
                 </a>
 
-                <Link href="/contact" className="text-xs text-primary hover:underline">
+                <Link href="/contact" className="text-xs text-primary hover:underline flex items-center gap-1">
+                  <MapPin className="h-3 w-3" aria-hidden="true" />
                   View Map
                 </Link>
               </div>

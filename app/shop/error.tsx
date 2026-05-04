@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import Link from "next/link"
+import { Home, RotateCcw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function Error({
@@ -23,10 +24,14 @@ export default function Error({
         <p className="text-muted-foreground mb-8">We're sorry, but we encountered an error while loading the shop.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button onClick={reset} size="lg">
+            <RotateCcw className="h-4 w-4" aria-hidden="true" />
             Try again
           </Button>
           <Button asChild variant="outline" size="lg">
-            <Link href="/">Return Home</Link>
+            <Link href="/">
+              <Home className="h-4 w-4" aria-hidden="true" />
+              Return Home
+            </Link>
           </Button>
         </div>
       </div>

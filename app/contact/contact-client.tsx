@@ -1,11 +1,10 @@
 "use client"
 import { useEffect } from "react"
 import Link from "next/link"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
-import VimeoVideoHero from "@/components/vimeo-video-hero"
 import LocationCard from "@/components/location-card"
 import { locations } from "@/data/locations"
-import VimeoApiScript from "@/components/vimeo-api-script"
 import { trackConversion } from "@/lib/track-conversion"
 
 export default function ContactClient() {
@@ -32,14 +31,6 @@ export default function ContactClient() {
 
   return (
     <div className="flex flex-col">
-      <VimeoApiScript />
-      <VimeoVideoHero
-        title="Contact Us"
-        subtitle="Schedule an appointment or ask our team a question"
-        videoId="1085840202"
-        height="small"
-      />
-
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -77,6 +68,7 @@ export default function ContactClient() {
                     href="mailto:buck@olympicbootworks.com"
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
+                    <ButtonIcon label="Email buck@olympicbootworks.com" href="mailto:buck@olympicbootworks.com" />
                     Email buck@olympicbootworks.com
                   </Link>
                 </Button>
@@ -100,6 +92,10 @@ export default function ContactClient() {
                     href="mailto:SouthLake@Olympicbootworks.com"
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
+                    <ButtonIcon
+                      label="Email SouthLake@Olympicbootworks.com"
+                      href="mailto:SouthLake@Olympicbootworks.com"
+                    />
                     Email SouthLake@Olympicbootworks.com
                   </Link>
                 </Button>
@@ -142,6 +138,7 @@ export default function ContactClient() {
                       )}`}
                       target="_blank"
                     >
+                      <ButtonIcon label="View on Google Maps" href="https://maps.google.com" />
                       View on Google Maps
                     </Link>
                   </Button>

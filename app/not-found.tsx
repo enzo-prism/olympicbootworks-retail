@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Home } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Page Not Found",
@@ -44,6 +45,7 @@ export default function AppNotFound() {
           textDecoration: "none",
         }}
       >
+        <Home style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }} aria-hidden="true" />
         Return Home
       </a>
     </div>

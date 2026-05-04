@@ -1,7 +1,7 @@
 import Link from "next/link"
+import ButtonIcon from "@/components/button-icon"
 import ImageGallery from "@/components/image-gallery"
-import VimeoVideoHero from "@/components/vimeo-video-hero"
-import MinimalHeroContent from "@/components/minimal-hero-content"
+import MinimalPageHero from "@/components/minimal-page-hero"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import NextImage from "@/components/next-image"
@@ -85,22 +85,14 @@ export default function GalleryPage() {
 
   return (
     <div className="flex flex-col">
-      {/* Minimal, elegant hero */}
-      <VimeoVideoHero
-        videoId="1085840202"
-        height="large"
-        customContent={
-          <MinimalHeroContent
-            eyebrow="Inside the shop"
-            title="Gallery"
-            subtitle="People, process, and the mountains."
-            actions={[
-              { href: "#gallery", label: "Explore gallery", variant: "solid" },
-              { href: "/contact", label: "Book a fitting", variant: "outline" },
-            ]}
-            logoHeight={52}
-          />
-        }
+      <MinimalPageHero
+        eyebrow="Inside the shop"
+        title="Gallery"
+        description="A quieter look at the people, process, and mountain community behind Olympic Bootworks."
+        actions={[
+          { href: "#gallery", label: "Explore gallery" },
+          { href: "/contact", label: "Book a fitting", variant: "secondary" },
+        ]}
       />
 
       {/* Gallery Section */}
@@ -152,7 +144,10 @@ export default function GalleryPage() {
               </ul>
               <div className="flex flex-wrap gap-4">
                 <Button asChild className="shadow-sm">
-                  <Link href="/contact">Schedule a Fitting</Link>
+                  <Link href="/contact">
+                    <ButtonIcon label="Schedule a Fitting" href="/contact" />
+                    Schedule a Fitting
+                  </Link>
                 </Button>
                 <ShopButton href="/shop/boots" className="shadow-sm">
                   Shop Boots
@@ -182,11 +177,6 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Updated Main Section */}
-      <main className="max-w-5xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold">Gallery</h1>
-        <p className="mt-4 text-muted-foreground">Photos from the shop and the mountains.</p>
-      </main>
     </div>
   )
 }

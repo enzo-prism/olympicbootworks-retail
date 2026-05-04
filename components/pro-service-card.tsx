@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react"
 import Link from "next/link"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -47,7 +48,10 @@ export default function ProServiceCard({
       {linkHref && linkText && (
         <div className="mt-auto">
           <Button asChild variant="outline" size="sm" className="group-hover:bg-primary/5">
-            <Link href={linkHref}>{linkText}</Link>
+            <Link href={linkHref}>
+              <ButtonIcon label={linkText} href={linkHref} />
+              {linkText}
+            </Link>
           </Button>
         </div>
       )}

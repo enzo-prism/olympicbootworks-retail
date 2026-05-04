@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import ContactClient from "./contact-client"
+import MinimalPageHero from "@/components/minimal-page-hero"
 
 export const metadata: Metadata = {
   title: "Contact & Lake Tahoe Locations",
@@ -18,12 +19,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="container mx-auto px-4 py-6 text-sm text-muted-foreground" aria-label="Contact introduction">
-        <h1 className="mb-2 text-base font-semibold text-foreground">Contact Olympic Bootworks</h1>
-        <p>
-          Book a fitting or ask a question. Contact the location that works best for you: Olympic Valley or South Lake Tahoe.
-        </p>
-      </section>
+      <MinimalPageHero
+        eyebrow="Two Tahoe locations"
+        title="Contact Olympic Bootworks"
+        description="Book a fitting, ask about products, or choose the Lake Tahoe location that works best for you."
+        actions={[
+          { href: "mailto:buck@olympicbootworks.com", label: "Email North Lake" },
+          { href: "tel:+15305810747", label: "Call North Lake", variant: "secondary" },
+        ]}
+      />
       <ContactClient />
     </>
   )

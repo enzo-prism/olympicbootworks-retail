@@ -7,7 +7,7 @@ import { ShopButton } from "@/components/ui/shop-button"
 import { Button } from "@/components/ui/button"
 import ServicesSection from "@/components/services-section"
 import HeelLocSection from "@/components/heel-loc-section"
-import { Calendar, Zap, ChevronDown, Mail, ShoppingBag } from 'lucide-react'
+import { Calendar, Zap, ChevronDown, Mail, ShoppingCart } from 'lucide-react'
 import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
 import NextImage from "@/components/next-image"
 import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
@@ -50,7 +50,7 @@ export default function HomeClient() {
 
             {/* Primary actions */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <HeroPrimaryCTA href="/shop" icon={<ShoppingBag className="h-5 w-5" aria-hidden="true" />}>
+              <HeroPrimaryCTA href="/shop" icon={<ShoppingCart className="h-5 w-5" aria-hidden="true" />}>
                 Shop Now
               </HeroPrimaryCTA>
               <HeroSecondaryCTA href="/contact" icon={<Calendar className="h-5 w-5" aria-hidden="true" />}>

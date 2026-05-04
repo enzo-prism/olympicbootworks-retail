@@ -1,6 +1,7 @@
 import type React from "react"
 import Link from "next/link"
-import { Bike, Footprints, ArrowRight, Zap, Award, Heart } from "lucide-react"
+import { Bike, Footprints, Zap, Award, Heart } from "lucide-react"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import ServicesCarousel from "@/components/services-carousel"
@@ -86,8 +87,8 @@ export default function ServicesSection() {
             className="bg-primary/5 border-primary/20 hover:bg-primary/10 text-primary font-medium px-8 py-3 h-auto rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 group"
           >
             <Link href="/contact" className="flex items-center gap-2">
+              <ButtonIcon label="Contact Us" href="/contact" />
               Contact Us
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
         </div>

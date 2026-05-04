@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ShopButton } from "@/components/ui/shop-button"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Phone, Mail } from "lucide-react"
 
@@ -44,7 +44,10 @@ export default function ShopFallbackPage() {
             </div>
 
             <Button asChild className="w-full">
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/contact">
+                <ButtonIcon label="Contact Us" href="/contact" />
+                Contact Us
+              </Link>
             </Button>
           </div>
 
@@ -69,7 +72,10 @@ export default function ShopFallbackPage() {
             </div>
 
             <Button asChild className="w-full">
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/contact">
+                <ButtonIcon label="Contact Us" href="/contact" />
+                Contact Us
+              </Link>
             </Button>
           </div>
         </div>
@@ -112,9 +118,12 @@ export default function ShopFallbackPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                     <div className="w-full">
                       <h3 className="text-white font-bold text-lg mb-2">{category.title}</h3>
-                      <ShopButton href={category.link} variant="on-dark" size="sm">
-                        Inquire
-                      </ShopButton>
+                      <Button asChild variant="on-dark" size="sm">
+                        <Link href={category.link}>
+                          <ButtonIcon label="Inquire" href={category.link} />
+                          Inquire
+                        </Link>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -131,10 +140,16 @@ export default function ShopFallbackPage() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg">
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/contact">
+                <ButtonIcon label="Contact Us" href="/contact" />
+                Contact Us
+              </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="/gallery">View Our Gallery</Link>
+              <Link href="/gallery">
+                <ButtonIcon label="View Our Gallery" href="/gallery" />
+                View Our Gallery
+              </Link>
             </Button>
           </div>
         </div>

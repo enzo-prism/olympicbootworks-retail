@@ -1,13 +1,12 @@
 import Image from "next/image"
 import Link from "next/link"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
-import VimeoVideoHero from "@/components/vimeo-video-hero"
-import MinimalHeroContent from "@/components/minimal-hero-content"
+import MinimalPageHero from "@/components/minimal-page-hero"
 import { Award, Footprints, Heart, ShieldCheck, Zap, UserCheck, Trophy, Package, Clock } from 'lucide-react'
 import FeatureCard from "@/components/feature-card"
 import LocationsSection from "@/app/about/locations-section"
-import VimeoApiScript from "@/components/vimeo-api-script"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -27,30 +26,19 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="flex flex-col">
-      {/* Load Vimeo API */}
-      <VimeoApiScript />
-
-      {/* Minimal, elegant hero */}
-      <VimeoVideoHero
-        videoId="1085840202"
-        height="large"
-        customContent={
-          <MinimalHeroContent
-            eyebrow="Lake Tahoe • Since 1985"
-            title="About Olympic Bootworks"
-            subtitle="Expert boot fitting. Precision alignment. Lifetime support."
-            actions={[
-              { href: "/contact", label: "Visit our locations", variant: "solid" },
-              { href: "/shop", label: "Shop products", variant: "shop" },
-            ]}
-            logoHeight={56}
-          />
-        }
+      <MinimalPageHero
+        eyebrow="Lake Tahoe • Since 1985"
+        title="About Olympic Bootworks"
+        description="Expert boot fitting, precision alignment, and lifetime support from two Tahoe locations."
+        actions={[
+          { href: "/contact", label: "Visit our locations" },
+          { href: "/shop", label: "Shop products", variant: "secondary" },
+        ]}
       />
 
       {/* Introduction Section */}
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold">About Olympic Bootworks</h1>
+        <h2 className="text-3xl font-bold">Built around better movement</h2>
         <p className="mt-4 text-muted-foreground">
           We’ve been fitting ski boots and building great riding experiences since 1985.
         </p>
@@ -95,7 +83,10 @@ export default function AboutPage() {
                 proudly opened our second location on Ski Run Blvd in South Lake Tahoe.
               </p>
               <Button asChild className="shadow-sm">
-                <Link href="/contact">Visit Our Locations</Link>
+                <Link href="/contact">
+                  <ButtonIcon label="Visit Our Locations" href="/contact" />
+                  Visit Our Locations
+                </Link>
               </Button>
             </div>
           </div>
@@ -201,7 +192,10 @@ export default function AboutPage() {
               Shop Our Products
             </ShopButton>
             <Button size="lg" variant="outline-on-dark" asChild className="backdrop-blur-sm shadow-sm">
-              <Link href="/contact">Book a Fitting</Link>
+              <Link href="/contact">
+                <ButtonIcon label="Book a Fitting" href="/contact" />
+                Book a Fitting
+              </Link>
             </Button>
           </div>
         </div>

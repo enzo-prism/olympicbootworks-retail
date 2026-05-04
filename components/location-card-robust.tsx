@@ -4,6 +4,7 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin } from "lucide-react"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { LocationData } from "@/data/locations"
@@ -83,13 +84,19 @@ export default function LocationCardRobust({ location, showHours = true, classNa
               <p>To request an appointment, please email us.</p>
             </div>
             <Button variant="link" asChild className="p-0 h-auto text-primary mt-1">
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/contact">
+                <ButtonIcon label="Contact Us" href="/contact" />
+                Contact Us
+              </Link>
             </Button>
           </div>
         )}
 
         <Button asChild variant="outline" className="w-full">
-          <Link href="/contact">Contact This Location</Link>
+          <Link href="/contact">
+            <ButtonIcon label="Contact This Location" href="/contact" />
+            Contact This Location
+          </Link>
         </Button>
       </div>
     </div>

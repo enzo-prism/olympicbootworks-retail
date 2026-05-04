@@ -2,6 +2,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Phone, Mail } from "lucide-react"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { LocationData } from "@/data/locations"
@@ -101,6 +102,7 @@ export default function LocationCard({ location, showHours = true, className = "
               href={`mailto:${location.contact.email}`}
               onClick={() => trackConversion('email_click', { location: locationSlug })}
             >
+              <ButtonIcon label="Email this Location" href={`mailto:${location.contact.email}`} />
               Email this Location - {location.contact.email}
             </Link>
           </Button>

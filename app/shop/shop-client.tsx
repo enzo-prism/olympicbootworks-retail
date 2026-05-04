@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Script from "next/script"
-import { Loader2, Mail, Truck } from 'lucide-react'
+import { Loader2, Mail, PhoneCall, RefreshCw, Truck } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import ShopVideoHero from "@/components/shop-video-hero"
 import { trackConversion } from "@/lib/track-conversion"
@@ -363,8 +363,9 @@ export default function ShopClient() {
               </p>
               <button
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
               >
+                <RefreshCw className="h-4 w-4" aria-hidden="true" />
                 Refresh Page
               </button>
             </div>
@@ -391,16 +392,18 @@ export default function ShopClient() {
               </p>
               <a
                 href="tel:+15305810747"
-                className="inline-block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 mr-4"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 mr-4"
                 onClick={() => trackConversion('phone_click', { location: 'north_lake_tahoe' })}
               >
+                <PhoneCall className="h-4 w-4" aria-hidden="true" />
                 Call North Lake: (530) 581-0747
               </a>
               <a
                 href="tel:+15306004056"
-                className="inline-block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
                 onClick={() => trackConversion('phone_click', { location: 'south_lake_tahoe' })}
               >
+                <PhoneCall className="h-4 w-4" aria-hidden="true" />
                 Call South Lake: (530) 600-4056
               </a>
             </div>

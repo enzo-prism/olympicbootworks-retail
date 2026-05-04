@@ -4,7 +4,21 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, X, ChevronDown, ChevronUp, Phone } from "lucide-react"
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ChevronUp,
+  Home,
+  Images,
+  Info,
+  MapPin,
+  MessageSquareQuote,
+  Phone,
+  PhoneCall,
+  Trophy,
+  type LucideIcon,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
@@ -31,10 +45,20 @@ const CartWidget = () => {
 type NavLinkProps = React.ComponentProps<typeof Link> & {
   isMobile?: boolean
   isActive?: boolean
+  icon?: LucideIcon
 }
 
 // Custom Link component that scrolls to top and handles mobile menu closing
-const NavLink = ({ href, className, children, onClick, isMobile = false, isActive = false, ...props }: NavLinkProps) => {
+const NavLink = ({
+  href,
+  className,
+  children,
+  onClick,
+  isMobile = false,
+  isActive = false,
+  icon: Icon,
+  ...props
+}: NavLinkProps) => {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Execute any passed onClick handler
     if (onClick) onClick(e)
@@ -50,13 +74,25 @@ const NavLink = ({ href, className, children, onClick, isMobile = false, isActiv
       href={href}
       className={cn(
         "transition-colors relative",
-        isMobile ? "text-lg py-3 px-1 w-full flex items-center" : "text-sm font-medium hover:text-primary",
+        isMobile
+          ? "text-lg py-3 pl-4 pr-1 w-full flex items-center gap-3"
+          : "inline-flex items-center gap-1.5 py-2 text-sm font-medium hover:text-primary",
         isActive ? "text-primary font-semibold" : "text-muted-foreground",
         className,
       )}
       onClick={handleClick}
       {...props}
     >
+      {Icon ? (
+        <Icon
+          className={cn(
+            "shrink-0",
+            isMobile ? "h-5 w-5" : "h-4 w-4",
+            isActive ? "text-primary" : "text-muted-foreground",
+          )}
+          aria-hidden="true"
+        />
+      ) : null}
       {children}
       {isActive && (
         <span
@@ -121,12 +157,12 @@ export default function Navigation() {
 
   // Updated navLinks array with Shop and Testimonials
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/pros", label: "Pros" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/testimonials", label: "Testimonials" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: "Home", icon: Home },
+    { href: "/about", label: "About", icon: Info },
+    { href: "/pros", label: "Pros", icon: Trophy },
+    { href: "/gallery", label: "Gallery", icon: Images },
+    { href: "/testimonials", label: "Testimonials", icon: MessageSquareQuote },
+    { href: "/contact", label: "Contact", icon: PhoneCall },
   ]
 
   // Toggle section expansion in mobile menu
@@ -156,9 +192,9 @@ export default function Navigation() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-4 lg:gap-6">
+        <nav className="hidden md:flex items-center gap-2 lg:gap-3">
           {navLinks.map((link) => (
-            <NavLink key={link.href} href={link.href} isActive={pathname === link.href}>
+            <NavLink key={link.href} href={link.href} icon={link.icon} isActive={pathname === link.href}>
               {link.label}
             </NavLink>
           ))}
@@ -218,6 +254,7 @@ export default function Navigation() {
                   <NavLink
                     key={link.href}
                     href={link.href}
+                    icon={link.icon}
                     isMobile={true}
                     isActive={pathname === link.href}
                     onClick={() => setIsOpen(false)}
@@ -229,11 +266,14 @@ export default function Navigation() {
                 {/* Locations Section */}
                 <div className="mt-2 border-t pt-4">
                   <button
-                    className="flex items-center justify-between w-full py-3 text-lg font-medium"
+                    className="flex items-center justify-between w-full py-3 pl-4 pr-1 text-lg font-medium"
                     onClick={() => toggleSection("locations")}
                     aria-expanded={expandedSection === "locations"}
                   >
-                    <span>Our Locations</span>
+                    <span className="flex items-center gap-3">
+                      <MapPin className="h-5 w-5 text-primary" aria-hidden="true" />
+                      Our Locations
+                    </span>
                     {expandedSection === "locations" ? (
                       <ChevronUp className="h-5 w-5" />
                     ) : (

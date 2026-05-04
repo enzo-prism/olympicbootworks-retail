@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { MapPin, X } from "lucide-react"
+import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { locations } from "@/data/locations"
 
@@ -54,7 +55,10 @@ export default function LocationBanner() {
           </div>
 
           <Button asChild variant="link" size="sm" className="p-0 h-auto text-primary">
-            <Link href="/contact">View Details</Link>
+            <Link href="/contact">
+              <ButtonIcon label="View Location Details" href="/contact" />
+              View Details
+            </Link>
           </Button>
         </div>
       </div>

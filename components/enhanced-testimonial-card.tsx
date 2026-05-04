@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Star } from "lucide-react"
+import { ChevronDown, ChevronUp, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import EnhancedImage from "@/components/enhanced-image"
@@ -65,6 +65,11 @@ export default function EnhancedTestimonialCard({
 
         {isLongContent && (
           <Button variant="link" onClick={() => setExpanded(!expanded)} className="mt-2 p-0 h-auto">
+            {expanded ? (
+              <ChevronUp className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <ChevronDown className="h-4 w-4" aria-hidden="true" />
+            )}
             {expanded ? "Read less" : "Read more"}
           </Button>
         )}

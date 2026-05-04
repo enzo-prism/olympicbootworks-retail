@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import Link from "next/link"
+import { Home, RotateCcw } from "lucide-react"
 
 export default function Error({
   error,
@@ -36,6 +37,7 @@ export default function Error({
           onClick={reset}
           style={{
             display: "inline-flex",
+            gap: "0.5rem",
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "0.375rem",
@@ -50,12 +52,14 @@ export default function Error({
             cursor: "pointer",
           }}
         >
+          <RotateCcw style={{ width: "1rem", height: "1rem" }} aria-hidden="true" />
           Try again
         </button>
         <Link
           href="/"
           style={{
             display: "inline-flex",
+            gap: "0.5rem",
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "0.375rem",
@@ -70,6 +74,7 @@ export default function Error({
             textDecoration: "none",
           }}
         >
+          <Home style={{ width: "1rem", height: "1rem" }} aria-hidden="true" />
           Return Home
         </Link>
       </div>
