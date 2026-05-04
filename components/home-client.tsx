@@ -11,6 +11,8 @@ import { Calendar, Zap, ChevronDown, Mail, ShoppingCart } from 'lucide-react'
 import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
 import NextImage from "@/components/next-image"
 import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
+import { sendGa4Event } from "@/lib/gtag"
+import { trackConversion } from "@/lib/track-conversion"
 
 export default function HomeClient() {
   return (
@@ -50,10 +52,22 @@ export default function HomeClient() {
 
             {/* Primary actions */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <HeroPrimaryCTA href="/shop" icon={<ShoppingCart className="h-5 w-5" aria-hidden="true" />}>
+              <HeroPrimaryCTA
+                href="/shop"
+                icon={<ShoppingCart className="h-5 w-5" aria-hidden="true" />}
+                onClick={() =>
+                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "shop_now" })
+                }
+              >
                 Shop Now
               </HeroPrimaryCTA>
-              <HeroSecondaryCTA href="/contact" icon={<Calendar className="h-5 w-5" aria-hidden="true" />}>
+              <HeroSecondaryCTA
+                href="/contact"
+                icon={<Calendar className="h-5 w-5" aria-hidden="true" />}
+                onClick={() =>
+                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "book_fitting" })
+                }
+              >
                 Book a Fitting
               </HeroSecondaryCTA>
             </div>
@@ -84,7 +98,10 @@ export default function HomeClient() {
             questions about these very special bikes, as we have been Fantic dealers for 8 years!
           </p>
           <Button asChild size="lg" className="shadow-md">
-            <a href="mailto:buck@olympicbootworks.com">
+            <a
+              href="mailto:buck@olympicbootworks.com"
+              onClick={() => trackConversion("email_click", { location: "home_fantic_bikes" })}
+            >
               <Mail className="mr-2 h-5 w-5" /> Email Us About Fantic Bikes
             </a>
           </Button>

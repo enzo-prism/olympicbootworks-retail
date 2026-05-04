@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { type ReactNode } from "react"
+import { type MouseEventHandler, type ReactNode } from "react"
 
 type CTAProps = {
   href?: string
@@ -10,6 +10,7 @@ type CTAProps = {
   icon?: ReactNode
   className?: string
   ariaLabel?: string
+  onClick?: MouseEventHandler<HTMLAnchorElement>
 }
 
 /**
@@ -22,6 +23,7 @@ export function HeroPrimaryCTA({
   icon,
   className,
   ariaLabel,
+  onClick,
 }: CTAProps) {
   const content = (
     <span className="relative z-10 inline-flex items-center gap-2">
@@ -37,6 +39,7 @@ export function HeroPrimaryCTA({
   return (
     <Link
       href={href}
+      onClick={onClick}
       aria-label={ariaLabel || (typeof children === "string" ? children : "Primary action")}
       className={cn(
         "hero-cta-primary group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold",
@@ -69,6 +72,7 @@ export function HeroSecondaryCTA({
   icon,
   className,
   ariaLabel,
+  onClick,
 }: CTAProps) {
   const content = (
     <span className="relative z-10 inline-flex items-center gap-2">
@@ -84,6 +88,7 @@ export function HeroSecondaryCTA({
   return (
     <Link
       href={href}
+      onClick={onClick}
       aria-label={ariaLabel || (typeof children === "string" ? children : "Secondary action")}
       className={cn(
         "hero-cta-secondary group relative inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-3 text-base font-semibold",

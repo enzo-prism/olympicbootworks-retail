@@ -14,6 +14,7 @@ import LocationBanner from "@/components/location-banner"
 import ScrollToTop from "@/components/scroll-to-top"
 import ImagePreloader from "@/components/image-preloader"
 import { Analytics } from "@/components/analytics"
+import { AnalyticsRouteListener } from "@/components/analytics-route-listener"
 import { Suspense } from "react"
 import SeoJsonLd from "@/components/seo-jsonld"
 
@@ -110,6 +111,9 @@ export default function RootLayout({
 
         {/* Load Vimeo API globally */}
         <Script src="https://player.vimeo.com/api/player.js" strategy="lazyOnload" />
+        <Suspense fallback={null}>
+          <AnalyticsRouteListener />
+        </Suspense>
         <Analytics />
       </body>
     </html>
