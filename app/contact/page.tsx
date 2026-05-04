@@ -2,15 +2,17 @@ import type { Metadata } from "next"
 import ContactClient from "./contact-client"
 
 export const metadata: Metadata = {
-title: "Contact",
-description: "Schedule an appointment or ask our team a question.",
-alternates: { canonical: "/contact" },
-openGraph: {
-  title: "Contact | Olympic Bootworks",
-  description: "Schedule an appointment or ask our team a question.",
-  url: "https://www.olympicbootworks.com/contact",
-  type: "website",
-},
+  title: "Contact & Lake Tahoe Locations",
+  description:
+    "Contact Olympic Bootworks to book a custom boot fitting, ask about products, or visit our North Lake Tahoe and South Lake Tahoe locations.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact & Lake Tahoe Locations | Olympic Bootworks",
+    description:
+      "Contact Olympic Bootworks to book a custom boot fitting, ask about products, or visit our North Lake Tahoe and South Lake Tahoe locations.",
+    url: "https://www.olympicbootworks.com/contact",
+    type: "website",
+  },
 }
 
 export default function ContactPage() {

@@ -11,12 +11,14 @@ import VimeoApiScript from "@/components/vimeo-api-script"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About",
-  description: "Learn about Olympic Bootworks, our history, and our commitment to expert boot fitting and bikes.",
+  title: "About Our Tahoe Boot Fitting Shop",
+  description:
+    "Learn the Olympic Bootworks story, from Buck Brown's Heel-Loc technology to two Lake Tahoe locations serving skiers, riders, and athletes.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About | Olympic Bootworks",
-    description: "Learn about Olympic Bootworks, our history, and our commitment to expert boot fitting and bikes.",
+    title: "About Our Tahoe Boot Fitting Shop | Olympic Bootworks",
+    description:
+      "Learn the Olympic Bootworks story, from Buck Brown's Heel-Loc technology to two Lake Tahoe locations serving skiers, riders, and athletes.",
     url: "https://www.olympicbootworks.com/about",
     type: "article",
   },

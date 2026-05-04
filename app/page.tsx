@@ -2,17 +2,15 @@ import type { Metadata } from "next"
 import HomeClient from "@/components/home-client"
 import SeoIntro from "@/components/seo-intro"
 
-// Unique, SEO-friendly metadata for the homepage.
-// The layout's title template will format this as "Ski & Mountain Bike Shop | Olympic Bootworks".
 export const metadata: Metadata = {
-  title: "Ski & Mountain Bike Shop",
+  title: "Custom Ski Boot Fitting & Mountain Bikes",
   description:
-    "Premier ski and mountain bike shop in Lake Tahoe offering precision boot fitting, Heel-Loc technology, and top products.",
+    "Olympic Bootworks in Lake Tahoe offers expert ski boot fitting, Heel-Loc custom footbeds, ZipFit liners, Fantic e-bikes, and mountain gear.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Ski & Mountain Bike Shop | Olympic Bootworks",
+    title: "Custom Ski Boot Fitting & Mountain Bikes | Olympic Bootworks",
     description:
-      "Premier ski and mountain bike shop in Lake Tahoe offering precision boot fitting, Heel-Loc technology, and top products.",
+      "Olympic Bootworks in Lake Tahoe offers expert ski boot fitting, Heel-Loc custom footbeds, ZipFit liners, Fantic e-bikes, and mountain gear.",
     url: "https://www.olympicbootworks.com/",
     type: "website",
   },

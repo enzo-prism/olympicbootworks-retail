@@ -25,7 +25,8 @@ export const metadata: Metadata = {
     default: "Olympic Bootworks",
     template: "%s | Olympic Bootworks",
   },
-  description: "Premier ski and mountain bike shop serving athletes of all levels",
+  description:
+    "Olympic Bootworks is a Lake Tahoe ski boot fitting and mountain bike shop specializing in custom footbeds, ZipFit liners, and Fantic e-bikes.",
   icons: {
     icon: [
       {
@@ -36,7 +37,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Olympic Bootworks",
-    description: "Premier ski and mountain bike shop serving athletes of all levels",
+    description:
+      "Olympic Bootworks is a Lake Tahoe ski boot fitting and mountain bike shop specializing in custom footbeds, ZipFit liners, and Fantic e-bikes.",
     url: "https://www.olympicbootworks.com",
     siteName: "Olympic Bootworks",
     type: "website",
@@ -52,7 +54,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Olympic Bootworks",
-    description: "Premier ski and mountain bike shop serving athletes of all levels",
+    description:
+      "Olympic Bootworks is a Lake Tahoe ski boot fitting and mountain bike shop specializing in custom footbeds, ZipFit liners, and Fantic e-bikes.",
     images: ["/images/og-default.png"],
   },
   alternates: {

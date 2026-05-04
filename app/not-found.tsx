@@ -1,3 +1,14 @@
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  description: "The Olympic Bootworks page you are looking for could not be found.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
+
 export default function AppNotFound() {
   return (
     <div

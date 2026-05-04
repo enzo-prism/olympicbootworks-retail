@@ -9,8 +9,9 @@ import VimeoApiScript from "@/components/vimeo-api-script"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Testimonials",
-  description: "What our customers say about Olympic Bootworks.",
+  title: "Customer Reviews & Testimonials",
+  description:
+    "Read Olympic Bootworks customer reviews from skiers, riders, pickleball players, and athletes who found better comfort and performance.",
   alternates: { canonical: "/testimonials" },
 }
 

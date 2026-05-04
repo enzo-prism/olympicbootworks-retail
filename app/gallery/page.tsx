@@ -8,8 +8,9 @@ import NextImage from "@/components/next-image"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: "A look inside Olympic Bootworks and our community.",
+  title: "Boot Fitting & Shop Gallery",
+  description:
+    "Explore Olympic Bootworks photos from the shop, boot fitting process, athletes, customers, and Lake Tahoe mountain community.",
   alternates: { canonical: "/gallery" },
 }
 

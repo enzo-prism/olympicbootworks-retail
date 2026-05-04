@@ -1,7 +1,17 @@
+import type { Metadata } from "next"
 import ImageAuditTool from "@/components/image-audit-tool"
 import CoreImage from "@/components/core-image"
 import DirectImage from "@/components/direct-image"
 import FallbackSVG from "@/components/fallback-svg"
+
+export const metadata: Metadata = {
+  title: "Image Debug",
+  description: "Internal Olympic Bootworks image debugging and audit tools.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default function DebugPage() {
   return (

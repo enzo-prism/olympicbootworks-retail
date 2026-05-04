@@ -4,8 +4,9 @@ import SeoIntro from "@/components/seo-intro"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Shop",
-  description: "Explore bikes, boots, and gear at Olympic Bootworks.",
+  title: "Shop Ski Boots, Liners & Fantic E-Bikes",
+  description:
+    "Shop Olympic Bootworks for ski boots, ZipFit liners, footbeds, accessories, and Fantic e-bikes with expert fitting support in Lake Tahoe.",
   alternates: { canonical: "/shop" },
 }
 

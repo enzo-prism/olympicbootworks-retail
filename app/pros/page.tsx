@@ -12,8 +12,9 @@ import VimeoApiScript from "@/components/vimeo-api-script"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Pros",
-  description: "Pro services and partnerships at Olympic Bootworks.",
+  title: "Pro Athlete Boot Fitting & Partnerships",
+  description:
+    "See how Olympic Bootworks supports pro skiers, snowboarders, explorers, and athletes with precision boot fitting and custom performance solutions.",
   alternates: { canonical: "/pros" },
 }
 
