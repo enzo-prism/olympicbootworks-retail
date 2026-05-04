@@ -21,6 +21,24 @@ const configureShopInventoryDisplay = () => {
   window.Ecwid?.refreshConfig?.()
 }
 
+const stripVisibleStockCounts = (root: Node) => {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+  const stockCountPattern = /\bIn stock:\s*\d+\s+available\b/gi
+  const nodes: Text[] = []
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode
+    if (node.textContent && stockCountPattern.test(node.textContent)) {
+      nodes.push(node as Text)
+    }
+    stockCountPattern.lastIndex = 0
+  }
+
+  nodes.forEach((node) => {
+    node.textContent = node.textContent?.replace(stockCountPattern, "In stock") ?? ""
+  })
+}
+
 export default function ShopClient() {
   const [isScriptLoaded, setIsScriptLoaded] = useState(false)
   const [isScriptError, setIsScriptError] = useState(false)
@@ -31,6 +49,7 @@ export default function ShopClient() {
   const shopContainerRef = useRef<HTMLDivElement>(null)
   const categoriesContainerRef = useRef<HTMLDivElement>(null)
   const initTimeoutRef = useRef<number | null>(null)
+  const stockScrubFrameRef = useRef<number | null>(null)
   const loadStartTimeRef = useRef<number>(Date.now())
 
   // Patch querySelector errors from third-party script
@@ -146,6 +165,7 @@ export default function ShopClient() {
 
     try {
       configureShopInventoryDisplay()
+      stripVisibleStockCounts(shopContainerRef.current ?? document.body)
 
       debugLog("Initializing categories")
       setLoadingStatus("Loading categories...")
@@ -162,6 +182,7 @@ export default function ShopClient() {
       )
 
       debugLog("Shop components initialized, making visible")
+      stripVisibleStockCounts(shopContainerRef.current ?? document.body)
       setLoadingStatus("Displaying shop...")
       setIsShopVisible(true)
 
@@ -220,6 +241,40 @@ export default function ShopClient() {
       }
     }
   }, [isScriptError, isScriptLoaded])
+
+  // Ecwid can re-render product details after option/hash changes, so keep exact stock counts scrubbed.
+  useEffect(() => {
+    const root = shopContainerRef.current
+    if (!root) return
+
+    const scrub = () => stripVisibleStockCounts(root)
+    const scheduleScrub = () => {
+      if (stockScrubFrameRef.current !== null) return
+      stockScrubFrameRef.current = window.requestAnimationFrame(() => {
+        stockScrubFrameRef.current = null
+        scrub()
+      })
+    }
+
+    scrub()
+    const observer = new MutationObserver(scheduleScrub)
+    observer.observe(root, {
+      childList: true,
+      characterData: true,
+      subtree: true,
+    })
+
+    const scrubTimeouts = [250, 1000, 2500, 5000].map((delay) => window.setTimeout(scrub, delay))
+
+    return () => {
+      observer.disconnect()
+      scrubTimeouts.forEach((timeoutId) => window.clearTimeout(timeoutId))
+      if (stockScrubFrameRef.current !== null) {
+        window.cancelAnimationFrame(stockScrubFrameRef.current)
+        stockScrubFrameRef.current = null
+      }
+    }
+  }, [])
 
   // Initialize store when the script is present
   useEffect(() => {
