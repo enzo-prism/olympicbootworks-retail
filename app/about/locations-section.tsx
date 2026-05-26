@@ -2,7 +2,7 @@ import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { MapPin } from "lucide-react"
-import { locations } from "@/data/locations"
+import { locations, seasonalScheduleNotice } from "@/data/locations"
 import LocationCardNoImage from "@/components/location-card-no-image"
 
 export default function LocationsSection() {
@@ -18,9 +18,7 @@ export default function LocationsSection() {
           <h2 className="text-3xl font-bold mb-5">Feel the Difference</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Whether you're pushing your limits on the mountain, pounding the pavement, or simply seeking all-day
-            comfort, your journey to a better foundation starts here. Both our Olympic Valley and South Lake Tahoe
-            locations are closed Tuesday and Wednesday, open Monday, Thursday, and Friday from 8 AM to 5 PM with a
-            skiesta from 10 AM to 12:30 PM, and open Saturday and Sunday from 8 AM to 5 PM.
+            comfort, your journey to a better foundation starts here. {seasonalScheduleNotice.summary}
           </p>
         </div>
 
@@ -34,12 +32,12 @@ export default function LocationsSection() {
         {/* Additional CTA - improved spacing */}
         <div className="mt-16 text-center">
           <p className="text-muted-foreground mb-5">
-            Planning a visit? We recommend calling ahead to ensure our boot fitters are available.
+            Planning a visit? Please request an appointment before coming in.
           </p>
           <Button asChild className="shadow-sm px-8">
             <Link href="/contact">
-              <ButtonIcon label="Contact Us" href="/contact" />
-              Contact Us
+              <ButtonIcon label="Request an Appointment" href="/contact" />
+              Request Appointment
             </Link>
           </Button>
         </div>

@@ -91,7 +91,7 @@ export default function GalleryPage() {
         description="A quieter look at the people, process, and mountain community behind Olympic Bootworks."
         actions={[
           { href: "#gallery", label: "Explore gallery" },
-          { href: "/contact", label: "Book a fitting", variant: "secondary" },
+          { href: "/contact", label: "Request a fitting", variant: "secondary" },
         ]}
       />
 
@@ -145,8 +145,8 @@ export default function GalleryPage() {
               <div className="flex flex-wrap gap-4">
                 <Button asChild className="shadow-sm">
                   <Link href="/contact">
-                    <ButtonIcon label="Schedule a Fitting" href="/contact" />
-                    Schedule a Fitting
+                    <ButtonIcon label="Request a Fitting" href="/contact" />
+                    Request a Fitting
                   </Link>
                 </Button>
                 <ShopButton href="/shop/boots" className="shadow-sm">

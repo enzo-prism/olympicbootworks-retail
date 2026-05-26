@@ -30,7 +30,7 @@ eyebrow = 'Lake Tahoe • Since 1994',
 title = 'Precision Boot Fitting',
 subtitle = 'Ski & mountain boot experts.',
 actions = [
-  { href: '/contact', label: 'Book a fitting', variant: 'solid' },
+  { href: '/contact', label: 'Request a fitting', variant: 'solid' },
   { href: '/gallery', label: 'Explore gallery', variant: 'outline' },
 ],
 logoSrc = '/images/olympic-bootworks-transparent-logo.png',

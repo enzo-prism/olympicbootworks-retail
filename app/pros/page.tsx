@@ -35,7 +35,7 @@ export default function ProsPage() {
             title="Our Pro Athletes"
             subtitle="Precision that wins."
             actions={[
-              { href: "/contact", label: "Book a pro fitting", variant: "solid" },
+              { href: "/contact", label: "Request a pro fitting", variant: "solid" },
               { href: "#alpine", label: "View athletes", variant: "outline" },
             ]}
             logoHeight={52}
@@ -91,7 +91,7 @@ export default function ProsPage() {
                 <Button asChild className="shadow-sm">
                   <Link href="/contact">
                     <Calendar className="h-4 w-4 mr-2" />
-                    Book a Pro-Level Fitting
+                    Request a Pro-Level Fitting
                   </Link>
                 </Button>
                 <Button asChild variant="outline" className="shadow-sm bg-transparent">
@@ -152,7 +152,7 @@ export default function ProsPage() {
                 <Button asChild className="gap-2 shadow-sm">
                   <Link href="/contact">
                     <Calendar className="h-4 w-4 mr-2" />
-                    Book a Pro Fitting
+                    Request a Pro Fitting
                   </Link>
                 </Button>
                 <div className="flex gap-2">
@@ -219,7 +219,7 @@ export default function ProsPage() {
                   description="Standing at 6'7&quot;, Bryce Bennett is one of the tallest athletes on the World Cup circuit. His unique physique requires specialized boot fitting to maximize power transfer and control. Olympic Bootworks has been instrumental in creating a custom setup that accommodates his height while maintaining precision."
                   achievements={[{ label: "World Cup Top 5" }, { label: "Olympian" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)"
                 />
                 <AthleteProfileCard
@@ -228,7 +228,7 @@ export default function ProsPage() {
                   description="KC Oakley's dynamic skiing style in moguls and freestyle events demands boots that provide both flexibility and support. Olympic Bootworks has developed a custom fitting process that allows for the precise flex pattern needed for mogul competition while maintaining lateral stability for landings."
                   achievements={[{ label: "World Cup Competitor" }, { label: "US Team" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #075985 0%, #0ea5e9 100%)"
                 />
               </div>
@@ -250,7 +250,7 @@ export default function ProsPage() {
                   description="Ralph Backstrom is a legendary big mountain snowboarder with multiple Freeride World Tour podiums. Olympic Bootworks provides Ralph with custom boot fitting and board setup that gives him the response and control needed for high-consequence lines in Alaska and beyond."
                   achievements={[{ label: "Freeride World Tour" }, { label: "X-Games Medalist" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%)"
                 />
                 <AthleteProfileCard
@@ -259,7 +259,7 @@ export default function ProsPage() {
                   description="Shelley Robertson pushes the boundaries of women's big mountain skiing. Her aggressive style requires boots that can handle high-speed, technical terrain. Olympic Bootworks has developed a custom boot setup that provides the stiffness and precision needed for her demanding skiing."
                   achievements={[{ label: "Film Athlete" }, { label: "Expedition Skier" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #6d28d9 0%, #a78bfa 100%)"
                 />
               </div>
@@ -281,7 +281,7 @@ export default function ProsPage() {
                   description="Adrian Ballinger is an IFMGA mountain guide and eight-time Everest summiter who has climbed the world's highest peaks. Olympic Bootworks provides Adrian with custom mountaineering boot modifications that balance warmth, weight, and performance for high-altitude expeditions."
                   achievements={[{ label: "Everest Summits" }, { label: "K2 Without Oxygen" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #064e3b 0%, #10b981 100%)"
                 />
                 <AthleteProfileCard
@@ -290,7 +290,7 @@ export default function ProsPage() {
                   description="Doug Stoup is a renowned polar explorer who has led expeditions to both the North and South Poles. Olympic Bootworks has developed specialized boot modifications for Doug that provide insulation and moisture management for the extreme conditions he faces in polar environments."
                   achievements={[{ label: "North Pole" }, { label: "South Pole" }, { label: "Antarctica Guide" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #065f46 0%, #34d399 100%)"
                 />
               </div>
@@ -302,7 +302,7 @@ export default function ProsPage() {
                   description="Tom Day is a legendary ski filmmaker whose work with Warren Miller Entertainment has defined the genre. As both a filmmaker and expert skier, Tom relies on Olympic Bootworks to provide boots that allow him to ski challenging terrain while carrying camera equipment."
                   achievements={[{ label: "Warren Miller" }, { label: "Award-Winning Filmmaker" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #0f766e 0%, #2dd4bf 100%)"
                 />
                 <AthleteProfileCard
@@ -311,7 +311,7 @@ export default function ProsPage() {
                   description="Andrew Draper is an AMGA-certified ski mountaineering guide who leads clients in the most challenging terrain. Olympic Bootworks provides Andrew with boots that balance uphill efficiency with downhill performance, crucial for long days guiding in the backcountry."
                   achievements={[{ label: "AMGA Certified" }, { label: "Expedition Leader" }]}
                   shopLink="/contact"
-                  shopLabel="Book a Fitting"
+                  shopLabel="Request a Fitting"
                   gradientColors="linear-gradient(135deg, #115e59 0%, #5eead4 100%)"
                 />
               </div>
@@ -339,7 +339,7 @@ export default function ProsPage() {
             <Button size="lg" variant="secondary" asChild className="gap-2 shadow-sm">
               <Link href="/contact">
                 <Calendar className="h-5 w-5 mr-2" />
-                Book a Pro Fitting
+                Request a Pro Fitting
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild className="shadow-sm bg-transparent">

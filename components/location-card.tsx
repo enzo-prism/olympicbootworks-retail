@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import type { LocationData } from "@/data/locations"
+import { seasonalScheduleNotice, type LocationData } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
 
 interface LocationCardProps {
@@ -84,7 +84,7 @@ export default function LocationCard({ location, showHours = true, className = "
 
         {showHours && (
           <div className="mb-6">
-            <h4 className="font-semibold mb-2">Hours:</h4>
+            <h4 className="font-semibold mb-2">Current availability:</h4>
             <div className="grid grid-cols-1 gap-2 text-sm">
               {location.hours.map((item, index) => (
                 <div key={index} className="py-1">
@@ -93,6 +93,7 @@ export default function LocationCard({ location, showHours = true, className = "
                 </div>
               ))}
             </div>
+            <p className="mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.summerHoursStatus}.</p>
           </div>
         )}
 
@@ -102,8 +103,8 @@ export default function LocationCard({ location, showHours = true, className = "
               href={`mailto:${location.contact.email}`}
               onClick={() => trackConversion('email_click', { location: locationSlug })}
             >
-              <ButtonIcon label="Email this Location" href={`mailto:${location.contact.email}`} />
-              Email this Location - {location.contact.email}
+              <ButtonIcon label="Request an Appointment" href={`mailto:${location.contact.email}`} />
+              Request Appointment - {location.contact.email}
             </Link>
           </Button>
         )}

@@ -3,6 +3,7 @@ import Image from "next/image"
 import { ShopButton } from "@/components/ui/shop-button"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { Facebook, Instagram, Star } from "lucide-react"
+import { seasonalScheduleNotice } from "@/data/locations"
 
 export default function Footer() {
   return (
@@ -24,6 +25,7 @@ export default function Footer() {
             <p className="text-muted-foreground text-sm">
               Premier ski and mountain bike shop serving athletes of all levels since 1985.
             </p>
+            <p className="text-muted-foreground text-sm">{seasonalScheduleNotice.appointmentOnlyStarting}.</p>
             <ShopButton href="/shop" size="sm" className="shadow-sm">
               Shop Now
             </ShopButton>
@@ -109,7 +111,7 @@ export default function Footer() {
                 <span className="font-medium">Email:</span> buck@olympicbootworks.com
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
-                View Hours & Map
+                Appointment Info & Map
               </Link>
             </div>
           </div>
@@ -127,7 +129,7 @@ export default function Footer() {
                 <span className="font-medium">Email:</span> SouthLake@Olympicbootworks.com
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
-                View Hours & Map
+                Appointment Info & Map
               </Link>
             </div>
           </div>

@@ -7,7 +7,7 @@ import { MapPin } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import type { LocationData } from "@/data/locations"
+import { seasonalScheduleNotice, type LocationData } from "@/data/locations"
 
 interface LocationCardRobustProps {
   location: LocationData
@@ -71,7 +71,7 @@ export default function LocationCardRobust({ location, showHours = true, classNa
 
         {showHours && (
           <div className="mb-6">
-            <h4 className="font-semibold mb-2">Hours:</h4>
+            <h4 className="font-semibold mb-2">Current availability:</h4>
             <div className="grid grid-cols-1 gap-2 text-sm">
               {location.hours.map((item, index) => (
                 <div key={index} className="py-1">
@@ -81,12 +81,12 @@ export default function LocationCardRobust({ location, showHours = true, classNa
               ))}
             </div>
             <div className="mt-3 text-sm text-primary">
-              <p>To request an appointment, please email us.</p>
+              <p>{seasonalScheduleNotice.summerHoursStatus}. To request an appointment, please email us.</p>
             </div>
             <Button variant="link" asChild className="p-0 h-auto text-primary mt-1">
               <Link href="/contact">
-                <ButtonIcon label="Contact Us" href="/contact" />
-                Contact Us
+                <ButtonIcon label="Request an Appointment" href="/contact" />
+                Request Appointment
               </Link>
             </Button>
           </div>

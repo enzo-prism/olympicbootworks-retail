@@ -4,7 +4,7 @@ import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import LocationCard from "@/components/location-card"
-import { locations } from "@/data/locations"
+import { locations, seasonalScheduleNotice } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
 
 export default function ContactClient() {
@@ -13,19 +13,19 @@ export default function ContactClient() {
   }, [])
   const faqs = [
     {
-      question: "Do I need an appointment for equipment service?",
+      question: "Are you open right now?",
       answer:
-        "While we accept walk-ins, we recommend scheduling an appointment for services like boot fitting and bike service, especially during peak season.",
+        "We are closed for spring vacation through Monday, June 1. Starting Tuesday, June 2, we will be open by appointment.",
     },
     {
-      question: "How far in advance should I book lessons?",
+      question: "Can I walk in after June 2?",
       answer:
-        "We recommend booking lessons at least 48 hours in advance, especially during holidays and weekends. For private lessons with specific instructors, booking 1-2 weeks ahead is advised.",
+        "Please request an appointment first while we finalize regular summer hours.",
     },
     {
-      question: "What is your cancellation policy?",
+      question: "When will summer hours be posted?",
       answer:
-        "For services and lessons, we require 24-hour notice for cancellations. Late cancellations or no-shows may be subject to a fee.",
+        "Regular summer hours are still being finalized. Email or call either location for the most current availability.",
     },
   ]
 
@@ -36,7 +36,7 @@ export default function ContactClient() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Locations</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Visit us at either of our two convenient locations in Lake Tahoe.
+              {seasonalScheduleNotice.summary}
             </p>
           </div>
 
@@ -54,7 +54,7 @@ export default function ContactClient() {
             <div className="text-center mb-12">
               <h3 className="text-3xl font-bold mb-4">Get in Touch</h3>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Contact us directly via email for appointments, questions, or equipment inquiries.
+                Contact us directly to request an appointment for June 2 or later, ask about products, or check current availability.
               </p>
             </div>
 
@@ -68,10 +68,11 @@ export default function ContactClient() {
                     href="mailto:buck@olympicbootworks.com"
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
-                    <ButtonIcon label="Email buck@olympicbootworks.com" href="mailto:buck@olympicbootworks.com" />
-                    Email buck@olympicbootworks.com
+                    <ButtonIcon label="Request an Appointment" href="mailto:buck@olympicbootworks.com" />
+                    Request Appointment
                   </Link>
                 </Button>
+                <p className="text-sm text-muted-foreground mt-3">buck@olympicbootworks.com</p>
                 <p className="text-sm text-muted-foreground mt-4">
                   Phone: <a 
                     href="tel:+15305810747" 
@@ -93,12 +94,13 @@ export default function ContactClient() {
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
                     <ButtonIcon
-                      label="Email SouthLake@Olympicbootworks.com"
+                      label="Request an Appointment"
                       href="mailto:SouthLake@Olympicbootworks.com"
                     />
-                    Email SouthLake@Olympicbootworks.com
+                    Request Appointment
                   </Link>
                 </Button>
+                <p className="text-sm text-muted-foreground mt-3">SouthLake@Olympicbootworks.com</p>
                 <p className="text-sm text-muted-foreground mt-4">
                   Phone: <a 
                     href="tel:+15306004056" 
@@ -119,7 +121,7 @@ export default function ContactClient() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Find Us</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              We have two convenient locations to serve you in the Lake Tahoe area.
+              Please request an appointment before visiting during the spring vacation and early summer transition.
             </p>
           </div>
 

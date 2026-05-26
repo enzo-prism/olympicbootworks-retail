@@ -1,5 +1,6 @@
 import { Clock } from "lucide-react"
 import Link from "next/link"
+import { seasonalScheduleNotice } from "@/data/locations"
 
 interface BusinessHoursProps {
   hours: Array<{ day: string; hours: string }>
@@ -12,10 +13,10 @@ export default function BusinessHours({ hours, className = "", showAppointmentLi
     <div className={`space-y-4 ${className}`}>
       <div className="flex items-center gap-2">
         <Clock className="h-5 w-5 text-primary" />
-        <h3 className="text-lg font-semibold">Business Hours</h3>
+        <h3 className="text-lg font-semibold">Current Availability</h3>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
         {hours.map((item, index) => (
           <div key={index} className="contents">
             <div className="font-medium">{item.day}</div>
@@ -26,9 +27,9 @@ export default function BusinessHours({ hours, className = "", showAppointmentLi
 
       {showAppointmentLink && (
         <div className="text-sm text-primary">
-          <p>To request an appointment, please email us.</p>
+          <p>{seasonalScheduleNotice.summerHoursStatus}. To request an appointment, please email us.</p>
           <Link href="/contact" className="text-primary hover:underline mt-1 inline-block">
-            Contact Us
+            Request Appointment
           </Link>
         </div>
       )}

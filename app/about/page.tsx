@@ -184,7 +184,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Experience the Olympic Bootworks Difference</h2>
           <p className="max-w-2xl mx-auto mb-8">
-            Ready to transform your performance and comfort? Book a fitting session or visit our shop to learn how our
+            Ready to transform your performance and comfort? Request a fitting appointment or visit our shop to learn how our
             custom solutions can elevate your experience.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -193,8 +193,8 @@ export default function AboutPage() {
             </ShopButton>
             <Button size="lg" variant="outline-on-dark" asChild className="backdrop-blur-sm shadow-sm">
               <Link href="/contact">
-                <ButtonIcon label="Book a Fitting" href="/contact" />
-                Book a Fitting
+                <ButtonIcon label="Request a Fitting" href="/contact" />
+                Request a Fitting
               </Link>
             </Button>
           </div>

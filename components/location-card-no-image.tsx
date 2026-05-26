@@ -4,7 +4,7 @@ import { MapPin, Clock, Phone, ExternalLink, Award } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import type { LocationData } from "@/data/locations"
+import { seasonalScheduleNotice, type LocationData } from "@/data/locations"
 
 interface LocationCardNoImageProps {
   location: LocationData
@@ -139,10 +139,10 @@ export default function LocationCardNoImage({
               <div className={cn("p-2 rounded-full", colors.badge)}>
                 <Clock className={cn("h-4 w-4", colors.icon)} />
               </div>
-              <h4 className="font-semibold">Hours:</h4>
+              <h4 className="font-semibold">Current availability:</h4>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm ml-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm ml-10">
               {groupedHours.map((item, index) => (
                 <React.Fragment key={index}>
                   <div className="font-medium">{item.label}</div>
@@ -150,10 +150,11 @@ export default function LocationCardNoImage({
                 </React.Fragment>
               ))}
             </div>
+            <p className="ml-10 mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.summerHoursStatus}.</p>
             <Button variant="link" asChild className={cn("p-0 h-auto ml-10 mt-3", colors.icon)}>
               <Link href="/contact">
-                <ButtonIcon label="View Full Hours" href="/contact" />
-                View Full Hours
+                <ButtonIcon label="Request an Appointment" href="/contact" />
+                Request Appointment
               </Link>
             </Button>
           </div>

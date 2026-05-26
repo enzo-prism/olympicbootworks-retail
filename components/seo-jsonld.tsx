@@ -1,5 +1,5 @@
 import React from "react"
-import { locations, type LocationHours } from "@/data/locations"
+import { locations, seasonalScheduleNotice, type LocationHours } from "@/data/locations"
 
 // Injects JSON-LD structured data into <head> safely.
 // Replace '<' with '\u003c' to mitigate script injection as recommended. [^1]
@@ -71,28 +71,33 @@ export default function SeoJsonLd() {
       })
     })
 
-  const locationJsonLd = locations.map((location) => ({
-    "@context": "https://schema.org",
-    "@type": "SportingGoodsStore",
-    "@id": `https://www.olympicbootworks.com/#${location.id}`,
-    name: `Olympic Bootworks - ${location.name}`,
-    url: "https://www.olympicbootworks.com/contact",
-    telephone: location.contact.phone,
-    email: location.contact.email,
-    parentOrganization: {
-      "@type": "Organization",
-      name: "Olympic Bootworks",
-    },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: [location.address.line1, location.address.line2].filter(Boolean).join(", "),
-      addressLocality: location.address.city,
-      addressRegion: location.address.state,
-      postalCode: location.address.zip,
-      addressCountry: "US",
-    },
-    openingHoursSpecification: openingHoursSpecification(location.hours),
-  }))
+  const locationJsonLd = locations.map((location) => {
+    const openingHours = openingHoursSpecification(location.hours)
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "SportingGoodsStore",
+      "@id": `https://www.olympicbootworks.com/#${location.id}`,
+      name: `Olympic Bootworks - ${location.name}`,
+      url: "https://www.olympicbootworks.com/contact",
+      telephone: location.contact.phone,
+      email: location.contact.email,
+      description: [location.description, seasonalScheduleNotice.summary].filter(Boolean).join(" "),
+      parentOrganization: {
+        "@type": "Organization",
+        name: "Olympic Bootworks",
+      },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: [location.address.line1, location.address.line2].filter(Boolean).join(", "),
+        addressLocality: location.address.city,
+        addressRegion: location.address.state,
+        postalCode: location.address.zip,
+        addressCountry: "US",
+      },
+      ...(openingHours.length > 0 ? { openingHoursSpecification: openingHours } : {}),
+    }
+  })
 
   const safe = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c")
 

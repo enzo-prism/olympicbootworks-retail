@@ -65,10 +65,10 @@ export default function HomeClient() {
                 href="/contact"
                 icon={<Calendar className="h-5 w-5" aria-hidden="true" />}
                 onClick={() =>
-                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "book_fitting" })
+                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "request_fitting" })
                 }
               >
-                Book a Fitting
+                Request a Fitting
               </HeroSecondaryCTA>
             </div>
           </div>
@@ -142,7 +142,7 @@ export default function HomeClient() {
                 <Button asChild className="shadow-sm">
                   <Link href="/contact">
                     <Calendar className="h-4 w-4 mr-2" />
-                    Schedule a Fitting
+                    Request a Fitting
                   </Link>
                 </Button>
               </div>

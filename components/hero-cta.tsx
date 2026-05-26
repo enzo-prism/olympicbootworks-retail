@@ -68,7 +68,7 @@ export function HeroPrimaryCTA({
  */
 export function HeroSecondaryCTA({
   href = "/contact",
-  children = "Book a Fitting",
+  children = "Request a Fitting",
   icon,
   className,
   ariaLabel,

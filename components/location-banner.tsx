@@ -5,7 +5,7 @@ import Link from "next/link"
 import { MapPin, X } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
-import { locations } from "@/data/locations"
+import { locations, seasonalScheduleNotice } from "@/data/locations"
 
 export default function LocationBanner() {
   const [isVisible, setIsVisible] = useState(true)
@@ -39,25 +39,21 @@ export default function LocationBanner() {
         <div className="flex flex-col md:flex-row items-center justify-center text-center gap-2 md:gap-6 text-sm location-banner-content">
           <div className="flex items-center gap-1">
             <MapPin className="h-3 w-3 text-primary" />
-            <span className="font-medium">We have two locations:</span>
+            <span className="font-medium">{seasonalScheduleNotice.label}:</span>
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-1 md:gap-6">
-            {locations.map((location, index) => (
-              <div key={location.id} className="flex items-center gap-1">
-                <span className="font-medium">{location.name}:</span>
-                <span className="text-muted-foreground">
-                  {location.address.city}, {location.address.state}
-                </span>
-                {index === 0 && <span className="hidden md:inline text-muted-foreground">|</span>}
-              </div>
-            ))}
+            <span className="text-muted-foreground">{seasonalScheduleNotice.closedThrough}</span>
+            <span className="hidden md:inline text-muted-foreground">|</span>
+            <span className="text-muted-foreground">{seasonalScheduleNotice.appointmentOnlyStarting}</span>
+            <span className="hidden md:inline text-muted-foreground">|</span>
+            <span className="text-muted-foreground">{locations.length} Tahoe locations</span>
           </div>
 
           <Button asChild variant="link" size="sm" className="p-0 h-auto text-primary">
             <Link href="/contact">
-              <ButtonIcon label="View Location Details" href="/contact" />
-              View Details
+              <ButtonIcon label="Request an Appointment" href="/contact" />
+              Request Appointment
             </Link>
           </Button>
         </div>

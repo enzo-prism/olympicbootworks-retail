@@ -32,7 +32,7 @@ export default function TestimonialsPage() {
             external: true,
             leadingIcon: <GoogleGIcon className="h-[1.15rem] w-[0.8rem]" />,
           },
-          { href: "/contact", label: "Book a fitting" },
+          { href: "/contact", label: "Request a fitting" },
           { href: "/shop", label: "Shop products", variant: "secondary" },
         ]}
       />
@@ -63,8 +63,8 @@ export default function TestimonialsPage() {
               <GoogleReviewButton size="lg" analyticsItemId="google_review_testimonials_footer" />
               <Button asChild size="lg" className="shadow-sm">
                 <Link href="/contact">
-                  <ButtonIcon label="Book a Fitting" href="/contact" />
-                  Book a Fitting
+                  <ButtonIcon label="Request a Fitting" href="/contact" />
+                  Request a Fitting
                 </Link>
               </Button>
               <ShopButton href="/shop" className="shadow-sm" size="lg">

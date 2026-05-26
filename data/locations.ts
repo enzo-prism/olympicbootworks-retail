@@ -26,14 +26,20 @@ export interface LocationData {
   description?: string
 }
 
+export const seasonalScheduleNotice = {
+  label: "Spring vacation update",
+  title: "Closed for spring vacation",
+  summary:
+    "Olympic Bootworks is closed through Monday, June 1. Starting Tuesday, June 2, both locations will be open by appointment while regular summer hours are being finalized.",
+  closedThrough: "Closed through Monday, June 1",
+  appointmentOnlyStarting: "Appointment-only beginning Tuesday, June 2",
+  summerHoursStatus: "Regular summer hours are being finalized",
+}
+
 const sharedStoreHours: LocationHours[] = [
-  { day: "Monday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-  { day: "Tuesday", hours: "Closed" },
-  { day: "Wednesday", hours: "Closed" },
-  { day: "Thursday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-  { day: "Friday", hours: "8 AM–10 AM, 12:30 PM–5 PM" },
-  { day: "Saturday", hours: "8 AM–5 PM" },
-  { day: "Sunday", hours: "8 AM–5 PM" },
+  { day: "Through Monday, June 1", hours: "Closed for spring vacation" },
+  { day: "Starting Tuesday, June 2", hours: "Open by appointment" },
+  { day: "Summer hours", hours: "Being finalized" },
 ]
 
 export const locations: LocationData[] = [
