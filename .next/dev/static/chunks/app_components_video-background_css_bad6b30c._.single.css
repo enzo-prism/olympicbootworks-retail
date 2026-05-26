@@ -121,6 +121,22 @@
   color: #fff !important;
 }
 
+.full-width-hero .hero-cta-primary, .full-width-hero .hero-cta-primary * {
+  color: #111827 !important;
+  text-shadow: none !important;
+}
+
+.full-width-hero .hero-cta-primary svg, .full-width-hero .hero-cta-primary .lucide {
+  color: #111827 !important;
+  fill: none !important;
+  stroke: #111827 !important;
+}
+
+.full-width-hero .hero-cta-secondary svg, .full-width-hero .hero-cta-secondary .lucide {
+  fill: none !important;
+  stroke: currentColor !important;
+}
+
 .video-container-wrapper {
   width: 100%;
   height: 100%;

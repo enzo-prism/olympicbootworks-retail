@@ -128,14 +128,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$seo$2d$intro$2
 ;
 ;
 const metadata = {
-    title: "Ski & Mountain Bike Shop",
-    description: "Premier ski and mountain bike shop in Lake Tahoe offering precision boot fitting, Heel-Loc technology, and top products.",
+    title: "Custom Ski Boot Fitting & Mountain Bikes",
+    description: "Olympic Bootworks in Lake Tahoe offers expert ski boot fitting, Heel-Loc custom footbeds, ZipFit liners, Fantic e-bikes, and mountain gear.",
     alternates: {
         canonical: "/"
     },
     openGraph: {
-        title: "Ski & Mountain Bike Shop | Olympic Bootworks",
-        description: "Premier ski and mountain bike shop in Lake Tahoe offering precision boot fitting, Heel-Loc technology, and top products.",
+        title: "Custom Ski Boot Fitting & Mountain Bikes | Olympic Bootworks",
+        description: "Olympic Bootworks in Lake Tahoe offers expert ski boot fitting, Heel-Loc custom footbeds, ZipFit liners, Fantic e-bikes, and mountain gear.",
         url: "https://www.olympicbootworks.com/",
         type: "website"
     }
@@ -153,7 +153,7 @@ function Page() {
                 ]
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 26,
+                lineNumber: 24,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$1$2e$1_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("noscript", {
@@ -163,22 +163,22 @@ function Page() {
                         children: "JavaScript is disabled. You can still learn about our services, custom boot fitting, and shop hours on this page. Enable JavaScript for interactive galleries and videos."
                     }, void 0, false, {
                         fileName: "[project]/app/page.tsx",
-                        lineNumber: 37,
+                        lineNumber: 35,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 36,
+                    lineNumber: 34,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 35,
+                lineNumber: 33,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$1$2e$1_react$2d$dom$40$19$2e$0$2e$0_react$40$19$2e$0$2e$0_$5f$react$40$19$2e$0$2e$0$2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$home$2d$client$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 42,
+                lineNumber: 40,
                 columnNumber: 7
             }, this)
         ]
