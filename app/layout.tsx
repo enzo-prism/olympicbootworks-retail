@@ -12,7 +12,6 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import LocationBanner from "@/components/location-banner"
 import ScrollToTop from "@/components/scroll-to-top"
-import ImagePreloader from "@/components/image-preloader"
 import { Analytics } from "@/components/analytics"
 import { AnalyticsRouteListener } from "@/components/analytics-route-listener"
 import { Suspense } from "react"
@@ -85,7 +84,6 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <ImagePreloader />
           <ScrollToTop />
           <div className="flex min-h-screen flex-col">
             <div className="fixed top-0 left-0 right-0 z-50 flex flex-col header-container">
