@@ -150,7 +150,7 @@ export default function LocationCardNoImage({
                 </React.Fragment>
               ))}
             </div>
-            <p className="ml-10 mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.summerHoursStatus}.</p>
+            <p className="ml-10 mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
             <Button variant="link" asChild className={cn("p-0 h-auto ml-10 mt-3", colors.icon)}>
               <Link href="/contact">
                 <ButtonIcon label="Request an Appointment" href="/contact" />

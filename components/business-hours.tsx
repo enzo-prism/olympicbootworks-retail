@@ -27,7 +27,7 @@ export default function BusinessHours({ hours, className = "", showAppointmentLi
 
       {showAppointmentLink && (
         <div className="text-sm text-primary">
-          <p>{seasonalScheduleNotice.summerHoursStatus}. To request an appointment, please email us.</p>
+          <p>{seasonalScheduleNotice.hoursStatus}. To request an appointment, please email us.</p>
           <Link href="/contact" className="text-primary hover:underline mt-1 inline-block">
             Request Appointment
           </Link>

@@ -8,7 +8,7 @@ import ShopVideoHero from "@/components/shop-video-hero"
 import { trackConversion } from "@/lib/track-conversion"
 import "./shop-embed.css"
 
-const DEBUG = true
+const DEBUG = process.env.NODE_ENV !== "production"
 const debugLog = (...args: any[]) => {
   if (DEBUG) console.log(`[Shop Debug ${new Date().toISOString()}]`, ...args)
 }
@@ -52,11 +52,13 @@ export default function ShopClient() {
   const stockScrubFrameRef = useRef<number | null>(null)
   const loadStartTimeRef = useRef<number>(Date.now())
 
-  // Patch querySelector errors from third-party script
+  // Patch querySelector errors from third-party script; returns a restore function
   const patchQuerySelectors = () => {
     debugLog("Patching query selectors")
     const originalQuerySelector = Document.prototype.querySelector
     const originalQuerySelectorAll = Document.prototype.querySelectorAll
+    const originalElementQuerySelector = Element.prototype.querySelector
+    const originalElementQuerySelectorAll = Element.prototype.querySelectorAll
 
     Document.prototype.querySelector = function (selector: string) {
       try {
@@ -76,9 +78,6 @@ export default function ShopClient() {
       }
     }
 
-    const originalElementQuerySelector = Element.prototype.querySelector
-    const originalElementQuerySelectorAll = Element.prototype.querySelectorAll
-
     Element.prototype.querySelector = function (selector: string) {
       try {
         return originalElementQuerySelector.call(this, selector)
@@ -95,6 +94,13 @@ export default function ShopClient() {
         console.warn(`Invalid selector: ${selector}. Returning empty NodeList instead.`)
         return document.createDocumentFragment().childNodes as unknown as NodeListOf<Element>
       }
+    }
+
+    return () => {
+      Document.prototype.querySelector = originalQuerySelector
+      Document.prototype.querySelectorAll = originalQuerySelectorAll
+      Element.prototype.querySelector = originalElementQuerySelector
+      Element.prototype.querySelectorAll = originalElementQuerySelectorAll
     }
   }
 
@@ -200,7 +206,7 @@ export default function ShopClient() {
     loadStartTimeRef.current = Date.now()
     trackConversion('shop_visit')
     configureShopInventoryDisplay()
-    patchQuerySelectors()
+    const cleanupQuerySelectors = patchQuerySelectors()
     const cleanupResizeObserver = handleResizeObserverErrors()
 
     const originalOnError = window.onerror
@@ -233,6 +239,7 @@ export default function ShopClient() {
     return () => {
       debugLog("Shop client unmounting, cleaning up")
       window.onerror = originalOnError as any
+      cleanupQuerySelectors()
       cleanupResizeObserver()
       window.clearTimeout(timeoutId)
       if (initTimeoutRef.current) {
@@ -305,12 +312,6 @@ export default function ShopClient() {
         <p className="mt-3 text-muted-foreground">
           Browse our selection of premium Fantic bikes and products.
         </p>
-      </section>
-
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <div className="border rounded-md p-4">Product placeholder</div>
-        <div className="border rounded-md p-4">Product placeholder</div>
-        <div className="border rounded-md p-4">Product placeholder</div>
       </section>
 
       <ShopVideoHero

@@ -27,19 +27,18 @@ export interface LocationData {
 }
 
 export const seasonalScheduleNotice = {
-  label: "Spring vacation update",
-  title: "Closed for spring vacation",
+  label: "Summer schedule",
+  title: "Open by appointment this summer",
   summary:
-    "Olympic Bootworks is closed through Monday, June 1. Starting Tuesday, June 2, both locations will be open by appointment while regular summer hours are being finalized.",
-  closedThrough: "Closed through Monday, June 1",
-  appointmentOnlyStarting: "Appointment-only beginning Tuesday, June 2",
-  summerHoursStatus: "Regular summer hours are being finalized",
+    "Both Olympic Bootworks locations are open by appointment this summer for boot fitting and Fantic e-bike sales. Call or email to schedule a visit — regular store hours resume in the fall.",
+  bannerPrimary: "Open by appointment at both locations",
+  bannerSecondary: "Call, email, or request an appointment online",
+  hoursStatus: "By appointment this summer — regular hours resume in the fall",
 }
 
 const sharedStoreHours: LocationHours[] = [
-  { day: "Through Monday, June 1", hours: "Closed for spring vacation" },
-  { day: "Starting Tuesday, June 2", hours: "Open by appointment" },
-  { day: "Summer hours", hours: "Being finalized" },
+  { day: "Summer", hours: "Open by appointment" },
+  { day: "Fall & winter", hours: "Regular store hours resume in the fall" },
 ]
 
 export const locations: LocationData[] = [

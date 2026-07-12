@@ -23,9 +23,9 @@ export default function Footer() {
               <h3 className="text-lg font-bold">Olympic Bootworks</h3>
             </div>
             <p className="text-muted-foreground text-sm">
-              Premier ski and mountain bike shop serving athletes of all levels since 1985.
+              Premier ski and mountain bike shop serving athletes of all levels since 1994.
             </p>
-            <p className="text-muted-foreground text-sm">{seasonalScheduleNotice.appointmentOnlyStarting}.</p>
+            <p className="text-muted-foreground text-sm">{seasonalScheduleNotice.bannerSecondary}.</p>
             <ShopButton href="/shop" size="sm" className="shadow-sm">
               Shop Now
             </ShopButton>

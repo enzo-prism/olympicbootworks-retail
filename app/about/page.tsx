@@ -27,7 +27,7 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col">
       <MinimalPageHero
-        eyebrow="Lake Tahoe • Since 1985"
+        eyebrow="Lake Tahoe • Since 1994"
         title="About Olympic Bootworks"
         description="Expert boot fitting, precision alignment, and lifetime support from two Tahoe locations."
         actions={[
@@ -40,7 +40,7 @@ export default function AboutPage() {
       <main className="max-w-4xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold">Built around better movement</h2>
         <p className="mt-4 text-muted-foreground">
-          We’ve been fitting ski boots and building great riding experiences since 1985.
+          We’ve been fitting ski boots and building great riding experiences in Tahoe since 1994.
         </p>
       </main>
 

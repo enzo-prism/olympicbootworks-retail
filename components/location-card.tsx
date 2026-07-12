@@ -93,7 +93,7 @@ export default function LocationCard({ location, showHours = true, className = "
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.summerHoursStatus}.</p>
+            <p className="mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
           </div>
         )}
 

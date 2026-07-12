@@ -81,7 +81,7 @@ export default function LocationCardRobust({ location, showHours = true, classNa
               ))}
             </div>
             <div className="mt-3 text-sm text-primary">
-              <p>{seasonalScheduleNotice.summerHoursStatus}. To request an appointment, please email us.</p>
+              <p>{seasonalScheduleNotice.hoursStatus}. To request an appointment, please email us.</p>
             </div>
             <Button variant="link" asChild className="p-0 h-auto text-primary mt-1">
               <Link href="/contact">
