@@ -26,7 +26,8 @@ export function waitForGtag(callback: () => void, maxRetries = 35, delay = 100) 
   checkGtag()
 }
 
-type Ga4ParamValue = string | number | boolean | undefined
+type Ga4ItemParam = Record<string, string | number | boolean | undefined>
+type Ga4ParamValue = string | number | boolean | undefined | Ga4ItemParam[]
 
 /**
  * Sends an event to every configured GA4 data stream (not Google Ads).

@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
+import Link from "next/link"
 import { ChevronLeft, ChevronRight, Footprints, Zap, Award, Heart, Bike } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -11,6 +12,7 @@ interface ServiceItem {
   icon: React.ReactNode
   title: string
   description: string
+  href?: string
 }
 
 export default function ServicesCarousel() {
@@ -53,6 +55,7 @@ export default function ServicesCarousel() {
       title: "Fantic Electric Bikes",
       description:
         "Experience the thrill of Italian-engineered Fantic electric bikes, combining cutting-edge technology with all-terrain versatility. From mountain trails to urban commutes, these premium e-bikes deliver power, range, and reliability.",
+      href: "/e-bikes",
     },
   ]
 
@@ -116,8 +119,8 @@ export default function ServicesCarousel() {
           className="flex transition-transform duration-300 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {services.map((service, index) => (
-            <div key={index} className="w-full flex-shrink-0 px-4 py-6">
+          {services.map((service, index) => {
+            const card = (
               <div className="bg-card border rounded-lg p-6 shadow-sm h-full flex flex-col">
                 <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary inline-block self-start">
                   {service.icon}
@@ -125,8 +128,13 @@ export default function ServicesCarousel() {
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                 <p className="text-muted-foreground text-sm flex-grow">{service.description}</p>
               </div>
-            </div>
-          ))}
+            )
+            return (
+              <div key={index} className="w-full flex-shrink-0 px-4 py-6">
+                {service.href ? <Link href={service.href}>{card}</Link> : card}
+              </div>
+            )
+          })}
         </div>
       </div>
 

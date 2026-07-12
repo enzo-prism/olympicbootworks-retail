@@ -27,11 +27,32 @@ pnpm build      # production build
 | Pages | `app/` (server components; interactivity in `*-client.tsx` siblings) |
 | Locations, hours, seasonal notice | `data/locations.ts` |
 | Testimonials | `data/testimonials.ts` |
+| **E-bike catalog, sale prices, financing flag** | `data/bikes.ts` |
+| E-bikes hub page | `app/e-bikes/` (Product + FAQ JSON-LD in `page.tsx`) |
+| Bike product cards | `components/bike-card.tsx` |
 | Structured data (JSON-LD) | `components/seo-jsonld.tsx` |
 | Analytics config (GA4/Ads IDs) | `lib/analytics-config.ts` (env-overridable) |
 | Conversion events | `lib/track-conversion.ts` |
 | Shop embed + hardening | `app/shop/shop-client.tsx` |
 | Social share image | `public/images/og-default.png` (1200×630) |
+
+## E-bike merchandising
+
+The `/e-bikes` hub, the homepage featured row, and the bike JSON-LD all render from
+`data/bikes.ts`. **The Ecwid store (id 115212795) is the source of truth for prices and
+stock** — when anything changes in the store admin (price, sale, sold out, new product),
+mirror it in `data/bikes.ts` in the same change. Each entry carries the Ecwid product id
+and deep link (`/shop#!/Name/p/<id>`).
+
+- `featured: true` + `inStock: true` puts a bike on the homepage row (keep it to ~4).
+- "Up to X% off" copy is computed from the data (`maxSavingsPct`) — never hardcode it.
+- **Financing**: `financing.enabled` in `data/bikes.ts` is `false` until Klarna (or another
+  BNPL provider) is actually enabled in the Ecwid admin. Flipping it to `true` turns on
+  "from $X/mo" framing on every bike card. Do not enable it before checkout supports it.
+- Bike conversion events: `test_ride_request` and `bike_page_view` in
+  `lib/track-conversion.ts`, plus GA4 `select_item` fired from `bike-card.tsx`.
+- Product photos load from the Ecwid CDN (`d2j6dbq0eux0bg.cloudfront.net`, allowlisted in
+  `next.config.mjs`).
 
 ## Seasonal content
 

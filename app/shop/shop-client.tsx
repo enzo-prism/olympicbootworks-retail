@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import Script from "next/script"
-import { Loader2, Mail, PhoneCall, RefreshCw, Truck } from 'lucide-react'
+import { Bike, Loader2, Mail, PhoneCall, RefreshCw, Truck } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import ShopVideoHero from "@/components/shop-video-hero"
 import { trackConversion } from "@/lib/track-conversion"
@@ -184,6 +185,7 @@ export default function ShopClient() {
         "views=grid(20,3) list(60) table(60)",
         "categoryView=grid",
         "searchView=list",
+        "defaultCategoryId=180049534",
         "id=my-store-115212795",
       )
 
@@ -323,14 +325,21 @@ export default function ShopClient() {
             <p className="text-muted-foreground mb-4">
               Email us any questions about these very special bikes, as we have been Fantic dealers for 8 years!
             </p>
-            <Button asChild className="mb-4">
-              <a 
-                href="mailto:buck@olympicbootworks.com"
-                onClick={() => trackConversion('email_click', { location: 'shop_page' })}
-              >
-                <Mail className="mr-2 h-4 w-4" /> Email Us About Fantic Bikes
-              </a>
-            </Button>
+            <div className="mb-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button asChild>
+                <Link href="/e-bikes">
+                  <Bike className="mr-2 h-4 w-4" aria-hidden="true" /> Models, Pricing &amp; Test Rides
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <a
+                  href="mailto:buck@olympicbootworks.com"
+                  onClick={() => trackConversion('email_click', { location: 'shop_page' })}
+                >
+                  <Mail className="mr-2 h-4 w-4" /> Email Us About Fantic Bikes
+                </a>
+              </Button>
+            </div>
             <div className="mt-4 pt-4 border-t border-border/50">
               <p className="text-lg font-medium text-foreground flex items-center justify-center">
                 <Truck className="mr-2 h-5 w-5 text-primary" />
@@ -365,8 +374,14 @@ export default function ShopClient() {
             </div>
           )}
 
-          {/* Shop Content - initially hidden until script initializes */}
-          <div className={`shop-content ${isShopVisible ? "shop-visible" : "shop-hidden"}`}>
+          {/* Shop Content - initially hidden until script initializes.
+              The extra anchor ids keep older /shop#boots links scrolling here. */}
+          <div
+            id="store"
+            className={`shop-content scroll-mt-24 ${isShopVisible ? "shop-visible" : "shop-hidden"}`}
+          >
+            <span id="boots" aria-hidden="true" />
+            <span id="bikes" aria-hidden="true" />
             {/* Categories */}
             <div className="shop-categories-wrapper mb-8 rounded-lg border p-4 bg-card">
               <h2 className="text-xl font-semibold mb-4">Shop Categories</h2>

@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation"
 import {
   Menu,
   X,
+  Bike,
   ChevronDown,
   ChevronUp,
   Home,
@@ -73,7 +74,7 @@ const NavLink = ({
     <Link
       href={href}
       className={cn(
-        "transition-colors relative",
+        "transition-colors relative whitespace-nowrap",
         isMobile
           ? "text-lg py-3 pl-4 pr-1 w-full flex items-center gap-3"
           : "inline-flex items-center gap-1.5 py-2 text-sm font-medium hover:text-primary",
@@ -87,7 +88,7 @@ const NavLink = ({
         <Icon
           className={cn(
             "shrink-0",
-            isMobile ? "h-5 w-5" : "h-4 w-4",
+            isMobile ? "h-5 w-5" : "hidden lg:block h-4 w-4",
             isActive ? "text-primary" : "text-muted-foreground",
           )}
           aria-hidden="true"
@@ -158,6 +159,7 @@ export default function Navigation() {
   // Updated navLinks array with Shop and Testimonials
   const navLinks = [
     { href: "/", label: "Home", icon: Home },
+    { href: "/e-bikes", label: "E-Bikes", icon: Bike },
     { href: "/about", label: "About", icon: Info },
     { href: "/pros", label: "Pros", icon: Trophy },
     { href: "/gallery", label: "Gallery", icon: Images },

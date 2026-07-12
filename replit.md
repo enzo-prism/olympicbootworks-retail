@@ -25,3 +25,4 @@ Preferred communication style: Simple, everyday language.
 - Images use standard `next/image` with optimization enabled (`next.config.mjs`). The old multi-wrapper "StandardImage" system was removed.
 - Video: Vimeo Player API background heroes + YouTube embeds; IDs are hardcoded in components.
 - E-commerce: Ecwid/Lightspeed embed in `app/shop/shop-client.tsx` (store id 115212795); it hardens against third-party script errors and scrubs exact stock counts from the UI.
+- E-bikes: `/e-bikes` hub + homepage featured row render from `data/bikes.ts`, which mirrors the Ecwid catalog (prices, stock, deep links) and must be updated whenever the store changes. `financing.enabled` there stays `false` until a BNPL provider is live in the Ecwid admin. See README "E-bike merchandising".

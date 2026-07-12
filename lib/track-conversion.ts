@@ -1,7 +1,20 @@
 import { GOOGLE_ADS_CONVERSION_SEND_TO } from "@/lib/analytics-config"
 import { sendGa4Event, waitForGtag } from "@/lib/gtag"
 
-export type ConversionType = "email_click" | "phone_click" | "shop_visit" | "contact_page_view"
+export type ConversionType =
+  | "email_click"
+  | "phone_click"
+  | "shop_visit"
+  | "contact_page_view"
+  | "test_ride_request"
+  | "bike_page_view"
+
+/**
+ * Passive engagement types are mirrored to GA4 but do NOT fire the Google Ads
+ * conversion — pouring high-volume page views into the same conversion label
+ * as real leads dilutes Smart Bidding.
+ */
+const GA4_ONLY_TYPES: ReadonlySet<ConversionType> = new Set(["bike_page_view"])
 
 interface ConversionOptions {
   value?: number
@@ -16,6 +29,21 @@ function mirrorEngagementToGa4(
   location: string,
 ) {
   switch (type) {
+    case "test_ride_request":
+      sendGa4Event("generate_lead", {
+        value,
+        currency,
+        lead_source: location,
+        lead_type: "bike_test_ride",
+      })
+      break
+    case "bike_page_view":
+      sendGa4Event("view_item_list", {
+        item_list_id: "fantic_ebikes",
+        item_list_name: "Fantic E-Bikes",
+        surface: location,
+      })
+      break
     case "email_click":
       sendGa4Event("generate_lead", {
         value,
@@ -66,6 +94,10 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
     }
 
     mirrorEngagementToGa4(type, value, currency, loc)
+
+    if (GA4_ONLY_TYPES.has(type)) {
+      return
+    }
 
     window.gtag("event", "conversion", {
       send_to: GOOGLE_ADS_CONVERSION_SEND_TO,

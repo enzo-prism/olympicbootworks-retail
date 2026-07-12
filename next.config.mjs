@@ -11,6 +11,10 @@ const nextConfig = {
   images: {
     qualities: [60, 75, 80, 85, 90],
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      // Ecwid/Lightspeed store product photos, reused on /e-bikes
+      { protocol: "https", hostname: "d2j6dbq0eux0bg.cloudfront.net" },
+    ],
   },
   async headers() {
     return [

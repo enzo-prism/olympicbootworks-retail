@@ -75,6 +75,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/e-bikes" className="text-primary hover:text-primary font-semibold text-sm">
+                  Fantic E-Bikes
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-muted-foreground hover:text-primary text-sm">
                   About
                 </Link>
