@@ -16,6 +16,7 @@ export const metadata: Metadata = {
       "Contact Olympic Bootworks to request an appointment, ask about products, or reach our North Lake Tahoe and South Lake Tahoe locations.",
     url: "https://www.olympicbootworks.com/contact",
     type: "website",
+    images: ["/images/og-default.png"],
   },
 }
 

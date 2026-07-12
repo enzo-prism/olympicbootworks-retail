@@ -6,7 +6,7 @@ export default function Loading() {
       <div className="container mx-auto px-4">
         {/* Shop Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold mb-2">Our Shop</h1>
+          <h2 className="text-3xl font-bold mb-2">Our Shop</h2>
           <p className="text-muted-foreground">Browse our selection of premium ski and mountain bike equipment</p>
         </div>
 

@@ -307,13 +307,6 @@ export default function ShopClient() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <section className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold">Shop</h1>
-        <p className="mt-3 text-muted-foreground">
-          Browse our selection of premium Fantic bikes and products.
-        </p>
-      </section>
-
       <ShopVideoHero
         videoId="1098348289"
         title="Our Shop"

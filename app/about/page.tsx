@@ -20,6 +20,7 @@ export const metadata: Metadata = {
       "Learn the Olympic Bootworks story, from Buck Brown's Heel-Loc technology to two Lake Tahoe locations serving skiers, riders, and athletes.",
     url: "https://www.olympicbootworks.com/about",
     type: "article",
+    images: ["/images/og-default.png"],
   },
 }
 
