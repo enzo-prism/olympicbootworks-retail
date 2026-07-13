@@ -2,8 +2,9 @@
 
 Marketing + e-commerce site for Olympic Bootworks, a Lake Tahoe ski-boot-fitting and Fantic e-bike shop with two locations (Olympic Valley and South Lake Tahoe).
 
-Deployment target: Vercel project `v0-olympic-bootworks-cy`, which deploys from `main`.
-Public domain: https://www.olympicbootworks.com — verify DNS cutover and browser behavior separately after deployment.
+Deployment target: Replit Autoscale, configured in `.replit` and published from the Replit project.
+Public domain: https://www.olympicbootworks.com — DNS points to the Replit deployment. Treat
+GitHub `main` as the source of truth, then republish in Replit and verify the public site.
 
 ## Stack
 
@@ -21,6 +22,9 @@ pnpm dev        # http://localhost:5000
 pnpm build      # production build
 pnpm check      # lint, typecheck, tests, live Ecwid catalog verification, build
 ```
+
+Use Node.js 22.13 or newer. The project pins pnpm in `package.json`; Replit uses its
+`nodejs-22` module so dependency installation and production builds use a compatible runtime.
 
 ## Where things live
 
@@ -94,5 +98,5 @@ the visitor chooses analytics cookies. Keep `components/tracking-consent.tsx` an
 
 GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is not
 ready until lint, strict TypeScript, unit tests, live Ecwid reconciliation, and the Next.js
-production build all pass. Vercel preview and the public custom domain still require browser
+production build all pass. Replit publishing and the public custom domain still require browser
 QA because third-party video and storefront behavior cannot be proven by compilation alone.

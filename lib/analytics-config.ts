@@ -1,5 +1,5 @@
 /**
- * Central GA4 / Google Ads IDs. Override with NEXT_PUBLIC_* in Vercel when rotating tags.
+ * Central GA4 / Google Ads IDs. Override with NEXT_PUBLIC_* deployment variables when rotating tags.
  *
  * If you use manual page_view (AnalyticsRouteListener), turn OFF GA4 Admin → Data streams →
  * Enhanced measurement → Page views → “Page changes based on browser history” to avoid duplicate hits.

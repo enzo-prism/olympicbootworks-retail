@@ -13,6 +13,8 @@ Preferred communication style: Simple, everyday language.
 ## Replit specifics
 
 - Dev server runs on port 5000 (`pnpm dev`).
+- Production uses Replit Autoscale with `pnpm build` and `pnpm start`.
+- Runtime: Node.js 22.13 or newer (required by the pinned pnpm version).
 - Package manager: pnpm.
 
 ## Key facts (keep in sync with code — the code is the source of truth)
