@@ -26,6 +26,7 @@ export default function LocationCard({ location, showHours = true, className = "
           alt={location.name}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
+          loading={location.flagship ? "eager" : "lazy"}
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">

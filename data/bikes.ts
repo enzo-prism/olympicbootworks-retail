@@ -80,7 +80,7 @@ export const bikes: Bike[] = [
       "Fantic's all-mountain workhorse — big-terrain capability that still pedals well everywhere else.",
     shopUrl: "/shop#!/XMF-1-7/p/739855138",
     image: "https://d2j6dbq0eux0bg.cloudfront.net/images/115212795/4928964322.jpg",
-    inStock: false,
+    inStock: true,
   },
   {
     id: 739855620,

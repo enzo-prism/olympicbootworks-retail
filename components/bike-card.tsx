@@ -20,9 +20,10 @@ interface BikeCardProps {
   /** Where the card is rendered, for analytics (e.g. "home_featured", "ebikes_hub") */
   surface: string
   className?: string
+  priority?: boolean
 }
 
-export default function BikeCard({ bike, surface, className }: BikeCardProps) {
+export default function BikeCard({ bike, surface, className, priority = false }: BikeCardProps) {
   const pct = savingsPct(bike)
 
   const trackView = () => {
@@ -47,6 +48,7 @@ export default function BikeCard({ bike, surface, className }: BikeCardProps) {
           src={bike.image}
           alt={`Fantic ${bike.name}`}
           fill
+          loading={priority ? "eager" : "lazy"}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
         />

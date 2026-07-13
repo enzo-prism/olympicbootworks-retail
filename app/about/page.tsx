@@ -4,8 +4,7 @@ import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
 import MinimalPageHero from "@/components/minimal-page-hero"
-import { Award, Footprints, Heart, ShieldCheck, Zap, UserCheck, Trophy, Package, Clock } from 'lucide-react'
-import FeatureCard from "@/components/feature-card"
+import { Award, Footprints, Heart, ShieldCheck, Zap, Clock } from 'lucide-react'
 import LocationsSection from "@/app/about/locations-section"
 import type { Metadata } from "next"
 
@@ -38,12 +37,12 @@ export default function AboutPage() {
       />
 
       {/* Introduction Section */}
-      <main className="max-w-4xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold">Built around better movement</h2>
+      <section className="max-w-4xl mx-auto px-4 py-12" aria-labelledby="about-introduction-heading">
+        <h2 id="about-introduction-heading" className="text-3xl font-bold">Built around better movement</h2>
         <p className="mt-4 text-muted-foreground">
           We’ve been fitting ski boots and building great riding experiences in Tahoe since 1994.
         </p>
-      </main>
+      </section>
 
       {/* Our Story Section */}
       <section className="py-16 bg-gray-50 dark:bg-gray-900">

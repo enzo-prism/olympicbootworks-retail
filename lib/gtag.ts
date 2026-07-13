@@ -1,4 +1,5 @@
 import { GA4_MEASUREMENT_IDS } from "@/lib/analytics-config"
+import { hasAnalyticsConsent } from "@/lib/consent"
 
 declare global {
   interface Window {
@@ -8,7 +9,7 @@ declare global {
 }
 
 export function waitForGtag(callback: () => void, maxRetries = 35, delay = 100) {
-  if (typeof window === "undefined") {
+  if (!hasAnalyticsConsent()) {
     return
   }
 
@@ -34,7 +35,7 @@ type Ga4ParamValue = string | number | boolean | undefined | Ga4ItemParam[]
  * Use recommended event names where possible; register custom params in GA4 > Admin > Custom definitions.
  */
 export function sendGa4Event(eventName: string, params?: Record<string, Ga4ParamValue>) {
-  if (typeof window === "undefined") {
+  if (!hasAnalyticsConsent()) {
     return
   }
 
@@ -64,7 +65,7 @@ export function sendGa4Event(eventName: string, params?: Record<string, Ga4Param
  * GA4 configs use send_page_view: false to avoid double-counting with this explicit event.
  */
 export function sendGa4PageView(pagePathWithQuery: string) {
-  if (typeof window === "undefined") {
+  if (!hasAnalyticsConsent()) {
     return
   }
 

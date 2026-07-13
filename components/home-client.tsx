@@ -35,11 +35,14 @@ export default function HomeClient() {
 
             {/* Brand mark */}
             <div className="mb-4">
-              {/* Use a static img tag here for simple sizing */}
-              <img
+              <NextImage
                 src="/images/olympic-bootworks-transparent-logo.png"
                 alt="Olympic Bootworks logo"
                 className="h-12 md:h-14 w-auto opacity-95"
+                width={240}
+                height={56}
+                priority
+                style={{ width: "auto" }}
               />
             </div>
 
@@ -94,9 +97,9 @@ export default function HomeClient() {
             </p>
             <h2 className="text-3xl font-bold mb-4">Fantic E-Bikes, In Stock Now</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Authorized Fantic dealer for 8 years with the largest inventory in the USA. Every bike
-              is professionally assembled and tuned — ride it out of our Tahoe shops or have it
-              shipped anywhere in the country for $299.
+              Authorized Fantic dealer with a wide in-stock selection. Every bike is professionally
+              assembled and tuned — ride it out of our Tahoe shops or have it shipped anywhere in
+              the country for $299.
             </p>
           </div>
 

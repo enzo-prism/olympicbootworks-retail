@@ -37,8 +37,8 @@ export default function TestimonialsPage() {
         ]}
       />
 
-      <main className="max-w-4xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold">Customer stories</h2>
+      <section className="max-w-4xl mx-auto px-4 py-12" aria-labelledby="customer-stories-heading">
+        <h2 id="customer-stories-heading" className="text-3xl font-bold">Customer stories</h2>
         <p className="mt-4 text-muted-foreground">Real stories from real riders and skiers.</p>
 
         <div className="container mx-auto px-4 py-16">
@@ -73,7 +73,7 @@ export default function TestimonialsPage() {
             </div>
           </div>
         </div>
-      </main>
+      </section>
     </div>
   )
 }

@@ -9,7 +9,6 @@ import VimeoVideoHero from "@/components/vimeo-video-hero"
 import MinimalHeroContent from "@/components/minimal-hero-content"
 import { Instagram, Twitter, Globe, Calendar, Users, Award, Mountain, Snowflake, Compass } from 'lucide-react'
 import AthleteProfileCard from "@/components/athlete-profile-card"
-import VimeoApiScript from "@/components/vimeo-api-script"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -22,9 +21,6 @@ export const metadata: Metadata = {
 export default function ProsPage() {
   return (
     <div className="flex flex-col">
-      {/* Load Vimeo API */}
-      <VimeoApiScript />
-
       {/* Minimal, elegant hero */}
       <VimeoVideoHero
         videoId="1096995547"

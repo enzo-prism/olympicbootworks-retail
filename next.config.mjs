@@ -5,6 +5,10 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  {
+    key: "Content-Security-Policy",
+    value: "object-src 'none'; base-uri 'self'; frame-ancestors 'self'; upgrade-insecure-requests",
+  },
 ]
 
 const nextConfig = {
@@ -14,6 +18,8 @@ const nextConfig = {
     remotePatterns: [
       // Ecwid/Lightspeed store product photos, reused on /e-bikes
       { protocol: "https", hostname: "d2j6dbq0eux0bg.cloudfront.net" },
+      // Privacy-enhanced YouTube embed poster images
+      { protocol: "https", hostname: "img.youtube.com" },
     ],
   },
   async headers() {

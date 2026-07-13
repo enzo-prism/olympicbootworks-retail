@@ -1,8 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import type { ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import ButtonIcon from "@/components/button-icon"
 import { cn } from "@/lib/utils"
+import { sendGa4Event } from "@/lib/gtag"
+import { trackConversion } from "@/lib/track-conversion"
 
 type HeroAction = {
   href: string
@@ -29,6 +33,23 @@ export default function MinimalPageHero({
   actions = [],
   className,
 }: MinimalPageHeroProps) {
+  const trackAction = (action: HeroAction) => {
+    const location = `page_hero_${window.location.pathname.replace(/^\/|\/$/g, "").replaceAll("/", "_") || "home"}`
+    if (action.href.startsWith("mailto:")) {
+      trackConversion("email_click", { location })
+      return
+    }
+    if (action.href.startsWith("tel:")) {
+      trackConversion("phone_click", { location })
+      return
+    }
+    sendGa4Event("select_content", {
+      content_type: "page_hero_cta",
+      item_id: action.label.toLowerCase().replaceAll(/[^a-z0-9]+/g, "_").replaceAll(/^_|_$/g, ""),
+      destination: action.href,
+    })
+  }
+
   return (
     <section
       className={cn(
@@ -66,6 +87,7 @@ export default function MinimalPageHero({
                 >
                   <Link
                     href={action.href}
+                    onClick={() => trackAction(action)}
                     {...(action.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}

@@ -5,12 +5,12 @@ import { bikes, cheapestBikePrice, formatPrice, maxSavingsPct } from "@/data/bik
 
 export const metadata: Metadata = {
   title: "Fantic E-Bikes for Sale — Authorized US Dealer",
-  description: `Shop in-stock Fantic e-bikes at up to ${maxSavingsPct}% off from an authorized dealer with the largest Fantic inventory in the USA. Trail, enduro, and urban models with $299 nationwide shipping and Lake Tahoe test rides.`,
+  description: `Shop in-stock Fantic e-bikes at up to ${maxSavingsPct}% off from an authorized dealer. Trail, enduro, and urban models with $299 nationwide shipping and Lake Tahoe test rides.`,
   alternates: { canonical: "/e-bikes" },
   openGraph: {
     title: "Fantic E-Bikes for Sale — Authorized US Dealer | Olympic Bootworks",
     description:
-      "In-stock Fantic e-bikes at sale pricing from the largest Fantic inventory in the USA. $299 nationwide shipping, professional assembly, and Lake Tahoe test rides.",
+      "In-stock Fantic e-bikes at sale pricing from an authorized dealer. $299 nationwide shipping, professional assembly, and Lake Tahoe test rides.",
     url: "https://www.olympicbootworks.com/e-bikes",
     type: "website",
     images: ["/images/og-default.png"],
@@ -33,12 +33,12 @@ const faqs = [
   {
     question: "Why are prices discounted?",
     answer:
-      "We're clearing current in-stock inventory at sale pricing while it lasts, with Fantic's new 2026 models on the way. Every bike is new, from an authorized dealer, with full factory warranty.",
+      "Current in-stock bikes are offered at sale pricing while inventory lasts. Every bike is new and sold by an authorized Fantic dealer.",
   },
   {
     question: "What about warranty and service?",
     answer:
-      "We've been an authorized Fantic dealer for 8 years. Your bike comes with Fantic's factory warranty, and our Tahoe shops handle warranty support and service.",
+      "Olympic Bootworks is an authorized Fantic dealer. Contact either Tahoe shop for current warranty coverage, support, and service details for your model.",
   },
   {
     question: "Do you offer financing?",
@@ -107,7 +107,7 @@ export default function EBikesPage() {
       <MinimalPageHero
         eyebrow={`Authorized Fantic Dealer • Up to ${maxSavingsPct}% Off`}
         title="Fantic E-Bikes"
-        description={`Italian-engineered e-bikes from the largest Fantic inventory in the USA${fromClause}, with flat-rate nationwide shipping and test rides at both Lake Tahoe stores.`}
+        description={`Italian-engineered e-bikes from an authorized Fantic dealer${fromClause}, with flat-rate nationwide shipping and test rides at both Lake Tahoe stores.`}
         actions={[
           { href: "#models", label: "Shop the sale" },
           { href: "#test-ride", label: "Book a test ride", variant: "secondary" },

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { Home } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function AppNotFound() {
       <p style={{ color: "#6b7280", maxWidth: "28rem", marginBottom: "2rem" }}>
         Sorry, we couldn't find the page you're looking for.
       </p>
-      <a
+      <Link
         href="/"
         style={{
           display: "inline-flex",
@@ -47,7 +48,7 @@ export default function AppNotFound() {
       >
         <Home style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }} aria-hidden="true" />
         Return Home
-      </a>
+      </Link>
     </div>
   )
 }

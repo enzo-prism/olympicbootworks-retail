@@ -49,8 +49,8 @@ const trustPoints = [
   },
   {
     icon: ShieldCheck,
-    title: "Authorized dealer for 8 years",
-    text: "Factory warranty support and service from a real Fantic dealer with two Lake Tahoe stores.",
+    title: "Authorized Fantic dealer",
+    text: "Current warranty guidance, support, and service from two Lake Tahoe stores.",
   },
   {
     icon: MapPin,
@@ -76,8 +76,8 @@ export default function EBikesClient() {
             Up to {maxSavingsPct}% off — while current inventory lasts
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-primary-foreground/85">
-            We carry the largest Fantic inventory in the USA, and the current lineup is priced to
-            move. Every bike ships nationwide for $299 or rolls out of our Tahoe shops ready to ride.
+            Our current in-stock lineup is priced to move. Every bike ships nationwide for $299 or
+            rolls out of our Tahoe shops ready to ride.
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" variant="on-dark" className="shadow-sm">
@@ -99,7 +99,7 @@ export default function EBikesClient() {
       {/* Model grid by family */}
       <section id="models" className="scroll-mt-24 py-16">
         <div className="container mx-auto px-4">
-          {sections.map((group) => {
+          {sections.map((group, groupIndex) => {
             const groupBikes = bikes.filter((b) => group.families.includes(b.family))
             if (groupBikes.length === 0) return null
             return (
@@ -109,8 +109,13 @@ export default function EBikesClient() {
                   <p className="mt-1 text-muted-foreground">{group.tagline}</p>
                 </div>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {groupBikes.map((bike) => (
-                    <BikeCard key={bike.id} bike={bike} surface="ebikes_hub" />
+                  {groupBikes.map((bike, bikeIndex) => (
+                    <BikeCard
+                      key={bike.id}
+                      bike={bike}
+                      surface="ebikes_hub"
+                      priority={groupIndex === 0 && bikeIndex === 0}
+                    />
                   ))}
                 </div>
               </div>
@@ -196,24 +201,24 @@ export default function EBikesClient() {
         </div>
       </section>
 
-      {/* 2026 lineup teaser */}
+      {/* Current lineup contact */}
       <section className="bg-secondary/50 py-14">
         <div className="container mx-auto px-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
-            Coming next
+            Find your next ride
           </p>
-          <h2 className="mt-2 text-2xl font-bold md:text-3xl">The 2026 Fantic lineup is on its way</h2>
+          <h2 className="mt-2 text-2xl font-bold md:text-3xl">Ask about the latest Fantic lineup</h2>
           <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-            Fantic&apos;s all-new Bosch-powered models are rolling out for 2026. Today&apos;s sale
-            pricing clears the way — ask us about what&apos;s coming and reserve early.
+            Inventory and model availability change throughout the season. Ask our team what is in
+            stock now, what is arriving next, and which bike best fits your riding.
           </p>
           <Button asChild size="lg" className="mt-6 shadow-sm">
             <a
-              href={`mailto:buck@olympicbootworks.com?subject=${encodeURIComponent("2026 Fantic Lineup — Keep Me Posted")}`}
-              onClick={() => trackConversion("email_click", { location: "ebikes_2026_teaser" })}
+              href={`mailto:buck@olympicbootworks.com?subject=${encodeURIComponent("Latest Fantic Lineup")}`}
+              onClick={() => trackConversion("email_click", { location: "ebikes_lineup" })}
             >
               <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
-              Ask about the 2026 lineup
+              Ask about the latest lineup
             </a>
           </Button>
         </div>

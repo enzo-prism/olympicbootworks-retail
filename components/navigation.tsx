@@ -17,29 +17,26 @@ import {
   MessageSquareQuote,
   Phone,
   PhoneCall,
+  ShoppingBag,
   Trophy,
   type LucideIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ShopButton } from "@/components/ui/shop-button"
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import LocationSelector from "@/components/location-selector"
 import { cn } from "@/lib/utils"
 import { locations } from "@/data/locations"
 
-// Add this new CartWidget component
-const CartWidget = () => {
-  useEffect(() => {
-    // Only initialize if Ecwid isn't already initialized
-    if (window.Ecwid && !window._xnext_initialization_scripts_loaded) {
-      window.Ecwid.init()
-    }
-  }, [])
-
+const CartLink = () => {
   return (
-    <div className="ec-cart-widget relative flex items-center">
-      {/* This div will be replaced by the Ecwid cart widget */}
-    </div>
+    <Link
+      href="/shop#!/~/cart"
+      className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      aria-label="View shopping bag"
+    >
+      <ShoppingBag className="h-5 w-5" aria-hidden="true" />
+    </Link>
   )
 }
 
@@ -140,17 +137,6 @@ export default function Navigation() {
     return () => window.removeEventListener("resize", checkOrientation)
   }, [])
 
-  // Add this useEffect to load the Ecwid script if it's not already loaded
-  useEffect(() => {
-    if (!document.querySelector('script[src*="app.business.shop/script.js"]')) {
-      const script = document.createElement("script")
-      script.src = "https://app.business.shop/script.js?115212795&data_platform=code&data_date=2025-04-30"
-      script.setAttribute("data-cfasync", "false")
-      script.async = true
-      document.head.appendChild(script)
-    }
-  }, [])
-
   // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false)
@@ -186,6 +172,7 @@ export default function Navigation() {
               src="/images/olympic-bootworks-transparent-logo.png"
               alt="Olympic Bootworks Logo"
               fill
+              sizes="40px"
               className="object-contain"
               priority
             />
@@ -205,7 +192,7 @@ export default function Navigation() {
           <ShopButton href="/shop" variant="default" size="sm" className="ml-2 shadow-sm">
             Shop
           </ShopButton>
-          <CartWidget />
+          <CartLink />
         </nav>
 
         {/* Mobile Navigation */}
@@ -217,7 +204,7 @@ export default function Navigation() {
           >
             <Phone className="h-5 w-5 text-primary" />
           </a>
-          <CartWidget />
+          <CartLink />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button
@@ -233,6 +220,10 @@ export default function Navigation() {
               side="right"
               className={cn("w-full sm:max-w-sm p-0 overflow-y-auto", orientation === "landscape" ? "pt-12" : "pt-16")}
             >
+              <SheetTitle className="sr-only">Site navigation</SheetTitle>
+              <SheetDescription className="sr-only">
+                Browse Olympic Bootworks pages, locations, and contact options.
+              </SheetDescription>
               <div className="sticky top-0 flex items-center justify-between p-4 bg-background/80 backdrop-blur-sm z-10 border-b">
                 <div className="flex items-center gap-2">
                   <div className="relative h-8 w-8 overflow-hidden">
@@ -240,6 +231,7 @@ export default function Navigation() {
                       src="/images/olympic-bootworks-transparent-logo.png"
                       alt="Olympic Bootworks Logo"
                       fill
+                      sizes="32px"
                       className="object-contain"
                     />
                   </div>

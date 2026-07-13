@@ -4,6 +4,7 @@ import { ShopButton } from "@/components/ui/shop-button"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { Facebook, Instagram, Star } from "lucide-react"
 import { seasonalScheduleNotice } from "@/data/locations"
+import { CookieSettingsButton } from "@/components/cookie-settings-button"
 
 export default function Footer() {
   return (
@@ -142,7 +143,11 @@ export default function Footer() {
 
         <div className="border-t border-gray-200 dark:border-gray-800 mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Olympic Bootworks. All rights reserved.</p>
-          <div className="mt-2">
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <Link href="/privacy" className="text-xs text-muted-foreground/70 hover:text-muted-foreground hover:underline">
+              Privacy
+            </Link>
+            <CookieSettingsButton />
             <Link
               href="https://www.design-prism.com/?utm_source=olympicbootworks&utm_medium=referral&utm_campaign=olympicbootworks_2025-07"
               target="_blank"

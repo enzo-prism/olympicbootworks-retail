@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight, Footprints, Zap, Award, Heart, Bike } from "lucide-react"
+import { ChevronLeft, ChevronRight, Footprints, Zap, Award, Heart, Bike, Pause, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -20,10 +20,21 @@ export default function ServicesCarousel() {
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [isUserPaused, setIsUserPaused] = useState(false)
+  const [isInteractionPaused, setIsInteractionPaused] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true)
   const slideRef = useRef<HTMLDivElement>(null)
 
   // Define minimum swipe distance (in px)
   const minSwipeDistance = 50
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const updatePreference = () => setPrefersReducedMotion(mediaQuery.matches)
+    updatePreference()
+    mediaQuery.addEventListener("change", updatePreference)
+    return () => mediaQuery.removeEventListener("change", updatePreference)
+  }, [])
 
   const services: ServiceItem[] = [
     {
@@ -98,15 +109,28 @@ export default function ServicesCarousel() {
 
   // Auto-advance slides every 5 seconds
   useEffect(() => {
+    if (isUserPaused || isInteractionPaused || prefersReducedMotion) return
+
     const interval = setInterval(() => {
-      nextSlide()
+      setCurrentIndex((previousIndex) => (previousIndex + 1) % services.length)
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [currentIndex])
+  }, [isInteractionPaused, isUserPaused, prefersReducedMotion, services.length])
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div
+      className="relative w-full overflow-hidden"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Olympic Bootworks services"
+      onMouseEnter={() => setIsInteractionPaused(true)}
+      onMouseLeave={() => setIsInteractionPaused(false)}
+      onFocusCapture={() => setIsInteractionPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setIsInteractionPaused(false)
+      }}
+    >
       {/* Mobile Carousel */}
       <div
         className="relative w-full overflow-hidden touch-pan-y"
@@ -116,8 +140,10 @@ export default function ServicesCarousel() {
       >
         <div
           ref={slideRef}
-          className="flex transition-transform duration-300 ease-in-out"
+          id="services-carousel-track"
+          className={cn("flex ease-in-out", prefersReducedMotion ? "transition-none" : "transition-transform duration-300")}
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          aria-live={isUserPaused || prefersReducedMotion ? "polite" : "off"}
         >
           {services.map((service, index) => {
             const card = (
@@ -130,7 +156,15 @@ export default function ServicesCarousel() {
               </div>
             )
             return (
-              <div key={index} className="w-full flex-shrink-0 px-4 py-6">
+              <div
+                key={index}
+                className="w-full flex-shrink-0 px-4 py-6"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${index + 1} of ${services.length}: ${service.title}`}
+                aria-hidden={index !== currentIndex}
+                inert={index !== currentIndex}
+              >
                 {service.href ? <Link href={service.href}>{card}</Link> : card}
               </div>
             )
@@ -144,6 +178,7 @@ export default function ServicesCarousel() {
         size="icon"
         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm rounded-full shadow-md hidden md:flex"
         onClick={prevSlide}
+        aria-controls="services-carousel-track"
       >
         <ChevronLeft className="h-5 w-5" />
         <span className="sr-only">Previous</span>
@@ -154,6 +189,7 @@ export default function ServicesCarousel() {
         size="icon"
         className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm rounded-full shadow-md hidden md:flex"
         onClick={nextSlide}
+        aria-controls="services-carousel-track"
       >
         <ChevronRight className="h-5 w-5" />
         <span className="sr-only">Next</span>
@@ -172,9 +208,26 @@ export default function ServicesCarousel() {
               setCurrentIndex(index)
             }}
             aria-label={`Go to slide ${index + 1}`}
+            aria-current={currentIndex === index ? "true" : undefined}
+            aria-controls="services-carousel-track"
           />
         ))}
       </div>
+
+      {!prefersReducedMotion && <div className="mt-3 flex justify-center">
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => setIsUserPaused((paused) => !paused)}
+          aria-controls="services-carousel-track"
+          aria-label={isUserPaused ? "Resume automatic slide rotation" : "Pause automatic slide rotation"}
+          className="gap-2"
+        >
+          {isUserPaused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
+          {isUserPaused ? "Resume slides" : "Pause slides"}
+        </Button>
+      </div>}
 
       {/* Swipe Instructions - only shown on first load on mobile */}
       <div className="text-center text-xs text-muted-foreground mt-2 md:hidden">

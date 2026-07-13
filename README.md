@@ -6,10 +6,10 @@ Production: https://www.olympicbootworks.com (Vercel project `v0-olympic-bootwor
 
 ## Stack
 
-- Next.js (App Router, React Server Components) + TypeScript
+- Next.js 16 (App Router, React Server Components) + React 19 + TypeScript
 - Tailwind CSS + shadcn/ui (Radix primitives)
 - Ecwid / Lightspeed embedded storefront on `/shop` (store id 115212795)
-- GA4 (dual streams) + Google Ads conversion tracking, Hotjar
+- Consent-gated GA4 (dual streams) + Google Ads conversion tracking and Hotjar
 - No database or CMS — all content lives in code (`data/`, page components)
 
 ## Develop
@@ -18,6 +18,7 @@ Production: https://www.olympicbootworks.com (Vercel project `v0-olympic-bootwor
 pnpm install
 pnpm dev        # http://localhost:5000
 pnpm build      # production build
+pnpm check      # lint, typecheck, tests, live Ecwid catalog verification, build
 ```
 
 ## Where things live
@@ -34,6 +35,8 @@ pnpm build      # production build
 | Analytics config (GA4/Ads IDs) | `lib/analytics-config.ts` (env-overridable) |
 | Conversion events | `lib/track-conversion.ts` |
 | Shop embed + hardening | `app/shop/shop-client.tsx` |
+| Analytics/cookie consent | `components/tracking-consent.tsx` |
+| Privacy notice | `app/privacy/page.tsx` |
 | Social share image | `public/images/og-default.png` (1200×630) |
 
 ## E-bike merchandising
@@ -43,6 +46,10 @@ The `/e-bikes` hub, the homepage featured row, and the bike JSON-LD all render f
 stock** — when anything changes in the store admin (price, sale, sold out, new product),
 mirror it in `data/bikes.ts` in the same change. Each entry carries the Ecwid product id
 and deep link (`/shop#!/Name/p/<id>`).
+
+Run `pnpm catalog:verify` after any store or catalog update. It compares all live Ecwid
+product IDs, names, prices, sale prices, overall stock, and main images against
+`data/bikes.ts`; the same check runs in CI.
 
 - `featured: true` + `inStock: true` puts a bike on the homepage row (keep it to ~4).
 - "Up to X% off" copy is computed from the data (`maxSavingsPct`) — never hardcode it.
@@ -62,4 +69,16 @@ JSON-LD emits `openingHoursSpecification` only when `hours` entries use weekday 
 
 ## Conversion tracking
 
-Email (`mailto:`) and phone (`tel:`) clicks are the primary conversions — there are no forms. All CTAs route through `trackConversion()` which fires both GA4 recommended events and the Google Ads conversion. Keep the `location` metadata on new CTAs for segmentation.
+Email (`mailto:`) and phone (`tel:`) clicks are the primary conversions — there are no forms. Reusable lead CTAs route through `trackConversion()`, which fires GA4 recommended events and the Google Ads lead conversion after analytics consent. Keep the `location` metadata on new CTAs for segmentation.
+
+Page views, contact-page views, shop mounts, and e-bike list views are GA4-only; they must
+never use the Google Ads lead conversion action. Google and Hotjar scripts load only after
+the visitor chooses analytics cookies. Keep `components/tracking-consent.tsx` and
+`app/privacy/page.tsx` aligned when measurement tools change.
+
+## Release checks
+
+GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is not
+ready until lint, strict TypeScript, unit tests, live Ecwid reconciliation, and the Next.js
+production build all pass. Vercel preview and the public custom domain still require browser
+QA because third-party video and storefront behavior cannot be proven by compilation alone.

@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import Script from "next/script"
 import { Bike, Loader2, Mail, PhoneCall, RefreshCw, Truck } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import ShopVideoHero from "@/components/shop-video-hero"
@@ -10,8 +9,76 @@ import { trackConversion } from "@/lib/track-conversion"
 import "./shop-embed.css"
 
 const DEBUG = process.env.NODE_ENV !== "production"
+const ECWID_SCRIPT_SRC = "https://app.business.shop/script.js?115212795&data_platform=code&data_date=2025-04-30"
+let ecwidScriptLoadPromise: Promise<void> | null = null
+
 const debugLog = (...args: any[]) => {
   if (DEBUG) console.log(`[Shop Debug ${new Date().toISOString()}]`, ...args)
+}
+
+const isEcwidApiReady = () =>
+  typeof window.xCategoriesV2 === "function" && typeof window.xProductBrowser === "function"
+
+/**
+ * Reuse the global navigation's Ecwid loader when it exists. This prevents the
+ * shop timeout fallback and Next Script from racing to download script.js more
+ * than once.
+ */
+const ensureEcwidScriptLoaded = () => {
+  if (isEcwidApiReady()) {
+    return Promise.resolve()
+  }
+
+  if (ecwidScriptLoadPromise) {
+    return ecwidScriptLoadPromise
+  }
+
+  ecwidScriptLoadPromise = new Promise<void>((resolve, reject) => {
+    let settled = false
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      'script[src*="app.business.shop/script.js"]',
+    )
+    const script = existingScript ?? document.createElement("script")
+
+    const cleanup = () => {
+      window.clearInterval(readinessInterval)
+      window.clearTimeout(loadTimeout)
+      script.removeEventListener("error", handleError)
+    }
+    const finish = (error?: Error) => {
+      if (settled) return
+      settled = true
+      cleanup()
+      if (error) {
+        ecwidScriptLoadPromise = null
+        reject(error)
+      } else {
+        resolve()
+      }
+    }
+    const handleError = () => finish(new Error("Unable to load the Ecwid store script"))
+    const checkReadiness = () => {
+      if (isEcwidApiReady()) finish()
+    }
+    const readinessInterval = window.setInterval(checkReadiness, 100)
+    const loadTimeout = window.setTimeout(
+      () => finish(new Error("Timed out waiting for the Ecwid store API")),
+      15000,
+    )
+
+    script.addEventListener("error", handleError, { once: true })
+
+    if (!existingScript) {
+      script.src = ECWID_SCRIPT_SRC
+      script.async = true
+      script.setAttribute("data-cfasync", "false")
+      document.head.appendChild(script)
+    }
+
+    checkReadiness()
+  })
+
+  return ecwidScriptLoadPromise
 }
 
 const configureShopInventoryDisplay = () => {
@@ -19,7 +86,6 @@ const configureShopInventoryDisplay = () => {
   window.ec.storefront = window.ec.storefront || {}
   window.ec.storefront.product_details_show_in_stock_label = true
   window.ec.storefront.product_details_show_number_of_items_in_stock = false
-  window.Ecwid?.refreshConfig?.()
 }
 
 const stripVisibleStockCounts = (root: Node) => {
@@ -49,9 +115,9 @@ export default function ShopClient() {
   const scriptLoadedRef = useRef(false)
   const shopContainerRef = useRef<HTMLDivElement>(null)
   const categoriesContainerRef = useRef<HTMLDivElement>(null)
-  const initTimeoutRef = useRef<number | null>(null)
   const stockScrubFrameRef = useRef<number | null>(null)
   const loadStartTimeRef = useRef<number>(Date.now())
+  const shopVisitTrackedRef = useRef(false)
 
   // Patch querySelector errors from third-party script; returns a restore function
   const patchQuerySelectors = () => {
@@ -130,43 +196,15 @@ export default function ShopClient() {
     }
   }
 
-  // Fallback: manually inject the Lightspeed script
-  const injectScript = () =>
-    new Promise<void>((resolve, reject) => {
-      debugLog("Manually injecting Lightspeed script")
-      configureShopInventoryDisplay()
-      const script = document.createElement("script")
-      script.src = "https://app.business.shop/script.js?115212795&data_platform=code&data_date=2025-04-30"
-      script.async = true
-      script.onload = () => {
-        debugLog("Manual script injection completed")
-        resolve()
-      }
-      script.onerror = (err) => {
-        debugLog("Manual script injection failed", err)
-        reject(err)
-      }
-      document.head.appendChild(script)
-    })
-
   // Initialize the embedded store
-  const initializeShopComponents = () => {
+  const initializeShopComponents = useCallback(() => {
     debugLog("Attempting to initialize shop components")
     setLoadingStatus("Initializing shop components...")
 
-    if (initTimeoutRef.current) {
-      window.clearTimeout(initTimeoutRef.current)
-      initTimeoutRef.current = null
-    }
-
     const w = window as any
     if (!w.xCategoriesV2 || !w.xProductBrowser) {
-      debugLog("Shop functions not available yet, will retry")
-      setLoadingStatus("Waiting for shop functions to load...")
-      initTimeoutRef.current = window.setTimeout(() => {
-        debugLog("Retrying initialization")
-        initializeShopComponents()
-      }, 1000)
+      debugLog("Shop functions unavailable after the loader reported ready")
+      setIsScriptError(true)
       return
     }
 
@@ -200,19 +238,19 @@ export default function ShopClient() {
       debugLog("Error initializing shop components:", error)
       setIsScriptError(true)
     }
-  }
+  }, [])
 
   // Setup page and fallbacks
   useEffect(() => {
     debugLog("Shop client mounted")
     loadStartTimeRef.current = Date.now()
-    trackConversion('shop_visit')
     configureShopInventoryDisplay()
     const cleanupQuerySelectors = patchQuerySelectors()
     const cleanupResizeObserver = handleResizeObserverErrors()
+    let cancelled = false
 
     const originalOnError = window.onerror
-    window.onerror = function (message, source, lineno, colno, error) {
+    window.onerror = function (message, source, lineno) {
       debugLog("Caught error:", message, source, lineno)
       const msg = String(message ?? "")
       if (msg.includes("ResizeObserver") || msg.includes("querySelector")) {
@@ -222,34 +260,36 @@ export default function ShopClient() {
       return typeof originalOnError === "function" ? originalOnError.apply(this, arguments as any) : false
     }
 
-    const timeoutId = window.setTimeout(() => {
-      if (!isScriptLoaded && !isScriptError) {
-        debugLog("Script loading timeout reached, trying direct injection")
-        setLoadingStatus("Script loading timeout, trying alternative method...")
-        injectScript()
-          .then(() => {
-            debugLog("Direct script injection successful")
-            setIsScriptLoaded(true)
-          })
-          .catch((err) => {
-            debugLog("Direct script injection failed", err)
-            setIsScriptError(true)
-          })
-      }
-    }, 5000)
+    setLoadingStatus("Loading secure shop components...")
+    ensureEcwidScriptLoaded()
+      .then(() => {
+        if (cancelled) return
+        const loadTime = Date.now() - loadStartTimeRef.current
+        debugLog(`Script loaded after ${loadTime}ms`)
+        setLoadingStatus("Script loaded, initializing shop...")
+        setIsScriptLoaded(true)
+      })
+      .catch((err) => {
+        if (cancelled) return
+        debugLog("Shop script loading failed", err)
+        setIsScriptError(true)
+      })
 
     return () => {
       debugLog("Shop client unmounting, cleaning up")
+      cancelled = true
       window.onerror = originalOnError as any
       cleanupQuerySelectors()
       cleanupResizeObserver()
-      window.clearTimeout(timeoutId)
-      if (initTimeoutRef.current) {
-        window.clearTimeout(initTimeoutRef.current)
-        initTimeoutRef.current = null
-      }
     }
-  }, [isScriptError, isScriptLoaded])
+  }, [])
+
+  // Count a shop visit only after the real storefront is visible, once per mount.
+  useEffect(() => {
+    if (!isShopVisible || shopVisitTrackedRef.current) return
+    shopVisitTrackedRef.current = true
+    trackConversion('shop_visit')
+  }, [isShopVisible])
 
   // Ecwid can re-render product details after option/hash changes, so keep exact stock counts scrubbed.
   useEffect(() => {
@@ -293,19 +333,7 @@ export default function ShopClient() {
     window.setTimeout(() => {
       initializeShopComponents()
     }, 100)
-  }, [isScriptLoaded])
-
-  const handleScriptLoad = () => {
-    const loadTime = Date.now() - loadStartTimeRef.current
-    debugLog(`Script loaded after ${loadTime}ms`)
-    setLoadingStatus("Script loaded, initializing shop...")
-    setIsScriptLoaded(true)
-  }
-
-  const handleScriptError = () => {
-    debugLog("Script loading failed")
-    setIsScriptError(true)
-  }
+  }, [initializeShopComponents, isScriptLoaded])
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -320,10 +348,10 @@ export default function ShopClient() {
           {/* Fantic Dealer & Shipping Announcement */}
           <div className="mb-6 text-center p-6 bg-secondary/50 rounded-lg shadow">
             <p className="text-xl font-semibold text-primary mb-3">
-              Authorized Fantic dealer! Largest inventory in the USA
+              Authorized Fantic dealer with bikes in stock
             </p>
             <p className="text-muted-foreground mb-4">
-              Email us any questions about these very special bikes, as we have been Fantic dealers for 8 years!
+              Email us for current model availability, sizing, service, and test-ride questions.
             </p>
             <div className="mb-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button asChild>
@@ -418,13 +446,6 @@ export default function ShopClient() {
             </div>
           )}
 
-          {/* Third-party e-commerce script */}
-          <Script
-            src="https://app.business.shop/script.js?115212795&data_platform=code&data_date=2025-04-30"
-            strategy="afterInteractive"
-            onLoad={handleScriptLoad}
-            onError={handleScriptError}
-          />
         </div>
       </div>
     </div>

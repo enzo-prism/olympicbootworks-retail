@@ -16,7 +16,7 @@ export default function ShopPage() {
       <SeoIntro
         as="h1"
         title="Shop Fantic E-Bikes, Ski Boots, and Liners"
-        description="Browse our in-stock Fantic e-bike inventory at sale pricing — the largest Fantic selection in the USA, with $299 nationwide shipping. Ski boots, ZipFit liners, and footbeds are fitted in store."
+        description="Browse our in-stock Fantic e-bike inventory at sale pricing with $299 nationwide shipping. Ski boots, ZipFit liners, and footbeds are fitted in store."
         bullets={[
           "Fantic e-bikes in stock now, from trail and enduro eMTBs to urban riders",
           "Professionally assembled and tuned before delivery by an authorized dealer",

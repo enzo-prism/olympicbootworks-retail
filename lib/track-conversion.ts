@@ -1,5 +1,7 @@
 import { GOOGLE_ADS_CONVERSION_SEND_TO } from "@/lib/analytics-config"
 import { sendGa4Event, waitForGtag } from "@/lib/gtag"
+import { isGa4OnlyConversion } from "@/lib/conversion-policy"
+import { hasAnalyticsConsent } from "@/lib/consent"
 
 export type ConversionType =
   | "email_click"
@@ -14,8 +16,6 @@ export type ConversionType =
  * conversion — pouring high-volume page views into the same conversion label
  * as real leads dilutes Smart Bidding.
  */
-const GA4_ONLY_TYPES: ReadonlySet<ConversionType> = new Set(["bike_page_view"])
-
 interface ConversionOptions {
   value?: number
   currency?: string
@@ -80,7 +80,7 @@ function mirrorEngagementToGa4(
  * using recommended events where applicable (e.g. generate_lead for email/phone).
  */
 export function trackConversion(type: ConversionType, options: ConversionOptions = {}) {
-  if (typeof window === "undefined") {
+  if (!hasAnalyticsConsent()) {
     return
   }
 
@@ -95,7 +95,7 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
 
     mirrorEngagementToGa4(type, value, currency, loc)
 
-    if (GA4_ONLY_TYPES.has(type)) {
+    if (isGa4OnlyConversion(type)) {
       return
     }
 
