@@ -6,7 +6,9 @@ const catalog = await loadTypescriptModule("../data/bikes.ts", import.meta.url)
 
 test("bike catalog has unique Ecwid IDs and valid sale data", () => {
   const ids = catalog.bikes.map((bike) => bike.id)
+  const slugs = catalog.bikes.map((bike) => bike.slug)
   assert.equal(new Set(ids).size, ids.length)
+  assert.equal(new Set(slugs).size, slugs.length)
 
   for (const bike of catalog.bikes) {
     assert.ok(bike.id > 0, `${bike.name} must have an Ecwid ID`)
@@ -14,6 +16,24 @@ test("bike catalog has unique Ecwid IDs and valid sale data", () => {
     assert.ok(bike.compareAtPrice > bike.price, `${bike.name} must have a real sale price`)
     assert.ok(bike.shopUrl.endsWith(`/p/${bike.id}`), `${bike.name} link must include its Ecwid ID`)
     assert.match(bike.image, /^https:\/\/d2j6dbq0eux0bg\.cloudfront\.net\//)
+    assert.match(bike.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+    assert.equal(catalog.bikeDetailUrl(bike), `/e-bikes/${bike.slug}`)
+    assert.ok(bike.overview.length >= 100, `${bike.name} needs a useful plain-language overview`)
+    assert.ok(bike.goodFor.length >= 3, `${bike.name} needs comparison guidance`)
+  }
+})
+
+test("every bike inquiry starts a useful, model-specific email to Buck", () => {
+  for (const bike of catalog.bikes) {
+    const url = new URL(catalog.bikeInquiryUrl(bike))
+    assert.equal(url.protocol, "mailto:")
+    assert.equal(url.pathname, "buck@olympicbootworks.com")
+    assert.match(url.searchParams.get("subject") ?? "", new RegExp(`Fantic ${bike.name}`))
+    const body = url.searchParams.get("body") ?? ""
+    assert.match(body, new RegExp(`Fantic ${bike.name}`))
+    assert.match(body, /availability/i)
+    assert.match(body, /sizing/i)
+    assert.doesNotMatch(body, /undefined|\[object Object\]/)
   }
 })
 

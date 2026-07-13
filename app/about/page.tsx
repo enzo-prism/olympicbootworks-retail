@@ -169,7 +169,7 @@ export default function AboutPage() {
                   <ShieldCheck className="h-6 w-6 text-primary" />
                 </div>
                 <h4 className="font-semibold mb-1">Injury Prevention</h4>
-                <p className="text-sm text-muted-foreground">Proper alignment to prevent common injuries</p>
+                <p className="text-sm text-muted-foreground">Personalized support for alignment and comfort</p>
               </div>
             </div>
           </div>

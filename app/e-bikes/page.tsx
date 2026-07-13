@@ -1,16 +1,16 @@
 import type { Metadata } from "next"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import EBikesClient from "./ebikes-client"
-import { bikes, cheapestBikePrice, formatPrice, maxSavingsPct } from "@/data/bikes"
+import { bikeDetailUrl, bikes, cheapestBikePrice, formatPrice, maxSavingsPct } from "@/data/bikes"
 
 export const metadata: Metadata = {
   title: "Fantic E-Bikes for Sale — Authorized US Dealer",
-  description: `Shop in-stock Fantic e-bikes at up to ${maxSavingsPct}% off from an authorized dealer. Trail, enduro, and urban models with $299 nationwide shipping and Lake Tahoe test rides.`,
+  description: `Compare current Fantic e-bikes at up to ${maxSavingsPct}% off. Read clear model descriptions, then email Olympic Bootworks about sizing, availability, and next steps.`,
   alternates: { canonical: "/e-bikes" },
   openGraph: {
     title: "Fantic E-Bikes for Sale — Authorized US Dealer | Olympic Bootworks",
     description:
-      "In-stock Fantic e-bikes at sale pricing from an authorized dealer. $299 nationwide shipping, professional assembly, and Lake Tahoe test rides.",
+      "Compare current Fantic e-bikes at sale pricing, read clear model descriptions, and email Olympic Bootworks for personal help.",
     url: "https://www.olympicbootworks.com/e-bikes",
     type: "website",
     images: ["/images/og-default.png"],
@@ -23,27 +23,27 @@ const faqs = [
   {
     question: "Do you ship e-bikes nationwide?",
     answer:
-      "Yes. We ship Fantic e-bikes anywhere in the USA for a flat $299 — just add shipping at checkout. Local pickup is available at our Olympic Valley and South Lake Tahoe stores.",
+      "Shipping is available. Email the shop with the model and destination so the team can confirm current pricing, delivery details, or local pickup options.",
   },
   {
     question: "Can I test ride before buying?",
     answer:
-      "Absolutely — that's the best way to choose. Both Lake Tahoe locations offer test rides by appointment this summer. Email or call either store and we'll set up a time.",
+      "Email or call with the model you are considering. The team will confirm current test-ride availability and arrange a time when possible.",
   },
   {
     question: "Why are prices discounted?",
     answer:
-      "Current in-stock bikes are offered at sale pricing while inventory lasts. Every bike is new and sold by an authorized Fantic dealer.",
+      "Current bikes are listed at sale pricing while availability lasts. Email the shop to confirm the size and color you want.",
   },
   {
     question: "What about warranty and service?",
     answer:
-      "Olympic Bootworks is an authorized Fantic dealer. Contact either Tahoe shop for current warranty coverage, support, and service details for your model.",
+      "Olympic Bootworks is an authorized Fantic dealer. Email the shop for current warranty, support, and service details for the specific model you are considering.",
   },
   {
     question: "Do you offer financing?",
     answer:
-      "Contact us about current payment options — we're happy to walk you through what's available for your purchase.",
+      "Email the shop about the model you are considering and the team will explain the currently available payment options.",
   },
 ]
 
@@ -64,7 +64,7 @@ function EBikesJsonLd() {
         brand: { "@type": "Brand", name: "Fantic" },
         offers: {
           "@type": "Offer",
-          url: `${SITE}${bike.shopUrl}`,
+          url: `${SITE}${bikeDetailUrl(bike)}`,
           price: bike.price,
           priceCurrency: "USD",
           availability: bike.inStock
@@ -106,11 +106,11 @@ export default function EBikesPage() {
 
       <MinimalPageHero
         eyebrow={`Authorized Fantic Dealer • Up to ${maxSavingsPct}% Off`}
-        title="Fantic E-Bikes"
-        description={`Italian-engineered e-bikes from an authorized Fantic dealer${fromClause}, with flat-rate nationwide shipping and test rides at both Lake Tahoe stores.`}
+        title="Compare Current Fantic E-Bikes"
+        description={`Read what each model is designed for${fromClause}, compare pricing, then email Buck about sizing, current availability, and the best next step.`}
         actions={[
-          { href: "#models", label: "Shop the sale" },
-          { href: "#test-ride", label: "Book a test ride", variant: "secondary" },
+          { href: "#models", label: "See model descriptions" },
+          { href: "mailto:buck@olympicbootworks.com?subject=Fantic%20E-Bike%20Question", label: "Email Buck", variant: "secondary" },
         ]}
       />
 

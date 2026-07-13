@@ -39,13 +39,13 @@ const sections: { families: BikeFamily[]; title: string; tagline: string }[] = [
 const trustPoints = [
   {
     icon: Truck,
-    title: "$299 nationwide shipping",
-    text: "We ship Fantic e-bikes anywhere in the USA — add shipping at checkout.",
+    title: "Shipping options available",
+    text: "Shipping is available. Email the shop to confirm current pricing and delivery details for your bike.",
   },
   {
     icon: Wrench,
-    title: "Professionally assembled & tuned",
-    text: "Every bike is built, torqued, and safety-checked by our shop before it rolls out — never a box of parts.",
+    title: "Support from a real bike shop",
+    text: "Ask the team about preparation, pickup, delivery, service, and the best next step for your bike.",
   },
   {
     icon: ShieldCheck,
@@ -55,7 +55,7 @@ const trustPoints = [
   {
     icon: MapPin,
     title: "Ride it before you buy it",
-    text: "Book a test ride at Olympic Valley or South Lake Tahoe and feel the difference on real terrain.",
+    text: "Email or call and we will confirm the current test-ride options for the model you are considering.",
   },
 ]
 
@@ -76,14 +76,14 @@ export default function EBikesClient() {
             Up to {maxSavingsPct}% off — while current inventory lasts
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-primary-foreground/85">
-            Our current in-stock lineup is priced to move. Every bike ships nationwide for $299 or
-            rolls out of our Tahoe shops ready to ride.
+            Start with a clear model description, then email Buck for current sizing, availability,
+            pickup, test-ride, or shipping details.
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" variant="on-dark" className="shadow-sm">
               <Link href="#models">
                 <Bike className="mr-2 h-5 w-5" aria-hidden="true" />
-                See the bikes
+                Read bike descriptions
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline-on-dark" className="shadow-sm">
@@ -122,11 +122,8 @@ export default function EBikesClient() {
             )
           })}
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            Prices and stock mirror our online store — final availability is confirmed at checkout.{" "}
-            <Link href="/shop" className="underline underline-offset-2">
-              Browse the full store
-            </Link>
-            .
+            Prices and general availability mirror our online store. Email the shop to confirm the
+            size and color you want before making a special trip.
           </p>
         </div>
       </section>
@@ -137,8 +134,7 @@ export default function EBikesClient() {
           <div className="mb-10 text-center">
             <h2 className="text-3xl font-bold">Why buy from Olympic Bootworks</h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-              Direct-to-consumer brands ship you a box. We deliver a dialed, warrantied bike backed
-              by a real shop.
+              Get personal guidance from a real Tahoe shop before choosing your bike.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -161,9 +157,8 @@ export default function EBikesClient() {
           <div className="mb-10 text-center">
             <h2 className="text-3xl font-bold">Book a Fantic test ride</h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-              The spec sheet only tells half the story — 20 minutes on Tahoe dirt tells the rest.
-              Both locations are open by appointment this summer, so reach out and we&apos;ll set up
-              a time that works.
+              Tell us which bike interests you and where you ride. We&apos;ll confirm current test-ride
+              options and arrange a time when possible.
             </p>
           </div>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">

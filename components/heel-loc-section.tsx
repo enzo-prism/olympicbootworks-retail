@@ -25,13 +25,13 @@ export default function HeelLocSection() {
             </div>
             <h2 className="text-3xl font-bold mb-4">Heel-Loc Technology</h2>
             <p className="text-muted-foreground mb-6">
-              Developed by Buck Brown over twenty years of biomechanical research, Heel-Loc technology represents the
-              pinnacle of orthotic design for performance athletes and everyday comfort seekers.
+              Developed by Buck Brown over twenty years of biomechanical research, Heel-Loc technology represents a
+              personalized orthotic approach for performance athletes and everyday comfort seekers.
             </p>
             <p className="text-muted-foreground mb-6">
               Unlike standard insoles, Heel-Loc orthotics are crafted using our proprietary unweighted casting method
-              that captures your foot's natural alignment. This revolutionary approach ensures optimal skeletal
-              positioning, maximizing power transfer while reducing fatigue and preventing injury.
+              that captures the foot in an unweighted position. The goal is a supportive foundation for alignment,
+              comfort, and efficient movement.
             </p>
 
             {/* Main benefits - keeping Lucide icons here for consistency with other sections if desired, or could also be emojis */}
@@ -54,8 +54,8 @@ export default function HeelLocSection() {
                 <span className="text-3xl mb-2" role="img" aria-label="Shield">
                   🛡️
                 </span>
-                <h3 className="font-semibold">Injury Prevention</h3>
-                <p className="text-xs text-muted-foreground">Reduces strain and fatigue</p>
+                <h3 className="font-semibold">Supportive Foundation</h3>
+                <p className="text-xs text-muted-foreground">Built around your individual fit</p>
               </div>
             </div>
 
@@ -75,9 +75,8 @@ export default function HeelLocSection() {
             </div>
 
             <p className="text-muted-foreground mb-6">
-              Olympic Bootworks is the go-to for Olympic medalists, World Champion big mountain athletes, pickleball
-              enthusiasts, and renowned global explorers who demand the absolute best in performance and comfort across
-              skiing, cycling, running, pickleball, and golf.
+              Olympic Bootworks works with competitive athletes, mountain professionals, and active customers who value
+              a precise, personalized fit across skiing and other sports.
             </p>
 
             <div className="flex flex-wrap gap-4">

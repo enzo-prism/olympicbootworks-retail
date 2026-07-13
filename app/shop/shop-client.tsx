@@ -371,7 +371,7 @@ export default function ShopClient() {
             <div className="mt-4 pt-4 border-t border-border/50">
               <p className="text-lg font-medium text-foreground flex items-center justify-center">
                 <Truck className="mr-2 h-5 w-5 text-primary" />
-                Nationwide shipping $299 (add to checkout)
+                Shipping and pickup options available — email us for current details
               </p>
             </div>
           </div>

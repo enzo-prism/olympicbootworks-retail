@@ -2,14 +2,17 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { ShoppingCart } from "lucide-react"
+import { ArrowRight, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { sendGa4Event } from "@/lib/gtag"
+import { trackConversion } from "@/lib/track-conversion"
 import {
   familyLabels,
   financing,
   formatPrice,
+  bikeDetailUrl,
+  bikeInquiryUrl,
   monthlyEstimate,
   savingsPct,
   type Bike,
@@ -43,7 +46,7 @@ export default function BikeCard({ bike, surface, className, priority = false }:
         className,
       )}
     >
-      <Link href={bike.shopUrl} onClick={trackView} className="relative block aspect-square bg-white">
+      <Link href={bikeDetailUrl(bike)} onClick={trackView} className="relative block aspect-square bg-white">
         <Image
           src={bike.image}
           alt={`Fantic ${bike.name}`}
@@ -82,19 +85,22 @@ export default function BikeCard({ bike, surface, className, priority = false }:
 
         <p className="mt-3 flex-1 text-sm text-muted-foreground">{bike.blurb}</p>
 
-        <div className="mt-5">
-          {bike.inStock ? (
-            <Button asChild className="w-full shadow-sm">
-              <Link href={bike.shopUrl} onClick={trackView}>
-                <ShoppingCart className="mr-2 h-4 w-4" aria-hidden="true" />
-                View &amp; Buy
-              </Link>
-            </Button>
-          ) : (
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/contact">Ask about availability</Link>
-            </Button>
-          )}
+        <div className="mt-5 flex flex-col gap-2">
+          <Button asChild className="w-full shadow-sm">
+            <Link href={bikeDetailUrl(bike)} onClick={trackView}>
+              View bike details
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="w-full">
+            <a
+              href={bikeInquiryUrl(bike)}
+              onClick={() => trackConversion("email_click", { location: `ebike_card_${bike.slug}` })}
+            >
+              <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
+              Email about this bike
+            </a>
+          </Button>
         </div>
       </div>
     </div>

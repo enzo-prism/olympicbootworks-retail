@@ -2,7 +2,8 @@
 
 Marketing + e-commerce site for Olympic Bootworks, a Lake Tahoe ski-boot-fitting and Fantic e-bike shop with two locations (Olympic Valley and South Lake Tahoe).
 
-Production: https://www.olympicbootworks.com (Vercel project `v0-olympic-bootworks-cy`, deploys from `main`).
+Deployment target: Vercel project `v0-olympic-bootworks-cy`, which deploys from `main`.
+Public domain: https://www.olympicbootworks.com — verify DNS cutover and browser behavior separately after deployment.
 
 ## Stack
 
@@ -29,8 +30,9 @@ pnpm check      # lint, typecheck, tests, live Ecwid catalog verification, build
 | Locations, hours, seasonal notice | `data/locations.ts` |
 | Testimonials | `data/testimonials.ts` |
 | **E-bike catalog, sale prices, financing flag** | `data/bikes.ts` |
-| E-bikes hub page | `app/e-bikes/` (Product + FAQ JSON-LD in `page.tsx`) |
+| E-bikes hub + model pages | `app/e-bikes/` (hub FAQ/List JSON-LD; static `[slug]` pages with Product JSON-LD) |
 | Bike product cards | `components/bike-card.tsx` |
+| Model inquiry button | `components/bike-inquiry-button.tsx` |
 | Structured data (JSON-LD) | `components/seo-jsonld.tsx` |
 | Analytics config (GA4/Ads IDs) | `lib/analytics-config.ts` (env-overridable) |
 | Conversion events | `lib/track-conversion.ts` |
@@ -38,14 +40,25 @@ pnpm check      # lint, typecheck, tests, live Ecwid catalog verification, build
 | Analytics/cookie consent | `components/tracking-consent.tsx` |
 | Privacy notice | `app/privacy/page.tsx` |
 | Social share image | `public/images/og-default.png` (1200×630) |
+| Buck-flow regression tests | `tests/bikes.test.mjs`, `tests/buck-flow.test.mjs` |
 
 ## E-bike merchandising
 
-The `/e-bikes` hub, the homepage featured row, and the bike JSON-LD all render from
-`data/bikes.ts`. **The Ecwid store (id 115212795) is the source of truth for prices and
-stock** — when anything changes in the store admin (price, sale, sold out, new product),
-mirror it in `data/bikes.ts` in the same change. Each entry carries the Ecwid product id
-and deep link (`/shop#!/Name/p/<id>`).
+The `/e-bikes` hub, static model-description pages, homepage featured row, and bike JSON-LD
+all render from `data/bikes.ts`. **The Ecwid store (id 115212795) is the source of truth for
+prices and stock** — when anything changes in the store admin (price, sale, sold out, new
+product), mirror it in `data/bikes.ts` in the same change. Each entry also carries a stable
+description-page slug and its secondary Ecwid purchase link (`/shop#!/Name/p/<id>`).
+
+The owner-approved conversion path is description-first and email-first: model cards open
+the on-site description, and every model has a prefilled inquiry to Buck. Keep Ecwid purchase
+options available but visually secondary unless the owner explicitly changes this direction.
+
+Ecwid currently provides no product descriptions or technical specifications for these 11
+items. The owner-reviewable `overview` and `goodFor` fields intentionally use conservative
+riding-category guidance.
+Do not add motor, battery, travel, component, range, size, or color claims until the physical
+inventory SKU/model year has been confirmed with the owner.
 
 Run `pnpm catalog:verify` after any store or catalog update. It compares all live Ecwid
 product IDs, names, prices, sale prices, overall stock, and main images against
@@ -56,8 +69,9 @@ product IDs, names, prices, sale prices, overall stock, and main images against
 - **Financing**: `financing.enabled` in `data/bikes.ts` is `false` until Klarna (or another
   BNPL provider) is actually enabled in the Ecwid admin. Flipping it to `true` turns on
   "from $X/mo" framing on every bike card. Do not enable it before checkout supports it.
-- Bike conversion events: `test_ride_request` and `bike_page_view` in
-  `lib/track-conversion.ts`, plus GA4 `select_item` fired from `bike-card.tsx`.
+- Bike conversion events: model-specific `email_click` leads, `test_ride_request`, and the
+  GA4-only `bike_page_view` hub/list view live in `lib/track-conversion.ts`; bike cards also
+  fire GA4 `select_item` when a visitor opens a model description.
 - Product photos load from the Ecwid CDN (`d2j6dbq0eux0bg.cloudfront.net`, allowlisted in
   `next.config.mjs`).
 

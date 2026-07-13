@@ -7,12 +7,13 @@ import { ShopButton } from "@/components/ui/shop-button"
 import { Button } from "@/components/ui/button"
 import ServicesSection from "@/components/services-section"
 import HeelLocSection from "@/components/heel-loc-section"
-import { Bike, Calendar, Zap, ChevronDown, ShoppingCart } from 'lucide-react'
+import { Bike, Calendar, Zap, ChevronDown, Mail } from 'lucide-react'
 import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
 import NextImage from "@/components/next-image"
 import BikeCard from "@/components/bike-card"
 import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
 import { sendGa4Event } from "@/lib/gtag"
+import { trackConversion } from "@/lib/track-conversion"
 import { featuredBikes, maxSavingsPct } from "@/data/bikes"
 
 export default function HomeClient() {
@@ -48,31 +49,29 @@ export default function HomeClient() {
 
             {/* Tight headline and subheadline */}
             <h1 className="text-white text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] drop-shadow-lg">
-              Move Better
+              Fantic E-Bikes in Lake Tahoe
             </h1>
             <p className="mt-3 text-white/85 text-base md:text-lg max-w-xl mx-auto drop-shadow">
-              Custom boot fitting and Fantic e-bikes for snow, trail, and everyday comfort.
+              Compare current models, read clear descriptions, and email Buck for personal help choosing the right bike.
             </p>
 
             {/* Primary actions */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <HeroPrimaryCTA
-                href="/shop"
-                icon={<ShoppingCart className="h-5 w-5" aria-hidden="true" />}
+                href="/e-bikes"
+                icon={<Bike className="h-5 w-5" aria-hidden="true" />}
                 onClick={() =>
-                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "shop_now" })
+                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "explore_ebikes" })
                 }
               >
-                Shop Now
+                Explore Fantic E-Bikes
               </HeroPrimaryCTA>
               <HeroSecondaryCTA
-                href="/contact"
-                icon={<Calendar className="h-5 w-5" aria-hidden="true" />}
-                onClick={() =>
-                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "request_fitting" })
-                }
+                href="mailto:buck@olympicbootworks.com?subject=Fantic%20E-Bike%20Question"
+                icon={<Mail className="h-5 w-5" aria-hidden="true" />}
+                onClick={() => trackConversion("email_click", { location: "home_hero_ebikes" })}
               >
-                Request a Fitting
+                Email Buck
               </HeroSecondaryCTA>
             </div>
           </div>
@@ -97,9 +96,8 @@ export default function HomeClient() {
             </p>
             <h2 className="text-3xl font-bold mb-4">Fantic E-Bikes, In Stock Now</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Authorized Fantic dealer with a wide in-stock selection. Every bike is professionally
-              assembled and tuned — ride it out of our Tahoe shops or have it shipped anywhere in
-              the country for $299.
+              Compare the current lineup in plain language, then email Buck for personal help with
+              sizing, availability, test rides, pickup, and shipping.
             </p>
           </div>
 
@@ -160,8 +158,8 @@ export default function HomeClient() {
               </p>
               <p className="text-muted-foreground mb-6">
                 Through precise shell modifications, custom footbeds, and personalized liner molding, we create a boot
-                that delivers exceptional power transfer, comfort, and control. As the #1 worldwide dealer for ZipFit
-                liners, we offer these premium cork-composite liners that continue to adapt to your feet over time.
+                designed to support comfort and control. We also fit premium ZipFit cork-composite liners that continue
+                to adapt to your feet over time.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild className="shadow-sm">
@@ -188,23 +186,23 @@ export default function HomeClient() {
       <section className="py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-4">Professional Athletes Trust Heel-Loc Technology</h2>
+            <h2 className="text-3xl font-bold mb-4">Heel-Loc Technology in Action</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Watch how Buck Brown&apos;s revolutionary Heel-Loc technology helps pros perform at their best
+              Hear how athletes use the Heel-Loc technology developed by Buck Brown.
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
             <SimpleYouTubeEmbed
               videoId="n4r3VUYUGW0"
-              title="Professional Athletes Trust Heel-Loc Technology"
+                title="Heel-Loc Technology in Action"
               className="rounded-lg shadow-lg border"
             />
 
             <div className="mt-4 text-center">
               <p className="text-sm text-muted-foreground">
-                This video features professional athletes who rely on the Heel-Loc technology developed by our founder
-                Buck Brown. Learn why Olympic medalists, World Champions, and global explorers choose Olympic Bootworks.
+                This video features athletes discussing the Heel-Loc technology developed by Olympic Bootworks founder
+                Buck Brown.
               </p>
             </div>
           </div>

@@ -41,25 +41,25 @@ export default function ServicesCarousel() {
       icon: <Footprints className="h-6 w-6" />,
       title: "Custom Boot Fitting",
       description:
-        "Our signature service employs advanced shell modification, liner molding, and personalized adjustments to create a truly custom fit that enhances performance and eliminates discomfort for skiers and snowboarders of all levels.",
+        "Our signature service uses shell modification, liner molding, and personalized adjustments to create a custom fit designed to support comfort and confident skiing.",
     },
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Heel-Loc Orthotics",
       description:
-        "Developed over decades of biomechanical research, our proprietary Heel-Loc orthotics support natural alignment and optimize power transfer for skiers, runners, golfers, and cyclists, delivering improved performance and reduced fatigue.",
+        "Our proprietary Heel-Loc orthotics are designed to support natural alignment and efficient power transfer for skiers and other active customers.",
     },
     {
       icon: <Award className="h-6 w-6" />,
       title: "ZipFit Liner Specialists",
       description:
-        "As the #1 worldwide dealer for ZipFit liners, we provide these premium cork-composite boot liners that mold to your feet over time, offering unparalleled comfort, performance, and durability for serious skiers and snowboarders.",
+        "We fit premium ZipFit cork-composite liners that adapt over time and can provide a precise, supportive option for serious skiers and snowboarders.",
     },
     {
       icon: <Heart className="h-6 w-6" />,
       title: "Custom Footbeds",
       description:
-        "Our precision-crafted custom footbeds provide the foundation for optimal biomechanical alignment, reducing pain and enhancing endurance across various sports—from skiing to pickleball—while preventing common injuries through proper support.",
+        "Our custom footbeds are designed to support alignment, comfort, and a stable foundation across skiing and other active pursuits.",
     },
     {
       icon: <Bike className="h-6 w-6" />,

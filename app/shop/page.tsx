@@ -6,7 +6,7 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "Shop Fantic E-Bikes, Ski Boots & Liners",
   description:
-    "Shop Olympic Bootworks for Fantic e-bikes at sale pricing with $299 nationwide shipping, plus ski boots, ZipFit liners, and footbeds with expert fitting support in Lake Tahoe.",
+    "Shop Olympic Bootworks for Fantic e-bikes at sale pricing with shipping and pickup options, plus ski boots, ZipFit liners, and footbeds with expert fitting support in Lake Tahoe.",
   alternates: { canonical: "/shop" },
 }
 
@@ -16,7 +16,7 @@ export default function ShopPage() {
       <SeoIntro
         as="h1"
         title="Shop Fantic E-Bikes, Ski Boots, and Liners"
-        description="Browse our in-stock Fantic e-bike inventory at sale pricing with $299 nationwide shipping. Ski boots, ZipFit liners, and footbeds are fitted in store."
+        description="Browse our current Fantic e-bike inventory at sale pricing, then email the shop to confirm shipping, pickup, sizing, and availability. Ski boots, ZipFit liners, and footbeds are fitted in store."
         bullets={[
           "Fantic e-bikes in stock now, from trail and enduro eMTBs to urban riders",
           "Professionally assembled and tuned before delivery by an authorized dealer",
