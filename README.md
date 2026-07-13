@@ -23,8 +23,10 @@ pnpm build      # production build
 pnpm check      # lint, typecheck, tests, live Ecwid catalog verification, build
 ```
 
-Use Node.js 22.13 or newer. The project pins pnpm in `package.json`; Replit uses its
-`nodejs-22` module so dependency installation and production builds use a compatible runtime.
+Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12 explicitly, while Replit uses
+the pnpm bundled with its `nodejs-22` module. Do not add a `packageManager` field to
+`package.json`: Replit tries to install that package-manager version before the app build,
+which can prevent publishing before `next build` starts.
 
 ## Where things live
 

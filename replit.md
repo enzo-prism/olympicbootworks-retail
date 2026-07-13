@@ -14,8 +14,10 @@ Preferred communication style: Simple, everyday language.
 
 - Dev server runs on port 5000 (`pnpm dev`).
 - Production uses Replit Autoscale with `pnpm build` and `pnpm start`.
-- Runtime: Node.js 22.13 or newer (required by the pinned pnpm version).
+- Runtime: Replit `nodejs-22` module; the app supports Node.js 20.19 or newer.
 - Package manager: pnpm.
+- Do not add `packageManager` to `package.json`. Replit's pre-build packager attempts to
+  install the declared pnpm version and can fail before the application build begins.
 
 ## Key facts (keep in sync with code — the code is the source of truth)
 
