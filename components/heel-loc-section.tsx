@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "lucide-react" // Keep Calendar for the button
-import DirectImage from "@/components/direct-image"
+import NextImage from "@/components/next-image"
 
 export default function HeelLocSection() {
   // Define sports with their corresponding emojis
@@ -92,11 +92,12 @@ export default function HeelLocSection() {
 
           <div className="relative order-1 lg:order-2">
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-md">
-              <DirectImage
+              <NextImage
                 src="/images/fitting-process-2.jpg"
                 alt="Heel-Loc custom footbed technology"
                 className="w-full h-full object-cover"
-                fallbackSrc="/placeholder.png?text=Heel-Loc+Technology"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                 <div className="bg-white/90 dark:bg-black/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">

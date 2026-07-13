@@ -15,17 +15,17 @@ export default function ContactClient() {
     {
       question: "Are you open right now?",
       answer:
-        "We are closed for spring vacation through Monday, June 1. Starting Tuesday, June 2, we will be open by appointment.",
+        "Both locations are open by appointment this summer. Call or email and we'll set up a time for a boot fitting or a Fantic e-bike visit.",
     },
     {
-      question: "Can I walk in after June 2?",
+      question: "Can I walk in?",
       answer:
-        "Please request an appointment first while we finalize regular summer hours.",
+        "During the summer we're appointment-only, so please reach out first — same-day appointments are often available.",
     },
     {
-      question: "When will summer hours be posted?",
+      question: "When do regular hours resume?",
       answer:
-        "Regular summer hours are still being finalized. Email or call either location for the most current availability.",
+        "Regular store hours resume in the fall. Email or call either location for the most current availability.",
     },
   ]
 
@@ -54,7 +54,7 @@ export default function ContactClient() {
             <div className="text-center mb-12">
               <h3 className="text-3xl font-bold mb-4">Get in Touch</h3>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Contact us directly to request an appointment for June 2 or later, ask about products, or check current availability.
+                Contact us directly to request an appointment, ask about products, or check current availability.
               </p>
             </div>
 
@@ -121,7 +121,7 @@ export default function ContactClient() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Find Us</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Please request an appointment before visiting during the spring vacation and early summer transition.
+              Please request an appointment before visiting this summer.
             </p>
           </div>
 

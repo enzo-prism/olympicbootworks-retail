@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useId, useRef, useState } from "react"
 import NextImage from "./next-image"
 
 interface GalleryImage {
@@ -15,8 +15,13 @@ interface ImageGalleryProps {
 
 export default function ImageGallery({ images }: ImageGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const captionId = useId()
 
-  const openLightbox = (image: GalleryImage) => {
+  const openLightbox = (image: GalleryImage, trigger: HTMLButtonElement) => {
+    triggerRef.current = trigger
     setSelectedImage(image)
   }
 
@@ -24,14 +29,58 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
     setSelectedImage(null)
   }
 
+  useEffect(() => {
+    if (!selectedImage) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    closeButtonRef.current?.focus()
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault()
+        closeLightbox()
+        return
+      }
+
+      if (event.key !== "Tab" || !dialogRef.current) return
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => !element.hasAttribute("disabled"))
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+      document.body.style.overflow = previousOverflow
+      triggerRef.current?.focus()
+    }
+  }, [selectedImage])
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {images.map((image, index) => (
-          <div
+          <button
+            type="button"
             key={index}
-            className="border rounded-lg overflow-hidden cursor-pointer transition-transform hover:scale-[1.02]"
-            onClick={() => openLightbox(image)}
+            className="border rounded-lg overflow-hidden cursor-pointer text-left transition-transform hover:scale-[1.02] motion-reduce:transition-none motion-reduce:hover:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            onClick={(event) => openLightbox(image, event.currentTarget)}
+            aria-label={`Open image: ${image.alt}`}
+            aria-haspopup="dialog"
           >
             <div className="relative h-64">
               <NextImage
@@ -45,7 +94,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
             {image.caption && (
               <div className="p-3 text-sm text-center text-gray-600 dark:text-gray-300">{image.caption}</div>
             )}
-          </div>
+          </button>
         ))}
       </div>
 
@@ -53,9 +102,16 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
-          onClick={closeLightbox}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeLightbox()
+          }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Image preview: ${selectedImage.alt}`}
+          aria-describedby={selectedImage.caption ? captionId : undefined}
+          ref={dialogRef}
         >
-          <div className="relative max-w-4xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-w-4xl max-h-[90vh] w-full">
             <div className="relative h-full">
               <NextImage
                 src={selectedImage.src}
@@ -66,10 +122,13 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
                 priority
               />
             </div>
-            {selectedImage.caption && <div className="text-white text-center mt-4">{selectedImage.caption}</div>}
+            {selectedImage.caption && <div id={captionId} className="text-white text-center mt-4">{selectedImage.caption}</div>}
             <button
-              className="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2"
+              ref={closeButtonRef}
+              type="button"
+              className="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               onClick={closeLightbox}
+              aria-label="Close image preview"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

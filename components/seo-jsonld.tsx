@@ -54,7 +54,7 @@ export default function SeoJsonLd() {
       }
 
       return entry.hours.split(",").flatMap((range) => {
-        const [opensRaw, closesRaw] = range.split("–").map((value) => value.trim())
+        const [opensRaw, closesRaw] = range.split(/[–—-]/).map((value) => value.trim())
         const opens = opensRaw ? to24HourTime(opensRaw) : null
         const closes = closesRaw ? to24HourTime(closesRaw) : null
 

@@ -7,12 +7,13 @@ import { ShopButton } from "@/components/ui/shop-button"
 import { Button } from "@/components/ui/button"
 import ServicesSection from "@/components/services-section"
 import HeelLocSection from "@/components/heel-loc-section"
-import { Calendar, Zap, ChevronDown, Mail, ShoppingCart } from 'lucide-react'
+import { Bike, Calendar, Zap, ChevronDown, ShoppingCart } from 'lucide-react'
 import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
 import NextImage from "@/components/next-image"
+import BikeCard from "@/components/bike-card"
 import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
 import { sendGa4Event } from "@/lib/gtag"
-import { trackConversion } from "@/lib/track-conversion"
+import { featuredBikes, maxSavingsPct } from "@/data/bikes"
 
 export default function HomeClient() {
   return (
@@ -34,11 +35,14 @@ export default function HomeClient() {
 
             {/* Brand mark */}
             <div className="mb-4">
-              {/* Use a static img tag here for simple sizing */}
-              <img
+              <NextImage
                 src="/images/olympic-bootworks-transparent-logo.png"
                 alt="Olympic Bootworks logo"
                 className="h-12 md:h-14 w-auto opacity-95"
+                width={240}
+                height={56}
+                priority
+                style={{ width: "auto" }}
               />
             </div>
 
@@ -47,7 +51,7 @@ export default function HomeClient() {
               Move Better
             </h1>
             <p className="mt-3 text-white/85 text-base md:text-lg max-w-xl mx-auto drop-shadow">
-              Custom boot fitting and performance gear for snow, trail, and everyday comfort.
+              Custom boot fitting and Fantic e-bikes for snow, trail, and everyday comfort.
             </p>
 
             {/* Primary actions */}
@@ -83,30 +87,51 @@ export default function HomeClient() {
         </div>
       </div>
 
+      {/* Fantic E-Bikes Sale Section — hidden if the featured inventory sells out */}
+      {featuredBikes.length > 0 && (
+      <section id="e-bikes" className="scroll-mt-24 py-16 bg-secondary/50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+              Fantic Summer Sale • Up to {maxSavingsPct}% Off
+            </p>
+            <h2 className="text-3xl font-bold mb-4">Fantic E-Bikes, In Stock Now</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Authorized Fantic dealer with a wide in-stock selection. Every bike is professionally
+              assembled and tuned — ride it out of our Tahoe shops or have it shipped anywhere in
+              the country for $299.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-10">
+            {featuredBikes.map((bike) => (
+              <BikeCard key={bike.id} bike={bike} surface="home_featured" />
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Button asChild size="lg" className="shadow-md">
+              <Link href="/e-bikes">
+                <Bike className="mr-2 h-5 w-5" aria-hidden="true" />
+                See all models &amp; pricing
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="shadow-sm">
+              <Link href="/e-bikes#test-ride">
+                <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
+                Book a test ride
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+      )}
+
       {/* Services Section */}
       <ServicesSection />
 
       {/* Heel-Loc Technology Section */}
       <HeelLocSection />
-
-      {/* Fantic Bikes CTA Section */}
-      <section className="py-16 bg-secondary/50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-primary mb-4">Authorized Fantic E-Bike Dealer</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-            We are proud to be an authorized Fantic dealer, offering the largest inventory in the USA! Email us any
-            questions about these very special bikes, as we have been Fantic dealers for 8 years!
-          </p>
-          <Button asChild size="lg" className="shadow-md">
-            <a
-              href="mailto:buck@olympicbootworks.com"
-              onClick={() => trackConversion("email_click", { location: "home_fantic_bikes" })}
-            >
-              <Mail className="mr-2 h-5 w-5" /> Email Us About Fantic Bikes
-            </a>
-          </Button>
-        </div>
-      </section>
 
       {/* Custom Boot Fitting Section */}
       <section className="py-16">

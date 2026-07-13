@@ -43,9 +43,9 @@ export default function LocationBanner() {
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-1 md:gap-6">
-            <span className="text-muted-foreground">{seasonalScheduleNotice.closedThrough}</span>
+            <span className="text-muted-foreground">{seasonalScheduleNotice.bannerPrimary}</span>
             <span className="hidden md:inline text-muted-foreground">|</span>
-            <span className="text-muted-foreground">{seasonalScheduleNotice.appointmentOnlyStarting}</span>
+            <span className="text-muted-foreground">{seasonalScheduleNotice.bannerSecondary}</span>
             <span className="hidden md:inline text-muted-foreground">|</span>
             <span className="text-muted-foreground">{locations.length} Tahoe locations</span>
           </div>

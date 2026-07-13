@@ -10,22 +10,32 @@ interface ServiceItemProps {
   icon: React.ReactNode
   title: string
   description: string
+  href?: string
   className?: string
 }
 
-function ServiceItem({ icon, title, description, className }: ServiceItemProps) {
-  return (
-    <div
-      className={cn(
-        "group flex flex-col items-start p-6 rounded-lg transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700",
-        className,
-      )}
-    >
+function ServiceItem({ icon, title, description, href, className }: ServiceItemProps) {
+  const content = (
+    <>
       <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary">{icon}</div>
       <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{title}</h3>
       <p className="text-muted-foreground text-sm">{description}</p>
-    </div>
+    </>
   )
+  const itemClass = cn(
+    "group flex flex-col items-start p-6 rounded-lg transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700",
+    className,
+  )
+
+  if (href) {
+    return (
+      <Link href={href} className={itemClass}>
+        {content}
+      </Link>
+    )
+  }
+
+  return <div className={itemClass}>{content}</div>
 }
 
 export default function ServicesSection() {
@@ -76,6 +86,7 @@ export default function ServicesSection() {
             icon={<Bike className="h-6 w-6" />}
             title="Fantic Electric Bikes"
             description="Experience the thrill of Italian-engineered Fantic electric bikes, combining cutting-edge technology with all-terrain versatility. From mountain trails to urban commutes, these premium e-bikes deliver power, range, and reliability."
+            href="/e-bikes"
           />
         </div>
 

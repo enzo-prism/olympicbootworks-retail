@@ -51,11 +51,15 @@ export default function SimpleYouTubeEmbed({
     <div className={cn("relative overflow-hidden rounded-lg", getAspectRatioClass(), className)}>
       {!isPlaying ? (
         // Thumbnail with play button
-        <div
-          className="w-full h-full cursor-pointer"
+        <button
+          type="button"
+          className="group relative w-full h-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           onClick={() => setIsPlaying(true)}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          onFocus={() => setIsHovered(true)}
+          onBlur={() => setIsHovered(false)}
+          aria-label={`Play video: ${title}`}
         >
           <EnhancedImage
             src={thumbnailUrl}
@@ -74,7 +78,7 @@ export default function SimpleYouTubeEmbed({
               <Play className="h-8 w-8 text-white fill-white" />
             </div>
           </div>
-        </div>
+        </button>
       ) : (
         // YouTube iframe
         <iframe

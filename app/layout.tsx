@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-import Script from "next/script"
 import "./globals.css"
 import "./shop/cart-widget.css"
 import "./components/button-animations.css"
@@ -12,9 +11,7 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import LocationBanner from "@/components/location-banner"
 import ScrollToTop from "@/components/scroll-to-top"
-import ImagePreloader from "@/components/image-preloader"
-import { Analytics } from "@/components/analytics"
-import { AnalyticsRouteListener } from "@/components/analytics-route-listener"
+import { TrackingConsent } from "@/components/tracking-consent"
 import { Suspense } from "react"
 import SeoJsonLd from "@/components/seo-jsonld"
 
@@ -29,12 +26,8 @@ export const metadata: Metadata = {
   description:
     "Olympic Bootworks is a Lake Tahoe ski boot fitting and mountain bike shop specializing in custom footbeds, ZipFit liners, and Fantic e-bikes.",
   icons: {
-    icon: [
-      {
-        url: "/images/olympic-bootworks-transparent-logo.png",
-        href: "/images/olympic-bootworks-transparent-logo.png",
-      },
-    ],
+    icon: [{ url: "/favicon.png", sizes: "32x32", type: "image/png" }],
+    apple: [{ url: "/images/olympic-bootworks-transparent-logo.png" }],
   },
   openGraph: {
     title: "Olympic Bootworks",
@@ -62,7 +55,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -73,24 +65,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* No environment variable scripts needed */}
-        <Script id="hotjar-tracking" strategy="afterInteractive">
-          {`
-            (function(h,o,t,j,a,r){
-                h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-                h._hjSettings={hjid:6435732,hjsv:6};
-                a=o.getElementsByTagName('head')[0];
-                r=o.createElement('script');r.async=1;
-                r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-                a.appendChild(r);
-            })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-          `}
-        </Script>
         <SeoJsonLd />
       </head>
       <body className="font-sans">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <ImagePreloader />
           <ScrollToTop />
           <div className="flex min-h-screen flex-col">
             <div className="fixed top-0 left-0 right-0 z-50 flex flex-col header-container">
@@ -109,12 +87,9 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
 
-        {/* Load Vimeo API globally */}
-        <Script src="https://player.vimeo.com/api/player.js" strategy="lazyOnload" />
         <Suspense fallback={null}>
-          <AnalyticsRouteListener />
+          <TrackingConsent />
         </Suspense>
-        <Analytics />
       </body>
     </html>
   )

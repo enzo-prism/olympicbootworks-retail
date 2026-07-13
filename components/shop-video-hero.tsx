@@ -22,7 +22,7 @@ export default function ShopVideoHero({ videoId, title, subtitle }: ShopVideoHer
       <div className="absolute inset-0 bg-black bg-opacity-50" />
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-center text-white p-4">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-2">{title}</h1>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-2">{title}</h2>
         <p className="text-base md:text-lg lg:text-xl text-neutral-200 max-w-2xl">{subtitle}</p>
       </div>
     </div>
