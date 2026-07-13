@@ -50,6 +50,14 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 201 100% 50%;
   }
+
+  /* Fantic's red is scoped to e-bike merchandising so the core boot-fitting brand stays intact. */
+  .fantic-theme {
+    --primary: 351 97% 45%;
+    --primary-light: 351 97% 55%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 351 97% 45%;
+  }
 }
 
 @layer base {

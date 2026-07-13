@@ -75,9 +75,10 @@ for (const local of localProducts) {
     continue
   }
 
+  const expectedCheckout = { ...local, price: local.checkoutPrice ?? local.price }
   for (const key of ["name", "price", "compareAtPrice", "inStock", "image"]) {
-    if (local[key] !== live[key]) {
-      errors.push(`${local.id} ${local.name}: ${key} is ${JSON.stringify(local[key])} locally, ${JSON.stringify(live[key])} in Ecwid`)
+    if (expectedCheckout[key] !== live[key]) {
+      errors.push(`${local.id} ${local.name}: ${key} is ${JSON.stringify(expectedCheckout[key])} for checkout locally, ${JSON.stringify(live[key])} in Ecwid`)
     }
   }
 
@@ -97,5 +98,5 @@ if (errors.length > 0) {
   for (const error of errors) console.error(`- ${error}`)
   process.exitCode = 1
 } else {
-  console.log(`Ecwid catalog verified: ${localProducts.length} products match live prices, stock, names, images, and IDs.`)
+  console.log(`Ecwid catalog verified: ${localProducts.length} products match live checkout prices, stock, names, images, and IDs.`)
 }

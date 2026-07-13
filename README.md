@@ -52,8 +52,11 @@ which can prevent publishing before `next build` starts.
 
 The `/e-bikes` hub, static model-description pages, homepage featured row, and bike JSON-LD
 all render from `data/bikes.ts`. **The Ecwid store (id 115212795) is the source of truth for
-prices and stock** — when anything changes in the store admin (price, sale, sold out, new
-product), mirror it in `data/bikes.ts` in the same change. Each entry also carries a stable
+checkout prices and stock** — when anything changes in the store admin (price, sale, sold out, new
+product), mirror it in `data/bikes.ts` in the same change. If Buck approves a website price before
+Ecwid can be changed, set `price` to the approved offer and set `checkoutPrice` to the still-live
+Ecwid price. The product page will hide the mismatched checkout link and direct the visitor to Buck;
+remove `checkoutPrice` as soon as Ecwid matches. Each entry also carries a stable
 description-page slug and its secondary Ecwid purchase link (`/shop#!/Name/p/<id>`).
 
 The owner-approved conversion path is description-first and email-first: model cards open

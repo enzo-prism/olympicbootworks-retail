@@ -4,6 +4,7 @@ import Link from "next/link"
 import type { ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import ButtonIcon from "@/components/button-icon"
+import CopyEmailButton from "@/components/copy-email-button"
 import { cn } from "@/lib/utils"
 import { sendGa4Event } from "@/lib/gtag"
 import { trackConversion } from "@/lib/track-conversion"
@@ -33,6 +34,11 @@ export default function MinimalPageHero({
   actions = [],
   className,
 }: MinimalPageHeroProps) {
+  const emailAction = actions.find((action) => action.href.startsWith("mailto:"))
+  const contactEmail = emailAction
+    ? decodeURIComponent(emailAction.href.slice("mailto:".length).split("?")[0])
+    : null
+
   const trackAction = (action: HeroAction) => {
     const location = `page_hero_${window.location.pathname.replace(/^\/|\/$/g, "").replaceAll("/", "_") || "home"}`
     if (action.href.startsWith("mailto:")) {
@@ -77,27 +83,50 @@ export default function MinimalPageHero({
 
           {actions.length > 0 ? (
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              {actions.map((action) => (
-                <Button
-                  key={`${action.href}-${action.label}`}
-                  asChild
-                  size="lg"
-                  variant={action.variant === "secondary" ? "outline" : "default"}
-                  className="min-w-40 shadow-sm"
-                >
-                  <Link
-                    href={action.href}
-                    onClick={() => trackAction(action)}
-                    {...(action.external
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
+              {actions.map((action) => {
+                const content = (
+                  <>
                     {action.leadingIcon ?? <ButtonIcon label={action.label} href={action.href} />}
                     {action.label}
-                  </Link>
-                </Button>
-              ))}
+                  </>
+                )
+                const linkProps = {
+                  onClick: () => trackAction(action),
+                  ...(action.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {}),
+                }
+                const usesNativeNavigation =
+                  action.href.startsWith("mailto:") ||
+                  action.href.startsWith("tel:") ||
+                  /^https?:\/\//.test(action.href)
+
+                return (
+                  <Button
+                    key={`${action.href}-${action.label}`}
+                    asChild
+                    size="lg"
+                    variant={action.variant === "secondary" ? "outline" : "default"}
+                    className="min-w-40 shadow-sm"
+                  >
+                    {usesNativeNavigation ? (
+                      <a href={action.href} {...linkProps}>{content}</a>
+                    ) : (
+                      <Link href={action.href} {...linkProps}>{content}</Link>
+                    )}
+                  </Button>
+                )
+              })}
             </div>
+          ) : null}
+
+          {contactEmail ? (
+            <CopyEmailButton
+              email={contactEmail}
+              className="mt-4 text-sm text-muted-foreground"
+              emailClassName="text-foreground"
+              buttonClassName="text-primary"
+            />
           ) : null}
         </div>
       </div>

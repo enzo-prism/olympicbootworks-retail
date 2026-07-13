@@ -1,9 +1,10 @@
 /**
  * Fantic e-bike catalog for the /e-bikes hub and homepage merchandising.
  *
- * Prices, stock, and deep links mirror the live Ecwid store (id 115212795) and
- * must be kept in sync with it — the store is the source of truth for checkout.
- * Last synced with the storefront: July 12, 2026.
+ * Checkout prices, stock, and deep links mirror the live Ecwid store (id 115212795).
+ * Display prices normally match checkout; a documented checkoutPrice is required
+ * when the owner approves a website price before the Ecwid checkout is updated.
+ * Last synced with the storefront: July 13, 2026.
  */
 
 export type BikeFamily =
@@ -24,6 +25,8 @@ export interface Bike {
   family: BikeFamily
   /** Current sale price in USD */
   price: number
+  /** Temporary live Ecwid price when checkout has not caught up to an owner-approved display price */
+  checkoutPrice?: number
   /** Original list price in USD (strikethrough) */
   compareAtPrice: number
   /** One-line, rider-focused description (no invented specs) */
@@ -202,7 +205,8 @@ export const bikes: Bike[] = [
     name: "Seven Day Living",
     slug: "seven-day-living",
     family: "urban",
-    price: 1799,
+    price: 1499,
+    checkoutPrice: 1799,
     compareAtPrice: 4200,
     blurb: "A practical everyday commuter and cruiser — errands, bike paths, and casual lake loops.",
     overview:

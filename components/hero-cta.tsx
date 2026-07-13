@@ -13,6 +13,9 @@ type CTAProps = {
   onClick?: MouseEventHandler<HTMLAnchorElement>
 }
 
+const usesNativeNavigation = (href: string) =>
+  href.startsWith("mailto:") || href.startsWith("tel:") || /^https?:\/\//.test(href)
+
 /**
  * High-contrast filled pill button for dark/video hero backgrounds.
  * White glass with dark text for maximum readability.
@@ -36,12 +39,10 @@ export function HeroPrimaryCTA({
     </span>
   )
 
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      aria-label={ariaLabel || (typeof children === "string" ? children : "Primary action")}
-      className={cn(
+  const props = {
+    onClick,
+    "aria-label": ariaLabel || (typeof children === "string" ? children : "Primary action"),
+    className: cn(
         "hero-cta-primary group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-base font-semibold",
         // High contrast on dark backgrounds
         "text-gray-950 bg-white/95 hover:bg-white",
@@ -55,10 +56,13 @@ export function HeroPrimaryCTA({
         "before:absolute before:inset-0 before:z-0 before:rounded-full before:bg-[radial-gradient(120px_60px_at_0%_0%,rgba(255,255,255,0.25),transparent)] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500",
         "transition-colors",
         className,
-      )}
-    >
-      {content}
-    </Link>
+    ),
+  }
+
+  return usesNativeNavigation(href) ? (
+    <a href={href} {...props}>{content}</a>
+  ) : (
+    <Link href={href} {...props}>{content}</Link>
   )
 }
 
@@ -85,12 +89,10 @@ export function HeroSecondaryCTA({
     </span>
   )
 
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      aria-label={ariaLabel || (typeof children === "string" ? children : "Secondary action")}
-      className={cn(
+  const props = {
+    onClick,
+    "aria-label": ariaLabel || (typeof children === "string" ? children : "Secondary action"),
+    className: cn(
         "hero-cta-secondary group relative inline-flex items-center justify-center overflow-hidden rounded-full px-6 py-3 text-base font-semibold",
         // High contrast on dark backgrounds
         "text-white border border-white/75",
@@ -102,9 +104,12 @@ export function HeroSecondaryCTA({
         "after:pointer-events-none after:absolute after:inset-0 after:z-0 after:rounded-full after:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.45)]",
         "transition-colors",
         className,
-      )}
-    >
-      {content}
-    </Link>
+    ),
+  }
+
+  return usesNativeNavigation(href) ? (
+    <a href={href} {...props}>{content}</a>
+  ) : (
+    <Link href={href} {...props}>{content}</Link>
   )
 }

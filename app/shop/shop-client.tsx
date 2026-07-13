@@ -2,15 +2,19 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { Bike, Loader2, Mail, PhoneCall, RefreshCw, Truck } from 'lucide-react'
+import { AlertTriangle, Bike, Loader2, Mail, PhoneCall, RefreshCw, Truck } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import ShopVideoHero from "@/components/shop-video-hero"
+import { bikes, bikeInquiryUrl, formatPrice } from "@/data/bikes"
 import { trackConversion } from "@/lib/track-conversion"
 import "./shop-embed.css"
 
 const DEBUG = process.env.NODE_ENV !== "production"
 const ECWID_SCRIPT_SRC = "https://app.business.shop/script.js?115212795&data_platform=code&data_date=2025-04-30"
 let ecwidScriptLoadPromise: Promise<void> | null = null
+const pendingPriceUpdates = bikes.filter(
+  (bike) => bike.checkoutPrice !== undefined && bike.checkoutPrice !== bike.price,
+)
 
 const debugLog = (...args: any[]) => {
   if (DEBUG) console.log(`[Shop Debug ${new Date().toISOString()}]`, ...args)
@@ -375,6 +379,32 @@ export default function ShopClient() {
               </p>
             </div>
           </div>
+
+          {pendingPriceUpdates.map((bike) => (
+            <div
+              key={bike.id}
+              role="alert"
+              className="fantic-theme mb-6 rounded-lg border-2 border-primary bg-primary/5 p-5 text-center shadow-sm"
+            >
+              <p className="flex items-center justify-center gap-2 font-bold text-primary">
+                <AlertTriangle className="h-5 w-5" aria-hidden="true" />
+                {bike.name} online checkout is being updated
+              </p>
+              <p className="mx-auto mt-2 max-w-2xl text-sm text-foreground">
+                Buck&apos;s current price is {formatPrice(bike.price)}. Please do not use the
+                {" "}{formatPrice(bike.checkoutPrice!)} online checkout for this model.
+              </p>
+              <Button asChild className="mt-4">
+                <a
+                  href={bikeInquiryUrl(bike)}
+                  onClick={() => trackConversion("email_click", { location: `shop_price_update_${bike.slug}` })}
+                >
+                  <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
+                  Email Buck for the {formatPrice(bike.price)} price
+                </a>
+              </Button>
+            </div>
+          ))}
 
           {/* Loading state */}
           {!isShopVisible && !isScriptError && (

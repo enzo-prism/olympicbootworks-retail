@@ -13,6 +13,9 @@ test("bike catalog has unique Ecwid IDs and valid sale data", () => {
   for (const bike of catalog.bikes) {
     assert.ok(bike.id > 0, `${bike.name} must have an Ecwid ID`)
     assert.ok(bike.price > 0, `${bike.name} must have a positive price`)
+    if (bike.checkoutPrice !== undefined) {
+      assert.ok(bike.checkoutPrice > 0, `${bike.name} checkout override must be positive`)
+    }
     assert.ok(bike.compareAtPrice > bike.price, `${bike.name} must have a real sale price`)
     assert.ok(bike.shopUrl.endsWith(`/p/${bike.id}`), `${bike.name} link must include its Ecwid ID`)
     assert.match(bike.image, /^https:\/\/d2j6dbq0eux0bg\.cloudfront\.net\//)
@@ -21,6 +24,12 @@ test("bike catalog has unique Ecwid IDs and valid sale data", () => {
     assert.ok(bike.overview.length >= 100, `${bike.name} needs a useful plain-language overview`)
     assert.ok(bike.goodFor.length >= 3, `${bike.name} needs comparison guidance`)
   }
+})
+
+test("Seven Day uses Buck's latest approved price while Ecwid catches up", () => {
+  const sevenDay = catalog.bikes.find((bike) => bike.slug === "seven-day-living")
+  assert.equal(sevenDay.price, 1499)
+  assert.equal(sevenDay.checkoutPrice, 1799)
 })
 
 test("every bike inquiry starts a useful, model-specific email to Buck", () => {

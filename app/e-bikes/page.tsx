@@ -101,11 +101,11 @@ export default function EBikesPage() {
     cheapestBikePrice !== null ? ` — trail, enduro, and urban models from ${formatPrice(cheapestBikePrice)}` : ""
 
   return (
-    <div className="flex flex-col">
+    <div className="fantic-theme flex flex-col">
       <EBikesJsonLd />
 
       <MinimalPageHero
-        eyebrow={`Authorized Fantic Dealer • Up to ${maxSavingsPct}% Off`}
+        eyebrow={`Fantic • Italian Made Freedom • Up to ${maxSavingsPct}% Off`}
         title="Compare Current Fantic E-Bikes"
         description={`Read what each model is designed for${fromClause}, compare pricing, then email Buck about sizing, current availability, and the best next step.`}
         actions={[

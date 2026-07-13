@@ -5,11 +5,13 @@ import Link from "next/link"
 import Script from "next/script"
 import { Analytics } from "@/components/analytics"
 import { AnalyticsRouteListener } from "@/components/analytics-route-listener"
-import { ANALYTICS_CONSENT_STORAGE_KEY } from "@/lib/consent"
+import {
+  readAnalyticsConsent,
+  writeAnalyticsConsent,
+  type AnalyticsConsent,
+} from "@/lib/consent"
 
 export const OPEN_COOKIE_SETTINGS_EVENT = "olympic-bootworks:open-cookie-settings"
-
-type Consent = "accepted" | "declined" | null
 
 declare global {
   interface Navigator {
@@ -22,18 +24,18 @@ function hasPrivacySignal() {
 }
 
 export function TrackingConsent() {
-  const [consent, setConsent] = useState<Consent>(null)
+  const [consent, setConsent] = useState<AnalyticsConsent>(null)
   const [showPrompt, setShowPrompt] = useState(false)
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY)
-    if (stored === "accepted" || stored === "declined") {
+    const stored = readAnalyticsConsent()
+    if (stored) {
       setConsent(stored)
       return
     }
 
     if (hasPrivacySignal()) {
-      window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, "declined")
+      writeAnalyticsConsent("declined")
       setConsent("declined")
       return
     }
@@ -47,9 +49,9 @@ export function TrackingConsent() {
     return () => window.removeEventListener(OPEN_COOKIE_SETTINGS_EVENT, openSettings)
   }, [])
 
-  const choose = (choice: Exclude<Consent, null>) => {
+  const choose = (choice: Exclude<AnalyticsConsent, null>) => {
     const hadLoadedAnalytics = consent === "accepted"
-    window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, choice)
+    writeAnalyticsConsent(choice)
     setConsent(choice)
     setShowPrompt(false)
 

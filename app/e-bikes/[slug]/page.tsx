@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowLeft, Check, PhoneCall, ShoppingCart } from "lucide-react"
 import { notFound } from "next/navigation"
 import BikeInquiryButton from "@/components/bike-inquiry-button"
+import CopyEmailButton from "@/components/copy-email-button"
 import { Button } from "@/components/ui/button"
 import {
   bikes,
@@ -65,7 +66,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
   }
 
   return (
-    <div className="border-b bg-gradient-to-b from-sky-50/70 via-background to-background dark:from-slate-950">
+    <div className="fantic-theme border-b bg-gradient-to-b from-red-50/70 via-background to-background dark:from-slate-950">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
@@ -131,7 +132,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               <h2 className="text-xl font-bold">Ask Buck about this bike</h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Email Buck with the model already filled in. He can confirm current size and color
-                choices, answer questions, and explain pickup, test-ride, or shipping next steps.
+                choices, share the exact technical specifications for the bike in stock, answer
+                questions, and explain pickup, test-ride, or shipping next steps.
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                 <BikeInquiryButton bike={bike} className="sm:flex-1" />
@@ -142,15 +144,27 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
                   </a>
                 </Button>
               </div>
+              <CopyEmailButton
+                email="buck@olympicbootworks.com"
+                className="mt-4 justify-start text-sm text-muted-foreground"
+                emailClassName="text-foreground"
+                buttonClassName="text-primary"
+              />
             </div>
 
             <div className="mt-6 text-center sm:text-left">
-              <Button asChild variant="link" className="px-0 text-muted-foreground">
-                <Link href={bike.shopUrl}>
-                  <ShoppingCart className="mr-2 h-4 w-4" aria-hidden="true" />
-                  View secondary online purchase options
-                </Link>
-              </Button>
+              {bike.checkoutPrice === undefined || bike.checkoutPrice === bike.price ? (
+                <Button asChild variant="link" className="px-0 text-muted-foreground">
+                  <Link href={bike.shopUrl}>
+                    <ShoppingCart className="mr-2 h-4 w-4" aria-hidden="true" />
+                    View secondary online purchase options
+                  </Link>
+                </Button>
+              ) : (
+                <p className="rounded-lg border border-primary/20 bg-primary/5 p-4 text-sm text-foreground">
+                  Online checkout is being updated. Email Buck to get the owner-confirmed {formatPrice(bike.price)} price.
+                </p>
+              )}
               <p className="mt-1 text-xs text-muted-foreground">
                 Availability changes. Email the shop before making a special trip.
               </p>

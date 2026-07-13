@@ -71,7 +71,7 @@ export default function EBikesClient() {
       {/* Sale banner */}
       <section className="bg-primary py-10 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em]">Fantic Summer Sale</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em]">Italian Made Freedom • Fantic Summer Sale</p>
           <h2 className="mt-2 text-3xl font-bold md:text-4xl">
             Up to {maxSavingsPct}% off — while current inventory lasts
           </h2>
@@ -122,8 +122,8 @@ export default function EBikesClient() {
             )
           })}
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            Prices and general availability mirror our online store. Email the shop to confirm the
-            size and color you want before making a special trip.
+            Website prices reflect Buck&apos;s latest approved offers. Email the shop to confirm the
+            exact bike, size, color, technical specifications, and checkout details before making a special trip.
           </p>
         </div>
       </section>

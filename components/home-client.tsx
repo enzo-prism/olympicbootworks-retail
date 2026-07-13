@@ -12,6 +12,7 @@ import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
 import NextImage from "@/components/next-image"
 import BikeCard from "@/components/bike-card"
 import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
+import CopyEmailButton from "@/components/copy-email-button"
 import { sendGa4Event } from "@/lib/gtag"
 import { trackConversion } from "@/lib/track-conversion"
 import { featuredBikes, maxSavingsPct } from "@/data/bikes"
@@ -29,9 +30,9 @@ export default function HomeClient() {
           <div className="flex flex-col items-center justify-center text-center">
             {/* Subtle frosted badge */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full frosted-glass px-4 py-1.5 text-white/90 text-xs md:text-sm border border-white/20 shadow-sm">
-              <span>Lake Tahoe</span>
+              <span>Fantic</span>
               <span className="opacity-60">{'•'}</span>
-              <span>Since 1994</span>
+              <span>Italian Made Freedom</span>
             </div>
 
             {/* Brand mark */}
@@ -74,6 +75,12 @@ export default function HomeClient() {
                 Email Buck
               </HeroSecondaryCTA>
             </div>
+            <CopyEmailButton
+              email="buck@olympicbootworks.com"
+              className="mt-4 text-sm text-white/85"
+              emailClassName="font-semibold text-white"
+              buttonClassName="text-white"
+            />
           </div>
         }
       />
@@ -88,7 +95,7 @@ export default function HomeClient() {
 
       {/* Fantic E-Bikes Sale Section — hidden if the featured inventory sells out */}
       {featuredBikes.length > 0 && (
-      <section id="e-bikes" className="scroll-mt-24 py-16 bg-secondary/50">
+      <section id="e-bikes" className="fantic-theme scroll-mt-24 py-16 bg-secondary/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
