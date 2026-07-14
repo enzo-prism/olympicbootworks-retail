@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, Check, PhoneCall, ShoppingCart } from "lucide-react"
+import { ArrowLeft, Check, Mail, PhoneCall } from "lucide-react"
 import { notFound } from "next/navigation"
 import BikeInquiryButton from "@/components/bike-inquiry-button"
 import CopyEmailButton from "@/components/copy-email-button"
@@ -11,7 +11,6 @@ import {
   familyLabels,
   formatPrice,
   getBikeBySlug,
-  savingsPct,
 } from "@/data/bikes"
 
 type BikeDetailPageProps = {
@@ -29,7 +28,7 @@ export async function generateMetadata({ params }: BikeDetailPageProps): Promise
 
   return {
     title: `Fantic ${bike.name} — Description, Price & Inquiry`,
-    description: `${bike.blurb} Read the plain-language description, compare the sale price, and email Olympic Bootworks about current sizing and availability.`,
+    description: `${bike.blurb} Read the plain-language description, see the current website price, and email Olympic Bootworks about sizing and availability.`,
     alternates: { canonical: `/e-bikes/${bike.slug}` },
     openGraph: {
       title: `Fantic ${bike.name} | Olympic Bootworks`,
@@ -50,7 +49,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: `Fantic ${bike.name}`,
-    image: bike.image,
+    image: `https://www.olympicbootworks.com${bike.image}`,
     description: bike.overview,
     brand: { "@type": "Brand", name: "Fantic" },
     offers: {
@@ -58,9 +57,6 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
       url: `https://www.olympicbootworks.com/e-bikes/${bike.slug}`,
       price: bike.price,
       priceCurrency: "USD",
-      availability: bike.inStock
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
       seller: { "@type": "Organization", name: "Olympic Bootworks" },
     },
   }
@@ -82,7 +78,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
         </Link>
 
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="relative aspect-square overflow-hidden rounded-2xl border bg-white shadow-sm">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border bg-white shadow-sm sm:aspect-square">
             <Image
               src={bike.image}
               alt={`Fantic ${bike.name}`}
@@ -92,7 +88,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               className="object-contain p-6 md:p-10"
             />
             <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-foreground shadow">
-              Save {savingsPct(bike)}%
+              Current price
             </span>
           </div>
 
@@ -105,12 +101,10 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
             </h1>
 
             <div className="mt-5 flex flex-wrap items-baseline gap-3">
+              <span className="sr-only">Current price: </span>
               <span className="text-3xl font-bold">{formatPrice(bike.price)}</span>
-              <span className="text-lg text-muted-foreground line-through">
-                {formatPrice(bike.compareAtPrice)}
-              </span>
-              <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900">
-                {bike.inStock ? "Listed as in stock" : "Ask about availability"}
+              <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-foreground">
+                Contact Buck to confirm availability
               </span>
             </div>
 
@@ -132,7 +126,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               <h2 className="text-xl font-bold">Ask Buck about this bike</h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Email Buck with the model already filled in. He can confirm current size and color
-                choices, share the exact technical specifications for the bike in stock, answer
+                choices, share the exact technical specifications for the bike being offered, answer
                 questions, and explain pickup, test-ride, or shipping next steps.
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -152,21 +146,16 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               />
             </div>
 
-            <div className="mt-6 text-center sm:text-left">
-              {bike.checkoutPrice === undefined || bike.checkoutPrice === bike.price ? (
-                <Button asChild variant="link" className="px-0 text-muted-foreground">
-                  <Link href={bike.shopUrl}>
-                    <ShoppingCart className="mr-2 h-4 w-4" aria-hidden="true" />
-                    View secondary online purchase options
-                  </Link>
-                </Button>
-              ) : (
-                <p className="rounded-lg border border-primary/20 bg-primary/5 p-4 text-sm text-foreground">
-                  Online checkout is being updated. Email Buck to get the owner-confirmed {formatPrice(bike.price)} price.
-                </p>
-              )}
-              <p className="mt-1 text-xs text-muted-foreground">
-                Availability changes. Email the shop before making a special trip.
+            <div className="mt-6 rounded-xl border p-6">
+              <h2 className="text-lg font-bold">How to get this bike</h2>
+              <ol className="mt-4 grid gap-4 text-sm text-muted-foreground sm:grid-cols-3">
+                <li><span className="font-semibold text-foreground">1. Ask Buck</span><br />Email the model and your riding goals.</li>
+                <li><span className="font-semibold text-foreground">2. Confirm the bike</span><br />Buck will confirm size, color, specifications, and availability.</li>
+                <li><span className="font-semibold text-foreground">3. Arrange the handoff</span><br />Plan a test ride, pickup, or available shipping and payment options.</li>
+              </ol>
+              <p className="mt-5 flex gap-2 rounded-lg bg-muted p-4 text-sm text-foreground">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                Olympic Bootworks does not use online checkout for these bikes. The listed price is {formatPrice(bike.price)}; availability changes, so contact the shop before making a special trip.
               </p>
             </div>
           </div>

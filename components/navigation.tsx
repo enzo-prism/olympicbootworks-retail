@@ -10,35 +10,20 @@ import {
   Bike,
   ChevronDown,
   ChevronUp,
-  Home,
-  Images,
+  Footprints,
   Info,
+  Mail,
   MapPin,
-  MessageSquareQuote,
   Phone,
   PhoneCall,
-  ShoppingBag,
-  Trophy,
   type LucideIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ShopButton } from "@/components/ui/shop-button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import LocationSelector from "@/components/location-selector"
 import { cn } from "@/lib/utils"
 import { locations } from "@/data/locations"
-
-const CartLink = () => {
-  return (
-    <Link
-      href="/shop#!/~/cart"
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      aria-label="View shopping bag"
-    >
-      <ShoppingBag className="h-5 w-5" aria-hidden="true" />
-    </Link>
-  )
-}
+import { trackConversion } from "@/lib/track-conversion"
 
 type NavLinkProps = React.ComponentProps<typeof Link> & {
   isMobile?: boolean
@@ -62,9 +47,11 @@ const NavLink = ({
     if (onClick) onClick(e)
 
     // Small timeout to ensure the navigation happens first
-    setTimeout(() => {
-      window.scrollTo(0, 0)
-    }, 10)
+    if (typeof href !== "string" || !href.includes("#")) {
+      setTimeout(() => {
+        window.scrollTo(0, 0)
+      }, 10)
+    }
   }
 
   return (
@@ -142,16 +129,15 @@ export default function Navigation() {
     setIsOpen(false)
   }, [pathname])
 
-  // Updated navLinks array with Shop and Testimonials
   const navLinks = [
-    { href: "/", label: "Home", icon: Home },
-    { href: "/e-bikes", label: "E-Bikes", icon: Bike },
+    { href: "/e-bikes", label: "E-Bikes & Prices", icon: Bike },
+    { href: "/#services", label: "Boot Fitting", icon: Footprints },
     { href: "/about", label: "About", icon: Info },
-    { href: "/pros", label: "Pros", icon: Trophy },
-    { href: "/gallery", label: "Gallery", icon: Images },
-    { href: "/testimonials", label: "Testimonials", icon: MessageSquareQuote },
-    { href: "/contact", label: "Contact", icon: PhoneCall },
+    { href: "/contact", label: "Locations & Contact", icon: PhoneCall },
   ]
+
+  const isLinkActive = (href: string) =>
+    href === "/e-bikes" ? pathname.startsWith("/e-bikes") : href === pathname
 
   // Toggle section expansion in mobile menu
   const toggleSection = (section: string) => {
@@ -183,16 +169,21 @@ export default function Navigation() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-2 lg:gap-3">
           {navLinks.map((link) => (
-            <NavLink key={link.href} href={link.href} icon={link.icon} isActive={pathname === link.href}>
+            <NavLink key={link.href} href={link.href} icon={link.icon} isActive={isLinkActive(link.href)}>
               {link.label}
             </NavLink>
           ))}
 
           <LocationSelector compact />
-          <ShopButton href="/shop" variant="default" size="sm" className="ml-2 shadow-sm">
-            Shop
-          </ShopButton>
-          <CartLink />
+          <Button asChild size="sm" className="ml-2 shadow-sm">
+            <a
+              href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
+              onClick={() => trackConversion("email_click", { location: "desktop_navigation" })}
+            >
+              <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
+              Email Buck
+            </a>
+          </Button>
         </nav>
 
         {/* Mobile Navigation */}
@@ -204,7 +195,6 @@ export default function Navigation() {
           >
             <Phone className="h-5 w-5 text-primary" />
           </a>
-          <CartLink />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button
@@ -250,7 +240,7 @@ export default function Navigation() {
                     href={link.href}
                     icon={link.icon}
                     isMobile={true}
-                    isActive={pathname === link.href}
+                    isActive={isLinkActive(link.href)}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
@@ -304,14 +294,18 @@ export default function Navigation() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t">
-                  <ShopButton
-                    href="/shop"
-                    fullWidth
-                    className="shadow-sm h-12 text-base"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Shop Now
-                  </ShopButton>
+                  <Button asChild size="lg" className="h-12 w-full shadow-sm">
+                    <a
+                      href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
+                      onClick={() => {
+                        setIsOpen(false)
+                        trackConversion("email_click", { location: "mobile_navigation" })
+                      }}
+                    >
+                      <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
+                      Email Buck
+                    </a>
+                  </Button>
                 </div>
               </div>
             </SheetContent>

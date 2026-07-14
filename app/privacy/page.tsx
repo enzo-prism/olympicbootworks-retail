@@ -4,7 +4,7 @@ import { CookieSettingsButton } from "@/components/cookie-settings-button"
 
 export const metadata: Metadata = {
   title: "Privacy Notice",
-  description: "How Olympic Bootworks handles information when you use this website and its embedded online store.",
+  description: "How Olympic Bootworks handles information when you use this website or contact the shop.",
   alternates: { canonical: "/privacy" },
 }
 
@@ -12,7 +12,7 @@ export default function PrivacyPage() {
   return (
     <div className="container mx-auto max-w-3xl px-4 py-16">
       <h1 className="text-4xl font-bold tracking-tight">Privacy notice</h1>
-      <p className="mt-3 text-sm text-muted-foreground">Last updated July 12, 2026</p>
+      <p className="mt-3 text-sm text-muted-foreground">Last updated July 14, 2026</p>
 
       <div className="mt-10 space-y-8 text-muted-foreground">
         <section>
@@ -24,19 +24,11 @@ export default function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-foreground">Online shop</h2>
+          <h2 className="text-xl font-semibold text-foreground">Bike and product inquiries</h2>
           <p className="mt-2">
-            The shop and checkout are provided by Ecwid/Lightspeed. Product browsing, cart, account, payment, shipping,
-            and order information are handled by that service under its own privacy practices. Review{" "}
-            <Link
-              href="https://www.lightspeedhq.com/legal/privacy-policy/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline underline-offset-2"
-            >
-              Lightspeed&apos;s privacy policy
-            </Link>
-            .
+            The website does not provide an online cart, account, or checkout. When you email or call about a bike,
+            fitting, product, test ride, pickup, or shipping, Olympic Bootworks uses the information you provide only
+            to answer the inquiry and arrange the requested next steps.
           </p>
         </section>
 

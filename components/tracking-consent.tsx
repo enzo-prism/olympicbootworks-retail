@@ -92,7 +92,7 @@ export function TrackingConsent() {
             <h2 className="font-semibold">Your privacy choices</h2>
             <p className="mt-1 text-sm text-muted-foreground">
               We use optional Google Analytics and Hotjar cookies to understand site use and improve the experience.
-              Essential site and shop features work without them. Read our{" "}
+              Essential site features work without them. Read our{" "}
               <Link href="/privacy" className="underline underline-offset-2">
                 privacy notice
               </Link>

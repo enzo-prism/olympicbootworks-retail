@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
-import "./shop/cart-widget.css"
 import "./components/button-animations.css"
 import "./components/carousel.css"
 import "./components/mobile-nav.css"

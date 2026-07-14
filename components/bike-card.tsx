@@ -9,12 +9,9 @@ import { sendGa4Event } from "@/lib/gtag"
 import { trackConversion } from "@/lib/track-conversion"
 import {
   familyLabels,
-  financing,
   formatPrice,
   bikeDetailUrl,
   bikeInquiryUrl,
-  monthlyEstimate,
-  savingsPct,
   type Bike,
 } from "@/data/bikes"
 
@@ -27,14 +24,12 @@ interface BikeCardProps {
 }
 
 export default function BikeCard({ bike, surface, className, priority = false }: BikeCardProps) {
-  const pct = savingsPct(bike)
-
   const trackView = () => {
     sendGa4Event("select_item", {
       item_list_id: "fantic_ebikes",
       item_list_name: "Fantic E-Bikes",
       currency: "USD",
-      items: [{ item_id: String(bike.id), item_name: bike.name, price: bike.price }],
+      items: [{ item_id: bike.slug, item_name: bike.name, price: bike.price }],
       surface,
     })
   }
@@ -56,13 +51,8 @@ export default function BikeCard({ bike, surface, className, priority = false }:
           className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
         />
         <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary-foreground shadow">
-          Save {pct}%
+          Current price
         </span>
-        {!bike.inStock ? (
-          <span className="absolute right-3 top-3 rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground shadow">
-            Sold out
-          </span>
-        ) : null}
       </Link>
 
       <div className="flex flex-1 flex-col p-5">
@@ -72,17 +62,9 @@ export default function BikeCard({ bike, surface, className, priority = false }:
         <h3 className="mt-1 text-lg font-bold">Fantic {bike.name}</h3>
 
         <div className="mt-2 flex items-baseline gap-2">
+          <span className="sr-only">Current price: </span>
           <span className="text-2xl font-bold text-foreground">{formatPrice(bike.price)}</span>
-          <span className="text-sm text-muted-foreground line-through">
-            {formatPrice(bike.compareAtPrice)}
-          </span>
         </div>
-        {financing.enabled ? (
-          <p className="mt-1 text-xs text-muted-foreground">
-            From ~{formatPrice(monthlyEstimate(bike.price))}/mo with {financing.provider}
-          </p>
-        ) : null}
-
         <p className="mt-3 flex-1 text-sm text-muted-foreground">{bike.blurb}</p>
 
         <div className="mt-5 flex flex-col gap-2">
@@ -98,7 +80,7 @@ export default function BikeCard({ bike, surface, className, priority = false }:
               onClick={() => trackConversion("email_click", { location: `ebike_card_${bike.slug}` })}
             >
               <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
-              Email about this bike
+              Ask Buck about this bike
             </a>
           </Button>
         </div>

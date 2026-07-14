@@ -1,16 +1,16 @@
 import type { Metadata } from "next"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import EBikesClient from "./ebikes-client"
-import { bikeDetailUrl, bikes, cheapestBikePrice, formatPrice, maxSavingsPct } from "@/data/bikes"
+import { bikeDetailUrl, bikes, cheapestBikePrice, formatPrice } from "@/data/bikes"
 
 export const metadata: Metadata = {
-  title: "Fantic E-Bikes for Sale — Authorized US Dealer",
-  description: `Compare current Fantic e-bikes at up to ${maxSavingsPct}% off. Read clear model descriptions, then email Olympic Bootworks about sizing, availability, and next steps.`,
+  title: "Fantic E-Bikes & Current Prices — Authorized US Dealer",
+  description: "Compare current Fantic e-bike prices and model descriptions, then email Olympic Bootworks about sizing, availability, test rides, and next steps.",
   alternates: { canonical: "/e-bikes" },
   openGraph: {
-    title: "Fantic E-Bikes for Sale — Authorized US Dealer | Olympic Bootworks",
+    title: "Fantic E-Bikes & Current Prices | Olympic Bootworks",
     description:
-      "Compare current Fantic e-bikes at sale pricing, read clear model descriptions, and email Olympic Bootworks for personal help.",
+      "Compare current Fantic e-bike prices, read clear model descriptions, and email Olympic Bootworks for personal help.",
     url: "https://www.olympicbootworks.com/e-bikes",
     type: "website",
     images: ["/images/og-default.png"],
@@ -21,9 +21,9 @@ const SITE = "https://www.olympicbootworks.com"
 
 const faqs = [
   {
-    question: "Do you ship e-bikes nationwide?",
+    question: "Can a bike be shipped?",
     answer:
-      "Shipping is available. Email the shop with the model and destination so the team can confirm current pricing, delivery details, or local pickup options.",
+      "Email the shop with the model and destination. The team will confirm whether shipping is available for that bike and explain delivery or local pickup options.",
   },
   {
     question: "Can I test ride before buying?",
@@ -31,9 +31,9 @@ const faqs = [
       "Email or call with the model you are considering. The team will confirm current test-ride availability and arrange a time when possible.",
   },
   {
-    question: "Why are prices discounted?",
+    question: "Are these the current prices?",
     answer:
-      "Current bikes are listed at sale pricing while availability lasts. Email the shop to confirm the size and color you want.",
+      "These are the current website prices. Email the shop to confirm the exact bike, size, color, specifications, and availability.",
   },
   {
     question: "What about warranty and service?",
@@ -41,7 +41,7 @@ const faqs = [
       "Olympic Bootworks is an authorized Fantic dealer. Email the shop for current warranty, support, and service details for the specific model you are considering.",
   },
   {
-    question: "Do you offer financing?",
+    question: "How do I pay for a bike?",
     answer:
       "Email the shop about the model you are considering and the team will explain the currently available payment options.",
   },
@@ -59,7 +59,7 @@ function EBikesJsonLd() {
       item: {
         "@type": "Product",
         name: `Fantic ${bike.name}`,
-        image: bike.image,
+        image: `${SITE}${bike.image}`,
         description: bike.blurb,
         brand: { "@type": "Brand", name: "Fantic" },
         offers: {
@@ -67,9 +67,6 @@ function EBikesJsonLd() {
           url: `${SITE}${bikeDetailUrl(bike)}`,
           price: bike.price,
           priceCurrency: "USD",
-          availability: bike.inStock
-            ? "https://schema.org/InStock"
-            : "https://schema.org/OutOfStock",
           seller: { "@type": "Organization", name: "Olympic Bootworks" },
         },
       },
@@ -105,7 +102,7 @@ export default function EBikesPage() {
       <EBikesJsonLd />
 
       <MinimalPageHero
-        eyebrow={`Fantic • Italian Made Freedom • Up to ${maxSavingsPct}% Off`}
+        eyebrow="Fantic • Italian Made Freedom • Current Pricing"
         title="Compare Current Fantic E-Bikes"
         description={`Read what each model is designed for${fromClause}, compare pricing, then email Buck about sizing, current availability, and the best next step.`}
         actions={[

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ShopButton } from "@/components/ui/shop-button"
+import { Button } from "@/components/ui/button"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { Facebook, Instagram, Star } from "lucide-react"
 import { seasonalScheduleNotice } from "@/data/locations"
@@ -27,9 +27,9 @@ export default function Footer() {
               Premier ski and mountain bike shop serving athletes of all levels since 1994.
             </p>
             <p className="text-muted-foreground text-sm">{seasonalScheduleNotice.bannerSecondary}.</p>
-            <ShopButton href="/shop" size="sm" className="shadow-sm">
-              Shop Now
-            </ShopButton>
+            <Button asChild size="sm" className="shadow-sm">
+              <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
+            </Button>
             <GoogleReviewButton size="sm" analyticsItemId="google_review_footer" className="w-fit" />
             <div className="flex items-center space-x-4 mt-6">
               <Link
@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/shop" className="text-primary hover:text-primary font-semibold text-sm">
-                  Shop
+                  How to Get a Bike
                 </Link>
               </li>
               <li>

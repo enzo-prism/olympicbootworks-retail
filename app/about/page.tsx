@@ -2,7 +2,6 @@ import Image from "next/image"
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
-import { ShopButton } from "@/components/ui/shop-button"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { Award, Footprints, Heart, ShieldCheck, Zap, Clock } from 'lucide-react'
 import LocationsSection from "@/app/about/locations-section"
@@ -32,7 +31,7 @@ export default function AboutPage() {
         description="Expert boot fitting, precision alignment, and lifetime support from two Tahoe locations."
         actions={[
           { href: "/contact", label: "Visit our locations" },
-          { href: "/shop", label: "Shop products", variant: "secondary" },
+          { href: "/e-bikes", label: "Explore Fantic e-bikes", variant: "secondary" },
         ]}
       />
 
@@ -188,9 +187,9 @@ export default function AboutPage() {
             custom solutions can elevate your experience.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <ShopButton href="/shop" size="lg" variant="on-dark" className="shadow-sm">
-              Shop Our Products
-            </ShopButton>
+            <Button asChild size="lg" variant="on-dark" className="shadow-sm">
+              <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
+            </Button>
             <Button size="lg" variant="outline-on-dark" asChild className="backdrop-blur-sm shadow-sm">
               <Link href="/contact">
                 <ButtonIcon label="Request a Fitting" href="/contact" />

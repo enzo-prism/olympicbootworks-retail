@@ -6,7 +6,6 @@ import { hasAnalyticsConsent } from "@/lib/consent"
 export type ConversionType =
   | "email_click"
   | "phone_click"
-  | "shop_visit"
   | "contact_page_view"
   | "test_ride_request"
   | "bike_page_view"
@@ -58,12 +57,6 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         contact_method: "phone",
-      })
-      break
-    case "shop_visit":
-      sendGa4Event("online_store_engagement", {
-        engagement_type: "embed_shop_mount",
-        store_platform: "lightspeed_ecwid",
       })
       break
     case "contact_page_view":

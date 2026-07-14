@@ -7,8 +7,7 @@
   },
   "scripts": {
     "build": "next build",
-    "catalog:verify": "node scripts/verify-ecwid-catalog.mjs",
-    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm catalog:verify && pnpm build",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "dev": "next dev --port 5000",
     "lint": "eslint .",
     "start": "next start",

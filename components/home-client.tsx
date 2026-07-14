@@ -3,7 +3,6 @@
 import Link from "next/link"
 import VimeoVideoHero from "@/components/vimeo-video-hero"
 import TestimonialsCarousel from "@/components/testimonials-carousel"
-import { ShopButton } from "@/components/ui/shop-button"
 import { Button } from "@/components/ui/button"
 import ServicesSection from "@/components/services-section"
 import HeelLocSection from "@/components/heel-loc-section"
@@ -15,7 +14,7 @@ import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
 import CopyEmailButton from "@/components/copy-email-button"
 import { sendGa4Event } from "@/lib/gtag"
 import { trackConversion } from "@/lib/track-conversion"
-import { featuredBikes, maxSavingsPct } from "@/data/bikes"
+import { featuredBikes } from "@/data/bikes"
 
 export default function HomeClient() {
   return (
@@ -93,15 +92,15 @@ export default function HomeClient() {
         </div>
       </div>
 
-      {/* Fantic E-Bikes Sale Section — hidden if the featured inventory sells out */}
+      {/* Current Fantic e-bike models and prices */}
       {featuredBikes.length > 0 && (
       <section id="e-bikes" className="fantic-theme scroll-mt-24 py-16 bg-secondary/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
-              Fantic Summer Sale • Up to {maxSavingsPct}% Off
+              Fantic • Italian Made Freedom
             </p>
-            <h2 className="text-3xl font-bold mb-4">Fantic E-Bikes, In Stock Now</h2>
+            <h2 className="text-3xl font-bold mb-4">Current Fantic E-Bike Prices</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Compare the current lineup in plain language, then email Buck for personal help with
               sizing, availability, test rides, pickup, and shipping.
@@ -110,7 +109,7 @@ export default function HomeClient() {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-10">
             {featuredBikes.map((bike) => (
-              <BikeCard key={bike.id} bike={bike} surface="home_featured" />
+              <BikeCard key={bike.slug} bike={bike} surface="home_featured" />
             ))}
           </div>
 
@@ -124,7 +123,7 @@ export default function HomeClient() {
             <Button asChild size="lg" variant="outline" className="shadow-sm">
               <Link href="/e-bikes#test-ride">
                 <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
-                Book a test ride
+                Request a test ride
               </Link>
             </Button>
           </div>
@@ -227,9 +226,9 @@ export default function HomeClient() {
             alignment and custom fitting can make in your active life.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <ShopButton href="/shop" variant="on-dark" size="lg" className="shadow-sm" iconPosition="left">
-              Shop Now
-            </ShopButton>
+            <Button asChild variant="on-dark" size="lg" className="shadow-sm">
+              <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
+            </Button>
             <Button
               variant="outline-on-dark"
               size="lg"

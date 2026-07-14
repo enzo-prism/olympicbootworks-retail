@@ -1,7 +1,6 @@
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
-import { ShopButton } from "@/components/ui/shop-button"
 import EnhancedTestimonialCard from "@/components/enhanced-testimonial-card"
 import { testimonials } from "@/data/testimonials"
 import MinimalPageHero from "@/components/minimal-page-hero"
@@ -33,7 +32,7 @@ export default function TestimonialsPage() {
             leadingIcon: <GoogleGIcon className="h-[1.15rem] w-[0.8rem]" />,
           },
           { href: "/contact", label: "Request a fitting" },
-          { href: "/shop", label: "Shop products", variant: "secondary" },
+          { href: "/e-bikes", label: "Explore Fantic e-bikes", variant: "secondary" },
         ]}
       />
 
@@ -67,9 +66,9 @@ export default function TestimonialsPage() {
                   Request a Fitting
                 </Link>
               </Button>
-              <ShopButton href="/shop" className="shadow-sm" size="lg">
-                Shop Our Products
-              </ShopButton>
+              <Button asChild className="shadow-sm" size="lg">
+                <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
+              </Button>
             </div>
           </div>
         </div>

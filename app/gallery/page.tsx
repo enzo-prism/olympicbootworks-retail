@@ -3,7 +3,6 @@ import ButtonIcon from "@/components/button-icon"
 import ImageGallery from "@/components/image-gallery"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { Button } from "@/components/ui/button"
-import { ShopButton } from "@/components/ui/shop-button"
 import NextImage from "@/components/next-image"
 import type { Metadata } from "next"
 
@@ -149,9 +148,9 @@ export default function GalleryPage() {
                     Request a Fitting
                   </Link>
                 </Button>
-                <ShopButton href="/shop/boots" className="shadow-sm">
-                  Shop Boots
-                </ShopButton>
+                <Button asChild variant="outline" className="shadow-sm">
+                  <Link href="/contact">Ask About Boots &amp; Liners</Link>
+                </Button>
               </div>
             </div>
             <div className="grid grid-cols-1 gap-4">

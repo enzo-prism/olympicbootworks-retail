@@ -1,33 +1,29 @@
-# Olympic Bootworks - Replit Configuration
+# Olympic Bootworks — Replit Configuration
 
 ## Overview
 
-Olympic Bootworks is a Next.js website for a Lake Tahoe ski-boot-fitting and Fantic e-bike shop with two locations (Olympic Valley flagship + South Lake Tahoe). Custom boot fitting (proprietary Heel-Loc technology, ZipFit liners), athlete profiles, and an embedded Ecwid/Lightspeed storefront on `/shop`.
+Olympic Bootworks is a Next.js inquiry-first website for a Lake Tahoe ski-boot-fitting and Fantic e-bike shop. It does not run an online storefront or checkout. Visitors compare e-bike descriptions and current website prices, then email or call the shop.
 
-**See `README.md` for the canonical project documentation** (stack, file map, seasonal-content workflow, conversion tracking). This file only records Replit-specific details and preferences.
-
-## User Preferences
-
-Preferred communication style: Simple, everyday language.
+See `README.md` for the canonical project and content guidance. This file records Replit-specific details.
 
 ## Replit specifics
 
-- Dev server runs on port 5000 (`pnpm dev`).
-- Production uses Replit Autoscale with `pnpm build` and `pnpm start`.
-- Runtime: Replit `nodejs-22` module; the app supports Node.js 20.19 or newer.
+- Development: `pnpm dev` on port 5000.
+- Production: Replit Autoscale with `pnpm build` and `pnpm start`.
+- Runtime: Replit `nodejs-22`; the app supports Node.js 20.19 or newer.
 - Package manager: pnpm.
-- Do not add `packageManager` to `package.json`. Replit's pre-build packager attempts to
-  install the declared pnpm version and can fail before the application build begins.
+- Do not add a `packageManager` field to `package.json`. Replit’s pre-build packager can fail before the application build begins.
 
-## Key facts (keep in sync with code — the code is the source of truth)
+## Important source-of-truth rules
 
-- Framework: Next.js 16 (App Router) + React 19 + TypeScript. Tailwind CSS 3 + shadcn/ui.
-- No database or CMS. Content lives in `data/locations.ts`, `data/testimonials.ts`, `data/bikes.ts`, and page components.
-- Contact emails: North Lake `buck@olympicbootworks.com`, South Lake `SouthLake@Olympicbootworks.com`. No contact forms — email/phone links are the conversion actions.
-- Hours and the seasonal notice live in `data/locations.ts` (`seasonalScheduleNotice`, per-location `hours`). Summer 2026: both locations open by appointment; regular hours resume in fall.
-- Analytics: GA4 dual streams (`G-BDFVXXMY5Z`, `G-NDRPCY4GVO`) + Google Ads conversions (`AW-17608821238`), configured in `lib/analytics-config.ts` (env-overridable). Consent-gated script loading, including Hotjar, lives in `components/tracking-consent.tsx`.
-- Images use standard `next/image` with optimization enabled (`next.config.mjs`). The old multi-wrapper "StandardImage" system was removed.
-- Video: Vimeo Player API background heroes + YouTube embeds; IDs are hardcoded in components.
-- E-commerce: Ecwid/Lightspeed embed in `app/shop/shop-client.tsx` (store id 115212795); it hardens against third-party script errors and scrubs exact stock counts from the UI.
-- E-bikes: `/e-bikes`, the 11 static `/e-bikes/[slug]` model pages, and the homepage featured row render from `data/bikes.ts`. Each model has `slug`, `overview`, and `goodFor` content. The owner-approved flow is description-first and email-first: cards open an on-site description, model inquiries are prefilled to Buck, and Ecwid purchase links are secondary. Ecwid remains the source of truth for price, general stock, product name, image, and purchase link. Exact stock quantities stay hidden. Do not invent technical specifications; confirm the physical inventory SKU/model year with the owner first. `financing.enabled` remains `false` unless a BNPL provider is live and the owner explicitly changes the checkout strategy. See README "E-bike merchandising".
-- E-bike regression tests: `tests/bikes.test.mjs` validates catalog/detail/email invariants; `tests/buck-flow.test.mjs` locks the owner-approved CTA hierarchy and inventory privacy behavior.
+- GitHub `main` is the code source of truth. Sync Replit from GitHub before publishing.
+- E-bike names, current website prices, descriptions, and image paths live in `data/bikes.ts`.
+- E-bike images are self-hosted in `public/images/e-bikes/`.
+- `/shop` is a static “How to Get a Bike” page, not an online store.
+- There are no cart, account, checkout, Ecwid, or Lightspeed runtime dependencies.
+- Primary conversion: prefilled email to `buck@olympicbootworks.com`.
+- Do not publish exact stock counts, unverified availability, or inferred technical specifications.
+- Hours and seasonal notices live in `data/locations.ts`.
+- Analytics is consent-gated in `components/tracking-consent.tsx`.
+
+Before publishing, run `pnpm check`. After publishing, verify the custom domain and all inquiry links.

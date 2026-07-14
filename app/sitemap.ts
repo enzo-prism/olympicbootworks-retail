@@ -21,8 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/testimonials`, lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/contact`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${base}/shop`, lastModified, changeFrequency: "weekly", priority: 0.9 },
-    // We intentionally omit /shop/boots because it 308-redirects to /shop#boots
+    { url: `${base}/shop`, lastModified, changeFrequency: "monthly", priority: 0.7 },
+    // We intentionally omit /shop/boots because it redirects to /contact.
     ...bikePages,
   ]
 }

@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button"
 import BikeCard from "@/components/bike-card"
 import { trackConversion } from "@/lib/track-conversion"
 import { locations } from "@/data/locations"
-import { bikes, maxSavingsPct, type BikeFamily } from "@/data/bikes"
+import { bikes, type BikeFamily } from "@/data/bikes"
 
 const sections: { families: BikeFamily[]; title: string; tagline: string }[] = [
   {
@@ -39,8 +39,8 @@ const sections: { families: BikeFamily[]; title: string; tagline: string }[] = [
 const trustPoints = [
   {
     icon: Truck,
-    title: "Shipping options available",
-    text: "Shipping is available. Email the shop to confirm current pricing and delivery details for your bike.",
+    title: "Ask about pickup or shipping",
+    text: "Email the shop with your location so the team can explain the currently available pickup or shipping options.",
   },
   {
     icon: Wrench,
@@ -68,17 +68,21 @@ export default function EBikesClient() {
 
   return (
     <div className="flex flex-col">
-      {/* Sale banner */}
+      {/* Current-pricing introduction */}
       <section className="bg-primary py-10 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em]">Italian Made Freedom • Fantic Summer Sale</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em]">Italian Made Freedom • How it works</p>
           <h2 className="mt-2 text-3xl font-bold md:text-4xl">
-            Up to {maxSavingsPct}% off — while current inventory lasts
+            Compare. Ask Buck. Arrange the ride.
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-primary-foreground/85">
-            Start with a clear model description, then email Buck for current sizing, availability,
-            pickup, test-ride, or shipping details.
+            Every bike begins with a clear website price and a direct conversation—never an online cart.
           </p>
+          <ol className="mx-auto mt-7 grid max-w-4xl gap-3 text-left sm:grid-cols-3">
+            <li className="rounded-lg border border-white/20 bg-white/10 p-4"><span className="font-bold">1. Compare</span><br /><span className="text-sm text-primary-foreground/80">Read the model descriptions and prices.</span></li>
+            <li className="rounded-lg border border-white/20 bg-white/10 p-4"><span className="font-bold">2. Ask Buck</span><br /><span className="text-sm text-primary-foreground/80">Share your size, terrain, and location.</span></li>
+            <li className="rounded-lg border border-white/20 bg-white/10 p-4"><span className="font-bold">3. Arrange</span><br /><span className="text-sm text-primary-foreground/80">Confirm the bike, test ride, pickup, or shipping.</span></li>
+          </ol>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" variant="on-dark" className="shadow-sm">
               <Link href="#models">
@@ -89,7 +93,7 @@ export default function EBikesClient() {
             <Button asChild size="lg" variant="outline-on-dark" className="shadow-sm">
               <Link href="#test-ride">
                 <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
-                Book a test ride
+                Request a test ride
               </Link>
             </Button>
           </div>
@@ -111,7 +115,7 @@ export default function EBikesClient() {
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {groupBikes.map((bike, bikeIndex) => (
                     <BikeCard
-                      key={bike.id}
+                      key={bike.slug}
                       bike={bike}
                       surface="ebikes_hub"
                       priority={groupIndex === 0 && bikeIndex === 0}
@@ -122,8 +126,9 @@ export default function EBikesClient() {
             )
           })}
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            Website prices reflect Buck&apos;s latest approved offers. Email the shop to confirm the
-            exact bike, size, color, technical specifications, and checkout details before making a special trip.
+            These are the current website prices. Olympic Bootworks does not use online checkout
+            for these bikes—email the shop to confirm the exact bike, size, color,
+            technical specifications, availability, and purchase next steps before making a special trip.
           </p>
         </div>
       </section>
@@ -155,7 +160,7 @@ export default function EBikesClient() {
       <section id="test-ride" className="scroll-mt-24 py-16">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold">Book a Fantic test ride</h2>
+            <h2 className="text-3xl font-bold">Request a Fantic test ride</h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
               Tell us which bike interests you and where you ride. We&apos;ll confirm current test-ride
               options and arrange a time when possible.
@@ -177,7 +182,7 @@ export default function EBikesClient() {
                       }
                     >
                       <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
-                      Email to book a test ride
+                      Email to request a test ride
                     </a>
                   </Button>
                   <Button asChild variant="outline">

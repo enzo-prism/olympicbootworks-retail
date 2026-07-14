@@ -11,28 +11,43 @@ test("homepage leads e-bike visitors into Buck's requested flow", async () => {
   assert.match(home, /Email Buck/)
   assert.match(home, /Italian Made Freedom/)
   assert.match(home, /CopyEmailButton/)
-  assert.doesNotMatch(home, /item_id: "shop_now"/)
+  assert.doesNotMatch(home, /Shop Now|ShoppingCart|item_id: "shop_now"/)
 })
 
-test("bike cards prioritize descriptions and model-specific email", async () => {
+test("bike cards prioritize descriptions, current prices, and model-specific email", async () => {
   const card = await read("components/bike-card.tsx")
   assert.match(card, /bikeDetailUrl\(bike\)/)
   assert.match(card, /View bike details/)
   assert.match(card, /bikeInquiryUrl\(bike\)/)
-  assert.match(card, /Email about this bike/)
-  assert.doesNotMatch(card, /View &amp; Buy/)
-  assert.doesNotMatch(card, /href=\{bike\.shopUrl\}/)
+  assert.match(card, /Ask Buck about this bike/)
+  assert.match(card, /Current price:/)
+  assert.doesNotMatch(card, /shopUrl|checkoutPrice|compareAtPrice|ShoppingCart/)
 })
 
-test("model detail page keeps matching checkout secondary and blocks price mismatches", async () => {
+test("model detail page explains the direct inquiry and purchase process", async () => {
   const detail = await read("app/e-bikes/[slug]/page.tsx")
   assert.match(detail, /Ask Buck about this bike/)
-  assert.match(detail, /BikeInquiryButton/)
-  assert.match(detail, /View secondary online purchase options/)
-  assert.match(detail, /href=\{bike\.shopUrl\}/)
-  assert.match(detail, /bike\.checkoutPrice === undefined \|\| bike\.checkoutPrice === bike\.price/)
-  assert.match(detail, /Online checkout is being updated/)
+  assert.match(detail, /How to get this bike/)
+  assert.match(detail, /Olympic Bootworks does not use online checkout/)
+  assert.match(detail, /Contact Buck to confirm availability/)
   assert.match(detail, /CopyEmailButton/)
+  assert.doesNotMatch(detail, /shopUrl|checkoutPrice|ShoppingCart|secondary online purchase/)
+})
+
+test("legacy shop route is a static, inquiry-first buying guide", async () => {
+  const shop = await read("app/shop/page.tsx")
+  assert.match(shop, /How to Get Your Fantic E-Bike/)
+  assert.match(shop, /There is no online checkout/)
+  assert.match(shop, /BikeInquiryButton bike=\{bike\}/)
+  assert.match(shop, /See models & prices/)
+  assert.doesNotMatch(shop, /Ecwid|Lightspeed|my-store-|script\.js|cart/)
+})
+
+test("global navigation has no cart or shop-now path", async () => {
+  const navigation = await read("components/navigation.tsx")
+  assert.match(navigation, /E-Bikes & Prices/)
+  assert.match(navigation, /Email Buck/)
+  assert.doesNotMatch(navigation, /CartLink|ShoppingBag|ShopButton|Shop Now|#!\/~\/cart/)
 })
 
 test("hero email and phone actions use native anchors", async () => {
@@ -44,21 +59,9 @@ test("hero email and phone actions use native anchors", async () => {
   assert.match(minimalHero, /<a href=\{action\.href\}/)
 })
 
-test("shop warns visitors when an owner-approved price is ahead of Ecwid checkout", async () => {
-  const shop = await read("app/shop/shop-client.tsx")
-  assert.match(shop, /pendingPriceUpdates/)
-  assert.match(shop, /Please do not use the/)
-  assert.match(shop, /Email Buck for the/)
-})
-
 test("copy fallback selects the email when clipboard access is blocked", async () => {
   const fallback = await read("components/copy-email-button.tsx")
   assert.match(fallback, /emailRef\.current\?\.focus\(\)/)
   assert.match(fallback, /emailRef\.current\?\.select\(\)/)
   assert.match(fallback, /role="status"/)
-})
-
-test("exact storefront stock quantities remain disabled", async () => {
-  const shop = await read("app/shop/shop-client.tsx")
-  assert.match(shop, /product_details_show_number_of_items_in_stock = false/)
 })

@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Calendar,
   Clock,
+  Footprints,
   Home,
   Images,
   Mail,
@@ -9,7 +10,6 @@ import {
   PhoneCall,
   RefreshCw,
   RotateCcw,
-  ShoppingCart,
   Users,
   Wrench,
 } from "lucide-react"
@@ -32,10 +32,10 @@ export default function ButtonIcon({ label, href = "", className }: ButtonIconPr
     Icon = Mail
   } else if (text.includes("call") || text.includes("phone") || target.includes("tel:")) {
     Icon = PhoneCall
-  } else if (text.includes("book") || text.includes("schedule") || text.includes("fitting") || text.includes("appointment")) {
+  } else if (text.includes("book") || text.includes("schedule") || text.includes("appointment")) {
     Icon = Calendar
-  } else if (text.includes("shop") || text.includes("product") || text.includes("boot") || text.includes("equipment")) {
-    Icon = ShoppingCart
+  } else if (text.includes("fitting") || text.includes("boot") || text.includes("footbed") || text.includes("liner")) {
+    Icon = Footprints
   } else if (text.includes("hour")) {
     Icon = Clock
   } else if (text.includes("athlete") || text.includes("pro")) {

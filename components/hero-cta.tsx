@@ -21,8 +21,8 @@ const usesNativeNavigation = (href: string) =>
  * White glass with dark text for maximum readability.
  */
 export function HeroPrimaryCTA({
-  href = "/shop",
-  children = "Shop Now",
+  href = "/e-bikes",
+  children = "Explore E-Bikes",
   icon,
   className,
   ariaLabel,

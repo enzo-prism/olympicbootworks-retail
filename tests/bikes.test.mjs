@@ -4,21 +4,28 @@ import { loadTypescriptModule } from "./load-typescript-module.mjs"
 
 const catalog = await loadTypescriptModule("../data/bikes.ts", import.meta.url)
 
-test("bike catalog has unique Ecwid IDs and valid sale data", () => {
-  const ids = catalog.bikes.map((bike) => bike.id)
+const expectedPrices = new Map([
+  ["xtf-1-5", 2499],
+  ["xtf-1-5-carbon", 4200],
+  ["xmf-1-7", 3799],
+  ["xmf-1-7-carbon-sport", 4900],
+  ["1-4-carbon-sport", 4000],
+  ["xef-1-9-factory", 5900],
+  ["xef-1-9-race", 5100],
+  ["xxf-2-0-race", 4900],
+  ["issimo-urban", 1499],
+  ["seven-day-living", 1499],
+  ["tx2-scooter", 299],
+])
+
+test("bike catalog has unique routes, current prices, and local product assets", () => {
   const slugs = catalog.bikes.map((bike) => bike.slug)
-  assert.equal(new Set(ids).size, ids.length)
   assert.equal(new Set(slugs).size, slugs.length)
+  assert.equal(catalog.bikes.length, expectedPrices.size)
 
   for (const bike of catalog.bikes) {
-    assert.ok(bike.id > 0, `${bike.name} must have an Ecwid ID`)
-    assert.ok(bike.price > 0, `${bike.name} must have a positive price`)
-    if (bike.checkoutPrice !== undefined) {
-      assert.ok(bike.checkoutPrice > 0, `${bike.name} checkout override must be positive`)
-    }
-    assert.ok(bike.compareAtPrice > bike.price, `${bike.name} must have a real sale price`)
-    assert.ok(bike.shopUrl.endsWith(`/p/${bike.id}`), `${bike.name} link must include its Ecwid ID`)
-    assert.match(bike.image, /^https:\/\/d2j6dbq0eux0bg\.cloudfront\.net\//)
+    assert.equal(bike.price, expectedPrices.get(bike.slug), `${bike.name} price drifted`)
+    assert.match(bike.image, /^\/images\/e-bikes\/[a-z0-9-]+\.jpg$/)
     assert.match(bike.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/)
     assert.equal(catalog.bikeDetailUrl(bike), `/e-bikes/${bike.slug}`)
     assert.ok(bike.overview.length >= 100, `${bike.name} needs a useful plain-language overview`)
@@ -26,10 +33,17 @@ test("bike catalog has unique Ecwid IDs and valid sale data", () => {
   }
 })
 
-test("Seven Day uses Buck's latest approved price while Ecwid catches up", () => {
+test("public bike data contains no cart, checkout, storefront, or stale inventory fields", () => {
+  for (const bike of catalog.bikes) {
+    for (const key of ["id", "shopUrl", "checkoutPrice", "compareAtPrice", "inStock"]) {
+      assert.equal(key in bike, false, `${bike.name} must not expose ${key}`)
+    }
+  }
+})
+
+test("Seven Day uses Buck and Trina's latest price", () => {
   const sevenDay = catalog.bikes.find((bike) => bike.slug === "seven-day-living")
   assert.equal(sevenDay.price, 1499)
-  assert.equal(sevenDay.checkoutPrice, 1799)
 })
 
 test("every bike inquiry starts a useful, model-specific email to Buck", () => {
@@ -41,19 +55,16 @@ test("every bike inquiry starts a useful, model-specific email to Buck", () => {
     const body = url.searchParams.get("body") ?? ""
     assert.match(body, new RegExp(`Fantic ${bike.name}`))
     assert.match(body, /availability/i)
-    assert.match(body, /sizing/i)
+    assert.match(body, /height \/ usual bike size/i)
+    assert.match(body, /test-ride interest/i)
+    assert.match(body, /shipping ZIP/i)
     assert.doesNotMatch(body, /undefined|\[object Object\]/)
   }
 })
 
-test("sale claims are derived only from purchasable e-bikes", () => {
-  const eligible = catalog.bikes.filter((bike) => bike.inStock && bike.family !== "scooter")
-  assert.ok(eligible.length > 0)
-  assert.equal(catalog.cheapestBikePrice, Math.min(...eligible.map((bike) => bike.price)))
-  assert.equal(catalog.maxSavingsPct, Math.max(...eligible.map(catalog.savingsPct)))
-  assert.ok(catalog.featuredBikes.every((bike) => bike.featured && bike.inStock))
-})
-
-test("financing stays hidden until checkout support is explicitly enabled", () => {
-  assert.equal(catalog.financing.enabled, false)
+test("catalog summaries are derived from the published model list", () => {
+  const eBikes = catalog.bikes.filter((bike) => bike.family !== "scooter")
+  assert.ok(eBikes.length > 0)
+  assert.equal(catalog.cheapestBikePrice, Math.min(...eBikes.map((bike) => bike.price)))
+  assert.ok(catalog.featuredBikes.every((bike) => bike.featured))
 })
