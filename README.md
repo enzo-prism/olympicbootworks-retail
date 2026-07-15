@@ -50,7 +50,8 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 | Analytics configuration | `lib/analytics-config.ts` |
 | Conversion events | `lib/track-conversion.ts` |
 | Privacy notice | `app/privacy/page.tsx` |
-| Owner-flow regression tests | `tests/bikes.test.mjs`, `tests/buck-flow.test.mjs` |
+| Owner-flow and redirect regression tests | `tests/bikes.test.mjs`, `tests/buck-flow.test.mjs`, `tests/legacy-redirects.test.mjs` |
+| Meta destination handoff | `docs/meta-linking-handoff.md` |
 | Release notes | `docs/releases/` |
 
 ## E-bike pricing and content
@@ -68,7 +69,7 @@ Product photos are stored locally in `public/images/e-bikes/`; do not reintroduc
 
 ## Conversion tracking
 
-Email, phone, and test-ride actions are the real conversions. Page views and e-bike list views are GA4-only and must never use the Google Ads lead action. Google and Hotjar scripts load only after analytics consent. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
+Email, phone, and test-ride actions are the real conversions. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google and Hotjar scripts load only after analytics consent. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
 
 ## Seasonal content
 
@@ -76,6 +77,6 @@ The banner, location cards, footer, and JSON-LD read from `seasonalScheduleNotic
 
 ## Release checks
 
-GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/shop`, email links, phone links, and mobile navigation.
+GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/shop`, email links, phone links, mobile navigation, the Fantic wordmark asset, and the exact `/shop/boots` public-domain redirect.
 
-The July 14 inquiry-first release is documented in `docs/releases/2026-07-14-inquiry-first.md`.
+The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`.

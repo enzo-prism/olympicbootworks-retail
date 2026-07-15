@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server"
+const CONTACT_URL = "https://www.olympicbootworks.com/contact"
 
-// Use HTTP 308 redirect with no HTML body, avoiding meta refresh for crawlers.
-export async function GET(request: Request) {
-  const url = new URL("/contact", new URL(request.url).origin)
-  return NextResponse.redirect(url, 308)
-}
+const redirectToContact = () =>
+  new Response(null, {
+    status: 308,
+    headers: { Location: CONTACT_URL },
+  })
 
-export async function HEAD(request: Request) {
-  const url = new URL("/contact", new URL(request.url).origin)
-  return NextResponse.redirect(url, 308)
-}
+// Keep the destination independent of request and forwarded-host values so a
+// deployment proxy cannot leak its internal origin into the public redirect.
+export const GET = redirectToContact
+export const HEAD = redirectToContact

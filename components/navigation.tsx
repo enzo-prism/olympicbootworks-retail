@@ -190,6 +190,7 @@ export default function Navigation() {
         <div className="flex items-center gap-2 md:hidden">
           <a
             href="tel:+15305810747"
+            onClick={() => trackConversion("phone_click", { location: "mobile_header" })}
             className="mr-1 p-2 rounded-full hover:bg-gray-100 transition-colors"
             aria-label="Call Olympic Bootworks"
           >
@@ -275,6 +276,11 @@ export default function Navigation() {
                           </p>
                           <a
                             href={`tel:${location.contact.phone.replace(/[^0-9]/g, "")}`}
+                            onClick={() =>
+                              trackConversion("phone_click", {
+                                location: `mobile_navigation_${location.id}`,
+                              })
+                            }
                             className="text-sm text-primary flex items-center gap-1 py-1"
                           >
                             <Phone className="h-3 w-3" />

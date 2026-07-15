@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, Check, Mail, PhoneCall } from "lucide-react"
+import { ArrowLeft, Check, Mail } from "lucide-react"
 import { notFound } from "next/navigation"
 import BikeInquiryButton from "@/components/bike-inquiry-button"
+import BikeCallButton from "@/components/bike-call-button"
 import CopyEmailButton from "@/components/copy-email-button"
-import { Button } from "@/components/ui/button"
 import {
   bikes,
   familyLabels,
@@ -77,8 +77,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
           Back to all Fantic models
         </Link>
 
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border bg-white shadow-sm sm:aspect-square">
+        <div className="grid min-w-0 items-start gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="relative min-w-0 aspect-[4/3] overflow-hidden rounded-2xl border bg-white shadow-sm sm:aspect-square">
             <Image
               src={bike.image}
               alt={`Fantic ${bike.name}`}
@@ -92,7 +92,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
             </span>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
               {familyLabels[bike.family]}
             </p>
@@ -107,6 +107,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
                 Contact Buck to confirm availability
               </span>
             </div>
+
+            <BikeInquiryButton bike={bike} className="mt-5 w-full lg:hidden" />
 
             <p className="mt-7 text-lg leading-8 text-muted-foreground">{bike.overview}</p>
 
@@ -131,18 +133,16 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                 <BikeInquiryButton bike={bike} className="sm:flex-1" />
-                <Button asChild size="lg" variant="outline" className="sm:flex-1">
-                  <a href="tel:+15305810747">
-                    <PhoneCall className="mr-2 h-4 w-4" aria-hidden="true" />
-                    Call Buck
-                  </a>
-                </Button>
+                <BikeCallButton bike={bike} className="sm:flex-1" />
               </div>
               <CopyEmailButton
                 email="buck@olympicbootworks.com"
                 className="mt-4 justify-start text-sm text-muted-foreground"
                 emailClassName="text-foreground"
                 buttonClassName="text-primary"
+                trackingLocation={`ebike_${bike.slug}_email_copy`}
+                contentId={bike.slug}
+                contentName={`Fantic ${bike.name}`}
               />
             </div>
 

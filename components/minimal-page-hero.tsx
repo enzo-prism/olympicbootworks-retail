@@ -126,6 +126,7 @@ export default function MinimalPageHero({
               className="mt-4 text-sm text-muted-foreground"
               emailClassName="text-foreground"
               buttonClassName="text-primary"
+              trackingLocation="page_hero_email_copy"
             />
           ) : null}
         </div>

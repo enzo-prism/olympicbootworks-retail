@@ -79,6 +79,7 @@ export default function HomeClient() {
               className="mt-4 text-sm text-white/85"
               emailClassName="font-semibold text-white"
               buttonClassName="text-white"
+              trackingLocation="home_hero_email_copy"
             />
           </div>
         }

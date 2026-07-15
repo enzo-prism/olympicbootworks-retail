@@ -31,6 +31,8 @@ test("model detail page explains the direct inquiry and purchase process", async
   assert.match(detail, /Olympic Bootworks does not use online checkout/)
   assert.match(detail, /Contact Buck to confirm availability/)
   assert.match(detail, /CopyEmailButton/)
+  assert.match(detail, /BikeCallButton/)
+  assert.match(detail, /className="mt-5 w-full lg:hidden"/)
   assert.doesNotMatch(detail, /shopUrl|checkoutPrice|ShoppingCart|secondary online purchase/)
 })
 
@@ -64,4 +66,17 @@ test("copy fallback selects the email when clipboard access is blocked", async (
   assert.match(fallback, /emailRef\.current\?\.focus\(\)/)
   assert.match(fallback, /emailRef\.current\?\.select\(\)/)
   assert.match(fallback, /role="status"/)
+  assert.match(fallback, /trackConversion\("email_copy"/)
+})
+
+test("e-bike process band uses the supplied Fantic logo on black", async () => {
+  const page = await read("app/e-bikes/ebikes-client.tsx")
+  const logo = await readFile(new URL("../public/images/brands/fantic-wordmark.jpg", import.meta.url))
+
+  assert.match(page, /src="\/images\/brands\/fantic-wordmark\.jpg"/)
+  assert.match(page, /alt="Fantic"/)
+  assert.match(page, /bg-\[#020107\] py-10 text-white/)
+  assert.doesNotMatch(page, /bg-primary py-10 text-primary-foreground/)
+  assert.ok(logo.byteLength > 20_000, "Fantic logo should contain the supplied wordmark")
+  assert.ok(logo.byteLength < 100_000, "Fantic logo should remain web-optimized")
 })

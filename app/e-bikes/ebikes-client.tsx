@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import {
   Bike,
@@ -69,19 +70,29 @@ export default function EBikesClient() {
   return (
     <div className="flex flex-col">
       {/* Current-pricing introduction */}
-      <section className="bg-primary py-10 text-primary-foreground">
+      <section className="bg-[#020107] py-10 text-white">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em]">Italian Made Freedom • How it works</p>
+          <Image
+            src="/images/brands/fantic-wordmark.jpg"
+            alt="Fantic"
+            width={1200}
+            height={234}
+            sizes="(max-width: 640px) 76vw, 384px"
+            className="mx-auto h-auto w-[76vw] max-w-sm"
+          />
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
+            Italian Made Freedom • How it works
+          </p>
           <h2 className="mt-2 text-3xl font-bold md:text-4xl">
             Compare. Ask Buck. Arrange the ride.
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-primary-foreground/85">
+          <p className="mx-auto mt-3 max-w-2xl text-white/80">
             Every bike begins with a clear website price and a direct conversation—never an online cart.
           </p>
           <ol className="mx-auto mt-7 grid max-w-4xl gap-3 text-left sm:grid-cols-3">
-            <li className="rounded-lg border border-white/20 bg-white/10 p-4"><span className="font-bold">1. Compare</span><br /><span className="text-sm text-primary-foreground/80">Read the model descriptions and prices.</span></li>
-            <li className="rounded-lg border border-white/20 bg-white/10 p-4"><span className="font-bold">2. Ask Buck</span><br /><span className="text-sm text-primary-foreground/80">Share your size, terrain, and location.</span></li>
-            <li className="rounded-lg border border-white/20 bg-white/10 p-4"><span className="font-bold">3. Arrange</span><br /><span className="text-sm text-primary-foreground/80">Confirm the bike, test ride, pickup, or shipping.</span></li>
+            <li className="rounded-lg border border-white/15 bg-white/[0.06] p-4"><span className="font-bold">1. Compare</span><br /><span className="text-sm text-white/75">Read the model descriptions and prices.</span></li>
+            <li className="rounded-lg border border-white/15 bg-white/[0.06] p-4"><span className="font-bold">2. Ask Buck</span><br /><span className="text-sm text-white/75">Share your size, terrain, and location.</span></li>
+            <li className="rounded-lg border border-white/15 bg-white/[0.06] p-4"><span className="font-bold">3. Arrange</span><br /><span className="text-sm text-white/75">Confirm the bike, test ride, pickup, or shipping.</span></li>
           </ol>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" variant="on-dark" className="shadow-sm">

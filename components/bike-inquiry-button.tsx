@@ -21,7 +21,13 @@ export default function BikeInquiryButton({
     <Button asChild size="lg" className={cn("shadow-sm", className)}>
       <a
         href={bikeInquiryUrl(bike)}
-        onClick={() => trackConversion("email_click", { location: `ebike_${bike.slug}` })}
+        onClick={() =>
+          trackConversion("email_click", {
+            location: `ebike_${bike.slug}`,
+            contentId: bike.slug,
+            contentName: `Fantic ${bike.name}`,
+          })
+        }
       >
         <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
         {label}

@@ -8,7 +8,7 @@ const { isGa4OnlyConversion } = await loadTypescriptModule(
 )
 
 test("passive engagement never becomes a Google Ads conversion", () => {
-  for (const type of ["bike_page_view", "contact_page_view"]) {
+  for (const type of ["bike_page_view", "contact_page_view", "email_copy"]) {
     assert.equal(isGa4OnlyConversion(type), true, `${type} must be GA4-only`)
   }
 })

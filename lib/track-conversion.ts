@@ -5,6 +5,7 @@ import { hasAnalyticsConsent } from "@/lib/consent"
 
 export type ConversionType =
   | "email_click"
+  | "email_copy"
   | "phone_click"
   | "contact_page_view"
   | "test_ride_request"
@@ -19,6 +20,8 @@ interface ConversionOptions {
   value?: number
   currency?: string
   location?: string
+  contentId?: string
+  contentName?: string
 }
 
 function mirrorEngagementToGa4(
@@ -26,6 +29,8 @@ function mirrorEngagementToGa4(
   value: number,
   currency: string,
   location: string,
+  contentId?: string,
+  contentName?: string,
 ) {
   switch (type) {
     case "test_ride_request":
@@ -34,6 +39,8 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         lead_type: "bike_test_ride",
+        content_id: contentId,
+        content_name: contentName,
       })
       break
     case "bike_page_view":
@@ -49,6 +56,16 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         contact_method: "email",
+        content_id: contentId,
+        content_name: contentName,
+      })
+      break
+    case "email_copy":
+      sendGa4Event("contact", {
+        lead_source: location,
+        contact_method: "email_copy",
+        content_id: contentId,
+        content_name: contentName,
       })
       break
     case "phone_click":
@@ -57,6 +74,8 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         contact_method: "phone",
+        content_id: contentId,
+        content_name: contentName,
       })
       break
     case "contact_page_view":
@@ -77,7 +96,7 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
     return
   }
 
-  const { value = 1.0, currency = "USD", location } = options
+  const { value = 1.0, currency = "USD", location, contentId, contentName } = options
   const loc = location ?? "unknown"
 
   const send = () => {
@@ -86,7 +105,7 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
       return
     }
 
-    mirrorEngagementToGa4(type, value, currency, loc)
+    mirrorEngagementToGa4(type, value, currency, loc, contentId, contentName)
 
     if (isGa4OnlyConversion(type)) {
       return
@@ -98,6 +117,8 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
       currency,
       event_category: "engagement",
       event_label: location ? `${type}_${location}` : type,
+      content_id: contentId,
+      content_name: contentName,
     })
   }
 

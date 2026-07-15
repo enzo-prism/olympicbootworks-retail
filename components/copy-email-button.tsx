@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react"
 import { Copy, Check } from "lucide-react"
+import { trackConversion } from "@/lib/track-conversion"
 import { cn } from "@/lib/utils"
 
 type CopyEmailButtonProps = {
@@ -9,6 +10,9 @@ type CopyEmailButtonProps = {
   className?: string
   emailClassName?: string
   buttonClassName?: string
+  trackingLocation?: string
+  contentId?: string
+  contentName?: string
 }
 
 export default function CopyEmailButton({
@@ -16,6 +20,9 @@ export default function CopyEmailButton({
   className,
   emailClassName,
   buttonClassName,
+  trackingLocation,
+  contentId,
+  contentName,
 }: CopyEmailButtonProps) {
   const [status, setStatus] = useState<"idle" | "copied" | "manual">("idle")
   const emailRef = useRef<HTMLInputElement>(null)
@@ -24,11 +31,17 @@ export default function CopyEmailButton({
     try {
       await navigator.clipboard.writeText(email)
       setStatus("copied")
+      if (trackingLocation) {
+        trackConversion("email_copy", { location: trackingLocation, contentId, contentName })
+      }
       window.setTimeout(() => setStatus("idle"), 2500)
     } catch {
       setStatus("manual")
       emailRef.current?.focus()
       emailRef.current?.select()
+      if (trackingLocation) {
+        trackConversion("email_copy", { location: trackingLocation, contentId, contentName })
+      }
     }
   }
 

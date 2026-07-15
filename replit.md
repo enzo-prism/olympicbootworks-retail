@@ -25,5 +25,6 @@ See `README.md` for the canonical project and content guidance. This file record
 - Do not publish exact stock counts, unverified availability, or inferred technical specifications.
 - Hours and seasonal notices live in `data/locations.ts`.
 - Analytics is consent-gated in `components/tracking-consent.tsx`.
+- Meta destination URLs and campaign constraints are documented in `docs/meta-linking-handoff.md`.
 
-Before publishing, run `pnpm check`. After publishing, verify the custom domain and all inquiry links.
+Before publishing, run `pnpm check`. After publishing, verify the custom domain and all inquiry links. Confirm `/shop/boots` redirects to `https://www.olympicbootworks.com/contact` without `localhost`, the Fantic wordmark loads from `/images/brands/fantic-wordmark.jpg`, and the Seven Day Living page returns 200 with its query string preserved.
