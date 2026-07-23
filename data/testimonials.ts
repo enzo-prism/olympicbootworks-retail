@@ -13,7 +13,7 @@ export const testimonials: Testimonial[] = [
     content:
       "I was having issues with plantar fasciitis, especially after playing pickleball multiple days in a row. After getting orthotics for both my ski boots and pickleball shoes, it was a game changer. I played 4 straight days of pickleball, then two days of skiing, followed by 2 more days of pickleball, without my feet bothering me at all. I've noticed less hip and back pain as well.",
     rating: 5,
-    imageSrc: "/placeholder-4nzhp.png",
+
   },
   {
     name: "Mindee Dziuba",

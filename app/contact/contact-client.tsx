@@ -5,6 +5,7 @@ import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import LocationCard from "@/components/location-card"
 import { locations, seasonalScheduleNotice } from "@/data/locations"
+import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
 export default function ContactClient() {
@@ -31,10 +32,10 @@ export default function ContactClient() {
 
   return (
     <div className="flex flex-col">
-      <section className="py-16">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Locations</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Our Locations</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               {seasonalScheduleNotice.summary}
             </p>
@@ -48,11 +49,11 @@ export default function ContactClient() {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      <section className="py-16 md:py-24 bg-secondary/60">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold mb-4">Get in Touch</h3>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">Get in Touch</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Contact us directly to request an appointment, ask about products, or check current availability.
               </p>
@@ -60,17 +61,17 @@ export default function ContactClient() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-card border rounded-lg p-8 shadow-sm">
-                <h4 className="text-2xl font-bold mb-4">North Lake Tahoe</h4>
+                <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">North Lake Tahoe</h3>
                 <p className="text-muted-foreground mb-2">Olympic Valley Location</p>
                 <p className="text-sm text-muted-foreground mb-6">1602 Squaw Valley Road, Box 3514</p>
                 <Button asChild size="lg" className="w-full">
-                  <Link 
-                    href="mailto:buck@olympicbootworks.com"
+                  <a
+                    href={fittingInquiryUrl()}
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
                     <ButtonIcon label="Request an Appointment" href="mailto:buck@olympicbootworks.com" />
                     Request Appointment
-                  </Link>
+                  </a>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-3">buck@olympicbootworks.com</p>
                 <p className="text-sm text-muted-foreground mt-4">
@@ -85,12 +86,12 @@ export default function ContactClient() {
               </div>
 
               <div className="bg-card border rounded-lg p-8 shadow-sm">
-                <h4 className="text-2xl font-bold mb-4">South Lake Tahoe</h4>
+                <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">South Lake Tahoe</h3>
                 <p className="text-muted-foreground mb-2">Ski Run Blvd Location</p>
                 <p className="text-sm text-muted-foreground mb-6">1235 Ski Run Blvd.</p>
                 <Button asChild size="lg" className="w-full">
-                  <Link 
-                    href="mailto:SouthLake@Olympicbootworks.com"
+                  <a
+                    href="mailto:SouthLake@Olympicbootworks.com?subject=Appointment%20Request"
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
                     <ButtonIcon
@@ -98,7 +99,7 @@ export default function ContactClient() {
                       href="mailto:SouthLake@Olympicbootworks.com"
                     />
                     Request Appointment
-                  </Link>
+                  </a>
                 </Button>
                 <p className="text-sm text-muted-foreground mt-3">SouthLake@Olympicbootworks.com</p>
                 <p className="text-sm text-muted-foreground mt-4">
@@ -116,10 +117,10 @@ export default function ContactClient() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Find Us</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Find Us</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Please request an appointment before visiting this summer.
             </p>
@@ -128,8 +129,8 @@ export default function ContactClient() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {locations.map((location) => (
               <div key={location.id} className="aspect-video w-full rounded-lg overflow-hidden border shadow-sm">
-                <div className="w-full h-full bg-gray-200 dark:bg-gray-800 flex flex-col items-center justify-center p-4">
-                  <h3 className="font-semibold mb-2">{location.name}</h3>
+                <div className="w-full h-full bg-muted flex flex-col items-center justify-center p-4">
+                  <h3 className="font-sans tracking-normal font-semibold mb-2">{location.name}</h3>
                   <p className="text-muted-foreground text-center mb-4">
                     {location.address.line1}, {location.address.city}, {location.address.state} {location.address.zip}
                   </p>
@@ -151,10 +152,10 @@ export default function ContactClient() {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      <section className="py-16 md:py-24 bg-secondary/60">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Frequently Asked Questions</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Find answers to our most commonly asked questions.
             </p>
@@ -163,7 +164,7 @@ export default function ContactClient() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {faqs.map((faq, index) => (
               <div key={index} className="border rounded-lg p-6 bg-card shadow-sm">
-                <h3 className="text-lg font-semibold mb-2">{faq.question}</h3>
+                <h3 className="font-sans tracking-normal text-lg font-semibold mb-2">{faq.question}</h3>
                 <p className="text-muted-foreground">{faq.answer}</p>
               </div>
             ))}

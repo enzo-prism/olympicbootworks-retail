@@ -4,52 +4,36 @@
 
 @layer base {
   :root {
+    /* Alpine palette: glacial-blue primary, navy ink, ice/stone tints */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 215 45% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 45% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 201 100% 36%;
-    --primary-light: 201 100% 50%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 215 45% 12%;
+    --primary: 205 70% 31%;
+    --primary-light: 205 62% 42%;
+    --primary-foreground: 204 40% 98%;
+    --secondary: 206 32% 95%;
+    --secondary-foreground: 215 45% 14%;
+    --muted: 210 22% 93%;
+    --muted-foreground: 215 20% 38%;
+    --accent: 203 45% 90%;
+    --accent-foreground: 215 45% 14%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 201 100% 36%;
+    --border: 213 26% 88%;
+    --input: 213 26% 88%;
+    --ring: 205 70% 31%;
+    /* Deep alpine navy for dark bands and the closing CTA */
+    --ink: 214 45% 11%;
+    --ink-foreground: 204 40% 98%;
     --radius: 0.5rem;
     --banner-height: 2.5rem;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 201 100% 50%;
-    --primary-light: 201 100% 65%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 201 100% 50%;
-  }
+  /* Dark mode is intentionally not offered: the site forces defaultTheme="light"
+     and has no toggle, so no .dark token block exists. */
 
   /* Fantic's red is scoped to e-bike merchandising so the core boot-fitting brand stays intact. */
   .fantic-theme {
@@ -66,98 +50,29 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Add this to ensure scroll to top on page load */
-    scroll-behavior: smooth;
     scroll-padding-top: calc(4rem + var(--banner-height, 2.5rem));
   }
 
-  /* Force scroll to top on page load */
   html {
-    scroll-behavior: smooth;
     overflow-y: scroll;
-    /* This ensures the browser scrolls to top on page refresh */
-    scroll-top: 0;
+    /* Guard against 100vw/full-bleed rounding creating sideways scroll */
+    overflow-x: clip;
   }
 
-  /* Button styles */
-  .btn-primary {
-    @apply bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 border border-primary/10 transition-colors duration-200;
+  /* Smooth scrolling for in-page anchors only, and only when motion is OK.
+     Route changes use instant scroll (see ScrollToTop). */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
-  .btn-secondary {
-    @apply bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 border border-secondary/10 transition-colors duration-200;
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
   }
 
-  .btn-outline {
-    @apply border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground transition-colors duration-200;
-  }
-
-  .btn-outline-on-dark {
-    @apply border border-white/30 bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 shadow-sm transition-colors duration-200;
-  }
-
-  .btn-outline-on-light {
-    @apply border border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 shadow-sm transition-colors duration-200;
-  }
-
-  .btn-ghost {
-    @apply hover:bg-accent hover:text-accent-foreground transition-colors duration-200;
-  }
-
-  .btn-link {
-    @apply text-primary underline-offset-4 hover:underline transition-colors duration-200;
-  }
-
-  /* Button sizes */
-  .btn-sm {
-    @apply h-9 rounded-md px-3 py-1.5 text-xs;
-  }
-
-  .btn-default {
-    @apply h-10 px-4 py-2 text-sm;
-  }
-
-  .btn-lg {
-    @apply h-11 rounded-md px-8 py-2.5 text-base;
-  }
-
-  .btn-icon {
-    @apply h-10 w-10 p-0;
-  }
-
-  /* Button states */
-  .btn-disabled {
-    @apply opacity-50 pointer-events-none;
-  }
-
-  /* Button with icon */
-  .btn-with-icon {
-    @apply inline-flex items-center gap-2;
-  }
-}
-
-/* Add consistent hover effects for all buttons */
-button,
-.btn,
-a[role="button"],
-.button {
-  @apply transition-all duration-200;
-}
-
-/* Add subtle hover transform effect to all buttons */
-button:not(.no-transform):hover,
-.btn:not(.no-transform):hover,
-a[role="button"]:not(.no-transform):hover,
-.button:not(.no-transform):hover {
-  @apply transform -translate-y-0.5;
-}
-
-/* Add subtle active transform effect to all buttons */
-button:not(.no-transform):active,
-.btn:not(.no-transform):active,
-a[role="button"]:not(.no-transform):active,
-.button:not(.no-transform):active {
-  @apply transform translate-y-0.5;
 }
 
 /* Mobile header adjustments */

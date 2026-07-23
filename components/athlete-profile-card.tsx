@@ -47,7 +47,7 @@ export default function AthleteProfileCard({
             alt={name}
             fill
             className="object-cover"
-            fallbackSrc="/diverse-group-athletes.png"
+            fallbackSrc="/diverse-group-athletes.jpg"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
         </div>

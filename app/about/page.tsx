@@ -18,7 +18,7 @@ export const metadata: Metadata = {
       "Learn the Olympic Bootworks story, from Buck Brown's Heel-Loc technology to two Lake Tahoe locations serving skiers, riders, and athletes.",
     url: "https://www.olympicbootworks.com/about",
     type: "article",
-    images: ["/images/og-default.png"],
+    images: ["/images/og-default.jpg"],
   },
 }
 
@@ -35,38 +35,31 @@ export default function AboutPage() {
         ]}
       />
 
-      {/* Introduction Section */}
-      <section className="max-w-4xl mx-auto px-4 py-12" aria-labelledby="about-introduction-heading">
-        <h2 id="about-introduction-heading" className="text-3xl font-bold">Built around better movement</h2>
-        <p className="mt-4 text-muted-foreground">
-          We’ve been fitting ski boots and building great riding experiences in Tahoe since 1994.
-        </p>
-      </section>
-
       {/* Our Story Section */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      <section className="py-16 md:py-24 bg-secondary/60">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[500px] rounded-lg overflow-hidden shadow-md order-2 lg:order-1">
+            <div className="relative h-[500px] rounded-lg overflow-hidden order-2 lg:order-1">
               <Image
                 src="/images/buck-in-shop.jpg"
                 alt="Founder Buck Brown in the Olympic Bootworks shop"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                 <div className="bg-white/90 dark:bg-black/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
-                  <h3 className="font-bold text-primary">Buck Brown</h3>
+                  <h3 className="font-sans tracking-normal font-bold text-primary">Buck Brown</h3>
                   <p className="text-sm text-foreground">Founder & Master Boot Fitter</p>
                 </div>
               </div>
             </div>
 
             <div className="order-1 lg:order-2">
-              <div className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-4">
-                Our Story
-              </div>
-              <h2 className="text-3xl font-bold mb-4">Rooted in Expertise</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+                Our story
+              </p>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">Rooted in Expertise</h2>
               <p className="text-muted-foreground mb-6">
                 Olympic Bootworks was founded by Buck Brown, whose relentless pursuit of the perfect fit has spanned
                 decades. Frustrated by the limitations of off-the-shelf solutions, Buck dedicated himself to
@@ -93,13 +86,13 @@ export default function AboutPage() {
       </section>
 
       {/* Our Philosophy Section */}
-      <section className="py-16">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-4">
-              Our Philosophy
-            </div>
-            <h2 className="text-3xl font-bold mb-4">Precision, Alignment, Potential</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+              Our philosophy
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Precision, Alignment, Potential</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We believe that true performance and lasting comfort start from the ground up. Our philosophy centers on
               achieving optimal body alignment through a meticulously customized foundation.
@@ -111,7 +104,7 @@ export default function AboutPage() {
               <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary inline-block">
                 <Footprints className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Individual Assessment</h3>
+              <h3 className="font-sans tracking-normal text-xl font-semibold mb-2">Individual Assessment</h3>
               <p className="text-muted-foreground">
                 Understanding your unique foot shape, biomechanics, and specific needs, whether for sport or daily life.
               </p>
@@ -121,7 +114,7 @@ export default function AboutPage() {
               <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary inline-block">
                 <Award className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Unweighted Alignment</h3>
+              <h3 className="font-sans tracking-normal text-xl font-semibold mb-2">Unweighted Alignment</h3>
               <p className="text-muted-foreground">
                 Ensuring your skeletal and muscular systems are fully balanced before creating your custom fit.
               </p>
@@ -131,7 +124,7 @@ export default function AboutPage() {
               <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary inline-block">
                 <Heart className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Custom Craftsmanship</h3>
+              <h3 className="font-sans tracking-normal text-xl font-semibold mb-2">Custom Craftsmanship</h3>
               <p className="text-muted-foreground">
                 Precisely molding footbeds and modifying boot shells and liners to create a seamless interface that
                 supports, stabilizes, and empowers.
@@ -140,7 +133,7 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-12 bg-primary/5 rounded-lg p-8 border border-primary/20">
-            <h3 className="text-xl font-bold mb-4 text-center">The Result?</h3>
+            <h3 className="font-sans tracking-normal text-xl font-bold mb-4 text-center">The Result?</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
               <div className="text-center">
                 <div className="mx-auto mb-3 h-12 w-12 flex items-center justify-center rounded-full bg-primary/10">
@@ -179,22 +172,22 @@ export default function AboutPage() {
       <LocationsSection />
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-24 bg-ink text-ink-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Experience the Olympic Bootworks Difference</h2>
-          <p className="max-w-2xl mx-auto mb-8">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-5">Experience the Olympic Bootworks Difference</h2>
+          <p className="max-w-2xl mx-auto mb-10 text-white/80">
             Ready to transform your performance and comfort? Request a fitting appointment or visit our shop to learn how our
             custom solutions can elevate your experience.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" variant="on-dark" className="shadow-sm">
-              <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
-            </Button>
-            <Button size="lg" variant="outline-on-dark" asChild className="backdrop-blur-sm shadow-sm">
-              <Link href="/contact">
-                <ButtonIcon label="Request a Fitting" href="/contact" />
-                Request a Fitting
+            <Button asChild size="lg" variant="on-dark">
+              <Link href="/boot-fitting">
+                <ButtonIcon label="Custom Boot Fitting" href="/boot-fitting" />
+                Custom Boot Fitting
               </Link>
+            </Button>
+            <Button size="lg" variant="outline-on-dark" asChild className="backdrop-blur-sm">
+              <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
             </Button>
           </div>
         </div>

@@ -18,12 +18,12 @@ function ServiceItem({ icon, title, description, href, className }: ServiceItemP
   const content = (
     <>
       <div className="mb-4 p-3 rounded-full bg-primary/10 text-primary">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{title}</h3>
+      <h3 className="font-sans tracking-normal text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{title}</h3>
       <p className="text-muted-foreground text-sm">{description}</p>
     </>
   )
   const itemClass = cn(
-    "group flex flex-col items-start p-6 rounded-lg transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-700",
+    "group flex flex-col items-start p-6 rounded-lg transition-all duration-300 hover:bg-secondary/60 border border-transparent hover:border-border",
     className,
   )
 
@@ -40,10 +40,13 @@ function ServiceItem({ icon, title, description, href, className }: ServiceItemP
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="py-20">
+    <section id="services" className="scroll-mt-24 py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Performance-Driven Solutions</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+            What we do
+          </p>
+          <h2 className="text-3xl md:text-4xl font-display font-semibold mb-4">Performance-Driven Solutions</h2>
           <p className="text-muted-foreground">
             At Olympic Bootworks, we're dedicated to enhancing your performance through precision-engineered solutions
             that optimize comfort, control, and power transfer across all your outdoor pursuits and court sports like
@@ -62,6 +65,7 @@ export default function ServicesSection() {
             icon={<Footprints className="h-6 w-6" />}
             title="Custom Boot Fitting"
             description="Our signature service uses shell modification, liner molding, and personalized adjustments to create a custom fit designed to support comfort and confident skiing."
+            href="/contact"
           />
 
           <ServiceItem
@@ -91,12 +95,7 @@ export default function ServicesSection() {
         </div>
 
         <div className="mt-12 text-center">
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="bg-primary/5 border-primary/20 hover:bg-primary/10 text-primary font-medium px-8 py-3 h-auto rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 group"
-          >
+          <Button asChild variant="outline" size="lg">
             <Link href="/contact" className="flex items-center gap-2">
               <ButtonIcon label="Contact Us" href="/contact" />
               Contact Us

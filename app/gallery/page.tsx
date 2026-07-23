@@ -98,7 +98,7 @@ export default function GalleryPage() {
       <section id="gallery" className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Shop & Customer Gallery</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Shop & Customer Gallery</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Browse through photos of our shop, team, and happy customers enjoying their Olympic Bootworks experience.
             </p>
@@ -109,11 +109,11 @@ export default function GalleryPage() {
       </section>
 
       {/* Boot Fitting Showcase */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      <section className="py-16 md:py-24 bg-secondary/60">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-4">Custom Boot Fitting</h2>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">Custom Boot Fitting</h2>
               <p className="text-muted-foreground mb-6">
                 At Olympic Bootworks, we specialize in custom boot fitting to ensure maximum comfort and performance.
                 Our expert technicians analyze your feet and skiing style to create a personalized fit that enhances
@@ -160,7 +160,6 @@ export default function GalleryPage() {
                   alt="Boot fitting process"
                   fill
                   className="object-cover"
-                  priority
                 />
               </div>
               <div className="relative h-80 rounded-lg overflow-hidden">

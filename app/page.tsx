@@ -12,7 +12,7 @@ export const metadata: Metadata = {
       "Olympic Bootworks in Lake Tahoe offers expert ski boot fitting, Heel-Loc custom footbeds, ZipFit liners, Fantic e-bikes, and mountain gear.",
     url: "https://www.olympicbootworks.com/",
     type: "website",
-    images: ["/images/og-default.png"],
+    images: ["/images/og-default.jpg"],
   },
 }
 

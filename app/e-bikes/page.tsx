@@ -13,7 +13,7 @@ export const metadata: Metadata = {
       "Compare current Fantic e-bike prices, read clear model descriptions, and email Olympic Bootworks for personal help.",
     url: "https://www.olympicbootworks.com/e-bikes",
     type: "website",
-    images: ["/images/og-default.png"],
+    images: ["/images/og-default.jpg"],
   },
 }
 

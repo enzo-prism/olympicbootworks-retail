@@ -1,29 +1,61 @@
-import Link from "next/link"
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { Calendar } from "lucide-react" // Keep Calendar for the button
+import {
+  Activity,
+  Bike,
+  CircleDot,
+  Flag,
+  Footprints,
+  Mail,
+  Mountain,
+  MountainSnow,
+  ShieldCheck,
+  Trophy,
+  Zap,
+} from "lucide-react"
 import NextImage from "@/components/next-image"
+import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
+import { trackConversion } from "@/lib/track-conversion"
+
+const sports = [
+  { icon: MountainSnow, name: "Skiing" },
+  { icon: Bike, name: "Cycling" },
+  { icon: Activity, name: "Running" },
+  { icon: Trophy, name: "Pickleball" },
+  { icon: Flag, name: "Golf" },
+  { icon: CircleDot, name: "Tennis" },
+  { icon: Mountain, name: "Hiking" },
+]
+
+const benefits = [
+  {
+    icon: Footprints,
+    title: "Optimal Alignment",
+    description: "Supports natural biomechanics",
+  },
+  {
+    icon: Zap,
+    title: "Enhanced Performance",
+    description: "Maximizes power transfer",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Supportive Foundation",
+    description: "Built around your individual fit",
+  },
+]
 
 export default function HeelLocSection() {
-  // Define sports with their corresponding emojis
-  const sports = [
-    { emoji: "⛷️", name: "Skiing" },
-    { emoji: "🚴", name: "Cycling" },
-    { emoji: "🏃", name: "Running" },
-    { emoji: "🏅", name: "Pickleball" }, // Using Sports Medal as a general sport/achievement emoji
-    { emoji: "⛳", name: "Golf" },
-    { emoji: "🎾", name: "Tennis" },
-    { emoji: "⛰️", name: "Hiking" },
-  ]
-
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
+    <section className="py-16 md:py-24 bg-secondary/60">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
-            <div className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-4">
-              Proprietary Technology
-            </div>
-            <h2 className="text-3xl font-bold mb-4">Heel-Loc Technology</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+              Proprietary technology
+            </p>
+            <h2 className="text-3xl md:text-4xl font-display font-semibold mb-4">Heel-Loc Technology</h2>
             <p className="text-muted-foreground mb-6">
               Developed by Buck Brown over twenty years of biomechanical research, Heel-Loc technology represents a
               personalized orthotic approach for performance athletes and everyday comfort seekers.
@@ -34,41 +66,28 @@ export default function HeelLocSection() {
               comfort, and efficient movement.
             </p>
 
-            {/* Main benefits - keeping Lucide icons here for consistency with other sections if desired, or could also be emojis */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-              <div className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
-                <span className="text-3xl mb-2" role="img" aria-label="Footprints">
-                  👣
-                </span>
-                <h3 className="font-semibold">Optimal Alignment</h3>
-                <p className="text-xs text-muted-foreground">Supports natural biomechanics</p>
-              </div>
-              <div className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
-                <span className="text-3xl mb-2" role="img" aria-label="Zap">
-                  ⚡
-                </span>
-                <h3 className="font-semibold">Enhanced Performance</h3>
-                <p className="text-xs text-muted-foreground">Maximizes power transfer</p>
-              </div>
-              <div className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
-                <span className="text-3xl mb-2" role="img" aria-label="Shield">
-                  🛡️
-                </span>
-                <h3 className="font-semibold">Supportive Foundation</h3>
-                <p className="text-xs text-muted-foreground">Built around your individual fit</p>
-              </div>
+              {benefits.map((benefit) => (
+                <div key={benefit.title} className="flex flex-col items-center text-center p-4 rounded-lg bg-card border">
+                  <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <benefit.icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="font-sans font-semibold tracking-normal">{benefit.title}</h3>
+                  <p className="text-xs text-muted-foreground">{benefit.description}</p>
+                </div>
+              ))}
             </div>
 
-            <h3 className="text-xl font-semibold mt-6 mb-4 text-foreground">Proven Benefits For Athletes In:</h3>
+            <h3 className="font-sans text-xl font-semibold tracking-normal mt-6 mb-4 text-foreground">
+              Proven Benefits For Athletes In:
+            </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-5 mb-6">
-              {sports.map((sport, index) => (
+              {sports.map((sport) => (
                 <div
-                  key={index}
-                  className="flex flex-col items-center text-center p-3 rounded-lg bg-background hover:bg-muted/50 border transition-colors"
+                  key={sport.name}
+                  className="flex flex-col items-center text-center p-3 rounded-lg bg-card hover:bg-accent/50 border transition-colors"
                 >
-                  <span className="text-3xl mb-1.5" role="img" aria-label={sport.name}>
-                    {sport.emoji}
-                  </span>
+                  <sport.icon className="mb-1.5 h-6 w-6 text-primary" aria-hidden="true" />
                   <p className="text-sm font-medium text-foreground">{sport.name}</p>
                 </div>
               ))}
@@ -80,17 +99,20 @@ export default function HeelLocSection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button asChild className="shadow-sm">
-                <Link href="/contact">
-                  <Calendar className="h-4 w-4 mr-2" />
+              <Button asChild size="lg">
+                <a
+                  href={fittingInquiryUrl()}
+                  onClick={() => trackConversion("email_click", { location: "home_heel_loc" })}
+                >
+                  <Mail className="h-4 w-4 mr-2" aria-hidden="true" />
                   Book a Custom Fitting
-                </Link>
+                </a>
               </Button>
             </div>
           </div>
 
           <div className="relative order-1 lg:order-2">
-            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-md">
+            <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden">
               <NextImage
                 src="/images/fitting-process-2.jpg"
                 alt="Heel-Loc custom footbed technology"
@@ -98,17 +120,13 @@ export default function HeelLocSection() {
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                <div className="bg-white/90 dark:bg-black/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
-                  <h3 className="font-bold text-primary">Heel-Loc Technology</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent flex items-end p-6">
+                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+                  <h3 className="font-sans font-bold tracking-normal text-primary">Heel-Loc Technology</h3>
                   <p className="text-sm text-foreground">The foundation for optimal performance</p>
                 </div>
               </div>
             </div>
-
-            {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-primary/10 -z-10"></div>
-            <div className="absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-primary/10 -z-10"></div>
           </div>
         </div>
       </div>

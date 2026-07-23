@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { Pause, Play } from "lucide-react"
 
@@ -18,6 +19,13 @@ interface VimeoVideoHeroProps {
    * composition while keeping the video background and overlay behavior.
    */
   customContent?: React.ReactNode
+  /**
+   * Static poster shown beneath the video: paints immediately on first load
+   * (no black-box before hydration) and is the permanent backdrop for
+   * reduced-motion visitors, who never get the iframe.
+   */
+  posterSrc?: string
+  posterAlt?: string
 }
 
 export default function VimeoVideoHero({
@@ -29,6 +37,8 @@ export default function VimeoVideoHero({
   height = "large",
   className = "",
   customContent,
+  posterSrc,
+  posterAlt = "",
 }: VimeoVideoHeroProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(true)
@@ -65,11 +75,20 @@ export default function VimeoVideoHero({
 
   return (
     <div
-        className={`relative w-screen overflow-hidden flex items-center justify-center ${heightClasses[height]} ${className}`}
-        style={{ maxWidth: "100vw", marginLeft: "calc(50% - 50vw)" }}
+        className={`relative w-full overflow-hidden flex items-center justify-center ${heightClasses[height]} ${className}`}
       >
         {/* Video Background Container */}
-        <div className="absolute inset-0 w-full h-full bg-black z-0">
+        <div className="absolute inset-0 w-full h-full bg-ink z-0">
+          {posterSrc && (
+            <Image
+              src={posterSrc}
+              alt={posterAlt}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          )}
           {!prefersReducedMotion && (
             <iframe
               ref={iframeRef}
@@ -94,12 +113,11 @@ export default function VimeoVideoHero({
           )}
         </div>
 
-        {/* Enhanced Overlay */}
+        {/* Overlay — single gradient scrim, darkest where the text sits */}
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80 z-[2]"
+          className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/50 to-ink/80 z-[2]"
           style={{ opacity: overlayOpacity }}
         ></div>
-        <div className="absolute inset-0 bg-black/30 z-[3]"></div>
 
         {/* Content */}
         <div className="relative z-20 container mx-auto px-6 py-12 flex flex-col items-center justify-center text-center">

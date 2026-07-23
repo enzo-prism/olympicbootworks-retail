@@ -5,7 +5,10 @@ import { ArrowLeft, Check, Mail } from "lucide-react"
 import { notFound } from "next/navigation"
 import BikeInquiryButton from "@/components/bike-inquiry-button"
 import BikeCallButton from "@/components/bike-call-button"
+import BikeStickyInquiryBar from "@/components/bike-sticky-inquiry-bar"
 import CopyEmailButton from "@/components/copy-email-button"
+import { GoogleGIcon } from "@/components/google-g-icon"
+import { GOOGLE_BUSINESS_PROFILE_URL } from "@/lib/google-business"
 import {
   bikes,
   familyLabels,
@@ -68,7 +71,9 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
       />
 
-      <div className="container mx-auto px-4 py-8 md:py-14">
+      <BikeStickyInquiryBar bike={bike} />
+
+      <div className="container mx-auto px-4 py-8 pb-24 md:py-14 lg:pb-14">
         <Link
           href="/e-bikes#models"
           className="mb-8 inline-flex items-center text-sm font-medium text-primary hover:underline"
@@ -78,7 +83,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
         </Link>
 
         <div className="grid min-w-0 items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="relative min-w-0 aspect-[4/3] overflow-hidden rounded-2xl border bg-white shadow-sm sm:aspect-square">
+          <div className="relative min-w-0 aspect-[4/3] overflow-hidden rounded-lg border bg-white sm:aspect-square">
             <Image
               src={bike.image}
               alt={`Fantic ${bike.name}`}
@@ -93,10 +98,10 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
           </div>
 
           <div className="min-w-0">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-primary">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
               {familyLabels[bike.family]}
             </p>
-            <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">
+            <h1 className="mt-2 text-4xl font-semibold tracking-tight md:text-5xl">
               Fantic {bike.name}
             </h1>
 
@@ -112,8 +117,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
 
             <p className="mt-7 text-lg leading-8 text-muted-foreground">{bike.overview}</p>
 
-            <div className="mt-8 rounded-xl border bg-card p-6 shadow-sm">
-              <h2 className="text-lg font-bold">A good match for</h2>
+            <div className="mt-8 rounded-lg border bg-card p-6">
+              <h2 className="font-sans tracking-normal text-lg font-bold">A good match for</h2>
               <ul className="mt-4 space-y-3">
                 {bike.goodFor.map((item) => (
                   <li key={item} className="flex gap-3 text-sm text-muted-foreground">
@@ -124,8 +129,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               </ul>
             </div>
 
-            <div className="mt-8 rounded-xl bg-primary/5 p-6">
-              <h2 className="text-xl font-bold">Ask Buck about this bike</h2>
+            <div className="mt-8 rounded-lg bg-primary/5 p-6">
+              <h2 className="font-sans tracking-normal text-xl font-bold">Ask Buck about this bike</h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 Email Buck with the model already filled in. He can confirm current size and color
                 choices, share the exact technical specifications for the bike being offered, answer
@@ -134,6 +139,21 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                 <BikeInquiryButton bike={bike} className="sm:flex-1" />
                 <BikeCallButton bike={bike} className="sm:flex-1" />
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-primary/10 pt-4 text-sm text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <Check className="h-4 w-4 text-primary" aria-hidden="true" />
+                  Authorized Fantic dealer
+                </span>
+                <a
+                  href={GOOGLE_BUSINESS_PROFILE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  <GoogleGIcon className="h-4 w-4" />
+                  Read our Google reviews
+                </a>
               </div>
               <CopyEmailButton
                 email="buck@olympicbootworks.com"
@@ -146,8 +166,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               />
             </div>
 
-            <div className="mt-6 rounded-xl border p-6">
-              <h2 className="text-lg font-bold">How to get this bike</h2>
+            <div className="mt-6 rounded-lg border p-6">
+              <h2 className="font-sans tracking-normal text-lg font-bold">How to get this bike</h2>
               <ol className="mt-4 grid gap-4 text-sm text-muted-foreground sm:grid-cols-3">
                 <li><span className="font-semibold text-foreground">1. Ask Buck</span><br />Email the model and your riding goals.</li>
                 <li><span className="font-semibold text-foreground">2. Confirm the bike</span><br />Buck will confirm size, color, specifications, and availability.</li>

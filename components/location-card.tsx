@@ -22,7 +22,7 @@ export default function LocationCard({ location, showHours = true, className = "
     <div className={`bg-card border rounded-lg overflow-hidden shadow-md ${className}`}>
       <div className="relative h-48">
         <Image
-          src={location.flagship ? "/images/shop-exterior.jpg" : "/ski-boot-fitting-station.png"}
+          src={location.flagship ? "/images/shop-exterior.jpg" : "/ski-boot-fitting-station.jpg"}
           alt={location.name}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"

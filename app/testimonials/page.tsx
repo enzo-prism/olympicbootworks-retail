@@ -7,6 +7,7 @@ import MinimalPageHero from "@/components/minimal-page-hero"
 import { GoogleGIcon } from "@/components/google-g-icon"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { GOOGLE_BUSINESS_REVIEW_URL } from "@/lib/google-business"
+import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -31,16 +32,22 @@ export default function TestimonialsPage() {
             external: true,
             leadingIcon: <GoogleGIcon className="h-[1.15rem] w-[0.8rem]" />,
           },
-          { href: "/contact", label: "Request a fitting" },
+          { href: fittingInquiryUrl(), label: "Request a fitting" },
           { href: "/e-bikes", label: "Explore Fantic e-bikes", variant: "secondary" },
         ]}
       />
 
-      <section className="max-w-4xl mx-auto px-4 py-12" aria-labelledby="customer-stories-heading">
-        <h2 id="customer-stories-heading" className="text-3xl font-bold">Customer stories</h2>
-        <p className="mt-4 text-muted-foreground">Real stories from real riders and skiers.</p>
-
-        <div className="container mx-auto px-4 py-16">
+      <section className="py-16 md:py-24" aria-labelledby="customer-stories-heading">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+              From the community
+            </p>
+            <h2 id="customer-stories-heading" className="text-3xl md:text-4xl font-semibold">
+              Customer stories
+            </h2>
+            <p className="mt-3 text-muted-foreground">Real stories from real riders and skiers.</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {testimonials.map((testimonial, index) => (
               <EnhancedTestimonialCard

@@ -6,7 +6,7 @@ export function CookieSettingsButton() {
   return (
     <button
       type="button"
-      className="text-xs text-muted-foreground/70 underline-offset-2 hover:text-muted-foreground hover:underline"
+      className="text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
       onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_SETTINGS_EVENT))}
     >
       Cookie preferences

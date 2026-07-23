@@ -73,16 +73,22 @@ export default function TestimonialsCarousel() {
           <ChevronLeft className="h-4 w-4" />
         </Button>
 
-        <div className="flex gap-1">
+        <div className="flex">
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentPage(index)}
-              className={`h-2 w-2 rounded-full transition-all ${
-                currentPage === index ? "bg-primary w-4" : "bg-gray-300 dark:bg-gray-600"
-              }`}
+              className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={`Go to page ${index + 1}`}
-            />
+              aria-current={currentPage === index ? "true" : undefined}
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2 rounded-full transition-all ${
+                  currentPage === index ? "bg-primary w-4" : "w-2 bg-muted-foreground/40"
+                }`}
+              />
+            </button>
           ))}
         </div>
 

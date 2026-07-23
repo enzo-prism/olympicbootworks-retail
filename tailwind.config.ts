@@ -19,7 +19,18 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        xs: "475px",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "-apple-system", "sans-serif"],
+        display: ["var(--font-fraunces)", "Georgia", "serif"],
+      },
       colors: {
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          foreground: "hsl(var(--ink-foreground))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

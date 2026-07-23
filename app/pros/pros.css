@@ -64,6 +64,6 @@
 }
 
 .athlete-tab-trigger[data-state="active"] {
-  background: linear-gradient(to right, var(--primary), var(--primary-light, #38bdf8));
+  background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary-light)));
   color: white;
 }

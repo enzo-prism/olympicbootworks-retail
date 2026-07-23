@@ -39,7 +39,7 @@ export default function NextImage({
         className={`bg-gray-200 flex items-center justify-center ${className}`}
         style={{ width: width || "100%", height: height || 300, ...style }}
       >
-        <span className="text-gray-400">Image not available</span>
+        <span className="text-muted-foreground">Image not available</span>
       </div>
     )
   }
@@ -57,7 +57,7 @@ export default function NextImage({
         className={`bg-gray-100 flex items-center justify-center ${className}`}
         style={{ width: width || "100%", height: height || 300, ...style }}
       >
-        <span className="text-gray-500">Image failed to load</span>
+        <span className="text-muted-foreground">Image failed to load</span>
       </div>
     )
   }

@@ -8,16 +8,17 @@ import { CookieSettingsButton } from "@/components/cookie-settings-button"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 py-12">
+    <footer className="bg-secondary/60 py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-10 gap-8">
           <div className="md:col-span-3 space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative h-12 w-12 overflow-hidden">
                 <Image
-                  src="/images/olympic-bootworks-transparent-logo.png"
+                  src="/images/logo-small.png"
                   alt="Olympic Bootworks Logo"
                   fill
+                  sizes="48px"
                   className="object-contain"
                 />
               </div>
@@ -71,13 +72,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/shop" className="text-primary hover:text-primary font-semibold text-sm">
-                  How to Get a Bike
+                <Link href="/e-bikes" className="text-primary hover:text-primary font-semibold text-sm">
+                  Fantic E-Bikes
                 </Link>
               </li>
               <li>
-                <Link href="/e-bikes" className="text-primary hover:text-primary font-semibold text-sm">
-                  Fantic E-Bikes
+                <Link href="/boot-fitting" className="text-primary hover:text-primary font-semibold text-sm">
+                  Boot Fitting
                 </Link>
               </li>
               <li>
@@ -93,6 +94,11 @@ export default function Footer() {
               <li>
                 <Link href="/gallery" className="text-muted-foreground hover:text-primary text-sm">
                   Gallery
+                </Link>
+              </li>
+              <li>
+                <Link href="/testimonials" className="text-muted-foreground hover:text-primary text-sm">
+                  Testimonials
                 </Link>
               </li>
               <li>
@@ -144,7 +150,7 @@ export default function Footer() {
         <div className="border-t border-gray-200 dark:border-gray-800 mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Olympic Bootworks. All rights reserved.</p>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            <Link href="/privacy" className="text-xs text-muted-foreground/70 hover:text-muted-foreground hover:underline">
+            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
               Privacy
             </Link>
             <CookieSettingsButton />
@@ -152,7 +158,7 @@ export default function Footer() {
               href="https://www.design-prism.com/?utm_source=olympicbootworks&utm_medium=referral&utm_campaign=olympicbootworks_2025-07"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-muted-foreground/70 hover:text-muted-foreground transition-colors"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               website design
             </Link>

@@ -40,7 +40,7 @@ export default function ProsPage() {
       />
 
       {/* Enhanced Intro Section */}
-      <section className="py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] rounded-lg overflow-hidden shadow-lg">
@@ -54,10 +54,10 @@ export default function ProsPage() {
             </div>
 
             <div className="space-y-6">
-              <div className="inline-flex items-center justify-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-2">
-                Elite Performance
-              </div>
-              <h2 className="text-3xl font-bold mb-4">Performance Driven by Precision</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+                Elite performance
+              </p>
+              <h2 className="text-3xl md:text-4xl font-semibold mb-4">Performance Driven by Precision</h2>
               <p className="text-lg text-muted-foreground mb-6">
                 At Olympic Bootworks, we're proud to support some of the world's top athletes in their pursuit of
                 excellence. Our custom boot fitting and equipment expertise give these professionals the edge they need
@@ -112,7 +112,6 @@ export default function ProsPage() {
                 alt="Travis Ganong, Professional Ski Racer"
                 fill
                 className="object-cover"
-                priority
               />
             </div>
 
@@ -178,10 +177,10 @@ export default function ProsPage() {
       </section>
 
       {/* Athlete Categories */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900">
+      <section className="py-16 md:py-24 bg-secondary/60">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Elite Athletes</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-4">Our Elite Athletes</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Olympic Bootworks proudly supports athletes across multiple disciplines, providing custom solutions that
               enhance performance in the most demanding conditions.
@@ -324,9 +323,9 @@ export default function ProsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-24 bg-ink text-ink-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Experience Pro-Level Service</h2>
+          <h2 className="text-3xl md:text-4xl font-semibold mb-5">Experience Pro-Level Service</h2>
           <p className="max-w-2xl mx-auto mb-8">
             Whether you're a competitive athlete or a passionate enthusiast, our team can help you achieve your
             performance goals with the same expertise we provide to the pros.

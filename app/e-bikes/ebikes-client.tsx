@@ -61,6 +61,9 @@ const trustPoints = [
 ]
 
 const testRideSubject = encodeURIComponent("Fantic Test Ride Request")
+const testRideBody = encodeURIComponent(
+  `Hi,\n\nI'd like to request a Fantic test ride.\n\nBike(s) I'm interested in:\nWhere and how I ride:\nPreferred days and times:\n\nThank you.`,
+)
 
 export default function EBikesClient() {
   useEffect(() => {
@@ -70,7 +73,7 @@ export default function EBikesClient() {
   return (
     <div className="flex flex-col">
       {/* Current-pricing introduction */}
-      <section className="bg-[#020107] py-10 text-white">
+      <section className="bg-ink py-12 md:py-16 text-white">
         <div className="container mx-auto px-4 text-center">
           <Image
             src="/images/brands/fantic-wordmark.jpg"
@@ -81,9 +84,9 @@ export default function EBikesClient() {
             className="mx-auto h-auto w-[76vw] max-w-sm"
           />
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.22em] text-white/70">
-            Italian Made Freedom • How it works
+            Italian Made Freedom &middot; How it works
           </p>
-          <h2 className="mt-2 text-3xl font-bold md:text-4xl">
+          <h2 className="mt-2 text-3xl font-semibold md:text-4xl">
             Compare. Ask Buck. Arrange the ride.
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-white/80">
@@ -112,15 +115,15 @@ export default function EBikesClient() {
       </section>
 
       {/* Model grid by family */}
-      <section id="models" className="scroll-mt-24 py-16">
+      <section id="models" className="scroll-mt-24 py-16 md:py-24">
         <div className="container mx-auto px-4">
           {sections.map((group, groupIndex) => {
             const groupBikes = bikes.filter((b) => group.families.includes(b.family))
             if (groupBikes.length === 0) return null
             return (
-              <div key={group.title} className="mb-14 last:mb-0">
+              <div key={group.title} className="mb-16 last:mb-0">
                 <div className="mb-6">
-                  <h2 className="text-2xl font-bold md:text-3xl">{group.title}</h2>
+                  <h2 className="text-2xl font-semibold md:text-3xl">{group.title}</h2>
                   <p className="mt-1 text-muted-foreground">{group.tagline}</p>
                 </div>
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -145,21 +148,24 @@ export default function EBikesClient() {
       </section>
 
       {/* Why buy from us */}
-      <section className="bg-gray-50 py-16 dark:bg-gray-900">
+      <section className="bg-secondary/60 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold">Why buy from Olympic Bootworks</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+              Why us
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold">Why buy from Olympic Bootworks</h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
               Get personal guidance from a real Tahoe shop before choosing your bike.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {trustPoints.map((point) => (
-              <div key={point.title} className="rounded-lg border bg-card p-6 shadow-sm">
+              <div key={point.title} className="rounded-lg border bg-card p-6">
                 <div className="mb-4 inline-block rounded-full bg-primary/10 p-3 text-primary">
                   <point.icon className="h-6 w-6" aria-hidden="true" />
                 </div>
-                <h3 className="mb-2 font-semibold">{point.title}</h3>
+                <h3 className="mb-2 font-sans tracking-normal font-semibold">{point.title}</h3>
                 <p className="text-sm text-muted-foreground">{point.text}</p>
               </div>
             ))}
@@ -168,10 +174,13 @@ export default function EBikesClient() {
       </section>
 
       {/* Test ride */}
-      <section id="test-ride" className="scroll-mt-24 py-16">
+      <section id="test-ride" className="scroll-mt-24 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold">Request a Fantic test ride</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
+              Try before you buy
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold">Request a Fantic test ride</h2>
             <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
               Tell us which bike interests you and where you ride. We&apos;ll confirm current test-ride
               options and arrange a time when possible.
@@ -179,15 +188,15 @@ export default function EBikesClient() {
           </div>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
             {locations.map((location) => (
-              <div key={location.id} className="rounded-lg border bg-card p-8 text-center shadow-sm">
-                <h3 className="text-xl font-bold">{location.name}</h3>
+              <div key={location.id} className="rounded-lg border bg-card p-8 text-center">
+                <h3 className="font-sans tracking-normal text-xl font-bold">{location.name}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {location.address.line1}, {location.address.city}
                 </p>
                 <div className="mt-6 flex flex-col gap-3">
-                  <Button asChild className="shadow-sm">
+                  <Button asChild>
                     <a
-                      href={`mailto:${location.contact.email}?subject=${testRideSubject}`}
+                      href={`mailto:${location.contact.email}?subject=${testRideSubject}&body=${testRideBody}`}
                       onClick={() =>
                         trackConversion("test_ride_request", { location: location.id })
                       }
@@ -213,12 +222,12 @@ export default function EBikesClient() {
       </section>
 
       {/* Current lineup contact */}
-      <section className="bg-secondary/50 py-14">
+      <section className="bg-secondary/60 py-14 md:py-20">
         <div className="container mx-auto px-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
             Find your next ride
           </p>
-          <h2 className="mt-2 text-2xl font-bold md:text-3xl">Ask about the latest Fantic lineup</h2>
+          <h2 className="mt-2 text-2xl font-semibold md:text-3xl">Ask about the latest Fantic lineup</h2>
           <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
             Inventory and model availability change throughout the season. Ask our team what is in
             stock now, what is arriving next, and which bike best fits your riding.

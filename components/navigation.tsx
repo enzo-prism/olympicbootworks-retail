@@ -20,7 +20,6 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetDescription, SheetTitle } from "@/components/ui/sheet"
-import LocationSelector from "@/components/location-selector"
 import { cn } from "@/lib/utils"
 import { locations } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
@@ -131,7 +130,7 @@ export default function Navigation() {
 
   const navLinks = [
     { href: "/e-bikes", label: "E-Bikes & Prices", icon: Bike },
-    { href: "/#services", label: "Boot Fitting", icon: Footprints },
+    { href: "/boot-fitting", label: "Boot Fitting", icon: Footprints },
     { href: "/about", label: "About", icon: Info },
     { href: "/contact", label: "Locations & Contact", icon: PhoneCall },
   ]
@@ -155,7 +154,7 @@ export default function Navigation() {
         <Link href="/" className="flex items-center gap-2 py-2" aria-label="Olympic Bootworks Home">
           <div className="relative h-10 w-10 overflow-hidden">
             <Image
-              src="/images/olympic-bootworks-transparent-logo.png"
+              src="/images/logo-small.png"
               alt="Olympic Bootworks Logo"
               fill
               sizes="40px"
@@ -174,8 +173,7 @@ export default function Navigation() {
             </NavLink>
           ))}
 
-          <LocationSelector compact />
-          <Button asChild size="sm" className="ml-2 shadow-sm">
+          <Button asChild size="sm" className="ml-2">
             <a
               href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
               onClick={() => trackConversion("email_click", { location: "desktop_navigation" })}
@@ -186,15 +184,16 @@ export default function Navigation() {
           </Button>
         </nav>
 
-        {/* Mobile Navigation */}
-        <div className="flex items-center gap-2 md:hidden">
+        {/* Mobile Navigation — email is the primary conversion, so it owns the
+            persistent header slot; phone lives in the menu's Locations section. */}
+        <div className="flex items-center gap-1 md:hidden">
           <a
-            href="tel:+15305810747"
-            onClick={() => trackConversion("phone_click", { location: "mobile_header" })}
-            className="mr-1 p-2 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="Call Olympic Bootworks"
+            href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
+            onClick={() => trackConversion("email_click", { location: "mobile_header" })}
+            className="h-11 w-11 flex items-center justify-center rounded-full hover:bg-secondary transition-colors"
+            aria-label="Email Olympic Bootworks"
           >
-            <Phone className="h-5 w-5 text-primary" />
+            <Mail className="h-5 w-5 text-primary" />
           </a>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -219,7 +218,7 @@ export default function Navigation() {
                 <div className="flex items-center gap-2">
                   <div className="relative h-8 w-8 overflow-hidden">
                     <Image
-                      src="/images/olympic-bootworks-transparent-logo.png"
+                      src="/images/logo-small.png"
                       alt="Olympic Bootworks Logo"
                       fill
                       sizes="32px"
@@ -228,7 +227,7 @@ export default function Navigation() {
                   </div>
                   <span className="font-bold text-lg">Olympic Bootworks</span>
                 </div>
-                <SheetClose className="rounded-full h-8 w-8 flex items-center justify-center hover:bg-gray-100">
+                <SheetClose className="rounded-full h-11 w-11 flex items-center justify-center hover:bg-secondary">
                   <X className="h-4 w-4" />
                   <span className="sr-only">Close</span>
                 </SheetClose>
@@ -299,8 +298,8 @@ export default function Navigation() {
                   )}
                 </div>
 
-                <div className="mt-6 pt-4 border-t">
-                  <Button asChild size="lg" className="h-12 w-full shadow-sm">
+                <div className="mt-6 pt-4 border-t flex flex-col gap-3">
+                  <Button asChild size="lg" className="h-12 w-full">
                     <a
                       href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
                       onClick={() => {
@@ -310,6 +309,18 @@ export default function Navigation() {
                     >
                       <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
                       Email Buck
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="h-12 w-full">
+                    <a
+                      href="tel:+15305810747"
+                      onClick={() => {
+                        setIsOpen(false)
+                        trackConversion("phone_click", { location: "mobile_navigation" })
+                      }}
+                    >
+                      <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
+                      Call the shop
                     </a>
                   </Button>
                 </div>

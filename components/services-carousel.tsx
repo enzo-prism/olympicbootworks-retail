@@ -176,7 +176,7 @@ export default function ServicesCarousel() {
       <Button
         variant="outline"
         size="icon"
-        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm rounded-full shadow-md hidden md:flex"
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 h-11 w-11 bg-background/80 backdrop-blur-sm rounded-full shadow-md"
         onClick={prevSlide}
         aria-controls="services-carousel-track"
       >
@@ -187,7 +187,7 @@ export default function ServicesCarousel() {
       <Button
         variant="outline"
         size="icon"
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm rounded-full shadow-md hidden md:flex"
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 h-11 w-11 bg-background/80 backdrop-blur-sm rounded-full shadow-md"
         onClick={nextSlide}
         aria-controls="services-carousel-track"
       >
@@ -196,21 +196,26 @@ export default function ServicesCarousel() {
       </Button>
 
       {/* Pagination Indicators */}
-      <div className="flex justify-center mt-4 gap-2">
+      <div className="flex justify-center mt-4">
         {services.map((_, index) => (
           <button
             key={index}
-            className={cn(
-              "w-2 h-2 rounded-full transition-all",
-              currentIndex === index ? "bg-primary w-6" : "bg-gray-300 dark:bg-gray-600",
-            )}
+            className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={() => {
               setCurrentIndex(index)
             }}
             aria-label={`Go to slide ${index + 1}`}
             aria-current={currentIndex === index ? "true" : undefined}
             aria-controls="services-carousel-track"
-          />
+          >
+            <span
+              aria-hidden="true"
+              className={cn(
+                "h-2 rounded-full transition-all",
+                currentIndex === index ? "bg-primary w-6" : "w-2 bg-muted-foreground/40",
+              )}
+            />
+          </button>
         ))}
       </div>
 

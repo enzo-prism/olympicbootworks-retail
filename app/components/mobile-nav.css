@@ -17,7 +17,7 @@
     transform: translateY(-50%);
     width: 4px;
     height: 24px;
-    background-color: var(--primary);
+    background-color: hsl(var(--primary));
     border-radius: 0 4px 4px 0;
   }
 
@@ -29,7 +29,7 @@
 
   /* Improved focus states for accessibility */
   .mobile-nav-link:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -52,8 +52,8 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    background-color: var(--background);
-    border-bottom: 1px solid var(--border);
+    background-color: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
   }
 }
 
