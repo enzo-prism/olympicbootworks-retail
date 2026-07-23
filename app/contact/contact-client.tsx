@@ -1,17 +1,27 @@
 "use client"
 import { useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
+import CopyEmailButton from "@/components/copy-email-button"
 import { Button } from "@/components/ui/button"
 import LocationCard from "@/components/location-card"
 import { locations, seasonalScheduleNotice } from "@/data/locations"
-import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
+import { fittingInquiryParts, fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
+
+const northInquiryOptions = { locationName: "Olympic Valley (North Lake Tahoe)" }
+const southInquiryOptions = {
+  email: "SouthLake@Olympicbootworks.com",
+  locationName: "South Lake Tahoe",
+}
 
 export default function ContactClient() {
   useEffect(() => {
     trackConversion('contact_page_view')
   }, [])
+  const northInquiry = fittingInquiryParts(northInquiryOptions)
+  const southInquiry = fittingInquiryParts(southInquiryOptions)
   const faqs = [
     {
       question: "Are you open right now?",
@@ -66,14 +76,31 @@ export default function ContactClient() {
                 <p className="text-sm text-muted-foreground mb-6">1602 Squaw Valley Road, Box 3514</p>
                 <Button asChild size="lg" className="w-full">
                   <a
-                    href={fittingInquiryUrl()}
+                    href={fittingInquiryUrl(northInquiryOptions)}
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
                     <ButtonIcon label="Request an Appointment" href="mailto:buck@olympicbootworks.com" />
                     Request Appointment
                   </a>
                 </Button>
-                <p className="text-sm text-muted-foreground mt-3">buck@olympicbootworks.com</p>
+                <CopyEmailButton
+                  email={northInquiry.email}
+                  subject={northInquiry.subject}
+                  body={northInquiry.body}
+                  className="mt-3 justify-start text-sm text-muted-foreground"
+                  emailClassName="text-foreground"
+                  buttonClassName="text-primary"
+                  trackingLocation="contact_north_lake_tahoe"
+                />
+                <p className="text-sm text-muted-foreground mt-3">
+                  <a
+                    href={fittingInquiryUrl(northInquiryOptions)}
+                    className="hover:text-primary hover:underline"
+                    onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
+                  >
+                    buck@olympicbootworks.com
+                  </a>
+                </p>
                 <p className="text-sm text-muted-foreground mt-4">
                   Phone: <a 
                     href="tel:+15305810747" 
@@ -91,7 +118,7 @@ export default function ContactClient() {
                 <p className="text-sm text-muted-foreground mb-6">1235 Ski Run Blvd.</p>
                 <Button asChild size="lg" className="w-full">
                   <a
-                    href="mailto:SouthLake@Olympicbootworks.com?subject=Appointment%20Request"
+                    href={fittingInquiryUrl(southInquiryOptions)}
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
                     <ButtonIcon
@@ -101,7 +128,24 @@ export default function ContactClient() {
                     Request Appointment
                   </a>
                 </Button>
-                <p className="text-sm text-muted-foreground mt-3">SouthLake@Olympicbootworks.com</p>
+                <CopyEmailButton
+                  email={southInquiry.email}
+                  subject={southInquiry.subject}
+                  body={southInquiry.body}
+                  className="mt-3 justify-start text-sm text-muted-foreground"
+                  emailClassName="text-foreground"
+                  buttonClassName="text-primary"
+                  trackingLocation="contact_south_lake_tahoe"
+                />
+                <p className="text-sm text-muted-foreground mt-3">
+                  <a
+                    href={fittingInquiryUrl(southInquiryOptions)}
+                    className="hover:text-primary hover:underline"
+                    onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
+                  >
+                    SouthLake@Olympicbootworks.com
+                  </a>
+                </p>
                 <p className="text-sm text-muted-foreground mt-4">
                   Phone: <a 
                     href="tel:+15306004056" 
@@ -128,13 +172,21 @@ export default function ContactClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {locations.map((location) => (
-              <div key={location.id} className="aspect-video w-full rounded-lg overflow-hidden border shadow-sm">
-                <div className="w-full h-full bg-muted flex flex-col items-center justify-center p-4">
-                  <h3 className="font-sans tracking-normal font-semibold mb-2">{location.name}</h3>
-                  <p className="text-muted-foreground text-center mb-4">
+              <div key={location.id} className="relative aspect-video w-full rounded-lg overflow-hidden border shadow-sm">
+                <Image
+                  src={location.flagship ? "/images/shop-exterior.jpg" : "/ski-boot-fitting-station.jpg"}
+                  alt={`Olympic Bootworks — ${location.name}`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/25 to-transparent" aria-hidden="true" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <h3 className="font-sans tracking-normal font-semibold text-white">{location.name}</h3>
+                  <p className="mt-1 text-sm text-white/80">
                     {location.address.line1}, {location.address.city}, {location.address.state} {location.address.zip}
                   </p>
-                  <Button asChild size="sm" className="shadow-sm">
+                  <Button asChild size="sm" className="mt-4 shadow-sm">
                     <Link
                       href={`https://maps.google.com/?q=${encodeURIComponent(
                         `${location.address.line1}, ${location.address.city}, ${location.address.state} ${location.address.zip}`,

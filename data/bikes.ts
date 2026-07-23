@@ -193,10 +193,19 @@ export const bikeDetailUrl = (bike: Pick<Bike, "slug">) => `/e-bikes/${bike.slug
 
 export const getBikeBySlug = (slug: string) => bikes.find((bike) => bike.slug === slug)
 
-export const bikeInquiryUrl = (bike: Pick<Bike, "name" | "price">) => {
+/**
+ * Raw parts of the bike-inquiry template so copy-to-clipboard fallbacks
+ * (CopyEmailButton) can reuse the exact same text as the mailto link.
+ */
+export const bikeInquiryParts = (bike: Pick<Bike, "name" | "price">) => {
   const subject = `Fantic ${bike.name} inquiry`
   const body = `Hi Buck,\n\nI'm interested in the Fantic ${bike.name} listed at ${formatPrice(bike.price)}.\n\nMy height / usual bike size:\nWhere and how I ride:\nTest-ride interest:\nPickup location or shipping ZIP:\n\nPlease let me know about current availability, exact specifications, and next steps.\n\nThank you.`
-  return `mailto:buck@olympicbootworks.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  return { email: "buck@olympicbootworks.com", subject, body }
+}
+
+export const bikeInquiryUrl = (bike: Pick<Bike, "name" | "price">) => {
+  const { email, subject, body } = bikeInquiryParts(bike)
+  return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
 
 export const formatPrice = (value: number) =>

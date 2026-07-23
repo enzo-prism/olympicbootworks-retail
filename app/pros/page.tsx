@@ -1,4 +1,3 @@
-import "./pros.css"
 import Image from "next/image"
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
@@ -25,6 +24,8 @@ export default function ProsPage() {
       <VimeoVideoHero
         videoId="1096995547"
         height="large"
+        posterSrc="/images/pro-team.jpg"
+        posterAlt="Professional athletes with Olympic Bootworks"
         customContent={
           <MinimalHeroContent
             eyebrow="Trusted by Pros"
@@ -103,7 +104,7 @@ export default function ProsPage() {
       </section>
 
       {/* Featured Athlete Section */}
-      <section className="py-16">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] rounded-lg overflow-hidden">
@@ -116,8 +117,8 @@ export default function ProsPage() {
             </div>
 
             <div className="space-y-6">
-              <Badge className="px-3 py-1 text-sm bg-primary text-primary-foreground">Featured Athlete</Badge>
-              <h2 className="text-4xl font-bold">Travis Ganong</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Featured Athlete</p>
+              <h2 className="text-3xl md:text-4xl font-semibold">Travis Ganong</h2>
               <p className="text-xl font-medium text-muted-foreground">World Cup Alpine Ski Racer</p>
 
               <div className="flex flex-wrap gap-3">
@@ -215,7 +216,7 @@ export default function ProsPage() {
                   achievements={[{ label: "World Cup Top 5" }, { label: "Olympian" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #0c4a6e 0%, #0369a1 100%)"
+                  accent="primary"
                 />
                 <AthleteProfileCard
                   name="KC Oakley"
@@ -224,16 +225,10 @@ export default function ProsPage() {
                   achievements={[{ label: "World Cup Competitor" }, { label: "US Team" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #075985 0%, #0ea5e9 100%)"
+                  accent="muted"
                 />
               </div>
 
-              <div className="text-center">
-                <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
-                  <ButtonIcon label="View All Alpine Athletes" />
-                  View All Alpine Athletes
-                </Button>
-              </div>
             </TabsContent>
 
             {/* Freeride Athletes */}
@@ -246,7 +241,7 @@ export default function ProsPage() {
                   achievements={[{ label: "Freeride World Tour" }, { label: "X-Games Medalist" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #4c1d95 0%, #8b5cf6 100%)"
+                  accent="primary"
                 />
                 <AthleteProfileCard
                   name="Shelley Robertson"
@@ -255,16 +250,10 @@ export default function ProsPage() {
                   achievements={[{ label: "Film Athlete" }, { label: "Expedition Skier" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #6d28d9 0%, #a78bfa 100%)"
+                  accent="muted"
                 />
               </div>
 
-              <div className="text-center">
-                <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
-                  <ButtonIcon label="View All Freeride Athletes" />
-                  View All Freeride Athletes
-                </Button>
-              </div>
             </TabsContent>
 
             {/* Expedition Athletes */}
@@ -277,7 +266,7 @@ export default function ProsPage() {
                   achievements={[{ label: "Everest Summits" }, { label: "K2 Without Oxygen" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #064e3b 0%, #10b981 100%)"
+                  accent="primary"
                 />
                 <AthleteProfileCard
                   name="Doug Stoup"
@@ -286,7 +275,7 @@ export default function ProsPage() {
                   achievements={[{ label: "North Pole" }, { label: "South Pole" }, { label: "Antarctica Guide" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #065f46 0%, #34d399 100%)"
+                  accent="muted"
                 />
               </div>
 
@@ -298,7 +287,7 @@ export default function ProsPage() {
                   achievements={[{ label: "Warren Miller" }, { label: "Award-Winning Filmmaker" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #0f766e 0%, #2dd4bf 100%)"
+                  accent="primary"
                 />
                 <AthleteProfileCard
                   name="Andrew Draper"
@@ -307,16 +296,10 @@ export default function ProsPage() {
                   achievements={[{ label: "AMGA Certified" }, { label: "Expedition Leader" }]}
                   shopLink="/contact"
                   shopLabel="Request a Fitting"
-                  gradientColors="linear-gradient(135deg, #115e59 0%, #5eead4 100%)"
+                  accent="muted"
                 />
               </div>
 
-              <div className="text-center">
-                <Button variant="outline" className="gap-2 shadow-sm bg-transparent">
-                  <ButtonIcon label="View All Expedition Athletes" />
-                  View All Expedition Athletes
-                </Button>
-              </div>
             </TabsContent>
           </Tabs>
         </div>
@@ -331,13 +314,13 @@ export default function ProsPage() {
             performance goals with the same expertise we provide to the pros.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" variant="secondary" asChild className="gap-2 shadow-sm">
+            <Button size="lg" variant="on-dark" asChild className="gap-2">
               <Link href="/contact">
                 <Calendar className="h-5 w-5 mr-2" />
                 Request a Pro Fitting
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="shadow-sm bg-transparent">
+            <Button size="lg" variant="outline-on-dark" asChild>
               <Link href="/gallery">
                 <ButtonIcon label="View Our Work" href="/gallery" />
                 View Our Work

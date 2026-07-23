@@ -10,6 +10,7 @@ import CopyEmailButton from "@/components/copy-email-button"
 import { GoogleGIcon } from "@/components/google-g-icon"
 import { GOOGLE_BUSINESS_PROFILE_URL } from "@/lib/google-business"
 import {
+  bikeInquiryParts,
   bikes,
   familyLabels,
   formatPrice,
@@ -65,7 +66,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
   }
 
   return (
-    <div className="fantic-theme border-b bg-gradient-to-b from-red-50/70 via-background to-background dark:from-slate-950">
+    <div className="fantic-theme border-b bg-gradient-to-b from-primary/5 via-background to-background">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
@@ -157,6 +158,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
               </div>
               <CopyEmailButton
                 email="buck@olympicbootworks.com"
+                subject={bikeInquiryParts(bike).subject}
+                body={bikeInquiryParts(bike).body}
                 className="mt-4 justify-start text-sm text-muted-foreground"
                 emailClassName="text-foreground"
                 buttonClassName="text-primary"

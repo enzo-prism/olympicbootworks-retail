@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useId, useRef, useState } from "react"
-import NextImage from "./next-image"
+import SiteImage, { NEUTRAL_BLUR } from "./site-image"
 
 interface GalleryImage {
   src: string
@@ -83,16 +83,19 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
             aria-haspopup="dialog"
           >
             <div className="relative h-64">
-              <NextImage
+              <SiteImage
                 src={image.src}
                 alt={image.alt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                // No blur-up behind transparent logos; photographs get the neutral blur
+                placeholder={image.src.endsWith(".png") ? "empty" : "blur"}
+                blurDataURL={NEUTRAL_BLUR}
               />
             </div>
             {image.caption && (
-              <div className="p-3 text-sm text-center text-gray-600 dark:text-gray-300">{image.caption}</div>
+              <div className="p-3 text-sm text-center text-muted-foreground">{image.caption}</div>
             )}
           </button>
         ))}
@@ -113,12 +116,13 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
         >
           <div className="relative max-w-4xl max-h-[90vh] w-full">
             <div className="relative h-full">
-              <NextImage
+              <SiteImage
                 src={selectedImage.src}
                 alt={selectedImage.alt}
                 className="object-contain max-h-[80vh] mx-auto"
                 width={1200}
                 height={800}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority
               />
             </div>

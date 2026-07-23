@@ -3,11 +3,13 @@ import { Calendar } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import EnhancedImage from "@/components/enhanced-image"
+import SiteImage from "@/components/site-image"
 
 interface AchievementBadge {
   label: string
 }
+
+type AthleteAccent = "primary" | "muted"
 
 interface AthleteProfileCardProps {
   name: string
@@ -16,9 +18,16 @@ interface AthleteProfileCardProps {
   achievements: AchievementBadge[]
   shopLink: string
   shopLabel: string
-  gradientColors: string
+  accent?: AthleteAccent
   className?: string
   imageSrc?: string
+}
+
+const accentStyles: Record<AthleteAccent, string> = {
+  // Headline treatment: full ink-to-glacial-blue sweep
+  primary: "bg-gradient-to-br from-ink to-primary",
+  // Subtler variant: mostly ink with a hint of primary
+  muted: "bg-gradient-to-br from-ink via-ink to-primary/60",
 }
 
 export default function AthleteProfileCard({
@@ -28,21 +37,21 @@ export default function AthleteProfileCard({
   achievements,
   shopLink,
   shopLabel,
-  gradientColors,
+  accent = "primary",
   className,
   imageSrc,
 }: AthleteProfileCardProps) {
   return (
     <div
       className={cn(
-        "rounded-xl p-6 shadow-md transition-all duration-300 hover:shadow-lg overflow-hidden relative",
+        "rounded-xl p-6 shadow-md transition-all duration-300 hover:shadow-lg overflow-hidden relative text-ink-foreground",
+        accentStyles[accent],
         className,
       )}
-      style={{ background: gradientColors }}
     >
       {imageSrc && (
         <div className="absolute inset-0 z-0 opacity-20">
-          <EnhancedImage
+          <SiteImage
             src={imageSrc}
             alt={name}
             fill
@@ -54,7 +63,7 @@ export default function AthleteProfileCard({
       )}
 
       <div className="relative z-10">
-        <h3 className="text-2xl font-bold text-white mb-1">{name}</h3>
+        <h3 className="text-2xl font-semibold font-sans tracking-normal text-white mb-1">{name}</h3>
         <p className="text-white/80 font-medium mb-4">{title}</p>
 
         <p className="text-white/90 mb-4 text-sm">{description}</p>
@@ -67,7 +76,7 @@ export default function AthleteProfileCard({
           ))}
         </div>
 
-        <Button asChild size="sm" className="gap-2 bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm">
+        <Button asChild size="sm" variant="outline-on-dark" className="gap-2">
           <Link href={shopLink}>
             <Calendar className="h-3 w-3" />
             {shopLabel}

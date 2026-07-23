@@ -59,8 +59,7 @@ export default function MinimalPageHero({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b bg-gradient-to-b from-sky-50/80 via-white to-white",
-        "dark:from-slate-950 dark:via-background dark:to-background",
+        "relative overflow-hidden border-b bg-gradient-to-b from-accent/40 via-background to-background",
         className,
       )}
     >
@@ -73,7 +72,7 @@ export default function MinimalPageHero({
             </p>
           ) : null}
 
-          <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+          <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
             {title}
           </h1>
 

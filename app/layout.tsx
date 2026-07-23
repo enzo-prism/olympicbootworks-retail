@@ -2,10 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Fraunces, Inter } from "next/font/google"
 import "./globals.css"
-import "./components/button-animations.css"
-import "./components/carousel.css"
-import "./components/mobile-nav.css"
-import "./components/video-background.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
@@ -86,7 +82,9 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        {/* forcedTheme guards against stale theme localStorage from the old
+            dark-mode era applying class="dark" against light-only tokens. */}
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" disableTransitionOnChange>
           <ScrollToTop />
           <div className="flex min-h-screen flex-col">
             <div className="fixed top-0 left-0 right-0 z-50 flex flex-col header-container">

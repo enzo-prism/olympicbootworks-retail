@@ -4,7 +4,7 @@ import { useState } from "react"
 import { ChevronDown, ChevronUp, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import EnhancedImage from "@/components/enhanced-image"
+import SiteImage, { NEUTRAL_BLUR } from "@/components/site-image"
 
 interface EnhancedTestimonialCardProps {
   name: string
@@ -35,12 +35,14 @@ export default function EnhancedTestimonialCard({
       <div className="flex items-center gap-4 mb-4">
         {imageSrc ? (
           <div className="relative h-12 w-12 overflow-hidden rounded-full">
-            <EnhancedImage
+            <SiteImage
               src={imageSrc}
               alt={name}
               fill
               className="object-cover"
               fallbackSrc={`/placeholder.svg?height=48&width=48&query=${encodeURIComponent(name.charAt(0))}`}
+              placeholder="blur"
+              blurDataURL={NEUTRAL_BLUR}
             />
           </div>
         ) : (

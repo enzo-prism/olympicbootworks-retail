@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import Link from "next/link"
 import { Home, RotateCcw } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function Error({
   error,
@@ -17,67 +18,26 @@ export default function Error({
   }, [error])
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "70vh",
-        textAlign: "center",
-        padding: "0 1rem",
-      }}
-    >
-      <h1 style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1rem" }}>Something went wrong!</h1>
-      <p style={{ color: "#6b7280", maxWidth: "28rem", marginBottom: "2rem" }}>
-        We're sorry, but something went wrong. Please try again or return to the home page.
-      </p>
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <button
-          onClick={reset}
-          style={{
-            display: "inline-flex",
-            gap: "0.5rem",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "0.375rem",
-            fontSize: "0.875rem",
-            fontWeight: "500",
-            height: "2.75rem",
-            paddingLeft: "1.5rem",
-            paddingRight: "1.5rem",
-            backgroundColor: "hsl(201, 100%, 36%)",
-            color: "white",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          <RotateCcw style={{ width: "1rem", height: "1rem" }} aria-hidden="true" />
-          Try again
-        </button>
-        <Link
-          href="/"
-          style={{
-            display: "inline-flex",
-            gap: "0.5rem",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "0.375rem",
-            fontSize: "0.875rem",
-            fontWeight: "500",
-            height: "2.75rem",
-            paddingLeft: "1.5rem",
-            paddingRight: "1.5rem",
-            border: "1px solid #e2e8f0",
-            backgroundColor: "transparent",
-            color: "inherit",
-            textDecoration: "none",
-          }}
-        >
-          <Home style={{ width: "1rem", height: "1rem" }} aria-hidden="true" />
-          Return Home
-        </Link>
+    <section className="py-16 md:py-24">
+      <div className="container mx-auto px-4 flex min-h-[60vh] flex-col items-center justify-center text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">Unexpected error</p>
+        <h1 className="text-3xl md:text-4xl font-semibold mb-4">Something went wrong</h1>
+        <p className="text-muted-foreground max-w-md mb-8">
+          We&apos;re sorry, but something went wrong. Please try again or return to the home page.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button onClick={reset} className="shadow-sm">
+            <RotateCcw className="h-4 w-4 mr-2" aria-hidden="true" />
+            Try again
+          </Button>
+          <Button asChild variant="outline" className="shadow-sm">
+            <Link href="/">
+              <Home className="h-4 w-4 mr-2" aria-hidden="true" />
+              Return Home
+            </Link>
+          </Button>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }

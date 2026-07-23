@@ -1,4 +1,4 @@
-import Image from "next/image"
+import SiteImage from "@/components/site-image"
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
@@ -40,15 +40,16 @@ export default function AboutPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] rounded-lg overflow-hidden order-2 lg:order-1">
-              <Image
+              <SiteImage
                 src="/images/buck-in-shop.jpg"
                 alt="Founder Buck Brown in the Olympic Bootworks shop"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
+                placeholder="blur"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                <div className="bg-white/90 dark:bg-black/90 backdrop-blur-sm rounded-lg p-4 shadow-lg">
+                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
                   <h3 className="font-sans tracking-normal font-bold text-primary">Buck Brown</h3>
                   <p className="text-sm text-foreground">Founder & Master Boot Fitter</p>
                 </div>

@@ -159,7 +159,6 @@ export default function Navigation() {
               fill
               sizes="40px"
               className="object-contain"
-              priority
             />
           </div>
           <span className="font-bold text-xl hidden xs:block">Olympic Bootworks</span>

@@ -14,7 +14,7 @@ import {
   Trophy,
   Zap,
 } from "lucide-react"
-import NextImage from "@/components/next-image"
+import SiteImage, { NEUTRAL_BLUR } from "@/components/site-image"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
@@ -113,12 +113,14 @@ export default function HeelLocSection() {
 
           <div className="relative order-1 lg:order-2">
             <div className="relative h-[400px] lg:h-[500px] rounded-lg overflow-hidden">
-              <NextImage
+              <SiteImage
                 src="/images/fitting-process-2.jpg"
                 alt="Heel-Loc custom footbed technology"
                 className="w-full h-full object-cover"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL={NEUTRAL_BLUR}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent flex items-end p-6">
                 <div className="bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">

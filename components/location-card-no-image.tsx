@@ -10,14 +10,12 @@ interface LocationCardNoImageProps {
   location: LocationData
   showHours?: boolean
   className?: string
-  colorScheme?: "blue" | "green" | "purple" | "amber"
 }
 
 export default function LocationCardNoImage({
   location,
   showHours = true,
   className = "",
-  colorScheme = "blue",
 }: LocationCardNoImageProps) {
   const fullAddress = `${location.address.line1}, ${location.address.city}, ${location.address.state} ${location.address.zip}`
   const groupedHours = location.hours.reduce<Array<{ label: string; hours: string }>>((groups, item) => {
@@ -35,76 +33,33 @@ export default function LocationCardNoImage({
     return groups
   }, [])
 
-  // Color schemes for different locations
-  const colorSchemes = {
-    blue: {
-      header: "bg-gradient-to-r from-blue-600 to-blue-400",
-      accent: "border-blue-200 bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:border-blue-800",
-      icon: "text-blue-600 dark:text-blue-400",
-      badge: "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/50 dark:text-blue-300 dark:border-blue-800",
-      hover: "hover:border-blue-300 hover:shadow-blue-100/50 dark:hover:border-blue-700",
-    },
-    green: {
-      header: "bg-gradient-to-r from-emerald-600 to-emerald-400",
-      accent: "border-emerald-200 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:border-emerald-800",
-      icon: "text-emerald-600 dark:text-emerald-400",
-      badge:
-        "bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-900/50 dark:text-emerald-300 dark:border-emerald-800",
-      hover: "hover:border-emerald-300 hover:shadow-emerald-100/50 dark:hover:border-emerald-700",
-    },
-    purple: {
-      header: "bg-gradient-to-r from-purple-600 to-purple-400",
-      accent: "border-purple-200 bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:border-purple-800",
-      icon: "text-purple-600 dark:text-purple-400",
-      badge:
-        "bg-purple-100 text-purple-800 border-purple-200 dark:bg-purple-900/50 dark:text-purple-300 dark:border-purple-800",
-      hover: "hover:border-purple-300 hover:shadow-purple-100/50 dark:hover:border-purple-700",
-    },
-    amber: {
-      header: "bg-gradient-to-r from-amber-600 to-amber-400",
-      accent: "border-amber-200 bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:border-amber-800",
-      icon: "text-amber-600 dark:text-amber-400",
-      badge:
-        "bg-amber-100 text-amber-800 border-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:border-amber-800",
-      hover: "hover:border-amber-300 hover:shadow-amber-100/50 dark:hover:border-amber-700",
-    },
-  }
-
-  const colors = colorSchemes[colorScheme]
-
   return (
     <div
       className={cn(
-        "bg-card border rounded-lg overflow-hidden shadow-sm transition-all duration-300 hover:shadow-lg",
-        colors.hover,
+        "bg-card border rounded-lg overflow-hidden shadow-sm transition-shadow duration-300 hover:shadow-lg",
         className,
       )}
     >
-      {/* Header with gradient background - improved alignment */}
-      <div className={cn("py-4 px-6 text-white", colors.header)}>
-        <div className="flex items-center justify-between">
+      {/* Header — ink band */}
+      <div className="py-4 px-6 bg-ink text-ink-foreground">
+        <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <MapPin className="h-5 w-5 flex-shrink-0" />
-            <h3 className="text-xl font-bold">{location.name}</h3>
+            <MapPin className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+            <h3 className="text-xl font-semibold font-sans tracking-normal">{location.name}</h3>
           </div>
           {location.flagship && (
-            <div
-              className={cn(
-                "px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1",
-                "bg-white/20 backdrop-blur-sm",
-              )}
-            >
-              <Award className="h-3 w-3" />
+            <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.22em]">
+              <Award className="h-3 w-3" aria-hidden="true" />
               Flagship
-            </div>
+            </span>
           )}
         </div>
       </div>
 
-      {/* Content - improved spacing */}
+      {/* Content */}
       <div className="p-6">
-        {/* Address - improved spacing and alignment */}
-        <div className={cn("rounded-lg p-4 mb-5 border", colors.accent)}>
+        {/* Address */}
+        <div className="rounded-lg p-4 mb-5 border bg-secondary/60">
           <div className="flex flex-col gap-1.5">
             <p className="font-medium">{location.address.line1}</p>
             {location.address.line2 && <p>{location.address.line2}</p>}
@@ -114,30 +69,30 @@ export default function LocationCardNoImage({
             <Link
               href={`https://maps.google.com/?q=${encodeURIComponent(fullAddress)}`}
               target="_blank"
-              className={cn("text-sm flex items-center gap-1 mt-2 hover:underline", colors.icon)}
+              className="text-sm flex items-center gap-1 mt-2 text-primary hover:underline"
             >
-              <ExternalLink className="h-3 w-3" />
+              <ExternalLink className="h-3 w-3" aria-hidden="true" />
               View on Map
             </Link>
           </div>
         </div>
 
-        {/* Phone - improved alignment */}
+        {/* Phone */}
         <div className="flex items-center gap-3 mb-5">
-          <div className={cn("p-2 rounded-full", colors.badge)}>
-            <Phone className={cn("h-4 w-4", colors.icon)} />
+          <div className="p-2 rounded-full bg-secondary">
+            <Phone className="h-4 w-4 text-primary" aria-hidden="true" />
           </div>
           <a href={`tel:${location.contact.phone.replace(/[^0-9]/g, "")}`} className="hover:underline">
             {location.contact.phone}
           </a>
         </div>
 
-        {/* Hours - improved spacing and alignment */}
+        {/* Hours */}
         {showHours && (
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-4">
-              <div className={cn("p-2 rounded-full", colors.badge)}>
-                <Clock className={cn("h-4 w-4", colors.icon)} />
+              <div className="p-2 rounded-full bg-secondary">
+                <Clock className="h-4 w-4 text-primary" aria-hidden="true" />
               </div>
               <h4 className="font-semibold">Current availability:</h4>
             </div>
@@ -151,7 +106,7 @@ export default function LocationCardNoImage({
               ))}
             </div>
             <p className="ml-10 mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
-            <Button variant="link" asChild className={cn("p-0 h-auto ml-10 mt-3", colors.icon)}>
+            <Button variant="link" asChild className="p-0 h-auto ml-10 mt-3">
               <Link href="/contact">
                 <ButtonIcon label="Request an Appointment" href="/contact" />
                 Request Appointment
@@ -160,8 +115,8 @@ export default function LocationCardNoImage({
           </div>
         )}
 
-        {/* Contact Button - improved spacing */}
-        <Button asChild variant="outline" className={cn("w-full border mt-2", colors.hover.replace("hover:", ""))}>
+        {/* Contact Button */}
+        <Button asChild variant="outline" className="w-full mt-2">
           <Link href="/contact">
             <ButtonIcon label="Contact This Location" href="/contact" />
             Contact This Location

@@ -32,8 +32,9 @@
     --banner-height: 2.5rem;
   }
 
-  /* Dark mode is intentionally not offered: the site forces defaultTheme="light"
-     and has no toggle, so no .dark token block exists. */
+  /* Dark mode is intentionally not offered: the site forces light theme
+     (forcedTheme in app/layout.tsx) and has no toggle, so no .dark token
+     block exists and no dark: variants should be added. */
 
   /* Fantic's red is scoped to e-bike merchandising so the core boot-fitting brand stays intact. */
   .fantic-theme {
@@ -73,9 +74,46 @@
     @apply font-display tracking-tight;
   }
 
+  /* Lucide icon defaults */
+  .lucide {
+    stroke-width: 2;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Consistent focus + disabled styles for plain buttons outside the shadcn
+     Button component (which carries its own focus-visible ring classes). */
+  button:focus-visible,
+  a[role="button"]:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  button:disabled,
+  a[role="button"][aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
-/* Mobile header adjustments */
+/* Fixed-header stack (location banner + navigation) */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.location-banner {
+  width: 100%;
+  z-index: 50;
+}
+
+.location-banner-content {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .location-banner {
     padding-top: 0.5rem;
@@ -89,244 +127,7 @@
   }
 }
 
-/* Hero section adjustments for mobile */
-.hero-section {
-  padding-top: calc(4rem + var(--banner-height, 2.5rem));
-  min-height: 100vh;
-}
-
 /* Smooth transitions for banner height changes */
 main {
   transition: padding-top 0.3s ease;
-}
-
-/* Hero section centering */
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-}
-
-/* Responsive adjustments for hero content */
-@media (max-width: 640px) {
-  .hero-content h1 {
-    font-size: 2rem;
-    line-height: 1.2;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .hero-buttons button,
-  .hero-buttons a {
-    width: 100%;
-    margin-bottom: 0.5rem;
-  }
-}
-
-/* Ensure the hero section takes appropriate space */
-.youtube-video-hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-}
-
-/* Location banner styling */
-.location-banner {
-  width: 100%;
-  z-index: 50;
-}
-
-.location-banner-content {
-  width: 100%;
-}
-
-/* Ensure proper spacing in the header */
-.header-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.animate-slideUp {
-  animation: slideUp 0.5s ease forwards;
-}
-
-.animate-pulse-white {
-  animation: pulse 2s infinite;
-}
-
-/* Hero button styles */
-.hero-button {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.hero-button::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
-}
-
-.hero-button:hover::after {
-  transform: translateX(100%);
-}
-
-/* New animations for the redesigned hero */
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 1.5s infinite;
-}
-
-/* Vimeo video background styles */
-.vimeo-background {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translateX(-50%) translateY(-50%);
-  z-index: -1;
-  overflow: hidden;
-}
-
-/* Gradient text effect */
-.text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  background-image: linear-gradient(to right, #ffffff, #f0f0f0);
-}
-
-/* Animated underline effect */
-.animated-underline {
-  position: relative;
-}
-
-.animated-underline::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: currentColor;
-  transition: width 0.3s ease;
-}
-
-.animated-underline:hover::after {
-  width: 100%;
-}
-
-/* Frosted glass effect */
-.frosted-glass {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Full-width hero styles */
-.full-width-hero {
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* Fix for container within full-width sections */
-.full-width-hero .container {
-  width: 100%;
-  max-width: var(--container-width, 1400px);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-/* Ensure content is properly positioned */
-.full-width-hero .relative.z-10 {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-}
-
-/* Fix for mobile devices */
-@media (max-width: 768px) {
-  .full-width-hero .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
 }

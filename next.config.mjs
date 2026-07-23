@@ -13,7 +13,7 @@ const securityHeaders = [
 
 const nextConfig = {
   images: {
-    qualities: [60, 75, 80, 85, 90],
+    qualities: [75],
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       // Privacy-enhanced YouTube embed poster images

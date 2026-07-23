@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Home } from "lucide-react"
+import { Home, Bike, Footprints } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
   title: "Page Not Found",
@@ -13,42 +14,35 @@ export const metadata: Metadata = {
 
 export default function AppNotFound() {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "70vh",
-        textAlign: "center",
-        padding: "0 1rem",
-      }}
-    >
-      <h1 style={{ fontSize: "3.75rem", fontWeight: "bold", marginBottom: "1rem" }}>404</h1>
-      <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "1.5rem" }}>Page Not Found</h2>
-      <p style={{ color: "#6b7280", maxWidth: "28rem", marginBottom: "2rem" }}>
-        Sorry, we couldn't find the page you're looking for.
-      </p>
-      <Link
-        href="/"
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: "0.375rem",
-          fontSize: "0.875rem",
-          fontWeight: "500",
-          height: "2.75rem",
-          paddingLeft: "1.5rem",
-          paddingRight: "1.5rem",
-          backgroundColor: "hsl(201, 100%, 36%)",
-          color: "white",
-          textDecoration: "none",
-        }}
-      >
-        <Home style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }} aria-hidden="true" />
-        Return Home
-      </Link>
-    </div>
+    <section className="py-16 md:py-24">
+      <div className="container mx-auto px-4 flex min-h-[60vh] flex-col items-center justify-center text-center">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">404 error</p>
+        <h1 className="text-3xl md:text-4xl font-semibold mb-4">Page not found</h1>
+        <p className="text-muted-foreground max-w-md mb-8">
+          Sorry, we couldn&apos;t find the page you&apos;re looking for. It may have been moved, or the link is out of
+          date.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button asChild className="shadow-sm">
+            <Link href="/">
+              <Home className="h-4 w-4 mr-2" aria-hidden="true" />
+              Return Home
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="shadow-sm">
+            <Link href="/e-bikes">
+              <Bike className="h-4 w-4 mr-2" aria-hidden="true" />
+              Explore E-Bikes
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="shadow-sm">
+            <Link href="/boot-fitting">
+              <Footprints className="h-4 w-4 mr-2" aria-hidden="true" />
+              Boot Fitting
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </section>
   )
 }

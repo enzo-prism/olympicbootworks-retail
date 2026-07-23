@@ -27,10 +27,11 @@ export default function GlobalError({
             minHeight: "100vh",
             textAlign: "center",
             padding: "0 1rem",
+            color: "hsl(215, 45%, 12%)",
           }}
         >
           <h1 style={{ fontSize: "2.25rem", fontWeight: "bold", marginBottom: "1rem" }}>Something went wrong!</h1>
-          <p style={{ color: "#6b7280", maxWidth: "28rem", marginBottom: "2rem" }}>
+          <p style={{ color: "hsl(215, 16%, 47%)", maxWidth: "28rem", marginBottom: "2rem" }}>
             We're sorry, but something went wrong. Please try again.
           </p>
           <button
@@ -46,7 +47,7 @@ export default function GlobalError({
               height: "2.75rem",
               paddingLeft: "1.5rem",
               paddingRight: "1.5rem",
-              backgroundColor: "hsl(201, 100%, 36%)",
+              backgroundColor: "hsl(205, 70%, 31%)",
               color: "white",
               border: "none",
               cursor: "pointer",

@@ -4,7 +4,7 @@ import { Award, Footprints, Ruler, Wrench } from "lucide-react"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import HeelLocSection from "@/components/heel-loc-section"
 import BootFittingCtas from "./boot-fitting-ctas"
-import NextImage from "@/components/next-image"
+import SiteImage from "@/components/site-image"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
 export const metadata: Metadata = {
@@ -78,12 +78,13 @@ export default function BootFittingPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[400px] lg:h-[480px] rounded-lg overflow-hidden">
-              <NextImage
+              <SiteImage
                 src="/images/buck-with-boot.jpg"
                 alt="Buck Brown working on a ski boot in the shop"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
+                placeholder="blur"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent"></div>
             </div>

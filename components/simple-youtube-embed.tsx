@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Play } from "lucide-react"
-import EnhancedImage from "@/components/enhanced-image"
+import SiteImage from "@/components/site-image"
 import { cn } from "@/lib/utils"
 
 interface SimpleYouTubeEmbedProps {
@@ -41,8 +41,10 @@ export default function SimpleYouTubeEmbed({
     }
   }
 
-  // YouTube thumbnail URL
+  // YouTube thumbnail URL. maxresdefault.jpg 404s for some videos, so fall
+  // back to hqdefault.jpg, which always exists.
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/${thumbnailQuality}.jpg`
+  const fallbackThumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 
   // YouTube embed URL with parameters
   const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&autoplay=${autoplay ? "1" : "0"}&mute=1`
@@ -61,12 +63,12 @@ export default function SimpleYouTubeEmbed({
           onBlur={() => setIsHovered(false)}
           aria-label={`Play video: ${title}`}
         >
-          <EnhancedImage
+          <SiteImage
             src={thumbnailUrl}
             alt={title}
             fill
             className={cn("object-cover transition-transform duration-300", isHovered && "scale-105")}
-            fallbackSrc={`/placeholder.svg?height=720&width=1280&query=${encodeURIComponent(title)}`}
+            fallbackSrc={fallbackThumbnailUrl}
           />
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <div

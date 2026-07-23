@@ -6,6 +6,7 @@ import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
 interface LocationCardProps {
@@ -100,12 +101,12 @@ export default function LocationCard({ location, showHours = true, className = "
 
         {location.contact.email && (
           <Button asChild variant="outline" className="w-full">
-            <Link 
-              href={`mailto:${location.contact.email}`}
+            <Link
+              href={fittingInquiryUrl({ email: location.contact.email, locationName: location.name })}
               onClick={() => trackConversion('email_click', { location: locationSlug })}
             >
               <ButtonIcon label="Request an Appointment" href={`mailto:${location.contact.email}`} />
-              Request Appointment - {location.contact.email}
+              Request Appointment
             </Link>
           </Button>
         )}

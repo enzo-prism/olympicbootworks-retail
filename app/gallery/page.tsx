@@ -3,7 +3,7 @@ import ButtonIcon from "@/components/button-icon"
 import ImageGallery from "@/components/image-gallery"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { Button } from "@/components/ui/button"
-import NextImage from "@/components/next-image"
+import SiteImage from "@/components/site-image"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -155,19 +155,23 @@ export default function GalleryPage() {
             </div>
             <div className="grid grid-cols-1 gap-4">
               <div className="relative h-80 rounded-lg overflow-hidden">
-                <NextImage
+                <SiteImage
                   src="/images/fitting-process.jpg"
                   alt="Boot fitting process"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover"
+                  placeholder="blur"
                 />
               </div>
               <div className="relative h-80 rounded-lg overflow-hidden">
-                <NextImage
+                <SiteImage
                   src="/images/fitting-process-2.jpg"
                   alt="Custom footbed molding"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover"
+                  placeholder="blur"
                 />
               </div>
             </div>

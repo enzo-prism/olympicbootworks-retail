@@ -8,7 +8,7 @@ import ServicesSection from "@/components/services-section"
 import HeelLocSection from "@/components/heel-loc-section"
 import { ArrowRight, Bike, Calendar, ChevronDown, Footprints, Mail } from 'lucide-react'
 import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
-import NextImage from "@/components/next-image"
+import SiteImage, { NEUTRAL_BLUR } from "@/components/site-image"
 import BikeCard from "@/components/bike-card"
 import { HeroPrimaryCTA, HeroSecondaryCTA } from "@/components/hero-cta"
 import CopyEmailButton from "@/components/copy-email-button"
@@ -61,6 +61,8 @@ export default function HomeClient() {
             </div>
             <CopyEmailButton
               email="buck@olympicbootworks.com"
+              subject="Fantic E-Bike Question"
+              body={"Hi Buck,\n\nI have a question about your Fantic e-bikes.\n\nWhat I'd like to know:\n\nThank you."}
               className="mt-4 text-sm text-white/85"
               emailClassName="font-semibold text-white"
               buttonClassName="text-white"
@@ -98,12 +100,14 @@ export default function HomeClient() {
               }
               className="group relative flex min-h-[220px] items-end overflow-hidden rounded-lg border bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
-              <NextImage
+              <SiteImage
                 src="/images/e-bikes/xmf-1-7.jpg"
                 alt="Fantic XMF 1.7 e-bike"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-80 transition-transform duration-500 group-hover:scale-[1.03]"
+                placeholder="blur"
+                blurDataURL={NEUTRAL_BLUR}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
               <div className="relative z-10 p-6 md:p-8">
@@ -130,12 +134,14 @@ export default function HomeClient() {
               }
               className="group relative flex min-h-[220px] items-end overflow-hidden rounded-lg border bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
-              <NextImage
+              <SiteImage
                 src="/images/buck-with-boot.jpg"
                 alt="Buck Brown fitting a ski boot"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-80 transition-transform duration-500 group-hover:scale-[1.03]"
+                placeholder="blur"
+                blurDataURL={NEUTRAL_BLUR}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
               <div className="relative z-10 p-6 md:p-8">
@@ -209,12 +215,14 @@ export default function HomeClient() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* aspect-[4/5] matches the photo's intrinsic 740x925 ratio so it renders uncropped */}
             <div className="relative aspect-[4/5] w-full max-w-[480px] mx-auto lg:mx-0 rounded-lg overflow-hidden">
-              <NextImage
+              <SiteImage
                 src="/images/fitting-process.jpg"
                 alt="Buck fitting a customer's foot on the casting stand in the Olympic Valley shop"
                 fill
                 sizes="(max-width: 1024px) 100vw, 480px"
                 className="object-cover"
+                placeholder="blur"
+                blurDataURL={NEUTRAL_BLUR}
               />
             </div>
 

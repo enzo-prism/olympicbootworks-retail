@@ -147,7 +147,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-200 dark:border-gray-800 mt-8 pt-8 text-center text-sm text-muted-foreground">
+        <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Olympic Bootworks. All rights reserved.</p>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
