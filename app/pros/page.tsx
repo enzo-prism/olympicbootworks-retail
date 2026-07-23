@@ -144,7 +144,7 @@ export default function ProsPage() {
                 Their attention to detail and expertise have been crucial to my success on the World Cup circuit."
               </blockquote>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <Button asChild className="gap-2 shadow-sm">
                   <Link href="/contact">
                     <Calendar className="h-4 w-4 mr-2" />
@@ -190,7 +190,7 @@ export default function ProsPage() {
 
           <Tabs defaultValue="alpine" className="w-full">
             <div className="flex justify-center mb-12">
-              <TabsList className="grid grid-cols-3 w-full max-w-md">
+              <TabsList className="grid grid-cols-3 w-full max-w-md [&>button]:px-2 [&>button]:text-xs sm:[&>button]:px-3 sm:[&>button]:text-sm">
                 <TabsTrigger value="alpine" id="alpine">
                   <Mountain className="h-4 w-4" aria-hidden="true" />
                   Alpine

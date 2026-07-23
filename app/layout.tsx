@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Fraunces, Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -24,6 +24,17 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
   axes: ["opsz"],
 })
+
+// Owner decision: lock pinch-zoom on mobile so a zoom-out can never strand the
+// layout in a "stuck" state showing empty canvas. (iOS Safari may still permit
+// forced zoom for accessibility; the layout itself must therefore also stay
+// overflow-free — see the mobile overflow checks in tests/.)
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.olympicbootworks.com"),

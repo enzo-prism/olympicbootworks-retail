@@ -95,7 +95,7 @@ export default function ContactClient() {
                 <p className="text-sm text-muted-foreground mt-3">
                   <a
                     href={fittingInquiryUrl(northInquiryOptions)}
-                    className="hover:text-primary hover:underline"
+                    className="hover:text-primary hover:underline break-all"
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
                     buck@olympicbootworks.com
@@ -140,7 +140,7 @@ export default function ContactClient() {
                 <p className="text-sm text-muted-foreground mt-3">
                   <a
                     href={fittingInquiryUrl(southInquiryOptions)}
-                    className="hover:text-primary hover:underline"
+                    className="hover:text-primary hover:underline break-all"
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
                     SouthLake@Olympicbootworks.com

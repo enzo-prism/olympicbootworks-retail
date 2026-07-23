@@ -92,19 +92,19 @@ export default function EBikesClient() {
           <p className="mx-auto mt-3 max-w-2xl text-white/80">
             Every bike begins with a clear website price and a direct conversation—never an online cart.
           </p>
-          <ol className="mx-auto mt-7 grid max-w-4xl gap-3 text-left sm:grid-cols-3">
+          <ol className="mx-auto mt-7 hidden sm:grid max-w-4xl gap-3 text-left sm:grid-cols-3">
             <li className="rounded-lg border border-white/15 bg-white/[0.06] p-4"><span className="font-bold">1. Compare</span><br /><span className="text-sm text-white/75">Read the model descriptions and prices.</span></li>
             <li className="rounded-lg border border-white/15 bg-white/[0.06] p-4"><span className="font-bold">2. Ask Buck</span><br /><span className="text-sm text-white/75">Share your size, terrain, and location.</span></li>
             <li className="rounded-lg border border-white/15 bg-white/[0.06] p-4"><span className="font-bold">3. Arrange</span><br /><span className="text-sm text-white/75">Confirm the bike, test ride, pickup, or shipping.</span></li>
           </ol>
-          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg" variant="on-dark" className="shadow-sm">
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row w-full max-w-xs sm:max-w-none mx-auto">
+            <Button asChild size="lg" variant="on-dark" className="w-full sm:w-auto">
               <Link href="#models">
                 <Bike className="mr-2 h-5 w-5" aria-hidden="true" />
                 Read bike descriptions
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline-on-dark" className="shadow-sm">
+            <Button asChild size="lg" variant="outline-on-dark" className="w-full sm:w-auto">
               <Link href="#test-ride">
                 <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
                 Request a test ride
@@ -188,13 +188,13 @@ export default function EBikesClient() {
           </div>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
             {locations.map((location) => (
-              <div key={location.id} className="rounded-lg border bg-card p-8 text-center">
+              <div key={location.id} className="rounded-lg border bg-card p-6 sm:p-8 text-center">
                 <h3 className="font-sans tracking-normal text-xl font-bold">{location.name}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
                   {location.address.line1}, {location.address.city}
                 </p>
                 <div className="mt-6 flex flex-col gap-3">
-                  <Button asChild>
+                  <Button asChild className="whitespace-normal h-auto min-h-10 py-2.5">
                     <a
                       href={`mailto:${location.contact.email}?subject=${testRideSubject}&body=${testRideBody}`}
                       onClick={() =>

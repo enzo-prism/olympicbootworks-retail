@@ -41,7 +41,7 @@ export default function HomeClient() {
             </p>
 
             {/* Primary actions */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xs sm:max-w-none mx-auto">
               <HeroPrimaryCTA
                 href="/e-bikes"
                 icon={<Bike className="h-5 w-5" aria-hidden="true" />}
@@ -63,7 +63,7 @@ export default function HomeClient() {
               email="buck@olympicbootworks.com"
               subject="Fantic E-Bike Question"
               body={"Hi Buck,\n\nI have a question about your Fantic e-bikes.\n\nWhat I'd like to know:\n\nThank you."}
-              className="mt-4 text-sm text-white/85"
+              className="mt-4 text-sm text-white/85 hidden sm:inline-flex"
               emailClassName="font-semibold text-white"
               buttonClassName="text-white"
               trackingLocation="home_hero_email_copy"
@@ -71,7 +71,7 @@ export default function HomeClient() {
             <a
               href={fittingInquiryUrl()}
               onClick={() => trackConversion("email_click", { location: "home_hero_fitting" })}
-              className="mt-6 inline-flex items-center gap-2 text-sm text-white/85 underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-sm"
+              className="mt-5 inline-flex flex-wrap justify-center max-w-full items-center gap-2 text-sm text-white/85 underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-sm"
             >
               <Footprints className="h-4 w-4" aria-hidden="true" />
               Here to ski? Request a custom boot fitting
@@ -185,14 +185,14 @@ export default function HomeClient() {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Button asChild size="lg">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xs sm:max-w-none mx-auto">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/e-bikes">
                 <Bike className="mr-2 h-5 w-5" aria-hidden="true" />
                 See all models &amp; pricing
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <Link href="/e-bikes#test-ride">
                 <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
                 Request a test ride
@@ -242,17 +242,17 @@ export default function HomeClient() {
                 to adapt to your feet over time.
               </p>
 
-              <dl className="mb-8 grid grid-cols-3 gap-4 border-y py-5">
+              <dl className="mb-8 grid grid-cols-3 gap-2 sm:gap-4 border-y py-5">
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-muted-foreground">Research</dt>
+                  <dt className="text-[11px] sm:text-xs uppercase tracking-wide sm:tracking-wider text-muted-foreground">Research</dt>
                   <dd className="mt-1 text-2xl font-display font-semibold text-foreground">20+ yrs</dd>
                 </div>
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-muted-foreground">Tahoe shops</dt>
+                  <dt className="text-[11px] sm:text-xs uppercase tracking-wide sm:tracking-wider text-muted-foreground">Tahoe shops</dt>
                   <dd className="mt-1 text-2xl font-display font-semibold text-foreground">2</dd>
                 </div>
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-muted-foreground">Fit for</dt>
+                  <dt className="text-[11px] sm:text-xs uppercase tracking-wide sm:tracking-wider text-muted-foreground">Fit for</dt>
                   <dd className="mt-1 text-2xl font-display font-semibold text-foreground">Pros</dd>
                 </div>
               </dl>
@@ -281,7 +281,7 @@ export default function HomeClient() {
 
       {/* Testimonials Section */}
       <section className="py-16 md:py-24 bg-secondary/60">
-        <div className="container">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
               From the community
@@ -333,14 +333,14 @@ export default function HomeClient() {
             Ride an Italian-built Fantic, or ski a boot built around your feet. Either way, it
             starts with a conversation with Buck.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild variant="on-dark" size="lg">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-xs sm:max-w-none mx-auto">
+            <Button asChild variant="on-dark" size="lg" className="w-full sm:w-auto">
               <Link href="/e-bikes">
                 <Bike className="h-5 w-5 mr-2" aria-hidden="true" />
                 Explore Fantic E-Bikes
               </Link>
             </Button>
-            <Button asChild variant="outline-on-dark" size="lg" className="backdrop-blur-sm">
+            <Button asChild variant="outline-on-dark" size="lg" className="backdrop-blur-sm w-full sm:w-auto">
               <a
                 href={fittingInquiryUrl()}
                 onClick={() => trackConversion("email_click", { location: "home_closing_fitting" })}

@@ -72,7 +72,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-4">
         {images.map((image, index) => (
           <button
             type="button"
@@ -82,20 +82,20 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
             aria-label={`Open image: ${image.alt}`}
             aria-haspopup="dialog"
           >
-            <div className="relative h-64">
+            <div className="relative h-40 sm:h-64">
               <SiteImage
                 src={image.src}
                 alt={image.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 25vw"
                 // No blur-up behind transparent logos; photographs get the neutral blur
                 placeholder={image.src.endsWith(".png") ? "empty" : "blur"}
                 blurDataURL={NEUTRAL_BLUR}
               />
             </div>
             {image.caption && (
-              <div className="p-3 text-sm text-center text-muted-foreground">{image.caption}</div>
+              <div className="hidden sm:block p-3 text-sm text-center text-muted-foreground">{image.caption}</div>
             )}
           </button>
         ))}

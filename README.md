@@ -35,6 +35,13 @@ The July 2026 redesign established an "alpine boutique" system. Stay inside it:
 - **Dark mode is intentionally not offered** — the layout forces the light theme and no `dark:` variants exist. Do not add them.
 - **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The background-video hero (`components/vimeo-video-hero.tsx`) defers the Vimeo player until after page load and always needs a `posterSrc`.
 
+### Mobile rules (owner decision, July 22, 2026)
+
+- Pinch-zoom is locked (`viewport` export in `app/layout.tsx`: `maximumScale: 1, userScalable: false`) so a zoom-out can never strand the layout. Because iOS can still force-zoom for accessibility, the layout itself must stay overflow-free: **nothing may lay out wider than the viewport at 320px**. The known traps are `whitespace-nowrap` buttons with long labels (Button's base class is nowrap — add `whitespace-normal h-auto` for long marketing labels), email addresses without `break-all`, flex rows without `flex-wrap`, and per-page carousel dots (use a counter on mobile).
+- The location banner renders as a single tappable line on mobile (`bannerPrimaryShort` in `data/locations.ts`); the full schedule row is `md:` and up.
+- Stacked CTA pairs use `w-full sm:w-auto` inside a `max-w-xs sm:max-w-none` wrapper so mobile buttons align to equal widths.
+- The hero uses `svh`-based height minus the fixed header (`--banner-height`), never raw `100vh`.
+
 ## Develop
 
 ```bash

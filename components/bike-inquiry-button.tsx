@@ -18,7 +18,7 @@ export default function BikeInquiryButton({
   className,
 }: BikeInquiryButtonProps) {
   return (
-    <Button asChild size="lg" className={cn("shadow-sm", className)}>
+    <Button asChild size="lg" className={cn("whitespace-normal h-auto min-h-11 py-2.5 px-4 sm:px-8 text-center", className)}>
       <a
         href={bikeInquiryUrl(bike)}
         onClick={() =>

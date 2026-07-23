@@ -85,7 +85,7 @@ export default function HeelLocSection() {
               {sports.map((sport) => (
                 <div
                   key={sport.name}
-                  className="flex flex-col items-center text-center p-3 rounded-lg bg-card hover:bg-accent/50 border transition-colors"
+                  className="flex flex-col items-center text-center p-3 rounded-lg bg-card hover:bg-accent/50 border transition-colors last:col-span-2 sm:last:col-span-1"
                 >
                   <sport.icon className="mb-1.5 h-6 w-6 text-primary" aria-hidden="true" />
                   <p className="text-sm font-medium text-foreground">{sport.name}</p>

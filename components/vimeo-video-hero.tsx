@@ -176,7 +176,7 @@ export default function VimeoVideoHero({
     small: "min-h-[40vh]",
     medium: "min-h-[60vh]",
     large: "min-h-[80vh]",
-    full: "min-h-screen",
+    full: "min-h-[calc(100svh-4rem-var(--banner-height,2.5rem))]",
   }
 
   return (

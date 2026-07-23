@@ -75,11 +75,6 @@ export default function GalleryPage() {
       alt: "Professional skier with Olympic Bootworks",
       caption: "Our pros are equipped with the best gear for the mountain",
     },
-    {
-      src: "/images/olympic-bootworks-transparent-logo.png",
-      alt: "Olympic Bootworks Logo",
-      caption: "The iconic Olympic Bootworks logo",
-    },
   ]
 
   return (

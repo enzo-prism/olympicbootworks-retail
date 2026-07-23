@@ -42,7 +42,7 @@ export default function ServicesSection() {
   return (
     <section id="services" className="scroll-mt-24 py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-10 md:mb-16">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
             What we do
           </p>

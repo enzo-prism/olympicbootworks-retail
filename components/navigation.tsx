@@ -95,7 +95,6 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
-  const [orientation, setOrientation] = useState<"portrait" | "landscape">("portrait")
 
   // Handle scroll effect for navigation
   useEffect(() => {
@@ -108,19 +107,6 @@ export default function Navigation() {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  // Handle orientation changes
-  useEffect(() => {
-    const checkOrientation = () => {
-      setOrientation(window.innerHeight > window.innerWidth ? "portrait" : "landscape")
-    }
-
-    // Check initial orientation
-    checkOrientation()
-
-    window.addEventListener("resize", checkOrientation)
-    return () => window.removeEventListener("resize", checkOrientation)
   }, [])
 
   // Close mobile menu when route changes
@@ -161,11 +147,11 @@ export default function Navigation() {
               className="object-contain"
             />
           </div>
-          <span className="font-bold text-xl hidden xs:block">Olympic Bootworks</span>
+          <span className="font-bold text-base xs:text-xl">Olympic Bootworks</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-2 lg:gap-3">
+        <nav className="hidden md:flex items-center gap-1.5 lg:gap-3">
           {navLinks.map((link) => (
             <NavLink key={link.href} href={link.href} icon={link.icon} isActive={isLinkActive(link.href)}>
               {link.label}
@@ -207,7 +193,7 @@ export default function Navigation() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className={cn("w-full sm:max-w-sm p-0 overflow-y-auto", orientation === "landscape" ? "pt-12" : "pt-16")}
+              className="w-full sm:max-w-sm p-0 overflow-y-auto"
             >
               <SheetTitle className="sr-only">Site navigation</SheetTitle>
               <SheetDescription className="sr-only">
@@ -279,7 +265,7 @@ export default function Navigation() {
                                 location: `mobile_navigation_${location.id}`,
                               })
                             }
-                            className="text-sm text-primary flex items-center gap-1 py-1"
+                            className="text-sm text-primary flex items-center gap-1 py-2.5"
                           >
                             <Phone className="h-3 w-3" />
                             {location.contact.phone}
@@ -288,7 +274,7 @@ export default function Navigation() {
                       ))}
                       <Link
                         href="/contact"
-                        className="text-primary hover:underline text-sm block mt-2"
+                        className="text-primary hover:underline text-sm inline-block py-2 mt-1"
                         onClick={() => setIsOpen(false)}
                       >
                         View Details & Map

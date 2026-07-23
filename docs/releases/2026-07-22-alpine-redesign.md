@@ -66,7 +66,31 @@ primary conversion.
 the non-breaking space, the Fantic band asserts `bg-ink`, and the `/shop`
 test now asserts the 308 redirect (same pattern as `/shop/boots`).
 
+## Mobile hardening (same-day follow-up)
+
+- Pinch-zoom locked via the `viewport` export (`maximumScale: 1`,
+  `userScalable: false`) — fixes the "zoomed-out stuck with white space"
+  report. The underlying overflow sources were also eliminated so forced
+  zoom on iOS still finds a clean canvas: the 18-page testimonial dot row
+  (mobile now shows a "1 / 18" counter), the `whitespace-nowrap` bike
+  inquiry buttons with long model names (now wrap), the /pros CTA row and
+  tab triggers, and email addresses without `break-all`. Every page
+  verified at 320px and 375px with zero unclipped overflow.
+- Location banner is a single tappable line on mobile
+  (`bannerPrimaryShort`); fixed header chrome dropped from ~214px (32% of
+  an iPhone SE screen) to ~101px (15%).
+- Hero heights use `svh` minus the fixed-header offset — the full
+  conversion stack now fits the first mobile screen.
+- Heading `text-balance`, equal-width stacked CTAs, 2-up mobile gallery,
+  compact /e-bikes intro (step cards md+), larger footer/copy-email/nav
+  tap targets, brand name visible in the phone header, no dead strip in
+  the menu sheet.
+
 ## Post-publish verification
 
 Follow README "Release checks": both 308 redirects, `/boot-fitting` 200,
-model routes, inquiry links, wordmark asset, mobile navigation.
+model routes, inquiry links, wordmark asset, mobile navigation. On a
+phone: no sideways scroll or pinch-zoom-out white space on /, /e-bikes,
+a long-name model page (e.g. /e-bikes/xmf-1-7-carbon-sport), and
+/contact; the banner is one line; the sticky bike bar clears the iOS
+home indicator.

@@ -106,17 +106,17 @@ export default function BootFittingPage() {
                 tell us what you feel, and we&apos;ll keep refining the shell, liner, and footbeds
                 until the boot disappears and the skiing is all that&apos;s left.
               </p>
-              <dl className="grid grid-cols-3 gap-4 border-y py-5">
+              <dl className="grid grid-cols-3 gap-2 sm:gap-4 border-y py-5">
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-muted-foreground">Research</dt>
+                  <dt className="text-[11px] sm:text-xs uppercase tracking-wide sm:tracking-wider text-muted-foreground">Research</dt>
                   <dd className="mt-1 text-2xl font-display font-semibold text-foreground">20+ yrs</dd>
                 </div>
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-muted-foreground">Tahoe shops</dt>
+                  <dt className="text-[11px] sm:text-xs uppercase tracking-wide sm:tracking-wider text-muted-foreground">Tahoe shops</dt>
                   <dd className="mt-1 text-2xl font-display font-semibold text-foreground">2</dd>
                 </div>
                 <div>
-                  <dt className="text-xs uppercase tracking-wider text-muted-foreground">Fit for</dt>
+                  <dt className="text-[11px] sm:text-xs uppercase tracking-wide sm:tracking-wider text-muted-foreground">Fit for</dt>
                   <dd className="mt-1 text-2xl font-display font-semibold text-foreground">Pros</dd>
                 </div>
               </dl>

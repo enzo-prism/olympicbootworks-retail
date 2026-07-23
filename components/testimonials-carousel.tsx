@@ -73,7 +73,13 @@ export default function TestimonialsCarousel() {
           <ChevronLeft className="h-4 w-4" />
         </Button>
 
-        <div className="flex">
+        {/* On mobile (1 card/page) there are too many pages for dots — a row of
+            44px targets would overflow the viewport. Show a compact counter
+            instead; dots return on md+ where the page count is small. */}
+        <span className="md:hidden min-w-[4.5rem] text-center text-sm tabular-nums text-muted-foreground" aria-live="polite">
+          {currentPage + 1} / {totalPages}
+        </span>
+        <div className="hidden md:flex max-w-full flex-wrap justify-center">
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
               key={index}

@@ -158,7 +158,7 @@ export default function ServicesCarousel() {
             return (
               <div
                 key={index}
-                className="w-full flex-shrink-0 px-4 py-6"
+                className="w-full flex-shrink-0 px-12 py-6"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${index + 1} of ${services.length}: ${service.title}`}
@@ -234,10 +234,6 @@ export default function ServicesCarousel() {
         </Button>
       </div>}
 
-      {/* Swipe Instructions - only shown on first load on mobile */}
-      <div className="text-center text-xs text-muted-foreground mt-2 md:hidden">
-        Swipe left or right to see more services
-      </div>
     </div>
   )
 }

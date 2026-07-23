@@ -21,10 +21,11 @@ export default function BikeStickyInquiryBar({ bike }: { bike: Bike }) {
             contentName: `Fantic ${bike.name}`,
           })
         }
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary text-base font-semibold text-primary-foreground shadow-md hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="flex min-h-12 h-auto py-2 w-full items-center justify-center gap-2 rounded-md bg-primary text-base font-semibold text-primary-foreground shadow-md hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         <Mail className="h-5 w-5" aria-hidden="true" />
-        Email Buck about this bike &middot; {formatPrice(bike.price)}
+        <span>Email Buck about this bike</span>
+        <span className="hidden xs:inline">&middot; {formatPrice(bike.price)}</span>
       </a>
     </div>
   )

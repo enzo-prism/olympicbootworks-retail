@@ -38,7 +38,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on Facebook"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors p-2 -m-2"
               >
                 <Facebook className="h-6 w-6" />
               </Link>
@@ -47,7 +47,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on Instagram"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors p-2 -m-2"
               >
                 <Instagram className="h-6 w-6" />
               </Link>
@@ -56,7 +56,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Check us out on Yelp"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors p-2 -m-2"
               >
                 <Star className="h-6 w-6" />
               </Link>
@@ -65,44 +65,44 @@ export default function Footer() {
 
           <div className="md:col-span-2 space-y-4">
             <h3 className="text-lg font-bold">Quick Links</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
-                <Link href="/" className="text-muted-foreground hover:text-primary text-sm">
+                <Link href="/" className="text-muted-foreground hover:text-primary text-sm inline-block py-1.5">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/e-bikes" className="text-primary hover:text-primary font-semibold text-sm">
+                <Link href="/e-bikes" className="text-primary hover:text-primary font-semibold text-sm inline-block py-1.5">
                   Fantic E-Bikes
                 </Link>
               </li>
               <li>
-                <Link href="/boot-fitting" className="text-primary hover:text-primary font-semibold text-sm">
+                <Link href="/boot-fitting" className="text-primary hover:text-primary font-semibold text-sm inline-block py-1.5">
                   Boot Fitting
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-muted-foreground hover:text-primary text-sm">
+                <Link href="/about" className="text-muted-foreground hover:text-primary text-sm inline-block py-1.5">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/pros" className="text-muted-foreground hover:text-primary text-sm">
+                <Link href="/pros" className="text-muted-foreground hover:text-primary text-sm inline-block py-1.5">
                   Pros
                 </Link>
               </li>
               <li>
-                <Link href="/gallery" className="text-muted-foreground hover:text-primary text-sm">
+                <Link href="/gallery" className="text-muted-foreground hover:text-primary text-sm inline-block py-1.5">
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link href="/testimonials" className="text-muted-foreground hover:text-primary text-sm">
+                <Link href="/testimonials" className="text-muted-foreground hover:text-primary text-sm inline-block py-1.5">
                   Testimonials
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary text-sm">
+                <Link href="/contact" className="text-muted-foreground hover:text-primary text-sm inline-block py-1.5">
                   Contact
                 </Link>
               </li>
@@ -150,7 +150,7 @@ export default function Footer() {
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Olympic Bootworks. All rights reserved.</p>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
+            <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground hover:underline inline-block py-1.5">
               Privacy
             </Link>
             <CookieSettingsButton />
@@ -158,7 +158,7 @@ export default function Footer() {
               href="https://www.design-prism.com/?utm_source=olympicbootworks&utm_medium=referral&utm_campaign=olympicbootworks_2025-07"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors inline-block py-1.5"
             >
               website design
             </Link>

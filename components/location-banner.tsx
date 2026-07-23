@@ -59,21 +59,32 @@ export default function LocationBanner() {
   return (
     <div ref={bannerRef} className="bg-background border-b border-border py-2 relative location-banner">
       <div className="container mx-auto pl-4 pr-14 md:px-14">
-        <div className="flex flex-col md:flex-row items-center justify-center text-center gap-2 md:gap-6 text-sm location-banner-content">
+        {/* Mobile: one tappable line. The full schedule detail lives on /contact. */}
+        <Link
+          href="/contact"
+          className="md:hidden flex items-center justify-center gap-1.5 py-1 text-xs location-banner-content"
+        >
+          <MapPin className="h-3 w-3 shrink-0 text-primary" aria-hidden="true" />
+          <span className="text-muted-foreground">{seasonalScheduleNotice.bannerPrimaryShort}</span>
+          <span className="font-semibold text-primary whitespace-nowrap">&middot; Request a time</span>
+        </Link>
+
+        {/* Desktop: full schedule row */}
+        <div className="hidden md:flex items-center justify-center text-center gap-6 text-sm location-banner-content">
           <div className="flex items-center gap-1">
             <MapPin className="h-3 w-3 text-primary" />
             <span className="font-medium">{seasonalScheduleNotice.label}:</span>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-1 md:gap-6">
+          <div className="flex items-center gap-6">
             <span className="text-muted-foreground">{seasonalScheduleNotice.bannerPrimary}</span>
-            <span className="hidden md:inline text-muted-foreground">|</span>
+            <span className="text-muted-foreground">|</span>
             <span className="text-muted-foreground">{seasonalScheduleNotice.bannerSecondary}</span>
-            <span className="hidden md:inline text-muted-foreground">|</span>
+            <span className="text-muted-foreground">|</span>
             <span className="text-muted-foreground">{locations.length} Tahoe locations</span>
           </div>
 
-          <Button asChild variant="link" size="sm" className="p-0 h-auto text-primary">
+          <Button asChild variant="link" size="sm" className="p-0 h-auto py-1.5 text-primary">
             <Link href="/contact">
               <ButtonIcon label="Request an Appointment" href="/contact" />
               Request Appointment

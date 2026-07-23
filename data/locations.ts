@@ -32,6 +32,8 @@ export const seasonalScheduleNotice = {
   summary:
     "Both Olympic Bootworks locations are open by appointment this summer for boot fitting and Fantic e-bike sales. Call or email to schedule a visit — regular store hours resume in the fall.",
   bannerPrimary: "Open by appointment at both locations",
+  /** Compact variant for the one-line mobile banner. */
+  bannerPrimaryShort: "Open by appointment",
   bannerSecondary: "Call, email, or request an appointment online",
   hoursStatus: "By appointment this summer — regular hours resume in the fall",
 }

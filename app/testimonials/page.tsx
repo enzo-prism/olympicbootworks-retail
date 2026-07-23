@@ -65,15 +65,15 @@ export default function TestimonialsPage() {
             <p className="text-muted-foreground mb-6">
               Ready to experience the Olympic Bootworks difference for yourself?
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap w-full max-w-xs sm:max-w-none mx-auto">
               <GoogleReviewButton size="lg" analyticsItemId="google_review_testimonials_footer" />
-              <Button asChild size="lg" className="shadow-sm">
+              <Button asChild size="lg" className="w-full sm:w-auto">
                 <Link href="/contact">
                   <ButtonIcon label="Request a Fitting" href="/contact" />
                   Request a Fitting
                 </Link>
               </Button>
-              <Button asChild className="shadow-sm" size="lg">
+              <Button asChild className="w-full sm:w-auto" size="lg">
                 <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
               </Button>
             </div>

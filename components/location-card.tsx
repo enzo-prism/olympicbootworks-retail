@@ -73,7 +73,7 @@ export default function LocationCard({ location, showHours = true, className = "
               <div className="flex items-center gap-2 mt-2">
                 <Mail className="h-4 w-4 text-primary" />
                 <a 
-                  href={`mailto:${location.contact.email}`} 
+                  href={`mailto:$<span className="break-all">{location.contact.email}</span>`} 
                   className="text-sm text-primary hover:underline"
                   onClick={() => trackConversion('email_click', { location: locationSlug })}
                 >

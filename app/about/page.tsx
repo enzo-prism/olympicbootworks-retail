@@ -180,14 +180,14 @@ export default function AboutPage() {
             Ready to transform your performance and comfort? Request a fitting appointment or visit our shop to learn how our
             custom solutions can elevate your experience.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" variant="on-dark">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-xs sm:max-w-none mx-auto">
+            <Button asChild size="lg" variant="on-dark" className="w-full sm:w-auto">
               <Link href="/boot-fitting">
                 <ButtonIcon label="Custom Boot Fitting" href="/boot-fitting" />
                 Custom Boot Fitting
               </Link>
             </Button>
-            <Button size="lg" variant="outline-on-dark" asChild className="backdrop-blur-sm">
+            <Button size="lg" variant="outline-on-dark" asChild className="backdrop-blur-sm w-full sm:w-auto">
               <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
             </Button>
           </div>
