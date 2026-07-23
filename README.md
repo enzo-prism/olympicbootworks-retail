@@ -14,7 +14,8 @@ GitHub `main` is the source of truth; republish from Replit after syncing `main`
 - Buck confirms current availability, size, color, exact specifications, payment, pickup, and available shipping.
 - Do not publish exact inventory quantities.
 - Do not publish technical specifications until the physical SKU and model year are confirmed.
-- `/shop` is retained as a static “How to Get a Bike” compatibility route. It has no storefront, cart, account, or checkout.
+- Boot fitting is the second core service line: `/boot-fitting` is its landing page, and every fitting CTA uses the prefilled inquiry template in `lib/fitting-inquiry.ts`.
+- `/shop` is a legacy compatibility route that permanently redirects (308) to `/e-bikes`. There is no storefront, cart, account, or checkout anywhere.
 
 ## Stack
 
@@ -23,6 +24,16 @@ GitHub `main` is the source of truth; republish from Replit after syncing `main`
 - Consent-gated GA4, Google Ads conversion measurement, and Hotjar
 - Replit Autoscale production hosting
 - No database, CMS, online storefront, or checkout integration
+
+## Design system
+
+The July 2026 redesign established an "alpine boutique" system. Stay inside it:
+
+- **Type**: Fraunces (display serif) for h1–h3 via a global rule; Inter for body. Both self-hosted through `next/font` in `app/layout.tsx`. Card-level h3s opt out with `font-sans tracking-normal`.
+- **Color**: tokens only, defined in `app/globals.css` — glacial-blue `primary`, `ink` (deep alpine navy) for dark bands, ice/stone `secondary`/`muted` tints. No raw hex, no `bg-gray-*`. Fantic red is scoped to `.fantic-theme` on e-bike merchandising.
+- **Patterns**: eyebrow labels are `text-xs font-semibold uppercase tracking-[0.22em] text-primary`; section rhythm is `py-16 md:py-24`; alternating bands use `bg-secondary/60`; closing CTAs use `bg-ink text-ink-foreground`.
+- **Dark mode is intentionally not offered** — the layout forces the light theme and no `dark:` variants exist. Do not add them.
+- **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The background-video hero (`components/vimeo-video-hero.tsx`) defers the Vimeo player until after page load and always needs a `posterSrc`.
 
 ## Develop
 
@@ -40,12 +51,17 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 | Concern | Location |
 |---|---|
 | Pages | `app/` |
+| Design tokens and global styles | `app/globals.css`, `tailwind.config.ts` |
 | Locations, hours, seasonal notice | `data/locations.ts` |
 | Testimonials | `data/testimonials.ts` |
 | E-bike names, prices, descriptions, and local images | `data/bikes.ts`, `public/images/e-bikes/` |
 | E-bike hub and model pages | `app/e-bikes/` |
-| Static “How to Get a Bike” route | `app/shop/page.tsx` |
+| Boot-fitting landing page | `app/boot-fitting/` |
+| Fitting inquiry template (mailto + copy fallback) | `lib/fitting-inquiry.ts` |
+| Legacy `/shop` 308 redirect | `app/shop/route.ts` |
 | Model inquiry CTA | `components/bike-inquiry-button.tsx` |
+| Sticky mobile bike inquiry bar | `components/bike-sticky-inquiry-bar.tsx` |
+| Shared image component | `components/site-image.tsx` |
 | Structured data | `components/seo-jsonld.tsx`, e-bike pages |
 | Analytics configuration | `lib/analytics-config.ts` |
 | Conversion events | `lib/track-conversion.ts` |
@@ -77,6 +93,6 @@ The banner, location cards, footer, and JSON-LD read from `seasonalScheduleNotic
 
 ## Release checks
 
-GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/shop`, email links, phone links, mobile navigation, the Fantic wordmark asset, and the exact `/shop/boots` public-domain redirect.
+GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/boot-fitting`, email links, phone links, mobile navigation, the Fantic wordmark asset, and both public-domain redirects: `/shop` → `/e-bikes` and `/shop/boots` → `/contact` (308, no localhost).
 
-The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`.
+The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`. The July 22 alpine redesign (design system, `/boot-fitting`, conversion and performance passes) is documented in `docs/releases/2026-07-22-alpine-redesign.md`.

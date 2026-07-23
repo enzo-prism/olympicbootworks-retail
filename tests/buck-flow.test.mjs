@@ -6,7 +6,8 @@ const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8")
 
 test("homepage leads e-bike visitors into Buck's requested flow", async () => {
   const home = await read("components/home-client.tsx")
-  assert.match(home, /Fantic E-Bikes in Lake Tahoe/)
+  // The headline uses a non-breaking space to keep "Lake Tahoe" on one line.
+  assert.match(home, /Fantic E-Bikes in Lake(?:&nbsp;|\s)Tahoe/)
   assert.match(home, /href="\/e-bikes"/)
   assert.match(home, /Email Buck/)
   assert.match(home, /Italian Made Freedom/)
@@ -36,13 +37,17 @@ test("model detail page explains the direct inquiry and purchase process", async
   assert.doesNotMatch(detail, /shopUrl|checkoutPrice|ShoppingCart|secondary online purchase/)
 })
 
-test("legacy shop route is a static, inquiry-first buying guide", async () => {
-  const shop = await read("app/shop/page.tsx")
-  assert.match(shop, /How to Get Your Fantic E-Bike/)
-  assert.match(shop, /There is no online checkout/)
-  assert.match(shop, /BikeInquiryButton bike=\{bike\}/)
-  assert.match(shop, /See models & prices/)
-  assert.doesNotMatch(shop, /Ecwid|Lightspeed|my-store-|script\.js|cart/)
+test("legacy shop route permanently redirects to the canonical e-bikes hub", async () => {
+  const { loadTypescriptModule } = await import("./load-typescript-module.mjs")
+  const { GET, HEAD } = await loadTypescriptModule("../app/shop/route.ts", import.meta.url)
+
+  for (const handler of [GET, HEAD]) {
+    const response = handler()
+    assert.equal(response.status, 308)
+    assert.equal(response.headers.get("location"), "https://www.olympicbootworks.com/e-bikes")
+    assert.doesNotMatch(response.headers.get("location"), /localhost|127\.0\.0\.1/)
+    assert.equal(await response.text(), "")
+  }
 })
 
 test("global navigation has no cart or shop-now path", async () => {
@@ -75,8 +80,9 @@ test("e-bike process band uses the supplied Fantic logo on black", async () => {
 
   assert.match(page, /src="\/images\/brands\/fantic-wordmark\.jpg"/)
   assert.match(page, /alt="Fantic"/)
-  assert.match(page, /bg-\[#020107\] py-10 text-white/)
-  assert.doesNotMatch(page, /bg-primary py-10 text-primary-foreground/)
+  // The intro band sits on the ink (deep alpine navy) token, not raw hex or primary.
+  assert.match(page, /bg-ink py-12 md:py-16 text-white/)
+  assert.doesNotMatch(page, /bg-\[#020107\]|bg-primary py-10 text-primary-foreground/)
   assert.ok(logo.byteLength > 20_000, "Fantic logo should contain the supplied wordmark")
   assert.ok(logo.byteLength < 100_000, "Fantic logo should remain web-optimized")
 })

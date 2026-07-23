@@ -1,13 +1,14 @@
 # Design & Growth Opportunities
 
-Status: July 14, 2026, after the inquiry-first Fantic e-bike alignment.
+Status: July 22, 2026, after the alpine redesign (see `docs/releases/2026-07-22-alpine-redesign.md`).
 
 ## Completed
 
+- July 22, 2026 — Alpine design system (Fraunces/Inter, glacial-blue + ink tokens), dual-path homepage, `/boot-fitting` landing page with the prefilled fitting-inquiry template, sticky mobile bike inquiry bar, Copy-full-inquiry fallback, deferred Vimeo hero with posters, consolidated `SiteImage` with blur-up loading, accessibility pass (skip link, 44px targets, contrast), and `/shop` → `/e-bikes` 308.
 - Homepage leads with Fantic e-bikes, “Italian Made Freedom,” model descriptions, current website prices, and direct email to Buck.
 - All 11 models have indexable description pages and model-specific inquiry emails.
 - The public Ecwid/Lightspeed storefront, cart, checkout, stale checkout-price warning, external product CDN dependency, and storefront analytics were removed.
-- `/shop` now explains the direct three-step purchase process and lists every current website price.
+- The three-step purchase process is explained on the `/e-bikes` hub and every model page (`/shop` now redirects to the hub).
 - Product imagery is self-hosted in `public/images/e-bikes/`.
 - Unverified inventory status, strikethrough list prices, and percent-off claims were removed.
 - Global navigation now prioritizes E-Bikes & Prices, Boot Fitting, About, Locations & Contact, and Email Buck.
