@@ -1,6 +1,7 @@
 # Design & Growth Opportunities
 
-Status: July 22, 2026, after the alpine redesign (see `docs/releases/2026-07-22-alpine-redesign.md`).
+Status: July 24, 2026, after the Trina Fantic photography refresh
+(see `docs/releases/2026-07-24-trina-fantic-photo-refresh.md`).
 
 ## Completed
 
@@ -10,6 +11,9 @@ Status: July 22, 2026, after the alpine redesign (see `docs/releases/2026-07-22-
 - The public Ecwid/Lightspeed storefront, cart, checkout, stale checkout-price warning, external product CDN dependency, and storefront analytics were removed.
 - The three-step purchase process is explained on the `/e-bikes` hub and every model page (`/shop` now redirects to the hub).
 - Product imagery is self-hosted in `public/images/e-bikes/`.
+- Trina's original Tahoe/Olympic Valley Fantic photography now supports the homepage
+  hero, e-bike path card, and `/e-bikes` local story. Desktop/mobile hero crops and
+  optimized derivatives are self-hosted in `public/images/fantic-tahoe/`.
 - Unverified inventory status, strikethrough list prices, and percent-off claims were removed.
 - Global navigation now prioritizes E-Bikes & Prices, Boot Fitting, About, Locations & Contact, and Email Buck.
 
@@ -27,9 +31,11 @@ Status: July 22, 2026, after the alpine redesign (see `docs/releases/2026-07-22-
 
 Once Buck provides exact model-year/SKU documentation, add structured specification tables to `data/bikes.ts` and the model pages. Cite the source internally and do not infer missing values.
 
-### Better original photography
+### More original shop photography
 
-Replace catalog-style product shots with approved Fantic lifestyle photography and local shop/test-ride images where possible. Preserve the current self-hosted asset strategy.
+Add current shop, staff, and test-ride photography where it improves trust. Keep the
+clean catalog cutouts on model pages for product accuracy and preserve the current
+self-hosted asset strategy.
 
 ### Mobile conversion polish
 

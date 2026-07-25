@@ -114,6 +114,47 @@ export default function EBikesClient() {
         </div>
       </section>
 
+      {/* Local context from Trina's Olympic Valley Fantic shoot */}
+      <section className="overflow-hidden bg-secondary/40">
+        <div className="container mx-auto grid items-stretch px-4 py-12 md:grid-cols-2 md:gap-10 md:py-16 lg:gap-16">
+          <div className="relative min-h-[320px] overflow-hidden rounded-lg md:min-h-[460px]">
+            <Image
+              src="/images/fantic-tahoe/fantic-issimos-olympic-valley.webp"
+              alt="Fantic Issimo electric bikes at Olympic Valley with Palisades Tahoe behind them"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center py-8 md:py-10">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+              Olympic Valley, California
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold md:text-4xl">
+              Fantic, right at home in Tahoe
+            </h2>
+            <p className="mt-4 max-w-xl text-muted-foreground">
+              From village paths and lakefront errands to alpine trail days, compare Fantic
+              models with a local shop that knows the terrain.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Button asChild size="lg">
+                <Link href="#models">
+                  <Bike className="mr-2 h-5 w-5" aria-hidden="true" />
+                  Compare models
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="#test-ride">
+                  <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
+                  Request a test ride
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Model grid by family */}
       <section id="models" className="scroll-mt-24 py-16 md:py-24">
         <div className="container mx-auto px-4">

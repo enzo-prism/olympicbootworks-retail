@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import VimeoVideoHero from "@/components/vimeo-video-hero"
+import TahoeBikeHero from "@/components/tahoe-bike-hero"
 import TestimonialsCarousel from "@/components/testimonials-carousel"
 import { Button } from "@/components/ui/button"
 import ServicesSection from "@/components/services-section"
@@ -20,66 +20,60 @@ import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 export default function HomeClient() {
   return (
     <div className="flex flex-col">
-      {/* Hero — full-bleed video over a static poster, bike-led with both paths reachable */}
-      <VimeoVideoHero
-        videoId="1096995547"
-        height="full"
-        overlayOpacity={0.9}
-        posterSrc="/images/elite-skier.jpg"
-        customContent={
-          <div className="flex flex-col items-center justify-center text-center">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-white/80 md:text-sm">
-              Olympic Valley&ensp;&middot;&ensp;South Lake Tahoe
-            </p>
+      {/* Reliable photo hero featuring Trina's Tahoe e-bike photography. */}
+      <TahoeBikeHero>
+        <div className="flex max-w-2xl flex-col items-center text-center md:items-start md:text-left">
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.28em] text-white/80 md:text-sm">
+            Olympic Valley&ensp;&middot;&ensp;South Lake Tahoe
+          </p>
 
-            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight leading-[1.02] drop-shadow-lg">
-              Fantic E-Bikes in Lake&nbsp;Tahoe
-            </h1>
-            <p className="mt-4 text-white/85 text-base md:text-lg max-w-xl mx-auto drop-shadow">
-              Compare current models and prices, then email Buck for personal help choosing,
-              sizing, and test riding the right bike.
-            </p>
+          <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-display font-semibold tracking-tight leading-[1.02] drop-shadow-lg">
+            Fantic E-Bikes in Lake&nbsp;Tahoe
+          </h1>
+          <p className="mt-4 max-w-xl text-base text-white/90 drop-shadow md:text-lg">
+            Compare current models and prices, then email Buck for personal help choosing,
+            sizing, and test riding the right bike.
+          </p>
 
-            {/* Primary actions */}
-            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xs sm:max-w-none mx-auto">
-              <HeroPrimaryCTA
-                href="/e-bikes"
-                icon={<Bike className="h-5 w-5" aria-hidden="true" />}
-                onClick={() =>
-                  sendGa4Event("select_content", { content_type: "hero_cta", item_id: "explore_ebikes" })
-                }
-              >
-                Explore Fantic E-Bikes
-              </HeroPrimaryCTA>
-              <HeroSecondaryCTA
-                href="mailto:buck@olympicbootworks.com?subject=Fantic%20E-Bike%20Question"
-                icon={<Mail className="h-5 w-5" aria-hidden="true" />}
-                onClick={() => trackConversion("email_click", { location: "home_hero_ebikes" })}
-              >
-                Email Buck
-              </HeroSecondaryCTA>
-            </div>
-            <CopyEmailButton
-              email="buck@olympicbootworks.com"
-              subject="Fantic E-Bike Question"
-              body={"Hi Buck,\n\nI have a question about your Fantic e-bikes.\n\nWhat I'd like to know:\n\nThank you."}
-              className="mt-4 text-sm text-white/85 hidden sm:inline-flex"
-              emailClassName="font-semibold text-white"
-              buttonClassName="text-white"
-              trackingLocation="home_hero_email_copy"
-            />
-            <a
-              href={fittingInquiryUrl()}
-              onClick={() => trackConversion("email_click", { location: "home_hero_fitting" })}
-              className="mt-5 inline-flex flex-wrap justify-center max-w-full items-center gap-2 text-sm text-white/85 underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-sm"
+          {/* Primary actions */}
+          <div className="mt-6 flex w-full max-w-xs flex-col items-center gap-3 sm:max-w-none sm:flex-row md:justify-start">
+            <HeroPrimaryCTA
+              href="/e-bikes"
+              icon={<Bike className="h-5 w-5" aria-hidden="true" />}
+              onClick={() =>
+                sendGa4Event("select_content", { content_type: "hero_cta", item_id: "explore_ebikes" })
+              }
             >
-              <Footprints className="h-4 w-4" aria-hidden="true" />
-              Here to ski? Request a custom boot fitting
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+              Explore Fantic E-Bikes
+            </HeroPrimaryCTA>
+            <HeroSecondaryCTA
+              href="mailto:buck@olympicbootworks.com?subject=Fantic%20E-Bike%20Question"
+              icon={<Mail className="h-5 w-5" aria-hidden="true" />}
+              onClick={() => trackConversion("email_click", { location: "home_hero_ebikes" })}
+            >
+              Email Buck
+            </HeroSecondaryCTA>
           </div>
-        }
-      />
+          <CopyEmailButton
+            email="buck@olympicbootworks.com"
+            subject="Fantic E-Bike Question"
+            body={"Hi Buck,\n\nI have a question about your Fantic e-bikes.\n\nWhat I'd like to know:\n\nThank you."}
+            className="mt-4 text-sm text-white/85 hidden sm:inline-flex"
+            emailClassName="font-semibold text-white"
+            buttonClassName="text-white"
+            trackingLocation="home_hero_email_copy"
+          />
+          <a
+            href={fittingInquiryUrl()}
+            onClick={() => trackConversion("email_click", { location: "home_hero_fitting" })}
+            className="mt-5 inline-flex flex-wrap justify-center max-w-full items-center gap-2 text-sm text-white/85 underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-sm"
+          >
+            <Footprints className="h-4 w-4" aria-hidden="true" />
+            Here to ski? Request a custom boot fitting
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+      </TahoeBikeHero>
 
       {/* Scroll cue */}
       <div className="-mt-10 mb-6 flex justify-center">
@@ -101,8 +95,8 @@ export default function HomeClient() {
               className="group relative flex min-h-[220px] items-end overflow-hidden rounded-lg border bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <SiteImage
-                src="/images/e-bikes/xmf-1-7.jpg"
-                alt="Fantic XMF 1.7 e-bike"
+                src="/images/fantic-tahoe/fantic-issimo-tahoe-path.webp"
+                alt="Two riders exploring a Tahoe bike path on red Fantic Issimo e-bikes"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-80 transition-transform duration-500 group-hover:scale-[1.03]"

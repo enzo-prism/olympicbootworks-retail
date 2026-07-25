@@ -33,7 +33,7 @@ The July 2026 redesign established an "alpine boutique" system. Stay inside it:
 - **Color**: tokens only, defined in `app/globals.css` — glacial-blue `primary`, `ink` (deep alpine navy) for dark bands, ice/stone `secondary`/`muted` tints. No raw hex, no `bg-gray-*`. Fantic red is scoped to `.fantic-theme` on e-bike merchandising.
 - **Patterns**: eyebrow labels are `text-xs font-semibold uppercase tracking-[0.22em] text-primary`; section rhythm is `py-16 md:py-24`; alternating bands use `bg-secondary/60`; closing CTAs use `bg-ink text-ink-foreground`.
 - **Dark mode is intentionally not offered** — the layout forces the light theme and no `dark:` variants exist. Do not add them.
-- **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The background-video hero (`components/vimeo-video-hero.tsx`) defers the Vimeo player until after page load and always needs a `posterSrc`.
+- **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The homepage uses the art-directed static Tahoe hero in `components/tahoe-bike-hero.tsx`; its desktop and mobile WebP crops live in `public/images/fantic-tahoe/`. The Vimeo hero remains available for `/pros` and always needs a `posterSrc`.
 
 ### Mobile rules (owner decision, July 22, 2026)
 
@@ -62,6 +62,7 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 | Locations, hours, seasonal notice | `data/locations.ts` |
 | Testimonials | `data/testimonials.ts` |
 | E-bike names, prices, descriptions, and local images | `data/bikes.ts`, `public/images/e-bikes/` |
+| Fantic Tahoe lifestyle photography | `public/images/fantic-tahoe/` |
 | E-bike hub and model pages | `app/e-bikes/` |
 | Boot-fitting landing page | `app/boot-fitting/` |
 | Fitting inquiry template (mailto + copy fallback) | `lib/fitting-inquiry.ts` |
@@ -90,6 +91,11 @@ Do not add strikethrough list prices, percent-off claims, financing claims, “i
 
 Product photos are stored locally in `public/images/e-bikes/`; do not reintroduce a dependency on an external storefront CDN.
 
+Trina's July 2026 Tahoe/Olympic Valley lifestyle photography is stored as optimized,
+metadata-stripped WebP derivatives in `public/images/fantic-tahoe/`. Keep model cutouts
+for product accuracy and use these lifestyle images for local context. The homepage
+hero has separate desktop and mobile crops; preserve that art direction when replacing it.
+
 ## Conversion tracking
 
 Email, phone, and test-ride actions are the real conversions. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google and Hotjar scripts load only after analytics consent. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
@@ -102,4 +108,4 @@ The banner, location cards, footer, and JSON-LD read from `seasonalScheduleNotic
 
 GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/boot-fitting`, email links, phone links, mobile navigation, the Fantic wordmark asset, and both public-domain redirects: `/shop` → `/e-bikes` and `/shop/boots` → `/contact` (308, no localhost).
 
-The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`. The July 22 alpine redesign (design system, `/boot-fitting`, conversion and performance passes) is documented in `docs/releases/2026-07-22-alpine-redesign.md`.
+The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`. The July 22 alpine redesign (design system, `/boot-fitting`, conversion and performance passes) is documented in `docs/releases/2026-07-22-alpine-redesign.md`. The July 24 Trina photography integration is documented in `docs/releases/2026-07-24-trina-fantic-photo-refresh.md`.
