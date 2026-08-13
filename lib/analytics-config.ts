@@ -1,19 +1,20 @@
 /**
  * Central GA4 / Google Ads IDs. Override with NEXT_PUBLIC_* deployment variables when rotating tags.
  *
+ * Single GA4 web stream only:
+ *   keep   — property 508275630 / G-BDFVXXMY5Z
+ *   removed — Buck Brown property 493377728 / G-NDRPCY4GV0 (do not gtag config)
+ *
+ * Google Ads AW-17608821238 is a separate Ads tag, not the Buck Brown GA4 property.
+ *
  * If you use manual page_view (AnalyticsRouteListener), turn OFF GA4 Admin → Data streams →
  * Enhanced measurement → Page views → “Page changes based on browser history” to avoid duplicate hits.
  */
 export const GA4_PRIMARY_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID ?? "G-BDFVXXMY5Z"
 
-export const GA4_SECONDARY_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID_SECONDARY ?? "G-NDRPCY4GV0"
-
-export const GA4_MEASUREMENT_IDS = [
-  GA4_PRIMARY_MEASUREMENT_ID,
-  GA4_SECONDARY_MEASUREMENT_ID,
-] as const
+/** Site-loaded GA4 streams. Intentionally primary-only after dual-tag de-dupe. */
+export const GA4_MEASUREMENT_IDS = [GA4_PRIMARY_MEASUREMENT_ID] as const
 
 export const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17608821238"
 
