@@ -1,7 +1,12 @@
 "use client"
 
 import Script from "next/script"
-import { GA4_DEBUG_MODE, GA4_MEASUREMENT_IDS, GOOGLE_ADS_ID } from "@/lib/analytics-config"
+import {
+  GA4_DEBUG_MODE,
+  GA4_MEASUREMENT_IDS,
+  GA4_PRIMARY_MEASUREMENT_ID,
+  GOOGLE_ADS_ID,
+} from "@/lib/analytics-config"
 
 function gtagBootstrapScript(): string {
   const parts: string[] = [
@@ -23,10 +28,12 @@ function gtagBootstrapScript(): string {
 }
 
 export function Analytics() {
-  const primaryId = GA4_MEASUREMENT_IDS[0]
   return (
     <>
-      <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${primaryId}`} />
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA4_PRIMARY_MEASUREMENT_ID}`}
+      />
       <Script id="gtag-init" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: gtagBootstrapScript() }} />
     </>
   )

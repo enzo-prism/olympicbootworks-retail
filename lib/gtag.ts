@@ -32,6 +32,7 @@ type Ga4ParamValue = string | number | boolean | undefined | Ga4ItemParam[]
 
 /**
  * Sends an event to every configured GA4 data stream (not Google Ads).
+ * After dual-tag de-dupe this is the single keep stream (property 508275630).
  * Use recommended event names where possible; register custom params in GA4 > Admin > Custom definitions.
  */
 export function sendGa4Event(eventName: string, params?: Record<string, Ga4ParamValue>) {

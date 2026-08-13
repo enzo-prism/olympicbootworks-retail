@@ -12,7 +12,7 @@ declare global {
 
 /**
  * Next.js App Router does not fire full document loads on in-app navigation.
- * Sends explicit GA4 page_view on each route (and query) change to both web streams.
+ * Sends explicit GA4 page_view on each route (and query) change to the configured web stream.
  */
 export function AnalyticsRouteListener() {
   const pathname = usePathname()
