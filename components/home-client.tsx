@@ -6,7 +6,7 @@ import TestimonialsCarousel from "@/components/testimonials-carousel"
 import { Button } from "@/components/ui/button"
 import ServicesSection from "@/components/services-section"
 import HeelLocSection from "@/components/heel-loc-section"
-import { ArrowRight, Bike, Calendar, ChevronDown, Footprints, Mail } from 'lucide-react'
+import { ArrowRight, Award, Bike, Calendar, ChevronDown, Footprints, Mail } from 'lucide-react'
 import SimpleYouTubeEmbed from "@/components/simple-youtube-embed"
 import SiteImage, { NEUTRAL_BLUR } from "@/components/site-image"
 import BikeCard from "@/components/bike-card"
@@ -16,6 +16,9 @@ import { sendGa4Event } from "@/lib/gtag"
 import { trackConversion } from "@/lib/track-conversion"
 import { featuredBikes } from "@/data/bikes"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
+
+const USA_TODAY_10BEST_URL =
+  "https://10best.usatoday.com/awards/olympic-bootworks-olympic-valley-california/"
 
 export default function HomeClient() {
   return (
@@ -82,6 +85,36 @@ export default function HomeClient() {
           <span className="text-xs">Scroll</span>
         </div>
       </div>
+
+      {/* Buck's latest requested recognition, linked to the authoritative result. */}
+      <section aria-labelledby="tenbest-heading" className="border-y border-primary/20 bg-primary/5">
+        <div className="container mx-auto flex flex-col gap-5 px-4 py-8 md:flex-row md:items-center md:justify-between md:py-10">
+          <div className="flex max-w-3xl gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm">
+              <Award className="h-6 w-6" aria-hidden="true" />
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">
+                USA TODAY 10Best Readers&apos; Choice Awards · 2025
+              </p>
+              <h2 id="tenbest-heading" className="mt-1 text-2xl font-display font-semibold md:text-3xl">
+                Runner-up: Best Ski Shop
+              </h2>
+              <p className="mt-2 leading-7 text-muted-foreground">
+                Olympic Bootworks was recognized for more than 40 years of Lake Tahoe boot-fitting
+                expertise, including custom footbeds, ZipFit liners, and Buck Brown&apos;s Heel-Loc
+                technology.
+              </p>
+            </div>
+          </div>
+          <Button asChild variant="outline" className="w-full shrink-0 md:w-auto">
+            <a href={USA_TODAY_10BEST_URL} target="_blank" rel="noopener noreferrer">
+              See the 2025 result
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+            </a>
+          </Button>
+        </div>
+      </section>
 
       {/* Dual-path chooser — answers both audiences immediately below the fold */}
       <section aria-label="Choose your path" className="py-10 md:py-14">
