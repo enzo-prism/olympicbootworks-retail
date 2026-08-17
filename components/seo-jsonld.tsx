@@ -18,6 +18,12 @@ export default function SeoJsonLd() {
     name: "Olympic Bootworks",
     url: "https://www.olympicbootworks.com",
     logo: "https://www.olympicbootworks.com/images/olympic-bootworks-transparent-logo.png",
+    award: "2025 USA TODAY 10BEST Readers' Choice Awards runner-up for Best Ski Shop",
+    sameAs: [
+      "https://10best.usatoday.com/awards/olympic-bootworks-olympic-valley-california/",
+      "https://www.facebook.com/olympicbootworks/",
+      "https://www.instagram.com/olympicbootworks/",
+    ],
   }
 
   const schemaDayMap: Record<string, string> = {

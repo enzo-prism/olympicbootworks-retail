@@ -4,12 +4,12 @@ import HomeClient from "@/components/home-client"
 export const metadata: Metadata = {
   title: "Fantic E-Bikes & Custom Ski Boot Fitting",
   description:
-    "Olympic Bootworks in Lake Tahoe offers expert ski boot fitting, Heel-Loc custom footbeds, ZipFit liners, Fantic e-bikes, and mountain gear.",
+    "Olympic Bootworks is a 2025 USA TODAY 10Best Best Ski Shop runner-up offering expert Lake Tahoe ski boot fitting, Heel-Loc footbeds, ZipFit liners, and Fantic e-bikes.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Fantic E-Bikes & Custom Ski Boot Fitting | Olympic Bootworks",
     description:
-      "Olympic Bootworks in Lake Tahoe offers expert ski boot fitting, Heel-Loc custom footbeds, ZipFit liners, Fantic e-bikes, and mountain gear.",
+      "A 2025 USA TODAY 10Best Best Ski Shop runner-up offering expert Lake Tahoe ski boot fitting, Heel-Loc footbeds, ZipFit liners, and Fantic e-bikes.",
     url: "https://www.olympicbootworks.com/",
     type: "website",
     images: ["/images/og-default.jpg"],

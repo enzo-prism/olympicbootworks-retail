@@ -61,6 +61,8 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
       url: `https://www.olympicbootworks.com/e-bikes/${bike.slug}`,
       price: bike.price,
       priceCurrency: "USD",
+      itemCondition: "https://schema.org/NewCondition",
+      availability: "https://schema.org/LimitedAvailability",
       seller: { "@type": "Organization", name: "Olympic Bootworks" },
     },
   }

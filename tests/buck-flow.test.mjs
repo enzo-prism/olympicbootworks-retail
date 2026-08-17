@@ -12,6 +12,9 @@ test("homepage leads e-bike visitors into Buck's requested flow", async () => {
   assert.match(home, /Email Buck/)
   assert.match(home, /Italian Made Freedom/)
   assert.match(home, /CopyEmailButton/)
+  assert.match(home, /USA TODAY 10Best Readers/)
+  assert.match(home, /Runner-up: Best Ski Shop/)
+  assert.match(home, /10best\.usatoday\.com\/awards\/olympic-bootworks-olympic-valley-california/)
   assert.doesNotMatch(home, /Shop Now|ShoppingCart|item_id: "shop_now"/)
 })
 
@@ -34,7 +37,15 @@ test("model detail page explains the direct inquiry and purchase process", async
   assert.match(detail, /CopyEmailButton/)
   assert.match(detail, /BikeCallButton/)
   assert.match(detail, /className="mt-5 w-full lg:hidden"/)
+  assert.match(detail, /https:\/\/schema\.org\/LimitedAvailability/)
+  assert.match(detail, /https:\/\/schema\.org\/NewCondition/)
   assert.doesNotMatch(detail, /shopUrl|checkoutPrice|ShoppingCart|secondary online purchase/)
+})
+
+test("e-bike hub uses accurate limited-availability product markup", async () => {
+  const page = await read("app/e-bikes/page.tsx")
+  assert.match(page, /https:\/\/schema\.org\/LimitedAvailability/)
+  assert.match(page, /https:\/\/schema\.org\/NewCondition/)
 })
 
 test("legacy shop route permanently redirects to the canonical e-bikes hub", async () => {
