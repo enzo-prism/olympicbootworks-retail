@@ -5,22 +5,13 @@ import { Button } from "@/components/ui/button"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { Award, Footprints, Heart, ShieldCheck, Zap, Clock } from 'lucide-react'
 import LocationsSection from "@/app/about/locations-section"
-import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About Our Tahoe Boot Fitting Shop",
-  description:
-    "Learn the Olympic Bootworks story, from Buck Brown's Heel-Loc technology to two Lake Tahoe locations serving skiers, riders, and athletes.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title: "About Our Tahoe Boot Fitting Shop | Olympic Bootworks",
-    description:
-      "Learn the Olympic Bootworks story, from Buck Brown's Heel-Loc technology to two Lake Tahoe locations serving skiers, riders, and athletes.",
-    url: "https://www.olympicbootworks.com/about",
-    type: "article",
-    images: ["/images/og-default.jpg"],
-  },
-}
+  description: "Learn the Olympic Bootworks story, from Buck Brown's Heel-Loc technology to two Lake Tahoe locations serving skiers, riders, and athletes.",
+  path: "/about",
+})
 
 export default function AboutPage() {
   return (
@@ -28,7 +19,7 @@ export default function AboutPage() {
       <MinimalPageHero
         eyebrow="Lake Tahoe • Since 1994"
         title="About Olympic Bootworks"
-        description="Expert boot fitting, precision alignment, and lifetime support from two Tahoe locations."
+        description="Founded by boot fitter Buck Brown, Olympic Bootworks offers custom ski boot fitting and Fantic e-bikes in Olympic Valley and South Lake Tahoe."
         actions={[
           { href: "/contact", label: "Visit our locations" },
           { href: "/e-bikes", label: "Explore Fantic e-bikes", variant: "secondary" },
@@ -117,7 +108,7 @@ export default function AboutPage() {
               </div>
               <h3 className="font-sans tracking-normal text-xl font-semibold mb-2">Unweighted Alignment</h3>
               <p className="text-muted-foreground">
-                Ensuring your skeletal and muscular systems are fully balanced before creating your custom fit.
+                Using an unweighted casting process to shape a footbed around your individual foot position.
               </p>
             </div>
 
@@ -154,16 +145,36 @@ export default function AboutPage() {
                 <div className="mx-auto mb-3 h-12 w-12 flex items-center justify-center rounded-full bg-primary/10">
                   <Heart className="h-6 w-6 text-primary" />
                 </div>
-                <h4 className="font-semibold mb-1">Pain Relief</h4>
-                <p className="text-sm text-muted-foreground">Corrective positioning that alleviates discomfort</p>
+                <h4 className="font-semibold mb-1">Fit Refinement</h4>
+                <p className="text-sm text-muted-foreground">Shell and liner adjustments based on your feedback</p>
               </div>
               <div className="text-center">
                 <div className="mx-auto mb-3 h-12 w-12 flex items-center justify-center rounded-full bg-primary/10">
                   <ShieldCheck className="h-6 w-6 text-primary" />
                 </div>
-                <h4 className="font-semibold mb-1">Injury Prevention</h4>
+                <h4 className="font-semibold mb-1">Individual Support</h4>
                 <p className="text-sm text-muted-foreground">Personalized support for alignment and comfort</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-secondary/60">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-6">Two ways to get ready for Tahoe</h2>
+          <div className="grid gap-8 sm:grid-cols-2">
+            <div>
+              <h3 className="font-sans tracking-normal text-xl font-semibold mb-3">
+                <Link href="/boot-fitting" className="text-primary underline underline-offset-4">Custom ski boot fitting</Link>
+              </h3>
+              <p className="text-muted-foreground">Explore the fitting process, shell and liner work, Heel-Loc custom footbeds, and ZipFit liners. Request a fitting at Olympic Valley or South Lake Tahoe.</p>
+            </div>
+            <div>
+              <h3 className="font-sans tracking-normal text-xl font-semibold mb-3">
+                <Link href="/e-bikes" className="text-primary underline underline-offset-4">Fantic e-bikes</Link>
+              </h3>
+              <p className="text-muted-foreground">Compare mountain and urban models and website prices from an authorized Fantic dealer. Buck can confirm the exact bike, available sizes, test rides, and pickup or shipping options.</p>
             </div>
           </div>
         </div>

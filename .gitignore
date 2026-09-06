@@ -36,3 +36,5 @@ yarn-error.log*
 
 # working scraps / local assets
 /attached_assets
+/output/
+/.playwright-cli/

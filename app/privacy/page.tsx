@@ -1,12 +1,12 @@
-import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo"
 import Link from "next/link"
 import { CookieSettingsButton } from "@/components/cookie-settings-button"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy Notice",
   description: "How Olympic Bootworks handles information when you use this website or contact the shop.",
-  alternates: { canonical: "/privacy" },
-}
+  path: "/privacy",
+})
 
 export default function PrivacyPage() {
   return (

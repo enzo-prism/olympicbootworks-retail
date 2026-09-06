@@ -26,12 +26,12 @@ export default function ContactClient() {
     {
       question: "Are you open right now?",
       answer:
-        "Both locations are open by appointment this summer. Call or email and we'll set up a time for a boot fitting or a Fantic e-bike visit.",
+        seasonalScheduleNotice.summary,
     },
     {
       question: "Can I walk in?",
       answer:
-        "During the summer we're appointment-only, so please reach out first — same-day appointments are often available.",
+        "Please call or email your preferred shop before visiting. The team will confirm an appointment and the current schedule for your visit.",
     },
     {
       question: "When do regular hours resume?",
@@ -53,7 +53,9 @@ export default function ContactClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {locations.map((location) => (
-              <LocationCard key={location.id} location={location} />
+              <div key={location.id} id={location.id} className="scroll-mt-36">
+                <LocationCard location={location} />
+              </div>
             ))}
           </div>
         </div>
@@ -65,7 +67,10 @@ export default function ContactClient() {
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-semibold mb-4">Get in Touch</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Contact us directly to request an appointment, ask about products, or check current availability.
+                For <Link href="/boot-fitting" className="text-primary underline underline-offset-4">ski boot fitting</Link>,
+                email your preferred location with your dates, current boots, and fit concerns. For
+                {" "}<Link href="/e-bikes" className="text-primary underline underline-offset-4">Fantic e-bikes</Link>,
+                email Buck with the model and your riding goals to confirm sizing and availability.
               </p>
             </div>
 
@@ -166,7 +171,7 @@ export default function ContactClient() {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">Find Us</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Please request an appointment before visiting this summer.
+              {seasonalScheduleNotice.summary}
             </p>
           </div>
 

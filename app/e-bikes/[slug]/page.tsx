@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata, productJsonLd, breadcrumbJsonLd, serializeJsonLd } from "@/lib/seo"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Check, Mail } from "lucide-react"
@@ -21,6 +22,9 @@ type BikeDetailPageProps = {
   params: Promise<{ slug: string }>
 }
 
+// The catalog is finite: unknown models must return an HTTP 404 before streaming.
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return bikes.map((bike) => ({ slug: bike.slug }))
 }
@@ -30,18 +34,13 @@ export async function generateMetadata({ params }: BikeDetailPageProps): Promise
   const bike = getBikeBySlug(slug)
   if (!bike) return {}
 
-  return {
-    title: `Fantic ${bike.name} — Description, Price & Inquiry`,
-    description: `${bike.blurb} Read the plain-language description, see the current website price, and email Olympic Bootworks about sizing and availability.`,
-    alternates: { canonical: `/e-bikes/${bike.slug}` },
-    openGraph: {
-      title: `Fantic ${bike.name} | Olympic Bootworks`,
-      description: bike.blurb,
-      url: `https://www.olympicbootworks.com/e-bikes/${bike.slug}`,
-      type: "website",
-      images: [bike.image],
-    },
-  }
+  return pageMetadata({
+    title: `Fantic ${bike.name} — Price & Inquiry`,
+    description: `${bike.blurb} See the current website price and contact Olympic Bootworks in Lake Tahoe about sizing and availability.`,
+    path: `/e-bikes/${bike.slug}`,
+    image: bike.image,
+    imageAlt: `Fantic ${bike.name}`,
+  })
 }
 
 export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
@@ -49,29 +48,22 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
   const bike = getBikeBySlug(slug)
   if (!bike) notFound()
 
-  const productJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: `Fantic ${bike.name}`,
-    image: `https://www.olympicbootworks.com${bike.image}`,
-    description: bike.overview,
-    brand: { "@type": "Brand", name: "Fantic" },
-    offers: {
-      "@type": "Offer",
-      url: `https://www.olympicbootworks.com/e-bikes/${bike.slug}`,
-      price: bike.price,
-      priceCurrency: "USD",
-      itemCondition: "https://schema.org/NewCondition",
-      availability: "https://schema.org/LimitedAvailability",
-      seller: { "@type": "Organization", name: "Olympic Bootworks" },
-    },
-  }
+  const relatedBikes = bikes.filter((candidate) => candidate.slug !== bike.slug && candidate.family === bike.family)
+
+  const structuredData = [
+    productJsonLd(bike),
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Fantic E-Bikes", path: "/e-bikes" },
+      { name: `Fantic ${bike.name}`, path: `/e-bikes/${bike.slug}` },
+    ]),
+  ]
 
   return (
     <div className="fantic-theme border-b bg-gradient-to-b from-primary/5 via-background to-background">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
       />
 
       <BikeStickyInquiryBar bike={bike} />
@@ -185,6 +177,29 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
             </div>
           </div>
         </div>
+
+        <section className="mt-14 border-t pt-10" aria-labelledby="compare-models">
+          <h2 id="compare-models" className="text-2xl font-semibold">Compare your options</h2>
+          {relatedBikes.length > 0 && (
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedBikes.map((related) => (
+                <li key={related.slug} className="rounded-lg border bg-card p-5">
+                  <h3 className="font-sans tracking-normal font-semibold">
+                    <Link href={`/e-bikes/${related.slug}`} className="text-primary underline underline-offset-4">Fantic {related.name}</Link>
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{related.blurb}</p>
+                  <p className="mt-3 text-sm font-medium">Website price: {formatPrice(related.price)}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-6 leading-7 text-muted-foreground">
+            <Link href="/e-bikes" className="font-medium text-primary underline underline-offset-4">Compare all Fantic models and prices</Link>
+            {" or "}
+            <Link href="/contact" className="font-medium text-primary underline underline-offset-4">find our Olympic Valley and South Lake Tahoe shops</Link>.
+            {" Contact Buck to confirm where to see this model before visiting."}
+          </p>
+        </section>
       </div>
     </div>
   )

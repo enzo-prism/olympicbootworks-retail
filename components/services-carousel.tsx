@@ -40,24 +40,28 @@ export default function ServicesCarousel() {
     {
       icon: <Footprints className="h-6 w-6" />,
       title: "Custom Boot Fitting",
+      href: "/boot-fitting",
       description:
         "Our signature service uses shell modification, liner molding, and personalized adjustments to create a custom fit designed to support comfort and confident skiing.",
     },
     {
       icon: <Zap className="h-6 w-6" />,
       title: "Heel-Loc Orthotics",
+      href: "/boot-fitting",
       description:
         "Our proprietary Heel-Loc orthotics are designed to support natural alignment and efficient power transfer for skiers and other active customers.",
     },
     {
       icon: <Award className="h-6 w-6" />,
       title: "ZipFit Liner Specialists",
+      href: "/boot-fitting",
       description:
         "We fit premium ZipFit cork-composite liners that adapt over time and can provide a precise, supportive option for serious skiers and snowboarders.",
     },
     {
       icon: <Heart className="h-6 w-6" />,
       title: "Custom Footbeds",
+      href: "/boot-fitting",
       description:
         "Our custom footbeds are designed to support alignment, comfort, and a stable foundation across skiing and other active pursuits.",
     },

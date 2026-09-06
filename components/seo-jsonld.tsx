@@ -1,4 +1,5 @@
 import React from "react"
+import { ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
 import { locations, seasonalScheduleNotice, type LocationHours } from "@/data/locations"
 
 // Injects JSON-LD structured data into <head> safely.
@@ -7,6 +8,8 @@ export default function SeoJsonLd() {
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    publisher: { "@id": ORGANIZATION_ID },
     name: "Olympic Bootworks",
     url: "https://www.olympicbootworks.com",
     inLanguage: "en",
@@ -15,6 +18,7 @@ export default function SeoJsonLd() {
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": ORGANIZATION_ID,
     name: "Olympic Bootworks",
     url: "https://www.olympicbootworks.com",
     logo: "https://www.olympicbootworks.com/images/olympic-bootworks-transparent-logo.png",
@@ -55,7 +59,7 @@ export default function SeoJsonLd() {
 
   const openingHoursSpecification = (hours: LocationHours[]) =>
     hours.flatMap((entry) => {
-      if (entry.hours.toLowerCase() === "closed") {
+      if (!schemaDayMap[entry.day] || entry.hours.toLowerCase() === "closed") {
         return []
       }
 
@@ -85,13 +89,13 @@ export default function SeoJsonLd() {
       "@type": "SportingGoodsStore",
       "@id": `https://www.olympicbootworks.com/#${location.id}`,
       name: `Olympic Bootworks - ${location.name}`,
-      url: "https://www.olympicbootworks.com/contact",
+      url: `https://www.olympicbootworks.com/contact#${location.id}`,
+      image: "https://www.olympicbootworks.com/images/og-default.jpg",
       telephone: location.contact.phone,
       email: location.contact.email,
       description: [location.description, seasonalScheduleNotice.summary].filter(Boolean).join(" "),
       parentOrganization: {
-        "@type": "Organization",
-        name: "Olympic Bootworks",
+        "@id": ORGANIZATION_ID,
       },
       address: {
         "@type": "PostalAddress",
@@ -105,7 +109,7 @@ export default function SeoJsonLd() {
     }
   })
 
-  const safe = (obj: unknown) => JSON.stringify(obj).replace(/</g, "\\u003c")
+  const safe = serializeJsonLd
 
   return (
     <>

@@ -37,15 +37,15 @@ test("model detail page explains the direct inquiry and purchase process", async
   assert.match(detail, /CopyEmailButton/)
   assert.match(detail, /BikeCallButton/)
   assert.match(detail, /className="mt-5 w-full lg:hidden"/)
-  assert.match(detail, /https:\/\/schema\.org\/LimitedAvailability/)
-  assert.match(detail, /https:\/\/schema\.org\/NewCondition/)
+  assert.doesNotMatch(detail, /https:\/\/schema\.org\/LimitedAvailability/)
+  assert.doesNotMatch(detail, /https:\/\/schema\.org\/NewCondition/)
   assert.doesNotMatch(detail, /shopUrl|checkoutPrice|ShoppingCart|secondary online purchase/)
 })
 
-test("e-bike hub uses accurate limited-availability product markup", async () => {
+test("e-bike hub avoids unsupported stock and condition claims", async () => {
   const page = await read("app/e-bikes/page.tsx")
-  assert.match(page, /https:\/\/schema\.org\/LimitedAvailability/)
-  assert.match(page, /https:\/\/schema\.org\/NewCondition/)
+  assert.doesNotMatch(page, /https:\/\/schema\.org\/LimitedAvailability/)
+  assert.doesNotMatch(page, /https:\/\/schema\.org\/NewCondition/)
 })
 
 test("legacy shop route permanently redirects to the canonical e-bikes hub", async () => {

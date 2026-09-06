@@ -1,32 +1,24 @@
-import type { Metadata } from "next"
+import { pageMetadata, SITE_URL, ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
 import Link from "next/link"
 import { Award, Footprints, Ruler, Wrench } from "lucide-react"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import HeelLocSection from "@/components/heel-loc-section"
 import BootFittingCtas from "./boot-fitting-ctas"
 import SiteImage from "@/components/site-image"
+import { bootFittingFaqs } from "@/data/boot-fitting-faqs"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Custom Ski Boot Fitting in Lake Tahoe",
-  description:
-    "Olympic Bootworks offers expert ski boot fitting in Olympic Valley and South Lake Tahoe — biomechanical assessment, shell modification, Heel-Loc custom footbeds, and ZipFit liners.",
-  alternates: { canonical: "/boot-fitting" },
-  openGraph: {
-    title: "Custom Ski Boot Fitting in Lake Tahoe | Olympic Bootworks",
-    description:
-      "Biomechanical assessment, shell modification, Heel-Loc custom footbeds, and ZipFit liners from Tahoe's boot-fitting specialists.",
-    url: "https://www.olympicbootworks.com/boot-fitting",
-    type: "website",
-    images: ["/images/og-default.jpg"],
-  },
-}
+  description: "Olympic Bootworks offers expert ski boot fitting in Olympic Valley and South Lake Tahoe — biomechanical assessment, shell modification, Heel-Loc custom footbeds, and ZipFit liners.",
+  path: "/boot-fitting",
+})
 
 const services = [
   {
     icon: Ruler,
     title: "Biomechanical Assessment",
-    text: "Every fitting starts with your feet, ankles, and stance — not a boot box. We measure, watch you move, and diagnose before we recommend.",
+    text: "Every fitting starts with your feet, ankles, and stance — not a boot box. We measure, watch you move, and assess your fit before we recommend.",
   },
   {
     icon: Wrench,
@@ -60,9 +52,43 @@ const steps = [
   },
 ]
 
+const bootFittingJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${SITE_URL}/boot-fitting#service`,
+      name: "Custom ski boot fitting",
+      serviceType: "Ski boot fitting",
+      url: `${SITE_URL}/boot-fitting`,
+      description: "Ski boot fitting, shell and liner adjustments, Heel-Loc custom footbeds, and ZipFit liners in Olympic Valley and South Lake Tahoe.",
+      provider: { "@id": ORGANIZATION_ID },
+      areaServed: ["Olympic Valley", "South Lake Tahoe", "Lake Tahoe"],
+      availableChannel: ["olympic-valley", "south-lake-tahoe"].map((id) => ({
+        "@type": "ServiceChannel",
+        serviceLocation: { "@id": `${SITE_URL}/#${id}` },
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/boot-fitting#webpage`,
+      url: `${SITE_URL}/boot-fitting`,
+      name: "Custom Ski Boot Fitting in Lake Tahoe",
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": `${SITE_URL}/boot-fitting#service` },
+      mainEntity: bootFittingFaqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
+    },
+  ],
+}
+
 export default function BootFittingPage() {
   return (
     <div className="flex flex-col">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(bootFittingJsonLd) }} />
       <MinimalPageHero
         eyebrow="Olympic Valley · South Lake Tahoe"
         title="Custom Ski Boot Fitting"
@@ -98,7 +124,7 @@ export default function BootFittingPage() {
               <p className="text-muted-foreground mb-6">
                 Most boot problems aren&apos;t boot problems — they&apos;re fit problems. Founded by
                 Buck Brown after twenty-plus years of biomechanical research, Olympic Bootworks
-                approaches every fitting as a diagnosis: your feet, your stance, your skiing, and
+                starts every fitting with your feet, your stance, your skiing, and
                 only then the hardware.
               </p>
               <p className="text-muted-foreground mb-8">
@@ -187,6 +213,25 @@ export default function BootFittingPage() {
               </Link>
             </figcaption>
           </figure>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 bg-secondary/60" aria-labelledby="fitting-questions">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 id="fitting-questions" className="text-3xl md:text-4xl font-semibold mb-8">Ski boot fitting questions</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {bootFittingFaqs.map((faq) => (
+              <div key={faq.question} className="rounded-lg border bg-card p-6">
+                <h3 className="font-sans tracking-normal text-lg font-semibold mb-3">{faq.question}</h3>
+                <p className="text-sm leading-6 text-muted-foreground">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 text-muted-foreground">
+            <Link href="/contact" className="font-medium text-primary underline underline-offset-4">Find shop addresses, phone numbers, and the current schedule</Link>
+            {" · "}
+            <Link href="/about" className="font-medium text-primary underline underline-offset-4">Meet founder and boot fitter Buck Brown</Link>
+          </p>
         </div>
       </section>
 

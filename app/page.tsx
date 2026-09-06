@@ -1,20 +1,11 @@
-import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo"
 import HomeClient from "@/components/home-client"
 
-export const metadata: Metadata = {
-  title: "Fantic E-Bikes & Custom Ski Boot Fitting",
-  description:
-    "Olympic Bootworks is a 2025 USA TODAY 10Best Best Ski Shop runner-up offering expert Lake Tahoe ski boot fitting, Heel-Loc footbeds, ZipFit liners, and Fantic e-bikes.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: "Fantic E-Bikes & Custom Ski Boot Fitting | Olympic Bootworks",
-    description:
-      "A 2025 USA TODAY 10Best Best Ski Shop runner-up offering expert Lake Tahoe ski boot fitting, Heel-Loc footbeds, ZipFit liners, and Fantic e-bikes.",
-    url: "https://www.olympicbootworks.com/",
-    type: "website",
-    images: ["/images/og-default.jpg"],
-  },
-}
+export const metadata = pageMetadata({
+  title: "Lake Tahoe Ski Boot Fitting & Fantic E-Bikes",
+  description: "Custom ski boot fitting, Heel-Loc footbeds, ZipFit liners and Fantic e-bikes in Olympic Valley and South Lake Tahoe. Contact either shop to plan a visit.",
+  path: "/",
+})
 
 // Server Component that renders the interactive homepage client component.
 // This composition keeps metadata on the server and UI interactivity on the client, per Next.js guidance. [^1]

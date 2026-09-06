@@ -4,14 +4,13 @@ import ImageGallery from "@/components/image-gallery"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { Button } from "@/components/ui/button"
 import SiteImage from "@/components/site-image"
-import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Boot Fitting & Shop Gallery",
-  description:
-    "Explore Olympic Bootworks photos from the shop, boot fitting process, athletes, customers, and Lake Tahoe mountain community.",
-  alternates: { canonical: "/gallery" },
-}
+  description: "Explore Olympic Bootworks photos from the shop, boot fitting process, athletes, customers, and Lake Tahoe mountain community.",
+  path: "/gallery",
+})
 
 export default function GalleryPage() {
   const galleryImages = [

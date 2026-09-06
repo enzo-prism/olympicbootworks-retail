@@ -1,25 +1,26 @@
-import type { Metadata } from "next"
+import { pageMetadata, productJsonLd } from "@/lib/seo"
+import Link from "next/link"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import EBikesClient from "./ebikes-client"
-import { bikeDetailUrl, bikes, cheapestBikePrice, formatPrice } from "@/data/bikes"
+import { bikes, cheapestBikePrice, formatPrice } from "@/data/bikes"
 
-export const metadata: Metadata = {
-  title: "Fantic E-Bikes & Current Prices — Authorized US Dealer",
+export const metadata = pageMetadata({
+  title: "Fantic E-Bikes & Prices in Lake Tahoe",
   description: "Compare current Fantic e-bike prices and model descriptions, then email Olympic Bootworks about sizing, availability, test rides, and next steps.",
-  alternates: { canonical: "/e-bikes" },
-  openGraph: {
-    title: "Fantic E-Bikes & Current Prices | Olympic Bootworks",
-    description:
-      "Compare current Fantic e-bike prices, read clear model descriptions, and email Olympic Bootworks for personal help.",
-    url: "https://www.olympicbootworks.com/e-bikes",
-    type: "website",
-    images: ["/images/og-default.jpg"],
-  },
-}
-
-const SITE = "https://www.olympicbootworks.com"
+  path: "/e-bikes",
+})
 
 const faqs = [
+  {
+    question: "Where can I buy a Fantic e-bike in Lake Tahoe?",
+    answer:
+      "Olympic Bootworks is an authorized Fantic dealer with shops in Olympic Valley and South Lake Tahoe. Compare the models here, then email Buck to confirm the exact bike and arrange your visit. Bike purchases are arranged directly with the shop; there is no online checkout.",
+  },
+  {
+    question: "How do I choose between trail, all-mountain, and enduro models?",
+    answer:
+      "Start with how you ride. The XTF trail models focus on everyday singletrack; XMF all-mountain models suit varied terrain with more descending focus; XEF enduro models are aimed at more demanding descents. Tell Buck about your terrain and riding goals, then confirm the specifications and fit of the actual bike before deciding.",
+  },
   {
     question: "Can a bike be shipped?",
     answer:
@@ -56,22 +57,7 @@ function EBikesJsonLd() {
     itemListElement: bikes.map((bike, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      item: {
-        "@type": "Product",
-        name: `Fantic ${bike.name}`,
-        image: `${SITE}${bike.image}`,
-        description: bike.blurb,
-        brand: { "@type": "Brand", name: "Fantic" },
-        offers: {
-          "@type": "Offer",
-          url: `${SITE}${bikeDetailUrl(bike)}`,
-          price: bike.price,
-          priceCurrency: "USD",
-          itemCondition: "https://schema.org/NewCondition",
-          availability: "https://schema.org/LimitedAvailability",
-          seller: { "@type": "Organization", name: "Olympic Bootworks" },
-        },
-      },
+      item: productJsonLd(bike),
     })),
   }
 
@@ -112,6 +98,20 @@ export default function EBikesPage() {
           { href: "mailto:buck@olympicbootworks.com?subject=Fantic%20E-Bike%20Question", label: "Email Buck", variant: "secondary" },
         ]}
       />
+
+      <section className="border-b bg-secondary/60 py-10">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="text-2xl font-semibold mb-4">Your Lake Tahoe Fantic dealer</h2>
+          <p className="leading-7 text-muted-foreground">
+            Olympic Bootworks helps riders compare Fantic mountain and urban e-bikes, with shops in Olympic Valley and South Lake Tahoe.
+            Start with a model description and website price, then email Buck to confirm size, model year, exact specifications, and availability.
+            Test rides, pickup, and available shipping are arranged with the shop.
+          </p>
+          <p className="mt-4">
+            <Link href="/contact" className="font-medium text-primary underline underline-offset-4">Check Tahoe shop locations and appointment details</Link>
+          </p>
+        </div>
+      </section>
 
       <EBikesClient />
 

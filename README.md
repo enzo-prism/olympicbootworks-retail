@@ -6,6 +6,8 @@ Deployment target: Replit Autoscale, configured in `.replit` and published from 
 Public domain: https://www.olympicbootworks.com.
 GitHub `main` is the source of truth; republish from Replit after syncing `main`.
 
+Vercel also builds `main` in project `v0-olympic-bootworks-cy` under `enzo-design-prisms-projects`, at https://v0-olympic-bootworks-cy.vercel.app. On September 6, 2026, both custom-domain DNS records still resolved to Replit/Google infrastructure (`34.111.179.208`), despite appearing in Vercel aliases. A successful Vercel release does not update that public endpoint. Verify DNS, response headers, and release content on the custom domain separately.
+
 ## Current business direction
 
 - Olympic Bootworks does **not** use online checkout for its Fantic e-bikes.
@@ -70,7 +72,8 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 | Model inquiry CTA | `components/bike-inquiry-button.tsx` |
 | Sticky mobile bike inquiry bar | `components/bike-sticky-inquiry-bar.tsx` |
 | Shared image component | `components/site-image.tsx` |
-| Structured data | `components/seo-jsonld.tsx`, e-bike pages |
+| Metadata and structured data | `lib/seo.ts`, `components/seo-jsonld.tsx`, page components |
+| Deployed crawl regression audit | `scripts/verify-seo.mjs` (`pnpm verify:seo --base-url URL`) |
 | Analytics configuration | `lib/analytics-config.ts` |
 | Conversion events | `lib/track-conversion.ts` |
 | Privacy notice | `app/privacy/page.tsx` |
@@ -109,3 +112,17 @@ The banner, location cards, footer, and JSON-LD read from `seasonalScheduleNotic
 GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/boot-fitting`, email links, phone links, mobile navigation, the Fantic wordmark asset, and both public-domain redirects: `/shop` → `/e-bikes` and `/shop/boots` → `/contact` (308, no localhost).
 
 The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`. The July 22 alpine redesign (design system, `/boot-fitting`, conversion and performance passes) is documented in `docs/releases/2026-07-22-alpine-redesign.md`. The July 24 Trina photography integration is documented in `docs/releases/2026-07-24-trina-fantic-photo-refresh.md`.
+
+## SEO and answer-engine maintenance
+
+- Give every indexable page its own title, description, canonical, Open Graph and Twitter metadata. Canonicals use `https://www.olympicbootworks.com`, including on previews.
+- Keep important answers and links in initial HTML. Use visible questions about the actual fitting and inquiry process; avoid creating duplicate town pages or unverified expert claims.
+- Keep business identity, addresses, phones, seasonal status, and schema aligned with their shared data. Appointment-only periods must not produce invented opening times.
+- Product prices remain catalog-driven. Do not infer availability, condition, shipping terms, reviews, or return policies to fill structured-data fields.
+- Sitemap entries include canonical pages only. Omit modification dates unless backed by actual content edits; never replace every date at build time.
+- Wildcard crawler access allows search engines and AI search crawlers. Search access and model-training permissions are separate decisions. No special AI file or schema guarantees citations.
+- Google retired FAQ rich results in May 2026. Useful visible answers are maintained for customers, with no promise of FAQ search enhancements.
+- Run `pnpm check`, start the built app, then run `pnpm verify:seo --base-url http://localhost:3000`. Repeat the crawl against the deployed endpoint. Review mobile pages and inquiry links in a browser.
+- Search Console, Bing Webmaster Tools, and Google Business Profile are external follow-through: check indexing, citations, and listing consistency there; a code release alone does not establish ranking gains.
+
+See [September 6 SEO/AEO audit](docs/releases/2026-09-06-seo-aeo.md) for scope, evidence, and hosting follow-through.

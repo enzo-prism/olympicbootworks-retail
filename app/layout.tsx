@@ -71,9 +71,6 @@ export const metadata: Metadata = {
       "Olympic Bootworks is a Lake Tahoe ski boot fitting and mountain bike shop specializing in custom footbeds, ZipFit liners, and Fantic e-bikes.",
     images: ["/images/og-default.jpg"],
   },
-  alternates: {
-    canonical: "/",
-  },
 }
 
 export default function RootLayout({

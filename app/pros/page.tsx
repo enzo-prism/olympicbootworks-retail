@@ -8,14 +8,13 @@ import VimeoVideoHero from "@/components/vimeo-video-hero"
 import MinimalHeroContent from "@/components/minimal-hero-content"
 import { Instagram, Twitter, Globe, Calendar, Users, Award, Mountain, Snowflake, Compass } from 'lucide-react'
 import AthleteProfileCard from "@/components/athlete-profile-card"
-import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Pro Athlete Boot Fitting & Partnerships",
-  description:
-    "See how Olympic Bootworks supports pro skiers, snowboarders, explorers, and athletes with precision boot fitting and custom performance solutions.",
-  alternates: { canonical: "/pros" },
-}
+  description: "See how Olympic Bootworks supports pro skiers, snowboarders, explorers, and athletes with precision boot fitting and custom performance solutions.",
+  path: "/pros",
+})
 
 export default function ProsPage() {
   return (

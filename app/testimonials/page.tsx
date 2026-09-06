@@ -8,14 +8,13 @@ import { GoogleGIcon } from "@/components/google-g-icon"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { GOOGLE_BUSINESS_REVIEW_URL } from "@/lib/google-business"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
-import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Customer Reviews & Testimonials",
-  description:
-    "Read Olympic Bootworks customer reviews from skiers, riders, pickleball players, and athletes who found better comfort and performance.",
-  alternates: { canonical: "/testimonials" },
-}
+  description: "Read Olympic Bootworks customer reviews from skiers, riders, pickleball players, and athletes who found better comfort and performance.",
+  path: "/testimonials",
+})
 
 export default function TestimonialsPage() {
   return (

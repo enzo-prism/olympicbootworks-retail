@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "start": "next start",
     "test": "node --test",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:seo": "node scripts/verify-seo.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "1.1.4",
