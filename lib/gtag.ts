@@ -1,8 +1,10 @@
+import { sanitizeAnalyticsUrl, sanitizeAnalyticsReferrer } from "@/lib/analytics-url"
 import { GA4_MEASUREMENT_IDS } from "@/lib/analytics-config"
 import { hasAnalyticsConsent } from "@/lib/consent"
 
 declare global {
   interface Window {
+    __olympicBootworksCurrentPageReferrer?: string
     dataLayer?: unknown[]
     gtag?: (...args: unknown[]) => void
   }
@@ -14,17 +16,24 @@ export function waitForGtag(callback: () => void, maxRetries = 35, delay = 100) 
   }
 
   let retries = 0
+  let cancelled = false
+  let timer: ReturnType<typeof setTimeout> | undefined
   const checkGtag = () => {
+    if (cancelled || !hasAnalyticsConsent()) return
     if (window.gtag) {
       callback()
     } else if (retries < maxRetries) {
       retries++
-      setTimeout(checkGtag, delay)
+      timer = setTimeout(checkGtag, delay)
     } else {
       console.warn("Google tag (gtag) not available after waiting")
     }
   }
   checkGtag()
+  return () => {
+    cancelled = true
+    if (timer) clearTimeout(timer)
+  }
 }
 
 type Ga4ItemParam = Record<string, string | number | boolean | undefined>
@@ -40,10 +49,14 @@ export function sendGa4Event(eventName: string, params?: Record<string, Ga4Param
     return
   }
 
-  const payload = compactParams(params)
+  const payload = {
+    ...compactParams(params),
+    page_location: sanitizeAnalyticsUrl(window.location.href),
+    page_referrer: window.__olympicBootworksCurrentPageReferrer ?? sanitizeAnalyticsReferrer(document.referrer),
+  }
 
   const run = () => {
-    if (!window.gtag) {
+    if (!hasAnalyticsConsent() || !window.gtag) {
       return
     }
     for (const measurementId of GA4_MEASUREMENT_IDS) {
@@ -65,34 +78,39 @@ export function sendGa4Event(eventName: string, params?: Record<string, Ga4Param
  * Virtual page views for App Router navigations. Initial load is covered by this via AnalyticsRouteListener.
  * GA4 configs use send_page_view: false to avoid double-counting with this explicit event.
  */
-export function sendGa4PageView(pagePathWithQuery: string) {
-  if (!hasAnalyticsConsent()) {
-    return
-  }
+export function sendGa4PageView(pagePathWithQuery: string, onQueued?: () => void) {
+  if (!hasAnalyticsConsent()) return
+
+  // Capture now: a delayed tag must not pair an earlier route with a later URL/title.
+  const page_location = sanitizeAnalyticsUrl(pagePathWithQuery, window.location.origin)
+  if (!page_location) return
+  const url = new URL(page_location)
+  const page_path = `${url.pathname}${url.search}`
+  const page_title = document.title
 
   const run = () => {
-    if (!window.gtag) {
-      return
-    }
-    const page_path = pagePathWithQuery.startsWith("/") ? pagePathWithQuery : `/${pagePathWithQuery}`
-    const page_location = window.location.href
-    const page_title = document.title
-
+    if (!hasAnalyticsConsent() || !window.gtag) return
+    if (window.__olympicBootworksLastPageView === page_location) return
+    const page_referrer = window.__olympicBootworksLastPageView
+      ? sanitizeAnalyticsReferrer(window.__olympicBootworksLastPageView)
+      : sanitizeAnalyticsReferrer(document.referrer)
+    // Keep automatically collected engagement events aligned with the current virtual page.
+    window.gtag("set", { page_location, page_referrer, page_title })
     for (const measurementId of GA4_MEASUREMENT_IDS) {
       window.gtag("event", "page_view", {
         send_to: measurementId,
         page_path,
         page_location,
         page_title,
+        page_referrer,
       })
     }
+    window.__olympicBootworksLastPageView = page_location
+    window.__olympicBootworksCurrentPageReferrer = page_referrer
+    onQueued?.()
   }
 
-  if (window.gtag) {
-    run()
-  } else {
-    waitForGtag(run)
-  }
+  return waitForGtag(run)
 }
 
 function compactParams(params?: Record<string, Ga4ParamValue>) {

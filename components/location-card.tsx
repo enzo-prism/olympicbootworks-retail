@@ -62,7 +62,7 @@ export default function LocationCard({ location, showHours = true, className = "
         <div className="flex items-start gap-3 mb-4">
           <Phone className="h-5 w-5 text-primary shrink-0 mt-0.5" />
           <div>
-            <a 
+            <a
               href={`tel:${location.contact.phone.replace(/[^0-9+]/g, '')}`}
               className="text-muted-foreground hover:text-primary hover:underline"
               onClick={() => trackConversion('phone_click', { location: locationSlug })}
@@ -72,9 +72,9 @@ export default function LocationCard({ location, showHours = true, className = "
             {location.contact.email && (
               <div className="flex items-center gap-2 mt-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <a 
-                  href={`mailto:$<span className="break-all">{location.contact.email}</span>`} 
-                  className="text-sm text-primary hover:underline"
+                <a
+                  href={`mailto:${location.contact.email}`}
+                  className="break-all text-sm text-primary hover:underline"
                   onClick={() => trackConversion('email_click', { location: locationSlug })}
                 >
                   {location.contact.email}

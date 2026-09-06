@@ -17,6 +17,46 @@ test("analytics consent never breaks essential links when localStorage is blocke
     assert.equal(consent.readAnalyticsConsent(), null)
     assert.equal(consent.hasAnalyticsConsent(), false)
     assert.equal(consent.writeAnalyticsConsent("accepted"), false)
+    assert.equal(consent.hasAnalyticsConsent(), true)
+    assert.equal(consent.writeAnalyticsConsent("declined"), false)
+    assert.equal(consent.hasAnalyticsConsent(), false)
+  } finally {
+    if (previousWindow === undefined) delete globalThis.window
+    else globalThis.window = previousWindow
+  }
+})
+
+ test("withdrawal overrides stale accepted storage when writing fails", () => {
+  const previousWindow = globalThis.window
+  globalThis.window = {
+    location: { search: "" },
+    localStorage: { getItem: () => "accepted", setItem() { throw new Error("quota") } },
+  }
+  try {
+    assert.equal(consent.hasAnalyticsConsent(), true)
+    assert.equal(consent.writeAnalyticsConsent("declined"), false)
+    assert.equal(consent.hasAnalyticsConsent(), false)
+    delete globalThis.window.__olympicAnalyticsConsent
+    globalThis.window.location.search = "?_analytics_opt_out=1"
+    assert.equal(consent.hasAnalyticsConsent(), false)
+  } finally {
+    if (previousWindow === undefined) delete globalThis.window
+    else globalThis.window = previousWindow
+  }
+})
+
+test("session fallback preserves withdrawal across unmarked reloads", () => {
+  const previousWindow = globalThis.window
+  const session = new Map()
+  globalThis.window = {
+    location: { search: "" },
+    localStorage: { getItem: () => "accepted", setItem() { throw new Error("quota") } },
+    sessionStorage: { getItem: key => session.get(key), setItem: (key, value) => session.set(key, value) },
+  }
+  try {
+    assert.equal(consent.writeAnalyticsConsent("declined"), true)
+    delete globalThis.window.__olympicAnalyticsConsent
+    assert.equal(consent.hasAnalyticsConsent(), false)
   } finally {
     if (previousWindow === undefined) delete globalThis.window
     else globalThis.window = previousWindow

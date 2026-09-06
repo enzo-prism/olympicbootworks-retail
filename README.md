@@ -23,7 +23,7 @@ Vercel also builds `main` in project `v0-olympic-bootworks-cy` under `enzo-desig
 
 - Next.js 16 App Router + React 19 + TypeScript
 - Tailwind CSS + shadcn/ui/Radix components
-- Consent-gated GA4, Google Ads conversion measurement, and Hotjar
+- Consent-gated GA4, Google Ads conversion measurement, Hotjar, and Vercel Web Analytics
 - Replit Autoscale production hosting
 - No database, CMS, online storefront, or checkout integration
 
@@ -101,7 +101,7 @@ hero has separate desktop and mobile crops; preserve that art direction when rep
 
 ## Conversion tracking
 
-Email, phone, and test-ride actions are the real conversions. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google and Hotjar scripts load only after analytics consent. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
+Email, phone, and test-ride actions are the real conversions. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google, Hotjar, and Vercel Web Analytics load only after analytics consent. Development and Vercel preview builds do not mount tracking scripts. Vercel Analytics is enabled on Vercel production builds only; Replit does not provide its first-party collection endpoint. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
 
 ## Seasonal content
 
@@ -126,3 +126,5 @@ The July 15 Meta-ready design and redirect release is documented in `docs/releas
 - Search Console, Bing Webmaster Tools, and Google Business Profile are external follow-through: check indexing, citations, and listing consistency there; a code release alone does not establish ranking gains.
 
 See [September 6 SEO/AEO audit](docs/releases/2026-09-06-seo-aeo.md) for scope, evidence, and hosting follow-through.
+
+The [September 6 analytics audit](docs/releases/2026-09-06-analytics.md) records the verified GA4 stream, saved history-pageview setting, Vercel enablement, event contract, consent behavior and deployment boundary.

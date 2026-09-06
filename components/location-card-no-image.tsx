@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { trackConversion } from "@/lib/track-conversion"
 import Link from "next/link"
 import { MapPin, Clock, Phone, ExternalLink, Award } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
@@ -82,7 +85,11 @@ export default function LocationCardNoImage({
           <div className="p-2 rounded-full bg-secondary">
             <Phone className="h-4 w-4 text-primary" aria-hidden="true" />
           </div>
-          <a href={`tel:${location.contact.phone.replace(/[^0-9]/g, "")}`} className="hover:underline">
+          <a
+            href={`tel:${location.contact.phone.replace(/[^0-9]/g, "")}`}
+            className="hover:underline"
+            onClick={() => trackConversion("phone_click", { location: `about_${location.id}` })}
+          >
             {location.contact.phone}
           </a>
         </div>

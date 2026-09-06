@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -66,9 +65,6 @@ const testRideBody = encodeURIComponent(
 )
 
 export default function EBikesClient() {
-  useEffect(() => {
-    trackConversion("bike_page_view", { location: "ebikes_hub" })
-  }, [])
 
   return (
     <div className="flex flex-col">

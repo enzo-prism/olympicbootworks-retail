@@ -1,5 +1,4 @@
 "use client"
-import { useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
@@ -17,9 +16,6 @@ const southInquiryOptions = {
 }
 
 export default function ContactClient() {
-  useEffect(() => {
-    trackConversion('contact_page_view')
-  }, [])
   const northInquiry = fittingInquiryParts(northInquiryOptions)
   const southInquiry = fittingInquiryParts(southInquiryOptions)
   const faqs = [

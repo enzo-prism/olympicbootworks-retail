@@ -77,7 +77,11 @@ export default function BikeCard({ bike, surface, className, priority = false }:
           <Button asChild variant="outline" className="w-full">
             <a
               href={bikeInquiryUrl(bike)}
-              onClick={() => trackConversion("email_click", { location: `ebike_card_${bike.slug}` })}
+              onClick={() => trackConversion("email_click", {
+                location: `${surface}_ebike_card_${bike.slug}`,
+                contentId: bike.slug,
+                contentName: `Fantic ${bike.name}`,
+              })}
             >
               <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
               Ask Buck about this bike

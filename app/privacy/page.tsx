@@ -12,7 +12,7 @@ export default function PrivacyPage() {
   return (
     <div className="container mx-auto max-w-3xl px-4 py-16">
       <h1 className="text-4xl font-bold tracking-tight">Privacy notice</h1>
-      <p className="mt-3 text-sm text-muted-foreground">Last updated July 14, 2026</p>
+      <p className="mt-3 text-sm text-muted-foreground">Last updated September 6, 2026</p>
 
       <div className="mt-10 space-y-8 text-muted-foreground">
         <section>
@@ -35,9 +35,9 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold text-foreground">Optional analytics</h2>
           <p className="mt-2">
-            With your permission, the site loads Google Analytics, Google Ads measurement, and Hotjar to measure page
+            With your permission, the site loads Google Analytics, Google Ads measurement, Hotjar, and Vercel Web Analytics to measure page
             use and interactions. These services may process device, browser, approximate location, referral, and
-            interaction information. They do not load until you choose “Allow analytics.”
+            interaction information. They do not load until you choose “Allow analytics.” Vercel Analytics does not use cookies and is enabled on our Vercel production deployment. Analytics page URLs exclude fragments and unrecognized query parameters; recognized campaign parameters are retained for attribution.
           </p>
           <div className="mt-3">
             <CookieSettingsButton />

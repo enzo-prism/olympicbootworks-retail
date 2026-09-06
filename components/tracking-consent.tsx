@@ -4,8 +4,10 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Script from "next/script"
 import { Analytics } from "@/components/analytics"
+import { VercelAnalytics } from "@/components/vercel-analytics"
 import { AnalyticsRouteListener } from "@/components/analytics-route-listener"
 import {
+  ANALYTICS_OPT_OUT_PARAM,
   readAnalyticsConsent,
   writeAnalyticsConsent,
   type AnalyticsConsent,
@@ -51,18 +53,29 @@ export function TrackingConsent() {
 
   const choose = (choice: Exclude<AnalyticsConsent, null>) => {
     const hadLoadedAnalytics = consent === "accepted"
-    writeAnalyticsConsent(choice)
+    const persisted = writeAnalyticsConsent(choice)
     setConsent(choice)
     setShowPrompt(false)
 
     if (hadLoadedAnalytics && choice === "declined") {
-      window.location.reload()
+      window.gtag?.("consent", "update", {
+        analytics_storage: "denied", ad_storage: "denied",
+        ad_user_data: "denied", ad_personalization: "denied",
+      })
+      if (persisted) {
+        window.location.reload()
+      } else {
+        // Fully unload third-party scripts without restoring a stale stored acceptance.
+        const url = new URL(window.location.href)
+        url.searchParams.set(ANALYTICS_OPT_OUT_PARAM, "1")
+        window.location.replace(url.href)
+      }
     }
   }
 
   return (
     <>
-      {consent === "accepted" && (
+      {consent === "accepted" && process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_VERCEL_ENV !== "preview" && (
         <>
           <Script id="hotjar-tracking" strategy="afterInteractive">
             {`
@@ -78,6 +91,7 @@ export function TrackingConsent() {
           </Script>
           <AnalyticsRouteListener />
           <Analytics />
+          <VercelAnalytics />
         </>
       )}
 
@@ -91,7 +105,7 @@ export function TrackingConsent() {
           <div className="flex-1">
             <h2 className="font-semibold">Your privacy choices</h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              We use optional Google Analytics, Google Ads, and Hotjar cookies to understand site use and improve the experience.
+              We use optional Google Analytics, Google Ads, Hotjar, and cookieless Vercel Analytics to understand site use and improve the experience.
               Essential site features work without them. Read our{" "}
               <Link href="/privacy" className="underline underline-offset-2">
                 privacy notice

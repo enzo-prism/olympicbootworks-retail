@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics"
 import { GOOGLE_ADS_CONVERSION_SEND_TO } from "@/lib/analytics-config"
 import { sendGa4Event, waitForGtag } from "@/lib/gtag"
 import { isGa4OnlyConversion } from "@/lib/conversion-policy"
@@ -99,7 +100,13 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
   const { value = 1.0, currency = "USD", location, contentId, contentName } = options
   const loc = location ?? "unknown"
 
+  // Vercel events are independent of Google tag readiness. The included plan supports two properties.
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
+    track(type, { surface: loc, ...(contentId ? { model: contentId } : {}) })
+  }
+
   const send = () => {
+    if (!hasAnalyticsConsent()) return
     if (!window.gtag) {
       console.warn("Google tag (gtag) not available")
       return
