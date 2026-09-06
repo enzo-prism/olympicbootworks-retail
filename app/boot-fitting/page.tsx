@@ -218,7 +218,7 @@ export default function BootFittingPage() {
 
       <section className="py-16 md:py-24 bg-secondary/60" aria-labelledby="fitting-questions">
         <div className="container mx-auto max-w-4xl px-4">
-          <h2 id="fitting-questions" className="text-3xl md:text-4xl font-semibold mb-8">Ski boot fitting questions</h2>
+          <h2 id="fitting-questions" className="scroll-mt-36 text-3xl md:text-4xl font-semibold mb-8">Ski boot fitting questions</h2>
           <div className="grid gap-6 sm:grid-cols-2">
             {bootFittingFaqs.map((faq) => (
               <div key={faq.question} className="rounded-lg border bg-card p-6">
