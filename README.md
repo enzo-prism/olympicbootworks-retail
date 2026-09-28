@@ -62,7 +62,7 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 |---|---|
 | Pages | `app/` |
 | Design tokens and global styles | `app/globals.css`, `tailwind.config.ts` |
-| Locations, hours, ski-season stock notice | `data/locations.ts` |
+| Locations, addresses, phones, hours, ski-season stock notice (the only place they are written; `tests/contact-data.test.mjs` enforces it) | `data/locations.ts` |
 | Testimonials | `data/testimonials.ts` |
 | E-bike names, prices, descriptions, and local images | `data/bikes.ts`, `public/images/e-bikes/` |
 | Fantic Tahoe lifestyle photography | `public/images/fantic-tahoe/` |

@@ -7,7 +7,7 @@ import { MapPin, Clock, Phone, ExternalLink, Award } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
 
 interface LocationCardNoImageProps {
   location: LocationData
@@ -86,7 +86,7 @@ export default function LocationCardNoImage({
             <Phone className="h-4 w-4 text-primary" aria-hidden="true" />
           </div>
           <a
-            href={`tel:${location.contact.phone.replace(/[^0-9]/g, "")}`}
+            href={phoneHref(location.contact.phone)}
             className="hover:underline"
             onClick={() => trackConversion("phone_click", { location: `about_${location.id}` })}
           >
