@@ -81,3 +81,24 @@ export const locations: LocationData[] = [
       "Our South Lake Tahoe location provides expert boot fitting and a full range of outdoor gear for skiers and mountain bikers.",
   },
 ]
+
+function requireLocation(id: string): LocationData {
+  const location = locations.find((entry) => entry.id === id)
+  if (!location) throw new Error(`Unknown location: ${id}`)
+  return location
+}
+
+/** Named shops for pages that render them separately; details stay in `locations` above. */
+export const northLakeLocation = requireLocation("olympic-valley")
+export const southLakeLocation = requireLocation("south-lake-tahoe")
+
+/** Street line(s) as displayed, e.g. "1235 Ski Run Blvd." */
+export const formatStreetAddress = (address: LocationAddress) =>
+  [address.line1, address.line2].filter(Boolean).join(", ")
+
+/** City line as displayed, e.g. "South Lake Tahoe, CA 96150" */
+export const formatCityLine = (address: LocationAddress) =>
+  `${address.city}, ${address.state} ${address.zip}`
+
+/** E.164 tel: link for a displayed US number, e.g. "(530) 581-0747" -> "tel:+15305810747" */
+export const phoneHref = (phone: string) => `tel:+1${phone.replace(/\D/g, "")}`

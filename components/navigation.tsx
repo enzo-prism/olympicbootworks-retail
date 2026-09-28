@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import { locations } from "@/data/locations"
+import { locations, northLakeLocation, phoneHref } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
 
 type NavLinkProps = React.ComponentProps<typeof Link> & {
@@ -259,7 +259,7 @@ export default function Navigation() {
                             {location.address.city}, {location.address.state}
                           </p>
                           <a
-                            href={`tel:${location.contact.phone.replace(/[^0-9]/g, "")}`}
+                            href={phoneHref(location.contact.phone)}
                             onClick={() =>
                               trackConversion("phone_click", {
                                 location: `mobile_navigation_${location.id}`,
@@ -298,7 +298,7 @@ export default function Navigation() {
                   </Button>
                   <Button asChild size="lg" variant="outline" className="h-12 w-full">
                     <a
-                      href="tel:+15305810747"
+                      href={phoneHref(northLakeLocation.contact.phone)}
                       onClick={() => {
                         setIsOpen(false)
                         trackConversion("phone_click", { location: "mobile_navigation" })

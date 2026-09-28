@@ -12,6 +12,7 @@ const securityHeaders = [
 ]
 
 const nextConfig = {
+  poweredByHeader: false,
   images: {
     qualities: [75],
     formats: ["image/avif", "image/webp"],
@@ -19,6 +20,18 @@ const nextConfig = {
       // Privacy-enhanced YouTube embed poster images
       { protocol: "https", hostname: "img.youtube.com" },
     ],
+  },
+  async redirects() {
+    return [
+      {
+        // The apex domain otherwise serves a duplicate copy of the site. Query
+        // strings (UTM/click IDs) pass through to the destination.
+        source: "/:path*",
+        has: [{ type: "host", value: "olympicbootworks.com" }],
+        destination: "https://www.olympicbootworks.com/:path*",
+        permanent: true,
+      },
+    ]
   },
   async headers() {
     return [

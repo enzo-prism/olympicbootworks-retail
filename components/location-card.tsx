@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
@@ -63,7 +63,7 @@ export default function LocationCard({ location, showHours = true, className = "
           <Phone className="h-5 w-5 text-primary shrink-0 mt-0.5" />
           <div>
             <a
-              href={`tel:${location.contact.phone.replace(/[^0-9+]/g, '')}`}
+              href={phoneHref(location.contact.phone)}
               className="text-muted-foreground hover:text-primary hover:underline"
               onClick={() => trackConversion('phone_click', { location: locationSlug })}
             >

@@ -5,13 +5,23 @@ import ButtonIcon from "@/components/button-icon"
 import CopyEmailButton from "@/components/copy-email-button"
 import { Button } from "@/components/ui/button"
 import LocationCard from "@/components/location-card"
-import { locations, seasonalScheduleNotice } from "@/data/locations"
+import {
+  formatStreetAddress,
+  locations,
+  northLakeLocation,
+  phoneHref,
+  seasonalScheduleNotice,
+  southLakeLocation,
+} from "@/data/locations"
 import { fittingInquiryParts, fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
-const northInquiryOptions = { locationName: "Olympic Valley (North Lake Tahoe)" }
+const northInquiryOptions = {
+  email: northLakeLocation.contact.email,
+  locationName: "Olympic Valley (North Lake Tahoe)",
+}
 const southInquiryOptions = {
-  email: "SouthLake@Olympicbootworks.com",
+  email: southLakeLocation.contact.email,
   locationName: "South Lake Tahoe",
 }
 
@@ -72,15 +82,15 @@ export default function ContactClient() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-card border rounded-lg p-8 shadow-sm">
-                <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">North Lake Tahoe</h3>
+                <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">{northLakeLocation.name}</h3>
                 <p className="text-muted-foreground mb-2">Olympic Valley Location</p>
-                <p className="text-sm text-muted-foreground mb-6">1602 Squaw Valley Road, Box 3514</p>
+                <p className="text-sm text-muted-foreground mb-6">{formatStreetAddress(northLakeLocation.address)}</p>
                 <Button asChild size="lg" className="w-full">
                   <a
                     href={fittingInquiryUrl(northInquiryOptions)}
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
-                    <ButtonIcon label="Request an Appointment" href="mailto:buck@olympicbootworks.com" />
+                    <ButtonIcon label="Request an Appointment" href={`mailto:${northInquiry.email}`} />
                     Request Appointment
                   </a>
                 </Button>
@@ -99,33 +109,30 @@ export default function ContactClient() {
                     className="hover:text-primary hover:underline break-all"
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
-                    buck@olympicbootworks.com
+                    {northInquiry.email}
                   </a>
                 </p>
                 <p className="text-sm text-muted-foreground mt-4">
-                  Phone: <a 
-                    href="tel:+15305810747" 
+                  Phone: <a
+                    href={phoneHref(northLakeLocation.contact.phone)}
                     className="text-primary hover:underline"
                     onClick={() => trackConversion('phone_click', { location: 'north_lake_tahoe' })}
                   >
-                    (530) 581-0747
+                    {northLakeLocation.contact.phone}
                   </a>
                 </p>
               </div>
 
               <div className="bg-card border rounded-lg p-8 shadow-sm">
-                <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">South Lake Tahoe</h3>
+                <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">{southLakeLocation.name}</h3>
                 <p className="text-muted-foreground mb-2">Ski Run Blvd Location</p>
-                <p className="text-sm text-muted-foreground mb-6">1235 Ski Run Blvd.</p>
+                <p className="text-sm text-muted-foreground mb-6">{formatStreetAddress(southLakeLocation.address)}</p>
                 <Button asChild size="lg" className="w-full">
                   <a
                     href={fittingInquiryUrl(southInquiryOptions)}
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
-                    <ButtonIcon
-                      label="Request an Appointment"
-                      href="mailto:SouthLake@Olympicbootworks.com"
-                    />
+                    <ButtonIcon label="Request an Appointment" href={`mailto:${southInquiry.email}`} />
                     Request Appointment
                   </a>
                 </Button>
@@ -144,16 +151,16 @@ export default function ContactClient() {
                     className="hover:text-primary hover:underline break-all"
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
-                    SouthLake@Olympicbootworks.com
+                    {southInquiry.email}
                   </a>
                 </p>
                 <p className="text-sm text-muted-foreground mt-4">
-                  Phone: <a 
-                    href="tel:+15306004056" 
+                  Phone: <a
+                    href={phoneHref(southLakeLocation.contact.phone)}
                     className="text-primary hover:underline"
                     onClick={() => trackConversion('phone_click', { location: 'south_lake_tahoe' })}
                   >
-                    (530) 600-4056
+                    {southLakeLocation.contact.phone}
                   </a>
                 </p>
               </div>
