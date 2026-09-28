@@ -97,14 +97,22 @@ export function TrackingConsent() {
 
       {showPrompt && (
         <section
-          className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-3xl rounded-xl border bg-background p-5 shadow-2xl sm:flex sm:items-center sm:gap-6"
+          className="fixed inset-x-0 bottom-0 z-[100] mx-auto max-w-3xl rounded-t-xl border-t bg-background px-4 py-3 shadow-2xl sm:inset-x-4 sm:bottom-4 sm:flex sm:items-center sm:gap-6 sm:rounded-xl sm:border sm:p-5"
           role="dialog"
           aria-label="Analytics cookie preferences"
           aria-live="polite"
         >
           <div className="flex-1">
-            <h2 className="font-semibold">Your privacy choices</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
+            {/* Phones get a compact bar (~110-130px) so the prompt does not cover the
+                homepage hero's calls to action; larger screens keep the full notice. */}
+            <p className="text-xs leading-5 text-muted-foreground sm:hidden">
+              Allow optional analytics (Google Analytics &amp; Ads, Hotjar, Vercel)? The site works either way.{" "}
+              <Link href="/privacy" className="underline underline-offset-2">
+                Privacy notice
+              </Link>
+            </p>
+            <h2 className="hidden font-semibold sm:block">Your privacy choices</h2>
+            <p className="mt-1 hidden text-sm text-muted-foreground sm:block">
               We use optional Google Analytics, Google Ads, Hotjar, and cookieless Vercel Analytics to understand site use and improve the experience.
               Essential site features work without them. Read our{" "}
               <Link href="/privacy" className="underline underline-offset-2">
@@ -113,17 +121,17 @@ export function TrackingConsent() {
               .
             </p>
           </div>
-          <div className="mt-4 flex flex-col gap-2 sm:mt-0 sm:min-w-48">
+          <div className="mt-2 flex gap-2 sm:mt-0 sm:min-w-48 sm:flex-col">
             <button
               type="button"
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+              className="flex-1 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground sm:px-4"
               onClick={() => choose("accepted")}
             >
               Allow analytics
             </button>
             <button
               type="button"
-              className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-muted"
+              className="flex-1 rounded-md border px-3 py-2 text-sm font-medium hover:bg-muted sm:px-4"
               onClick={() => choose("declined")}
             >
               Essential only
