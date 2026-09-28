@@ -4,7 +4,7 @@ import ContactClient from "./contact-client"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { GoogleGIcon } from "@/components/google-g-icon"
 import { GOOGLE_BUSINESS_REVIEW_URL } from "@/lib/google-business"
-import { seasonalScheduleNotice } from "@/data/locations"
+import { northLakeLocation, phoneHref, seasonalScheduleNotice } from "@/data/locations"
 
 export const metadata = pageMetadata({
   title: "Contact & Lake Tahoe Locations",
@@ -21,7 +21,7 @@ export default function ContactPage() {
         description={seasonalScheduleNotice.summary}
         actions={[
           { href: fittingInquiryUrl(), label: "Request Appointment" },
-          { href: "tel:+15305810747", label: "Call North Lake", variant: "secondary" },
+          { href: phoneHref(northLakeLocation.contact.phone), label: "Call North Lake", variant: "secondary" },
           {
             href: GOOGLE_BUSINESS_REVIEW_URL,
             label: "Leave a Google review",
