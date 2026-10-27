@@ -25,12 +25,10 @@ import { sendGa4Event } from "@/lib/gtag"
 import { trackConversion } from "@/lib/track-conversion"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { featuredBikes, bikeDetailUrl, cheapestBikePrice, formatPrice, familyLabels } from "@/data/bikes"
-import { locations, seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { locations, phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
 
 const USA_TODAY_10BEST_URL =
   "https://10best.usatoday.com/awards/olympic-bootworks-olympic-valley-california/"
-
-const telHref = (phone: string) => `tel:+1${phone.replace(/[^0-9]/g, "")}`
 
 const heroPoints = [
   "Ski boots on the wall at both Tahoe shops",
@@ -108,7 +106,7 @@ function ShopCard({ location }: { location: LocationData }) {
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <Button asChild size="lg" className="h-auto w-full whitespace-normal py-3">
           <a
-            href={telHref(contact.phone)}
+            href={phoneHref(contact.phone)}
             onClick={() => trackConversion("phone_click", { location: `home_shops_${location.id}` })}
           >
             <Phone className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -502,7 +500,7 @@ export default function HomeClient() {
             {locations.map((location) => (
               <Button key={location.id} asChild variant="outline-on-dark" size="lg" className="w-full sm:w-auto">
                 <a
-                  href={telHref(location.contact.phone)}
+                  href={phoneHref(location.contact.phone)}
                   onClick={() => trackConversion("phone_click", { location: `home_closing_${location.id}` })}
                 >
                   <Phone className="mr-2 h-5 w-5" aria-hidden="true" />

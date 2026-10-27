@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button"
 import BikeCard from "@/components/bike-card"
 import { trackConversion } from "@/lib/track-conversion"
-import { locations } from "@/data/locations"
+import { locations, phoneHref } from "@/data/locations"
 import { bikes, type BikeFamily } from "@/data/bikes"
 
 const sections: { families: BikeFamily[]; title: string; tagline: string }[] = [
@@ -244,7 +244,7 @@ export default function EBikesClient() {
                   </Button>
                   <Button asChild variant="outline">
                     <a
-                      href={`tel:${location.contact.phone.replace(/[^\d+]/g, "")}`}
+                      href={phoneHref(location.contact.phone)}
                       onClick={() => trackConversion("phone_click", { location: location.id })}
                     >
                       <PhoneCall className="mr-2 h-4 w-4" aria-hidden="true" />

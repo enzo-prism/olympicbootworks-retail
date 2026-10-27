@@ -46,8 +46,9 @@ export default function SimpleYouTubeEmbed({
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/${thumbnailQuality}.jpg`
   const fallbackThumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 
-  // YouTube embed URL with parameters
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&showinfo=0&autoplay=${autoplay ? "1" : "0"}&mute=1`
+  // Privacy-enhanced embed, loaded only after the visitor clicks play. That click
+  // is the user gesture browsers require, so playback can start with sound.
+  const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&showinfo=0&autoplay=${autoplay ? "1" : "0"}`
 
   return (
     <div className={cn("relative overflow-hidden rounded-lg", getAspectRatioClass(), className)}>

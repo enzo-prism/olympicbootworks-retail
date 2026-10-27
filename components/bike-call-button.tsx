@@ -3,6 +3,7 @@
 import { PhoneCall } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { Bike } from "@/data/bikes"
+import { northLakeLocation, phoneHref } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
 import { cn } from "@/lib/utils"
 
@@ -15,7 +16,7 @@ export default function BikeCallButton({ bike, className }: BikeCallButtonProps)
   return (
     <Button asChild size="lg" variant="outline" className={cn(className)}>
       <a
-        href="tel:+15305810747"
+        href={phoneHref(northLakeLocation.contact.phone)}
         onClick={() =>
           trackConversion("phone_click", {
             location: `ebike_${bike.slug}`,

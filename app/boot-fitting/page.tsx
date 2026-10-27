@@ -6,7 +6,7 @@ import HeelLocSection from "@/components/heel-loc-section"
 import BootFittingCtas from "./boot-fitting-ctas"
 import SiteImage from "@/components/site-image"
 import StockPill from "@/components/stock-pill"
-import { locations, seasonalScheduleNotice } from "@/data/locations"
+import { locations, phoneHref, seasonalScheduleNotice } from "@/data/locations"
 import { bootFittingFaqs } from "@/data/boot-fitting-faqs"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
@@ -142,7 +142,7 @@ export default function BootFittingPage() {
                   {index > 0 && " · "}
                   {location.address.city}{" "}
                   <a
-                    href={`tel:+1${location.contact.phone.replace(/[^0-9]/g, "")}`}
+                    href={phoneHref(location.contact.phone)}
                     className="whitespace-nowrap font-medium text-primary underline-offset-4 hover:underline"
                   >
                     {location.contact.phone}

@@ -2,7 +2,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { Facebook, Instagram, Star } from "lucide-react"
-import { seasonalScheduleNotice } from "@/data/locations"
+import {
+  formatCityLine,
+  formatStreetAddress,
+  northLakeLocation,
+  seasonalScheduleNotice,
+  southLakeLocation,
+} from "@/data/locations"
 import { CookieSettingsButton } from "@/components/cookie-settings-button"
 import FooterFittingButton from "@/components/footer-fitting-button"
 
@@ -109,16 +115,16 @@ export default function Footer() {
 
           {/* North Lake Tahoe Location */}
           <div className="md:col-span-2 space-y-4">
-            <h3 className="text-lg font-bold">North Lake Tahoe</h3>
+            <h3 className="text-lg font-bold">{northLakeLocation.name}</h3>
             <div className="space-y-2">
               <p className="text-sm font-medium text-primary">Flagship Store</p>
-              <p className="text-sm text-muted-foreground">1602 Squaw Valley Road, Box 3514</p>
-              <p className="text-sm text-muted-foreground">Olympic Valley, CA 96146</p>
+              <p className="text-sm text-muted-foreground">{formatStreetAddress(northLakeLocation.address)}</p>
+              <p className="text-sm text-muted-foreground">{formatCityLine(northLakeLocation.address)}</p>
               <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Call:</span> (530) 581-0747
+                <span className="font-medium">Call:</span> {northLakeLocation.contact.phone}
               </p>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Email:</span> buck@olympicbootworks.com
+              <p className="break-all text-sm text-muted-foreground">
+                <span className="font-medium">Email:</span> {northLakeLocation.contact.email}
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
                 Hours & Map
@@ -128,15 +134,15 @@ export default function Footer() {
 
           {/* South Lake Tahoe Location */}
           <div className="md:col-span-3 space-y-4">
-            <h3 className="text-lg font-bold">South Lake Tahoe</h3>
+            <h3 className="text-lg font-bold">{southLakeLocation.name}</h3>
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground">1235 Ski Run Blvd.</p>
-              <p className="text-sm text-muted-foreground">South Lake Tahoe, CA 96150</p>
+              <p className="text-sm text-muted-foreground">{formatStreetAddress(southLakeLocation.address)}</p>
+              <p className="text-sm text-muted-foreground">{formatCityLine(southLakeLocation.address)}</p>
               <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Call:</span> (530) 600-4056
+                <span className="font-medium">Call:</span> {southLakeLocation.contact.phone}
               </p>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Email:</span> SouthLake@Olympicbootworks.com
+              <p className="break-all text-sm text-muted-foreground">
+                <span className="font-medium">Email:</span> {southLakeLocation.contact.email}
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
                 Hours & Map

@@ -62,7 +62,7 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 |---|---|
 | Pages | `app/` |
 | Design tokens and global styles | `app/globals.css`, `tailwind.config.ts` |
-| Locations, hours, ski-season stock notice | `data/locations.ts` |
+| Locations, addresses, phones, hours, ski-season stock notice (the only place they are written; `tests/contact-data.test.mjs` enforces it) | `data/locations.ts` |
 | Testimonials | `data/testimonials.ts` |
 | E-bike names, prices, descriptions, and local images | `data/bikes.ts`, `public/images/e-bikes/` |
 | Fantic Tahoe lifestyle photography | `public/images/fantic-tahoe/` |
@@ -109,7 +109,7 @@ The banner, location cards, footer, and JSON-LD read from `seasonalScheduleNotic
 
 ## Release checks
 
-GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/boot-fitting`, email links, phone links, mobile navigation, the Fantic wordmark asset, and both public-domain redirects: `/shop` → `/e-bikes` and `/shop/boots` → `/boot-fitting` (308, no localhost).
+GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/boot-fitting`, email links, phone links, mobile navigation, the Fantic wordmark asset, and the public-domain redirects: `/shop` → `/e-bikes`, `/shop/boots` → `/boot-fitting`, and apex `https://olympicbootworks.com/<path>` → `https://www.olympicbootworks.com/<path>` with the query string kept (all 308, no localhost).
 
 The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`. The July 22 alpine redesign (design system, `/boot-fitting`, conversion and performance passes) is documented in `docs/releases/2026-07-22-alpine-redesign.md`. The July 24 Trina photography integration is documented in `docs/releases/2026-07-24-trina-fantic-photo-refresh.md`.
 
