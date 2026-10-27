@@ -1,11 +1,10 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { Facebook, Instagram, Star } from "lucide-react"
 import { seasonalScheduleNotice } from "@/data/locations"
 import { CookieSettingsButton } from "@/components/cookie-settings-button"
-import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
+import FooterFittingButton from "@/components/footer-fitting-button"
 
 export default function Footer() {
   return (
@@ -29,9 +28,7 @@ export default function Footer() {
               Lake Tahoe ski boots and custom boot fitting since 1994, plus Fantic e-bikes.
             </p>
             <p className="text-muted-foreground text-sm">{seasonalScheduleNotice.bannerSecondary}.</p>
-            <Button asChild size="sm" className="shadow-sm">
-              <a href={fittingInquiryUrl()}>Book a Boot Fitting</a>
-            </Button>
+            <FooterFittingButton />
             <GoogleReviewButton size="sm" analyticsItemId="google_review_footer" className="w-fit" />
             <div className="flex items-center space-x-4 mt-6">
               <Link

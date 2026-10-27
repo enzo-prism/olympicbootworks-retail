@@ -86,6 +86,14 @@ test("legacy shop route permanently redirects to the canonical e-bikes hub", asy
   }
 })
 
+test("footer fitting CTA is tracked like the other fitting mailtos", async () => {
+  const footer = await read("components/footer.tsx")
+  const button = await read("components/footer-fitting-button.tsx")
+  assert.match(footer, /<FooterFittingButton \/>/)
+  assert.match(button, /fittingInquiryUrl\(\)/)
+  assert.match(button, /trackConversion\("email_click", \{ location: "footer_fitting" \}\)/)
+})
+
 test("global navigation has no cart or shop-now path", async () => {
   const navigation = await read("components/navigation.tsx")
   assert.match(navigation, /Ski Boots & Fitting/)

@@ -147,7 +147,7 @@ export default function HomeClient() {
         />
         <div className="container relative mx-auto grid items-center gap-12 px-4 py-12 md:py-16 lg:min-h-[calc(100svh-4rem-var(--banner-height,2.5rem))] lg:grid-cols-[1.05fr_1fr] lg:gap-14">
           <div className="flex flex-col items-start">
-            <StockPill onDark>In stock for the 2026–27 season</StockPill>
+            <StockPill onDark>In stock for 2026–27</StockPill>
             <h1 className="mt-6 text-[2.6rem] font-semibold leading-[1.02] tracking-tight sm:text-6xl xl:text-7xl">
               Ski boots in stock.
               <span className="mt-1 block italic text-white/70">Fit and ready to go.</span>
