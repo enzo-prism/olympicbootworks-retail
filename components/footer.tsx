@@ -123,7 +123,7 @@ export default function Footer() {
               <p className="text-sm text-muted-foreground">
                 <span className="font-medium">Call:</span> {northLakeLocation.contact.phone}
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="break-all text-sm text-muted-foreground">
                 <span className="font-medium">Email:</span> {northLakeLocation.contact.email}
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
@@ -141,7 +141,7 @@ export default function Footer() {
               <p className="text-sm text-muted-foreground">
                 <span className="font-medium">Call:</span> {southLakeLocation.contact.phone}
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="break-all text-sm text-muted-foreground">
                 <span className="font-medium">Email:</span> {southLakeLocation.contact.email}
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
