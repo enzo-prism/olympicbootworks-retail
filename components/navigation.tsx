@@ -115,8 +115,8 @@ export default function Navigation() {
   }, [pathname])
 
   const navLinks = [
-    { href: "/e-bikes", label: "E-Bikes & Prices", icon: Bike },
     { href: "/boot-fitting", label: "Boot Fitting", icon: Footprints },
+    { href: "/e-bikes", label: "E-Bikes & Prices", icon: Bike },
     { href: "/about", label: "About", icon: Info },
     { href: "/contact", label: "Locations & Contact", icon: PhoneCall },
   ]

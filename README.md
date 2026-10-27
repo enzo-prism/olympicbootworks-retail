@@ -16,7 +16,7 @@ Vercel also builds `main` in project `v0-olympic-bootworks-cy` under `enzo-desig
 - Buck confirms current availability, size, color, exact specifications, payment, pickup, and available shipping.
 - Do not publish exact inventory quantities.
 - Do not publish technical specifications until the physical SKU and model year are confirmed.
-- Boot fitting is the second core service line: `/boot-fitting` is its landing page, and every fitting CTA uses the prefilled inquiry template in `lib/fitting-inquiry.ts`.
+- As of Buck’s October 26, 2026 request, the homepage leads with ski boots and boot fitting, highlights that the shop is stocked and ready, and retains a clear path to Fantic e-bikes. `/boot-fitting` is the fitting landing page, and fitting inquiry CTAs use the prefilled template in `lib/fitting-inquiry.ts`. Do not infer specific boot models, sizes, or quantities from the general stock message.
 - `/shop` is a legacy compatibility route that permanently redirects (308) to `/e-bikes`. There is no storefront, cart, account, or checkout anywhere.
 
 ## Stack
@@ -35,7 +35,7 @@ The July 2026 redesign established an "alpine boutique" system. Stay inside it:
 - **Color**: tokens only, defined in `app/globals.css` — glacial-blue `primary`, `ink` (deep alpine navy) for dark bands, ice/stone `secondary`/`muted` tints. No raw hex, no `bg-gray-*`. Fantic red is scoped to `.fantic-theme` on e-bike merchandising.
 - **Patterns**: eyebrow labels are `text-xs font-semibold uppercase tracking-[0.22em] text-primary`; section rhythm is `py-16 md:py-24`; alternating bands use `bg-secondary/60`; closing CTAs use `bg-ink text-ink-foreground`.
 - **Dark mode is intentionally not offered** — the layout forces the light theme and no `dark:` variants exist. Do not add them.
-- **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The homepage uses the art-directed static Tahoe hero in `components/tahoe-bike-hero.tsx`; its desktop and mobile WebP crops live in `public/images/fantic-tahoe/`. The Vimeo hero remains available for `/pros` and always needs a `posterSrc`.
+- **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The homepage hero uses the existing boot-fitting photograph in `public/images/buck-with-boot.jpg`. The art-directed Tahoe bike hero remains available in `components/tahoe-bike-hero.tsx`, with desktop and mobile WebP crops in `public/images/fantic-tahoe/`. The Vimeo hero remains available for `/pros` and always needs a `posterSrc`.
 
 ### Mobile rules (owner decision, July 22, 2026)
 
@@ -96,8 +96,7 @@ Product photos are stored locally in `public/images/e-bikes/`; do not reintroduc
 
 Trina's July 2026 Tahoe/Olympic Valley lifestyle photography is stored as optimized,
 metadata-stripped WebP derivatives in `public/images/fantic-tahoe/`. Keep model cutouts
-for product accuracy and use these lifestyle images for local context. The homepage
-hero has separate desktop and mobile crops; preserve that art direction when replacing it.
+for product accuracy and use these lifestyle images for local context. The Tahoe bike hero has separate desktop and mobile crops; preserve that art direction when reusing it.
 
 ## Conversion tracking
 
@@ -128,3 +127,5 @@ The July 15 Meta-ready design and redirect release is documented in `docs/releas
 See [September 6 SEO/AEO audit](docs/releases/2026-09-06-seo-aeo.md) for scope, evidence, and hosting follow-through.
 
 The [September 6 analytics audit](docs/releases/2026-09-06-analytics.md) records the verified GA4 stream, saved history-pageview setting, Vercel enablement, event contract, consent behavior and deployment boundary.
+
+The [October 26 boot-first update](docs/releases/2026-10-26-boot-first.md) records Buck’s request, the local changes, and release follow-through.

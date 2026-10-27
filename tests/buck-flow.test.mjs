@@ -4,14 +4,14 @@ import { readFile } from "node:fs/promises"
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8")
 
-test("homepage leads e-bike visitors into Buck's requested flow", async () => {
+test("homepage leads with boots while preserving the bike inquiry flow", async () => {
   const home = await read("components/home-client.tsx")
-  // The headline uses a non-breaking space to keep "Lake Tahoe" on one line.
-  assert.match(home, /Fantic E-Bikes in Lake(?:&nbsp;|\s)Tahoe/)
+  assert.match(home, /Ski boots, ready for Tahoe/)
+  assert.match(home, /stocked and ready/)
+  assert.ok(home.indexOf("Custom Boot Fitting") < home.indexOf("Current Fantic E-Bike Prices"))
   assert.match(home, /href="\/e-bikes"/)
-  assert.match(home, /Email Buck/)
+  assert.match(home, /email Buck/)
   assert.match(home, /Italian Made Freedom/)
-  assert.match(home, /CopyEmailButton/)
   assert.match(home, /USA TODAY 10Best Readers/)
   assert.match(home, /Runner-up: Best Ski Shop/)
   assert.match(home, /10best\.usatoday\.com\/awards\/olympic-bootworks-olympic-valley-california/)
