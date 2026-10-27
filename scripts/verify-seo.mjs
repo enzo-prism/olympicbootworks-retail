@@ -108,7 +108,7 @@ try {
   check(robots.status === 200, `robots.txt: HTTP ${robots.status}`)
   check(/User-Agent:\s*\*[\s\S]*?Allow:\s*\/\s*(?:\r?\n|$)/i.test(robotsText) && !/^Disallow:\s*\/\s*$/im.test(robotsText), "robots.txt must allow search crawling")
   check(robotsText.includes(`${canonicalOrigin}/sitemap.xml`), "robots.txt missing canonical sitemap")
-  if (!args.includes("--skip-redirects")) for (const [path, target] of [["/shop", "/e-bikes"], ["/shop/boots", "/contact"]]) {
+  if (!args.includes("--skip-redirects")) for (const [path, target] of [["/shop", "/e-bikes"], ["/shop/boots", "/boot-fitting"]]) {
     for (const query of ["", "?utm_source=seo-audit&returnTo=https%3A%2F%2Fexample.com"]) for (const method of ["GET", "HEAD"]) {
       const response = await request(`${path}${query}`, { method })
       check(response.status === 308, `${method} ${path}${query}: expected permanent 308, got ${response.status}`)

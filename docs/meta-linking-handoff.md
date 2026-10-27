@@ -23,7 +23,7 @@ Recommended naming shape if a new convention is needed:
 - Email, phone, test-ride, and copy-email intent paths retain native browser behavior and are measured after analytics consent.
 - Product context is attached to model-page email and phone events.
 - The e-bike process band uses the supplied Fantic wordmark on black.
-- `/shop/boots` uses a permanent absolute redirect to the public contact page.
+- `/shop/boots` uses a permanent absolute redirect to the public ski boots and fitting page (`/boot-fitting`, changed October 26, 2026).
 - Exact technical specifications, stock quantities, financing, discounts, and guaranteed shipping are intentionally excluded until a dated owner-approved source exists.
 
 ## Meta measurement boundary

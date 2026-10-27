@@ -27,12 +27,12 @@ export default function ContactClient() {
     {
       question: "Can I walk in?",
       answer:
-        "Please call or email your preferred shop before visiting. The team will confirm an appointment and the current schedule for your visit.",
+        "Call or email your preferred shop before visiting so the team can confirm today's hours and set aside time for your fitting.",
     },
     {
-      question: "When do regular hours resume?",
+      question: "Do you have ski boots in stock?",
       answer:
-        "Regular store hours resume in the fall. Email or call either location for the most current availability.",
+        "Yes. Both shops are stocked with ski boots for the 2026–27 season. Call or email to ask about fit and availability; the website does not list specific models or sizes.",
     },
   ]
 
@@ -80,8 +80,8 @@ export default function ContactClient() {
                     href={fittingInquiryUrl(northInquiryOptions)}
                     onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
                   >
-                    <ButtonIcon label="Request an Appointment" href="mailto:buck@olympicbootworks.com" />
-                    Request Appointment
+                    <ButtonIcon label="Book a Fitting" href="mailto:buck@olympicbootworks.com" />
+                    Book a Fitting
                   </a>
                 </Button>
                 <CopyEmailButton
@@ -123,10 +123,10 @@ export default function ContactClient() {
                     onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
                   >
                     <ButtonIcon
-                      label="Request an Appointment"
+                      label="Book a Fitting"
                       href="mailto:SouthLake@Olympicbootworks.com"
                     />
-                    Request Appointment
+                    Book a Fitting
                   </a>
                 </Button>
                 <CopyEmailButton

@@ -108,7 +108,7 @@ export default function EBikesPage() {
             Test rides, pickup, and available shipping are arranged with the shop.
           </p>
           <p className="mt-4">
-            <Link href="/contact" className="font-medium text-primary underline underline-offset-4">Check Tahoe shop locations and appointment details</Link>
+            <Link href="/contact" className="font-medium text-primary underline underline-offset-4">Check Tahoe shop locations and contact details</Link>
           </p>
         </div>
       </section>

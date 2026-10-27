@@ -23,6 +23,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetDescription, SheetT
 import { cn } from "@/lib/utils"
 import { locations } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
+import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
 type NavLinkProps = React.ComponentProps<typeof Link> & {
   isMobile?: boolean
@@ -115,10 +116,10 @@ export default function Navigation() {
   }, [pathname])
 
   const navLinks = [
-    { href: "/boot-fitting", label: "Boot Fitting", icon: Footprints },
-    { href: "/e-bikes", label: "E-Bikes & Prices", icon: Bike },
-    { href: "/about", label: "About", icon: Info },
-    { href: "/contact", label: "Locations & Contact", icon: PhoneCall },
+    { href: "/boot-fitting", label: "Ski Boots & Fitting", shortLabel: "Ski Boots", icon: Footprints },
+    { href: "/e-bikes", label: "E-Bikes & Prices", shortLabel: "E-Bikes", icon: Bike },
+    { href: "/about", label: "About", shortLabel: "About", icon: Info },
+    { href: "/contact", label: "Locations & Contact", shortLabel: "Contact", icon: PhoneCall },
   ]
 
   const isLinkActive = (href: string) =>
@@ -147,24 +148,26 @@ export default function Navigation() {
               className="object-contain"
             />
           </div>
-          <span className="font-bold text-base xs:text-xl">Olympic Bootworks</span>
+          <span className="whitespace-nowrap font-bold text-base xs:text-xl md:text-lg lg:text-xl">Olympic Bootworks</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1.5 lg:gap-3">
           {navLinks.map((link) => (
             <NavLink key={link.href} href={link.href} icon={link.icon} isActive={isLinkActive(link.href)}>
-              {link.label}
+              {/* Short labels keep the tablet-width bar on one line */}
+              <span className="lg:hidden">{link.shortLabel}</span>
+              <span className="hidden lg:inline">{link.label}</span>
             </NavLink>
           ))}
 
           <Button asChild size="sm" className="ml-2">
             <a
-              href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
+              href={fittingInquiryUrl()}
               onClick={() => trackConversion("email_click", { location: "desktop_navigation" })}
             >
-              <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
-              Email Buck
+              <Footprints className="mr-2 h-4 w-4" aria-hidden="true" />
+              Book a Fitting
             </a>
           </Button>
         </nav>
@@ -285,6 +288,18 @@ export default function Navigation() {
 
                 <div className="mt-6 pt-4 border-t flex flex-col gap-3">
                   <Button asChild size="lg" className="h-12 w-full">
+                    <a
+                      href={fittingInquiryUrl()}
+                      onClick={() => {
+                        setIsOpen(false)
+                        trackConversion("email_click", { location: "mobile_navigation_fitting" })
+                      }}
+                    >
+                      <Footprints className="mr-2 h-5 w-5" aria-hidden="true" />
+                      Book a Boot Fitting
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="h-12 w-full">
                     <a
                       href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
                       onClick={() => {

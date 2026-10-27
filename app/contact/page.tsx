@@ -8,7 +8,7 @@ import { seasonalScheduleNotice } from "@/data/locations"
 
 export const metadata = pageMetadata({
   title: "Contact & Lake Tahoe Locations",
-  description: "Contact Olympic Bootworks to request an appointment, ask about products, or reach our North Lake Tahoe and South Lake Tahoe locations.",
+  description: "Contact Olympic Bootworks to book a boot fitting, ask about ski boots in stock, or reach our North Lake Tahoe and South Lake Tahoe locations.",
   path: "/contact",
 })
 
@@ -20,7 +20,7 @@ export default function ContactPage() {
         title="Contact Olympic Bootworks"
         description={seasonalScheduleNotice.summary}
         actions={[
-          { href: fittingInquiryUrl(), label: "Request Appointment" },
+          { href: fittingInquiryUrl(), label: "Book a Fitting" },
           { href: "tel:+15305810747", label: "Call North Lake", variant: "secondary" },
           {
             href: GOOGLE_BUSINESS_REVIEW_URL,

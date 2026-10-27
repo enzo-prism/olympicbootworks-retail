@@ -16,7 +16,8 @@ Vercel also builds `main` in project `v0-olympic-bootworks-cy` under `enzo-desig
 - Buck confirms current availability, size, color, exact specifications, payment, pickup, and available shipping.
 - Do not publish exact inventory quantities.
 - Do not publish technical specifications until the physical SKU and model year are confirmed.
-- As of Buck’s October 26, 2026 request, the homepage leads with ski boots and boot fitting, highlights that the shop is stocked and ready, and retains a clear path to Fantic e-bikes. `/boot-fitting` is the fitting landing page, and fitting inquiry CTAs use the prefilled template in `lib/fitting-inquiry.ts`. Do not infer specific boot models, sizes, or quantities from the general stock message.
+- As of Buck’s October 26, 2026 request (“focus on boots, still include bikes, highlight being stocked and ready to go”), the site is boots-first: the homepage hero, banner, navigation order and primary CTAs all point at ski boots and fitting, and Fantic e-bikes follow as a compact secondary section. `/boot-fitting` is the ski boots and fitting page and opens with an in-stock section; fitting inquiry CTAs use the prefilled template in `lib/fitting-inquiry.ts`. The stock message is general — do not infer specific boot models, sizes, or quantities from it, and do not reuse the in-stock treatment for e-bikes.
+- Winter hours are not confirmed. `data/locations.ts` asks visitors to call ahead instead of listing times; replace `sharedStoreHours` with real hours once Buck provides them (a test blocks invented AM/PM times until then).
 - `/shop` is a legacy compatibility route that permanently redirects (308) to `/e-bikes`. There is no storefront, cart, account, or checkout anywhere.
 
 ## Stack
@@ -32,10 +33,10 @@ Vercel also builds `main` in project `v0-olympic-bootworks-cy` under `enzo-desig
 The July 2026 redesign established an "alpine boutique" system. Stay inside it:
 
 - **Type**: Fraunces (display serif) for h1–h3 via a global rule; Inter for body. Both self-hosted through `next/font` in `app/layout.tsx`. Card-level h3s opt out with `font-sans tracking-normal`.
-- **Color**: tokens only, defined in `app/globals.css` — glacial-blue `primary`, `ink` (deep alpine navy) for dark bands, ice/stone `secondary`/`muted` tints. No raw hex, no `bg-gray-*`. Fantic red is scoped to `.fantic-theme` on e-bike merchandising.
+- **Color**: tokens only, defined in `app/globals.css` — glacial-blue `primary`, `ink` (deep alpine navy) for dark bands, ice/stone `secondary`/`muted` tints, and `stock`/`stock-light` green reserved for the boot in-stock signal (`components/stock-pill.tsx`). No raw hex, no `bg-gray-*`. Fantic red is scoped to `.fantic-theme` on e-bike merchandising.
 - **Patterns**: eyebrow labels are `text-xs font-semibold uppercase tracking-[0.22em] text-primary`; section rhythm is `py-16 md:py-24`; alternating bands use `bg-secondary/60`; closing CTAs use `bg-ink text-ink-foreground`.
 - **Dark mode is intentionally not offered** — the layout forces the light theme and no `dark:` variants exist. Do not add them.
-- **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The homepage hero uses the existing boot-fitting photograph in `public/images/buck-with-boot.jpg`. The art-directed Tahoe bike hero remains available in `components/tahoe-bike-hero.tsx`, with desktop and mobile WebP crops in `public/images/fantic-tahoe/`. The Vimeo hero remains available for `/pros` and always needs a `posterSrc`.
+- **Images**: use `components/site-image.tsx` (blur-up placeholders + working error fallbacks). The homepage hero pairs the stocked boot wall (`public/ski-boot-fitting-station.jpg`) with an inset of Buck at work (`public/images/buck-with-boot.jpg`). The art-directed Tahoe bike hero remains available in `components/tahoe-bike-hero.tsx`, with desktop and mobile WebP crops in `public/images/fantic-tahoe/`. The Vimeo hero remains available for `/pros` and always needs a `posterSrc`.
 
 ### Mobile rules (owner decision, July 22, 2026)
 
@@ -61,7 +62,7 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 |---|---|
 | Pages | `app/` |
 | Design tokens and global styles | `app/globals.css`, `tailwind.config.ts` |
-| Locations, hours, seasonal notice | `data/locations.ts` |
+| Locations, hours, ski-season stock notice | `data/locations.ts` |
 | Testimonials | `data/testimonials.ts` |
 | E-bike names, prices, descriptions, and local images | `data/bikes.ts`, `public/images/e-bikes/` |
 | Fantic Tahoe lifestyle photography | `public/images/fantic-tahoe/` |
@@ -108,7 +109,7 @@ The banner, location cards, footer, and JSON-LD read from `seasonalScheduleNotic
 
 ## Release checks
 
-GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/boot-fitting`, email links, phone links, mobile navigation, the Fantic wordmark asset, and both public-domain redirects: `/shop` → `/e-bikes` and `/shop/boots` → `/contact` (308, no localhost).
+GitHub Actions runs `pnpm check` for pull requests and pushes to `main`. A release is ready for Replit only after lint, strict TypeScript, unit tests, and the production build pass. After publishing, verify the custom domain, homepage, `/e-bikes`, all model routes, `/boot-fitting`, email links, phone links, mobile navigation, the Fantic wordmark asset, and both public-domain redirects: `/shop` → `/e-bikes` and `/shop/boots` → `/boot-fitting` (308, no localhost).
 
 The July 15 Meta-ready design and redirect release is documented in `docs/releases/2026-07-15-meta-ready-fantic-pass.md`. The July 22 alpine redesign (design system, `/boot-fitting`, conversion and performance passes) is documented in `docs/releases/2026-07-22-alpine-redesign.md`. The July 24 Trina photography integration is documented in `docs/releases/2026-07-24-trina-fantic-photo-refresh.md`.
 

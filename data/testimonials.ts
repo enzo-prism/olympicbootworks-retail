@@ -8,24 +8,16 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
-    name: "Gary K.",
-    role: "Avid Skier & Pickleball Player",
-    content:
-      "I was having issues with plantar fasciitis, especially after playing pickleball multiple days in a row. After getting orthotics for both my ski boots and pickleball shoes, it was a game changer. I played 4 straight days of pickleball, then two days of skiing, followed by 2 more days of pickleball, without my feet bothering me at all. I've noticed less hip and back pain as well.",
+    name: "Annie Edinger",
     rating: 5,
-
+    content:
+      "CINDERELLA! THE SHOE FINALLY FITS! This place rocks. The most knowledgeable, friendly, professional, welcoming boot shop around. These guys really know their stuff and are super informative without making you feel silly when you ask a million questions. I came in with old boots that were causing me pain and making me tap out of skiing early in the day. I found out were too wide for my feet and the liner was not doing me any favors. Jason gave me the run down on my foot shape, and fitted me in a snug Lange boot. I opted for the shop's proprietary heel-loc foot beds that that Jason form fitted to my high arch to give me more support. After a week of skiing, I could feel the difference but I brought my boots in the get worked on in toe box and Levi did god's work and put up with my endless questions about liners, heat molding, how to properly buckle my boots, etc. I opted for the zip fit liners and will never look back. The whole crew here is great and I cannot recommend this shop enough. Seriously life changing!",
   },
   {
     name: "Mindee Dziuba",
     rating: 5,
     content:
       'I am a 25+ year snowboarder who decided it would be a great idea to learn to ski this year. I was struggling with baggy feeling boots and a lot of discomfort/pain but I sort of thought that was normal with ski boots. I decided to do a little more research to see if there was a way to make these boots work for me (they were "the right size" after all - I had been "fitted" by a very kind and attentive person at REI). I ended up calling Olympic Bootworks in South Lake Tahoe and spoke to Joel. I shared with him my struggles with the current boots and also that I was surprised how hard it was to learn to ski. Within a few minutes of talking to me, he diagnosed my problem over the phone. I made the trek up to South Lake the following week to see him in person. I had THE BEST experience in the shop - reminded me of the vibe of the surf and skate shops I used to work at in the 90s. Joel remembered speaking with me and was quick to help. He measured my feet, watched me walk and examined my physiology / how my knees and feet worked in concert with one another. Within a short time he got me set with a pair of boots that was the actual right size for me. He then took the time to fit me for custom footbeds for the boots. I have worn orthotics for the better part of the last two decades and am very well versed in recognizing who knows what they are doing. Joel knows exactly what he is doing. These foot beds essentially transformed an off the shelf boot and liner into a custom boot. WOW. I was able to go skiing a couple days later and had THE BIGGEST breakthrough with progression and was actually able to link turns and figured out how to hockey stop. That gave me so much confidence in my ability to learn something new at 42. Our three kids will be graduating from season rental gear next year. Olympic Bootworks will be our first stop for all three of them to get them outfitted. If your foundation isn\'t proper, nothing else will be stable. I am so enthused about this operation and the guys that work there! Everyone that came in during my time in the shop was as enthusiastic about their services and abilities as I am now! It is worth EVERY penny to upgrade your boots and footbeds.',
-  },
-  {
-    name: "Annie Edinger",
-    rating: 5,
-    content:
-      "CINDERELLA! THE SHOE FINALLY FITS! This place rocks. The most knowledgeable, friendly, professional, welcoming boot shop around. These guys really know their stuff and are super informative without making you feel silly when you ask a million questions. I came in with old boots that were causing me pain and making me tap out of skiing early in the day. I found out were too wide for my feet and the liner was not doing me any favors. Jason gave me the run down on my foot shape, and fitted me in a snug Lange boot. I opted for the shop's proprietary heel-loc foot beds that that Jason form fitted to my high arch to give me more support. After a week of skiing, I could feel the difference but I brought my boots in the get worked on in toe box and Levi did god's work and put up with my endless questions about liners, heat molding, how to properly buckle my boots, etc. I opted for the zip fit liners and will never look back. The whole crew here is great and I cannot recommend this shop enough. Seriously life changing!",
   },
   {
     name: "Mark Brown",
@@ -44,6 +36,14 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     content:
       "Incredible expertise, phenomenal technology in Heel-Loc. After 45 years of skiing I didn't think anything could ever solve my boot fit problems. Boy was I wrong. Revolutionized my stance, power transfer, and stability. Dropping into Gunsight and High Greely at Alta finally became a story about skill and no longer about equipment.",
+  },
+  {
+    name: "Gary K.",
+    role: "Avid Skier & Pickleball Player",
+    content:
+      "I was having issues with plantar fasciitis, especially after playing pickleball multiple days in a row. After getting orthotics for both my ski boots and pickleball shoes, it was a game changer. I played 4 straight days of pickleball, then two days of skiing, followed by 2 more days of pickleball, without my feet bothering me at all. I've noticed less hip and back pain as well.",
+    rating: 5,
+
   },
   {
     name: "Nikolaus Marsh",

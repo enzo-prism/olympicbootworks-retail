@@ -1,14 +1,18 @@
 import assert from "node:assert/strict"
 import test from "node:test"
 import { readFile } from "node:fs/promises"
+import { loadTypescriptModule } from "./load-typescript-module.mjs"
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8")
 
-test("homepage leads with boots while preserving the bike inquiry flow", async () => {
+test("homepage leads with stocked ski boots while preserving the bike inquiry flow", async () => {
   const home = await read("components/home-client.tsx")
-  assert.match(home, /Ski boots, ready for Tahoe/)
+  assert.match(home, /Ski boots in stock\./)
+  assert.match(home, /Fit and ready to go\./)
   assert.match(home, /stocked and ready/)
-  assert.ok(home.indexOf("Custom Boot Fitting") < home.indexOf("Current Fantic E-Bike Prices"))
+  assert.match(home, /fittingInquiryUrl\(\)/)
+  assert.ok(home.indexOf("Custom Boot Fitting") < home.indexOf("Fantic e-bikes</h2>"))
+  assert.ok(home.indexOf('id="shops"') < home.indexOf('id="e-bikes"'))
   assert.match(home, /href="\/e-bikes"/)
   assert.match(home, /email Buck/)
   assert.match(home, /Italian Made Freedom/)
@@ -16,6 +20,28 @@ test("homepage leads with boots while preserving the bike inquiry flow", async (
   assert.match(home, /Runner-up: Best Ski Shop/)
   assert.match(home, /10best\.usatoday\.com\/awards\/olympic-bootworks-olympic-valley-california/)
   assert.doesNotMatch(home, /Shop Now|ShoppingCart|item_id: "shop_now"/)
+})
+
+test("ski-season stock message stays general and invents no hours", async () => {
+  const { seasonalScheduleNotice, locations } = await loadTypescriptModule("../data/locations.ts", import.meta.url)
+  const copy = Object.values(seasonalScheduleNotice).join(" ")
+  assert.match(copy, /stocked/i)
+  assert.match(copy, /ski boots/i)
+  assert.doesNotMatch(copy, /summer|resume in the fall/i)
+  for (const location of locations) {
+    for (const entry of location.hours) {
+      assert.doesNotMatch(entry.hours, /\d{1,2}(?::\d{2})?\s*(?:AM|PM)/i, "Winter hours are unconfirmed")
+    }
+  }
+})
+
+test("boot page leads with the in-stock section and answers whether boots are sold", async () => {
+  const page = await read("app/boot-fitting/page.tsx")
+  const faqs = await read("data/boot-fitting-faqs.ts")
+  assert.match(page, /id="in-stock"/)
+  assert.ok(page.indexOf('id="in-stock"') < page.indexOf("Editorial intro"))
+  assert.match(faqs, /Does Olympic Bootworks sell ski boots\?/)
+  assert.match(faqs, /does not list specific models or sizes/)
 })
 
 test("bike cards prioritize descriptions, current prices, and model-specific email", async () => {
@@ -49,7 +75,6 @@ test("e-bike hub avoids unsupported stock and condition claims", async () => {
 })
 
 test("legacy shop route permanently redirects to the canonical e-bikes hub", async () => {
-  const { loadTypescriptModule } = await import("./load-typescript-module.mjs")
   const { GET, HEAD } = await loadTypescriptModule("../app/shop/route.ts", import.meta.url)
 
   for (const handler of [GET, HEAD]) {
@@ -63,7 +88,9 @@ test("legacy shop route permanently redirects to the canonical e-bikes hub", asy
 
 test("global navigation has no cart or shop-now path", async () => {
   const navigation = await read("components/navigation.tsx")
-  assert.match(navigation, /E-Bikes & Prices/)
+  assert.match(navigation, /Ski Boots & Fitting/)
+  assert.match(navigation, /Book a Fitting/)
+  assert.ok(navigation.indexOf("Ski Boots & Fitting") < navigation.indexOf("E-Bikes & Prices"))
   assert.match(navigation, /Email Buck/)
   assert.doesNotMatch(navigation, /CartLink|ShoppingBag|ShopButton|Shop Now|#!\/~\/cart/)
 })

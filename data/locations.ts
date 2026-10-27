@@ -26,21 +26,27 @@ export interface LocationData {
   description?: string
 }
 
+/**
+ * Ski-season status shared by the banner, location cards, footer, and JSON-LD.
+ * Source: Buck's October 26, 2026 email asking the site to highlight that the
+ * shops are stocked and ready to go. It is a general stock message only — never
+ * publish specific boot models, sizes, or quantities from it. Exact winter hours
+ * have not been confirmed, so visitors are asked to call ahead instead.
+ */
 export const seasonalScheduleNotice = {
-  label: "Summer schedule",
-  title: "Open by appointment this summer",
+  label: "Ski season 2026–27",
+  title: "Stocked and ready for ski season",
   summary:
-    "Both Olympic Bootworks locations are open by appointment this summer for boot fitting and Fantic e-bike sales. Call or email to schedule a visit — regular store hours resume in the fall.",
-  bannerPrimary: "Open by appointment at both locations",
+    "Both Olympic Bootworks shops are stocked with ski boots for the 2026–27 season. Call or email your preferred location to confirm today's hours or book a boot fitting.",
+  bannerPrimary: "Ski boots in stock at both Tahoe shops",
   /** Compact variant for the one-line mobile banner. */
-  bannerPrimaryShort: "Open by appointment",
-  bannerSecondary: "Call, email, or request an appointment online",
-  hoursStatus: "By appointment this summer — regular hours resume in the fall",
+  bannerPrimaryShort: "Ski boots in stock",
+  bannerSecondary: "Call or email to book your fitting",
+  hoursStatus: "Call ahead to confirm today's hours",
 }
 
 const sharedStoreHours: LocationHours[] = [
-  { day: "Summer", hours: "Open by appointment" },
-  { day: "Fall & winter", hours: "Regular store hours resume in the fall" },
+  { day: "Ski season", hours: "Boots in stock · book a fitting by phone or email" },
 ]
 
 export const locations: LocationData[] = [
