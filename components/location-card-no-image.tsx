@@ -115,8 +115,8 @@ export default function LocationCardNoImage({
             <p className="ml-10 mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
             <Button variant="link" asChild className="p-0 h-auto ml-10 mt-3">
               <Link href="/contact">
-                <ButtonIcon label="Request an Appointment" href="/contact" />
-                Request Appointment
+                <ButtonIcon label="Book a Fitting" href="/contact" />
+                Book a Fitting
               </Link>
             </Button>
           </div>

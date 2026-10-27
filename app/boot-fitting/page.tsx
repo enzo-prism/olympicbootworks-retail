@@ -1,16 +1,18 @@
 import { pageMetadata, SITE_URL, ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
 import Link from "next/link"
-import { Award, Footprints, Ruler, Wrench } from "lucide-react"
+import { Award, Check, Footprints, Ruler, Wrench } from "lucide-react"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import HeelLocSection from "@/components/heel-loc-section"
 import BootFittingCtas from "./boot-fitting-ctas"
 import SiteImage from "@/components/site-image"
+import StockPill from "@/components/stock-pill"
+import { locations, seasonalScheduleNotice } from "@/data/locations"
 import { bootFittingFaqs } from "@/data/boot-fitting-faqs"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
 export const metadata = pageMetadata({
-  title: "Custom Ski Boot Fitting in Lake Tahoe",
-  description: "Olympic Bootworks offers expert ski boot fitting in Olympic Valley and South Lake Tahoe — biomechanical assessment, shell modification, Heel-Loc custom footbeds, and ZipFit liners.",
+  title: "Ski Boots & Custom Boot Fitting in Lake Tahoe",
+  description: "Ski boots in stock and expert boot fitting at Olympic Bootworks in Olympic Valley and South Lake Tahoe: biomechanical assessment, shell work, Heel-Loc custom footbeds, and ZipFit liners.",
   path: "/boot-fitting",
 })
 
@@ -37,14 +39,20 @@ const services = [
   },
 ]
 
+const stockPoints = [
+  "New ski boots on the wall at Olympic Valley and South Lake Tahoe",
+  "Footbeds, shell work, and liner fitting for every pair we sell",
+  "Bring them back after you ski. We keep adjusting until they're right",
+]
+
 const steps = [
   {
-    title: "1. Request a fitting",
-    text: "Email Buck with your location, dates, and what you ski. We fit by appointment at both Tahoe shops.",
+    title: "1. Book your fitting",
+    text: "Email or call either shop with your dates and what you ski. Both shops are stocked, so we can fit you in new boots or work on the pair you own.",
   },
   {
     title: "2. Assess & fit",
-    text: "In the shop we assess your biomechanics, select the right shell and liner, and build your custom footbeds.",
+    text: "In the shop we assess your biomechanics, shell-check you in boots off our wall, and build your custom footbeds.",
   },
   {
     title: "3. Refine until it's right",
@@ -73,7 +81,7 @@ const bootFittingJsonLd = {
       "@type": "FAQPage",
       "@id": `${SITE_URL}/boot-fitting#webpage`,
       url: `${SITE_URL}/boot-fitting`,
-      name: "Custom Ski Boot Fitting in Lake Tahoe",
+      name: "Ski Boots & Custom Boot Fitting in Lake Tahoe",
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": `${SITE_URL}/boot-fitting#service` },
       mainEntity: bootFittingFaqs.map(({ question, answer }) => ({
@@ -90,14 +98,61 @@ export default function BootFittingPage() {
     <div className="flex flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(bootFittingJsonLd) }} />
       <MinimalPageHero
-        eyebrow="Olympic Valley · South Lake Tahoe"
-        title="Custom Ski Boot Fitting"
-        description="A boot built around your feet — biomechanical assessment, precise shell work, Heel-Loc custom footbeds, and ZipFit liners from the shop Tahoe's strongest skiers trust."
+        eyebrow="Ski season 2026–27 · Boots in stock"
+        title="Ski Boots & Custom Boot Fitting"
+        description="Both Tahoe shops are stocked and ready. Pick your boot off the wall and we'll build it around your feet with biomechanical assessment, precise shell work, Heel-Loc custom footbeds, and ZipFit liners."
         actions={[
-          { href: fittingInquiryUrl(), label: "Request a Fitting" },
+          { href: fittingInquiryUrl(), label: "Book a Fitting" },
           { href: "/contact", label: "Hours & Locations", variant: "secondary" },
         ]}
       />
+
+      {/* In stock — Buck's Oct 26, 2026 request */}
+      <section id="in-stock" className="scroll-mt-28 border-b bg-secondary/60 py-16 md:py-20">
+        <div className="container mx-auto grid items-center gap-10 px-4 lg:grid-cols-2 lg:gap-14">
+          <div className="relative aspect-[3/2] overflow-hidden rounded-xl shadow-lg">
+            <SiteImage
+              src="/ski-boot-fitting-station.jpg"
+              alt="A wall of new ski boots above the fitting benches at Olympic Bootworks"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-top"
+            />
+          </div>
+          <div>
+            <StockPill>{seasonalScheduleNotice.bannerPrimary}</StockPill>
+            <h2 className="mt-4 text-3xl md:text-4xl font-semibold">Stocked and ready to fit</h2>
+            <p className="mt-4 text-muted-foreground">
+              We don&apos;t sell boots off a size chart. We start with your feet, shell-check you in the right
+              boots from our wall, and fit them before you leave, so you&apos;re ready for the mountain.
+            </p>
+            <ul className="mt-6 grid gap-3">
+              {stockPoints.map((point) => (
+                <li key={point} className="flex items-start gap-3">
+                  <Check className="mt-0.5 h-5 w-5 shrink-0 text-stock" aria-hidden="true" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-sm text-muted-foreground">
+              {seasonalScheduleNotice.hoursStatus}:{" "}
+              {locations.map((location, index) => (
+                <span key={location.id}>
+                  {index > 0 && " · "}
+                  {location.address.city}{" "}
+                  <a
+                    href={`tel:+1${location.contact.phone.replace(/[^0-9]/g, "")}`}
+                    className="whitespace-nowrap font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    {location.contact.phone}
+                  </a>
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Editorial intro */}
       <section className="py-16 md:py-24">
@@ -181,7 +236,7 @@ export default function BootFittingPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-3">
               How it works
             </p>
-            <h2 className="text-3xl md:text-4xl font-semibold">By appointment, built around you</h2>
+            <h2 className="text-3xl md:text-4xl font-semibold">Built around you, start to finish</h2>
           </div>
           <ol className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-3">
             {steps.map((step) => (
@@ -239,12 +294,12 @@ export default function BootFittingPage() {
       <section className="py-16 md:py-24 bg-ink text-ink-foreground">
         <div className="container mx-auto px-4 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/60 mb-4">
-            By appointment at both shops
+            Stocked at both Tahoe shops
           </p>
           <h2 className="text-3xl md:text-5xl font-semibold mb-5">Ski a boot built for you.</h2>
           <p className="max-w-xl mx-auto mb-10 text-white/80">
-            Email Buck with your dates and what you ski — he&apos;ll set up your fitting at Olympic
-            Valley or South Lake Tahoe.
+            The boot wall is stocked. Email Buck with your dates and what you ski, and he&apos;ll set up
+            your fitting at Olympic Valley or South Lake Tahoe.
           </p>
           <BootFittingCtas />
         </div>

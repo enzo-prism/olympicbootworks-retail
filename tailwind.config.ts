@@ -31,6 +31,10 @@ const config = {
           DEFAULT: "hsl(var(--ink))",
           foreground: "hsl(var(--ink-foreground))",
         },
+        stock: {
+          DEFAULT: "hsl(var(--stock))",
+          light: "hsl(var(--stock-light))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -1,6 +1,10 @@
 /** Visible answers shared with the boot-fitting page's structured data. */
 export const bootFittingFaqs = [
   {
+    question: "Does Olympic Bootworks sell ski boots?",
+    answer: "Yes. Both Lake Tahoe shops are stocked with ski boots for the 2026–27 season, and every pair is sold with a fitting: the fitter assesses your feet, checks shell fit, and recommends footbed, shell, and liner work. Contact your preferred shop to ask about fit and availability; the website does not list specific models or sizes.",
+  },
+  {
     question: "Where can I get custom ski boot fitting in Lake Tahoe?",
     answer: "Olympic Bootworks offers custom ski boot fitting at two Lake Tahoe shops: Olympic Valley in North Lake Tahoe and Ski Run Boulevard in South Lake Tahoe. Contact your preferred shop to confirm an appointment before visiting.",
   },

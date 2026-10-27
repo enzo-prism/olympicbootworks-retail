@@ -28,12 +28,12 @@ export default function LocationsSection() {
         {/* Additional CTA - improved spacing */}
         <div className="mt-16 text-center">
           <p className="text-muted-foreground mb-5">
-            Planning a visit? Please request an appointment before coming in.
+            Planning a visit? Call ahead to confirm today's hours, and book your fitting by phone or email.
           </p>
           <Button asChild className="shadow-sm px-8">
             <Link href="/contact">
-              <ButtonIcon label="Request an Appointment" href="/contact" />
-              Request Appointment
+              <ButtonIcon label="Book a Fitting" href="/contact" />
+              Book a Fitting
             </Link>
           </Button>
         </div>

@@ -1,10 +1,10 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
 import { GoogleReviewButton } from "@/components/google-review-button"
 import { Facebook, Instagram, Star } from "lucide-react"
 import { seasonalScheduleNotice } from "@/data/locations"
 import { CookieSettingsButton } from "@/components/cookie-settings-button"
+import FooterFittingButton from "@/components/footer-fitting-button"
 
 export default function Footer() {
   return (
@@ -25,12 +25,10 @@ export default function Footer() {
               <h3 className="text-lg font-bold">Olympic Bootworks</h3>
             </div>
             <p className="text-muted-foreground text-sm">
-              Premier ski and mountain bike shop serving athletes of all levels since 1994.
+              Lake Tahoe ski boots and custom boot fitting since 1994, plus Fantic e-bikes.
             </p>
             <p className="text-muted-foreground text-sm">{seasonalScheduleNotice.bannerSecondary}.</p>
-            <Button asChild size="sm" className="shadow-sm">
-              <Link href="/e-bikes">Explore Fantic E-Bikes</Link>
-            </Button>
+            <FooterFittingButton />
             <GoogleReviewButton size="sm" analyticsItemId="google_review_footer" className="w-fit" />
             <div className="flex items-center space-x-4 mt-6">
               <Link
@@ -72,13 +70,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/e-bikes" className="text-primary hover:text-primary font-semibold text-sm inline-block py-1.5">
-                  Fantic E-Bikes
+                <Link href="/boot-fitting" className="text-primary hover:text-primary font-semibold text-sm inline-block py-1.5">
+                  Ski Boots &amp; Fitting
                 </Link>
               </li>
               <li>
-                <Link href="/boot-fitting" className="text-primary hover:text-primary font-semibold text-sm inline-block py-1.5">
-                  Boot Fitting
+                <Link href="/e-bikes" className="text-muted-foreground hover:text-primary text-sm inline-block py-1.5">
+                  Fantic E-Bikes
                 </Link>
               </li>
               <li>
@@ -123,7 +121,7 @@ export default function Footer() {
                 <span className="font-medium">Email:</span> buck@olympicbootworks.com
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
-                Appointment Info & Map
+                Hours & Map
               </Link>
             </div>
           </div>
@@ -141,7 +139,7 @@ export default function Footer() {
                 <span className="font-medium">Email:</span> SouthLake@Olympicbootworks.com
               </p>
               <Link href="/contact" className="text-sm text-primary hover:underline">
-                Appointment Info & Map
+                Hours & Map
               </Link>
             </div>
           </div>

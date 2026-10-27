@@ -8,11 +8,11 @@ for (const [method, handler] of [
   ["GET", GET],
   ["HEAD", HEAD],
 ]) {
-  test(`/shop/boots ${method} permanently redirects to public /contact`, async () => {
+  test(`/shop/boots ${method} permanently redirects to the public boots page`, async () => {
     const response = handler()
 
     assert.equal(response.status, 308)
-    assert.equal(response.headers.get("location"), "https://www.olympicbootworks.com/contact")
+    assert.equal(response.headers.get("location"), "https://www.olympicbootworks.com/boot-fitting")
     assert.doesNotMatch(response.headers.get("location"), /localhost|127\.0\.0\.1|attacker\.example/)
     assert.equal(await response.text(), "")
   })

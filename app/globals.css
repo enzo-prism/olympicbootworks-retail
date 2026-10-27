@@ -28,6 +28,9 @@
     /* Deep alpine navy for dark bands and the closing CTA */
     --ink: 214 45% 11%;
     --ink-foreground: 204 40% 98%;
+    /* "In stock / ready" signal — used only for live-stock indicators */
+    --stock: 152 72% 27%;
+    --stock-light: 148 60% 58%;
     --radius: 0.5rem;
     --banner-height: 2.5rem;
   }

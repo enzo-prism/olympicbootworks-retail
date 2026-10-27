@@ -16,7 +16,7 @@ export default function BootFittingCtas() {
           onClick={() => trackConversion("email_click", { location: "boot_fitting_closing" })}
         >
           <Mail className="h-5 w-5 mr-2" aria-hidden="true" />
-          Request a Fitting
+          Book a Fitting
         </a>
       </Button>
       <Button asChild variant="outline-on-dark" size="lg" className="backdrop-blur-sm w-full sm:w-auto">

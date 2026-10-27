@@ -2,8 +2,8 @@ import { pageMetadata } from "@/lib/seo"
 import HomeClient from "@/components/home-client"
 
 export const metadata = pageMetadata({
-  title: "Lake Tahoe Ski Boot Fitting & Fantic E-Bikes",
-  description: "Custom ski boot fitting, Heel-Loc footbeds, ZipFit liners and Fantic e-bikes in Olympic Valley and South Lake Tahoe. Contact either shop to plan a visit.",
+  title: "Ski Boots In Stock & Custom Boot Fitting in Lake Tahoe",
+  description: "Both Olympic Bootworks shops are stocked with ski boots for the 2026–27 season. Custom boot fitting, Heel-Loc footbeds and ZipFit liners in Olympic Valley and South Lake Tahoe, plus Fantic e-bikes.",
   path: "/",
 })
 
@@ -15,7 +15,7 @@ export default function Page() {
       <noscript>
         <section className="container mx-auto px-4 py-4 text-sm">
           <p>
-            JavaScript is disabled. You can still learn about our services, custom boot fitting, and shop hours on this page. Enable JavaScript for interactive galleries and videos.
+            JavaScript is disabled. You can still learn about our ski boots, custom boot fitting, and shop locations on this page. Enable JavaScript for interactive galleries and videos.
           </p>
         </section>
       </noscript>

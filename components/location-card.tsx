@@ -105,8 +105,8 @@ export default function LocationCard({ location, showHours = true, className = "
               href={fittingInquiryUrl({ email: location.contact.email, locationName: location.name })}
               onClick={() => trackConversion('email_click', { location: locationSlug })}
             >
-              <ButtonIcon label="Request an Appointment" href={`mailto:${location.contact.email}`} />
-              Request Appointment
+              <ButtonIcon label="Book a Fitting" href={`mailto:${location.contact.email}`} />
+              Book a Fitting
             </Link>
           </Button>
         )}
