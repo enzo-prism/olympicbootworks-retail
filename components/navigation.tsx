@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetDescription, SheetTitle } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import { locations, northLakeLocation, phoneHref } from "@/data/locations"
+import { locationUrl, locations, northLakeLocation, phoneHref } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
@@ -93,6 +93,13 @@ const NavLink = ({
 
 export default function Navigation() {
   const pathname = usePathname()
+  const currentShop = locations.find((location) => locationUrl(location) === pathname)
+  const shopId = currentShop?.id
+  const fittingHref = fittingInquiryUrl({ email: currentShop?.contact.email, locationName: currentShop?.address.city })
+  const generalEmailHref = currentShop?.contact.email
+    ? fittingHref
+    : "mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
+  const phoneShop = currentShop ?? northLakeLocation
   const [isOpen, setIsOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
@@ -163,8 +170,8 @@ export default function Navigation() {
 
           <Button asChild size="sm" className="ml-2">
             <a
-              href={fittingInquiryUrl()}
-              onClick={() => trackConversion("email_click", { location: "desktop_navigation" })}
+              href={fittingHref}
+              onClick={() => trackConversion("email_click", { location: "desktop_navigation", shopId })}
             >
               <Footprints className="mr-2 h-4 w-4" aria-hidden="true" />
               Book a Fitting
@@ -176,8 +183,8 @@ export default function Navigation() {
             persistent header slot; phone lives in the menu's Locations section. */}
         <div className="flex items-center gap-1 md:hidden">
           <a
-            href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
-            onClick={() => trackConversion("email_click", { location: "mobile_header" })}
+            href={generalEmailHref}
+            onClick={() => trackConversion("email_click", { location: "mobile_header", shopId })}
             className="h-11 w-11 flex items-center justify-center rounded-full hover:bg-secondary transition-colors"
             aria-label="Email Olympic Bootworks"
           >
@@ -290,10 +297,10 @@ export default function Navigation() {
                 <div className="mt-6 pt-4 border-t flex flex-col gap-3">
                   <Button asChild size="lg" className="h-12 w-full">
                     <a
-                      href={fittingInquiryUrl()}
+                      href={fittingHref}
                       onClick={() => {
                         setIsOpen(false)
-                        trackConversion("email_click", { location: "mobile_navigation_fitting" })
+                        trackConversion("email_click", { location: "mobile_navigation_fitting", shopId })
                       }}
                     >
                       <Footprints className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -302,22 +309,22 @@ export default function Navigation() {
                   </Button>
                   <Button asChild size="lg" variant="outline" className="h-12 w-full">
                     <a
-                      href="mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
+                      href={generalEmailHref}
                       onClick={() => {
                         setIsOpen(false)
-                        trackConversion("email_click", { location: "mobile_navigation" })
+                        trackConversion("email_click", { location: "mobile_navigation", shopId })
                       }}
                     >
                       <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
-                      Email Buck
+                      {currentShop ? "Email the shop" : "Email Buck"}
                     </a>
                   </Button>
                   <Button asChild size="lg" variant="outline" className="h-12 w-full">
                     <a
-                      href={phoneHref(northLakeLocation.contact.phone)}
+                      href={phoneHref(phoneShop.contact.phone)}
                       onClick={() => {
                         setIsOpen(false)
-                        trackConversion("phone_click", { location: "mobile_navigation", shopId: northLakeLocation.id })
+                        trackConversion("phone_click", { location: "mobile_navigation", shopId: phoneShop.id })
                       }}
                     >
                       <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
