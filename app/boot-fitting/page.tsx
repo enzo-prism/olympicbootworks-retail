@@ -6,7 +6,7 @@ import HeelLocSection from "@/components/heel-loc-section"
 import BootFittingCtas, { BootFittingPhoneLink } from "./boot-fitting-ctas"
 import SiteImage from "@/components/site-image"
 import StockPill from "@/components/stock-pill"
-import { locations, seasonalScheduleNotice } from "@/data/locations"
+import { locationUrl, locations, seasonalScheduleNotice } from "@/data/locations"
 import { bootFittingFaqs } from "@/data/boot-fitting-faqs"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
@@ -140,7 +140,9 @@ export default function BootFittingPage() {
               {locations.map((location, index) => (
                 <span key={location.id}>
                   {index > 0 && " · "}
-                  {location.address.city}{" "}
+                  <Link href={locationUrl(location)} className="font-medium text-primary underline-offset-4 hover:underline">
+                    {location.address.city}
+                  </Link>{" "}
                   <BootFittingPhoneLink phone={location.contact.phone} shopId={location.id} />
                 </span>
               ))}

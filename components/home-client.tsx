@@ -25,7 +25,7 @@ import { sendGa4Event } from "@/lib/gtag"
 import { trackConversion } from "@/lib/track-conversion"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { featuredBikes, bikeDetailUrl, cheapestBikePrice, formatPrice, familyLabels } from "@/data/bikes"
-import { locations, phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { locationUrl, locations, phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
 
 const USA_TODAY_10BEST_URL =
   "https://10best.usatoday.com/awards/olympic-bootworks-olympic-valley-california/"
@@ -91,7 +91,11 @@ function ShopCard({ location }: { location: LocationData }) {
   return (
     <div className="flex flex-col rounded-xl border bg-card p-6 shadow-sm md:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h3 className="text-2xl font-semibold">{location.name}</h3>
+        <h3 className="text-2xl font-semibold">
+          <Link href={locationUrl(location)} className="underline-offset-4 hover:underline">
+            {location.address.city}
+          </Link>
+        </h3>
         <StockPill>Boots in stock</StockPill>
       </div>
       <p className="mt-4 flex items-start gap-2 text-muted-foreground">
@@ -128,7 +132,7 @@ function ShopCard({ location }: { location: LocationData }) {
       {contact.email && (
         <a
           href={fittingInquiryUrl({ email: contact.email, locationName: location.name })}
-          onClick={() => trackConversion("email_click", { location: `home_shops_${location.id}` })}
+          onClick={() => trackConversion("email_click", { location: `home_shops_${location.id}`, shopId: location.id })}
           className="mt-4 inline-flex items-center gap-2 self-start text-sm font-medium text-primary underline-offset-4 hover:underline"
         >
           <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />

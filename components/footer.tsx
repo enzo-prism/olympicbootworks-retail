@@ -5,6 +5,7 @@ import { Facebook, Instagram, Star } from "lucide-react"
 import {
   formatCityLine,
   formatStreetAddress,
+  locationUrl,
   northLakeLocation,
   seasonalScheduleNotice,
   southLakeLocation,
@@ -126,8 +127,8 @@ export default function Footer() {
               <p className="break-all text-sm text-muted-foreground">
                 <span className="font-medium">Email:</span> {northLakeLocation.contact.email}
               </p>
-              <Link href="/contact" className="text-sm text-primary hover:underline">
-                Hours & Map
+              <Link href={locationUrl(northLakeLocation)} className="text-sm text-primary hover:underline">
+                Shop details & directions
               </Link>
             </div>
           </div>
@@ -144,8 +145,8 @@ export default function Footer() {
               <p className="break-all text-sm text-muted-foreground">
                 <span className="font-medium">Email:</span> {southLakeLocation.contact.email}
               </p>
-              <Link href="/contact" className="text-sm text-primary hover:underline">
-                Hours & Map
+              <Link href={locationUrl(southLakeLocation)} className="text-sm text-primary hover:underline">
+                Shop details & directions
               </Link>
             </div>
           </div>

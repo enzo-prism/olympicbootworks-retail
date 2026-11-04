@@ -13,14 +13,14 @@ test("both location cards link their displayed email to the actual recipient", a
   const { outputText } = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
   })
-  const { locations, phoneHref, seasonalScheduleNotice } = await loadTypescriptModule("../data/locations.ts", import.meta.url)
+  const locationData = await loadTypescriptModule("../data/locations.ts", import.meta.url)
   const conversionCalls = []
   const exports = {}
   vm.runInNewContext(outputText, {
     exports,
     require(name) {
       if (name === "react/jsx-runtime") return jsxRuntime
-      if (name === "@/data/locations") return { phoneHref, seasonalScheduleNotice }
+      if (name === "@/data/locations") return locationData
       if (name === "@/lib/fitting-inquiry") return { fittingInquiryUrl: ({ email }) => `mailto:${email}?subject=Fitting` }
       if (name === "@/lib/track-conversion") return { trackConversion: (...args) => conversionCalls.push(args) }
       if (name === "@/lib/utils") return { cn: (...classes) => classes.join(" ") }
@@ -34,7 +34,7 @@ test("both location cards link their displayed email to the actual recipient", a
     return [ ...(node.type === "a" ? [node] : []), ...findAnchors(node.props?.children) ]
   }
 
-  for (const location of locations) {
+  for (const location of locationData.locations) {
     const anchors = findAnchors(exports.default({ location }))
     const emailLink = anchors.find((node) => node.props.children === location.contact.email)
     assert.ok(emailLink, `Missing email link for ${location.id}`)
