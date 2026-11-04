@@ -1,6 +1,6 @@
 import React from "react"
-import { ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
-import { locations, seasonalScheduleNotice, type LocationHours } from "@/data/locations"
+import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
+import { locationUrl, locations, seasonalScheduleNotice, type LocationHours } from "@/data/locations"
 
 // Injects JSON-LD structured data into <head> safely.
 // Replace '<' with '\u003c' to mitigate script injection as recommended. [^1]
@@ -89,7 +89,7 @@ export default function SeoJsonLd() {
       "@type": "SportingGoodsStore",
       "@id": `https://www.olympicbootworks.com/#${location.id}`,
       name: `Olympic Bootworks - ${location.name}`,
-      url: `https://www.olympicbootworks.com/contact#${location.id}`,
+      url: `${SITE_URL}${locationUrl(location)}`,
       image: "https://www.olympicbootworks.com/images/og-default.jpg",
       telephone: location.contact.phone,
       email: location.contact.email,

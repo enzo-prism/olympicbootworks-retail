@@ -60,6 +60,7 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         contact_method: "email",
+        shop_id: shopId,
         content_id: contentId,
         content_name: contentName,
       })
@@ -68,6 +69,7 @@ function mirrorEngagementToGa4(
       sendGa4Event("contact", {
         lead_source: location,
         contact_method: "email_copy",
+        shop_id: shopId,
         content_id: contentId,
         content_name: contentName,
       })

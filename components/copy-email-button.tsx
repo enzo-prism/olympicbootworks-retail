@@ -15,6 +15,7 @@ type CopyEmailButtonProps = {
   emailClassName?: string
   buttonClassName?: string
   trackingLocation?: string
+  shopId?: string
   contentId?: string
   contentName?: string
 }
@@ -27,6 +28,7 @@ export default function CopyEmailButton({
   emailClassName,
   buttonClassName,
   trackingLocation,
+  shopId,
   contentId,
   contentName,
 }: CopyEmailButtonProps) {
@@ -40,6 +42,7 @@ export default function CopyEmailButton({
     if (trackingLocation) {
       trackConversion("email_copy", {
         location: isFullInquiry ? `${trackingLocation}_full_inquiry` : trackingLocation,
+        shopId,
         contentId,
         contentName,
       })
@@ -73,7 +76,7 @@ export default function CopyEmailButton({
           "max-w-full cursor-text bg-transparent p-0 font-medium text-current outline-none",
           emailClassName,
         )}
-        aria-label="Buck's email address"
+        aria-label="Email address"
       />
       <button
         type="button"

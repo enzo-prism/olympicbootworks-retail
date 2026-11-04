@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { locationUrl, phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
@@ -33,7 +33,11 @@ export default function LocationCard({ location, showHours = true, className = "
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
           <div className="p-6 w-full">
             <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white">{location.name}</h3>
+              <h3 className="text-xl font-bold text-white">
+                <Link href={locationUrl(location)} className="underline-offset-4 hover:underline">
+                  {location.address.city}
+                </Link>
+              </h3>
               {location.flagship && <Badge className="bg-primary text-white">Flagship</Badge>}
             </div>
           </div>

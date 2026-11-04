@@ -98,6 +98,8 @@ function requireLocation(id: string): LocationData {
 export const northLakeLocation = requireLocation("olympic-valley")
 export const southLakeLocation = requireLocation("south-lake-tahoe")
 
+export const locationUrl = (location: Pick<LocationData, "id">) => `/locations/${location.id}`
+
 /** Street line(s) as displayed, e.g. "1235 Ski Run Blvd." */
 export const formatStreetAddress = (address: LocationAddress) =>
   [address.line1, address.line2].filter(Boolean).join(", ")

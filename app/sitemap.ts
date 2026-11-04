@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 import { bikeDetailUrl, bikes } from "@/data/bikes"
+import { locationUrl, locations } from "@/data/locations"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.olympicbootworks.com"
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/contact`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/privacy`, changeFrequency: "yearly", priority: 0.3 },
     // We intentionally omit /shop/boots because it redirects to /contact.
+    ...locations.map((location) => ({ url: `${base}${locationUrl(location)}` })),
     ...bikePages,
   ]
 }

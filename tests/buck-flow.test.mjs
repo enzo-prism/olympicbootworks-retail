@@ -91,7 +91,7 @@ test("footer fitting CTA is tracked like the other fitting mailtos", async () =>
   const button = await read("components/footer-fitting-button.tsx")
   assert.match(footer, /<FooterFittingButton \/>/)
   assert.match(button, /fittingInquiryUrl\(\)/)
-  assert.match(button, /trackConversion\("email_click", \{ location: "footer_fitting" \}\)/)
+  assert.match(button, /trackConversion\("email_click", \{ location: "footer_fitting", shopId: shop\?\.id \}\)/)
 })
 
 test("global navigation has no cart or shop-now path", async () => {
