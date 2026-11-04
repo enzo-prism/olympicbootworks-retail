@@ -245,7 +245,7 @@ export default function EBikesClient() {
                   <Button asChild variant="outline">
                     <a
                       href={phoneHref(location.contact.phone)}
-                      onClick={() => trackConversion("phone_click", { location: location.id })}
+                      onClick={() => trackConversion("phone_click", { location: location.id, shopId: location.id })}
                     >
                       <PhoneCall className="mr-2 h-4 w-4" aria-hidden="true" />
                       Call {location.contact.phone}

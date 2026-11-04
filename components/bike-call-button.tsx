@@ -20,6 +20,7 @@ export default function BikeCallButton({ bike, className }: BikeCallButtonProps)
         onClick={() =>
           trackConversion("phone_click", {
             location: `ebike_${bike.slug}`,
+            shopId: northLakeLocation.id,
             contentId: bike.slug,
             contentName: `Fantic ${bike.name}`,
           })
