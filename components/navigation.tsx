@@ -266,6 +266,7 @@ export default function Navigation() {
                             onClick={() =>
                               trackConversion("phone_click", {
                                 location: `mobile_navigation_${location.id}`,
+                                shopId: location.id,
                               })
                             }
                             className="text-sm text-primary flex items-center gap-1 py-2.5"
@@ -316,7 +317,7 @@ export default function Navigation() {
                       href={phoneHref(northLakeLocation.contact.phone)}
                       onClick={() => {
                         setIsOpen(false)
-                        trackConversion("phone_click", { location: "mobile_navigation" })
+                        trackConversion("phone_click", { location: "mobile_navigation", shopId: northLakeLocation.id })
                       }}
                     >
                       <Phone className="mr-2 h-5 w-5" aria-hidden="true" />

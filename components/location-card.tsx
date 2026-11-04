@@ -52,6 +52,7 @@ export default function LocationCard({ location, showHours = true, className = "
             <Link
               href={`https://maps.google.com/?q=${encodeURIComponent(fullAddress)}`}
               target="_blank"
+              onClick={() => trackConversion("directions_click", { location: `contact_card_${location.id}`, shopId: location.id })}
               className="text-sm text-primary hover:underline"
             >
               View on Map
@@ -65,7 +66,7 @@ export default function LocationCard({ location, showHours = true, className = "
             <a
               href={phoneHref(location.contact.phone)}
               className="text-muted-foreground hover:text-primary hover:underline"
-              onClick={() => trackConversion('phone_click', { location: locationSlug })}
+              onClick={() => trackConversion('phone_click', { location: locationSlug, shopId: location.id })}
             >
               {location.contact.phone}
             </a>

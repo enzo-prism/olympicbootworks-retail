@@ -8,6 +8,7 @@ export type ConversionType =
   | "email_click"
   | "email_copy"
   | "phone_click"
+  | "directions_click"
   | "contact_page_view"
   | "test_ride_request"
   | "bike_page_view"
@@ -21,6 +22,7 @@ interface ConversionOptions {
   value?: number
   currency?: string
   location?: string
+  shopId?: string
   contentId?: string
   contentName?: string
 }
@@ -32,6 +34,7 @@ function mirrorEngagementToGa4(
   location: string,
   contentId?: string,
   contentName?: string,
+  shopId?: string,
 ) {
   switch (type) {
     case "test_ride_request":
@@ -75,8 +78,15 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         contact_method: "phone",
+        shop_id: shopId,
         content_id: contentId,
         content_name: contentName,
+      })
+      break
+    case "directions_click":
+      sendGa4Event("directions_click", {
+        lead_source: location,
+        shop_id: shopId,
       })
       break
     case "contact_page_view":
@@ -97,7 +107,7 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
     return
   }
 
-  const { value = 1.0, currency = "USD", location, contentId, contentName } = options
+  const { value = 1.0, currency = "USD", location, contentId, contentName, shopId } = options
   const loc = location ?? "unknown"
 
   // Vercel events are independent of Google tag readiness. The included plan supports two properties.
@@ -112,7 +122,7 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
       return
     }
 
-    mirrorEngagementToGa4(type, value, currency, loc, contentId, contentName)
+    mirrorEngagementToGa4(type, value, currency, loc, contentId, contentName, shopId)
 
     if (isGa4OnlyConversion(type)) {
       return

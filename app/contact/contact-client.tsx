@@ -116,7 +116,7 @@ export default function ContactClient() {
                   Phone: <a
                     href={phoneHref(northLakeLocation.contact.phone)}
                     className="text-primary hover:underline"
-                    onClick={() => trackConversion('phone_click', { location: 'north_lake_tahoe' })}
+                    onClick={() => trackConversion('phone_click', { location: 'north_lake_tahoe', shopId: northLakeLocation.id })}
                   >
                     {northLakeLocation.contact.phone}
                   </a>
@@ -158,7 +158,7 @@ export default function ContactClient() {
                   Phone: <a
                     href={phoneHref(southLakeLocation.contact.phone)}
                     className="text-primary hover:underline"
-                    onClick={() => trackConversion('phone_click', { location: 'south_lake_tahoe' })}
+                    onClick={() => trackConversion('phone_click', { location: 'south_lake_tahoe', shopId: southLakeLocation.id })}
                   >
                     {southLakeLocation.contact.phone}
                   </a>
@@ -200,6 +200,7 @@ export default function ContactClient() {
                         `${location.address.line1}, ${location.address.city}, ${location.address.state} ${location.address.zip}`,
                       )}`}
                       target="_blank"
+                      onClick={() => trackConversion("directions_click", { location: `contact_map_${location.id}`, shopId: location.id })}
                     >
                       <ButtonIcon label="View on Google Maps" href="https://maps.google.com" />
                       View on Google Maps

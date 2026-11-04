@@ -72,6 +72,7 @@ export default function LocationCardNoImage({
             <Link
               href={`https://maps.google.com/?q=${encodeURIComponent(fullAddress)}`}
               target="_blank"
+              onClick={() => trackConversion("directions_click", { location: `about_card_${location.id}`, shopId: location.id })}
               className="text-sm flex items-center gap-1 mt-2 text-primary hover:underline"
             >
               <ExternalLink className="h-3 w-3" aria-hidden="true" />
@@ -88,7 +89,7 @@ export default function LocationCardNoImage({
           <a
             href={phoneHref(location.contact.phone)}
             className="hover:underline"
-            onClick={() => trackConversion("phone_click", { location: `about_${location.id}` })}
+            onClick={() => trackConversion("phone_click", { location: `about_${location.id}`, shopId: location.id })}
           >
             {location.contact.phone}
           </a>

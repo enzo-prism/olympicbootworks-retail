@@ -12,6 +12,7 @@ import { trackConversion } from "@/lib/track-conversion"
 type HeroAction = {
   href: string
   label: string
+  shopId?: string
   variant?: "primary" | "secondary"
   /** Opens in a new tab (e.g. external review link) */
   external?: boolean
@@ -46,7 +47,7 @@ export default function MinimalPageHero({
       return
     }
     if (action.href.startsWith("tel:")) {
-      trackConversion("phone_click", { location })
+      trackConversion("phone_click", { location, shopId: action.shopId })
       return
     }
     sendGa4Event("select_content", {

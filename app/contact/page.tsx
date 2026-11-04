@@ -21,7 +21,7 @@ export default function ContactPage() {
         description={seasonalScheduleNotice.summary}
         actions={[
           { href: fittingInquiryUrl(), label: "Book a Fitting" },
-          { href: phoneHref(northLakeLocation.contact.phone), label: "Call North Lake", variant: "secondary" },
+          { href: phoneHref(northLakeLocation.contact.phone), label: "Call North Lake", shopId: northLakeLocation.id, variant: "secondary" },
           {
             href: GOOGLE_BUSINESS_REVIEW_URL,
             label: "Leave a Google review",

@@ -3,10 +3,10 @@ import Link from "next/link"
 import { Award, Check, Footprints, Ruler, Wrench } from "lucide-react"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import HeelLocSection from "@/components/heel-loc-section"
-import BootFittingCtas from "./boot-fitting-ctas"
+import BootFittingCtas, { BootFittingPhoneLink } from "./boot-fitting-ctas"
 import SiteImage from "@/components/site-image"
 import StockPill from "@/components/stock-pill"
-import { locations, phoneHref, seasonalScheduleNotice } from "@/data/locations"
+import { locations, seasonalScheduleNotice } from "@/data/locations"
 import { bootFittingFaqs } from "@/data/boot-fitting-faqs"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
@@ -141,12 +141,7 @@ export default function BootFittingPage() {
                 <span key={location.id}>
                   {index > 0 && " · "}
                   {location.address.city}{" "}
-                  <a
-                    href={phoneHref(location.contact.phone)}
-                    className="whitespace-nowrap font-medium text-primary underline-offset-4 hover:underline"
-                  >
-                    {location.contact.phone}
-                  </a>
+                  <BootFittingPhoneLink phone={location.contact.phone} shopId={location.id} />
                 </span>
               ))}
             </p>

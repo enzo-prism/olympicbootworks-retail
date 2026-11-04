@@ -107,14 +107,19 @@ function ShopCard({ location }: { location: LocationData }) {
         <Button asChild size="lg" className="h-auto w-full whitespace-normal py-3">
           <a
             href={phoneHref(contact.phone)}
-            onClick={() => trackConversion("phone_click", { location: `home_shops_${location.id}` })}
+            onClick={() => trackConversion("phone_click", { location: `home_shops_${location.id}`, shopId: location.id })}
           >
             <Phone className="mr-2 h-4 w-4" aria-hidden="true" />
             {contact.phone}
           </a>
         </Button>
         <Button asChild size="lg" variant="outline" className="h-auto w-full whitespace-normal py-3">
-          <a href={`https://maps.google.com/?q=${encodeURIComponent(fullAddress)}`} target="_blank" rel="noopener noreferrer">
+          <a
+            href={`https://maps.google.com/?q=${encodeURIComponent(fullAddress)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackConversion("directions_click", { location: `home_shops_${location.id}`, shopId: location.id })}
+          >
             <MapPin className="mr-2 h-4 w-4" aria-hidden="true" />
             Directions
           </a>
@@ -501,7 +506,7 @@ export default function HomeClient() {
               <Button key={location.id} asChild variant="outline-on-dark" size="lg" className="w-full sm:w-auto">
                 <a
                   href={phoneHref(location.contact.phone)}
-                  onClick={() => trackConversion("phone_click", { location: `home_closing_${location.id}` })}
+                  onClick={() => trackConversion("phone_click", { location: `home_closing_${location.id}`, shopId: location.id })}
                 >
                   <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
                   Call {location.address.city}

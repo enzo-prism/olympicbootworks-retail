@@ -3,8 +3,21 @@
 import Link from "next/link"
 import { Mail, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { phoneHref } from "@/data/locations"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
+
+export function BootFittingPhoneLink({ phone, shopId }: { phone: string; shopId: string }) {
+  return (
+    <a
+      href={phoneHref(phone)}
+      className="whitespace-nowrap font-medium text-primary underline-offset-4 hover:underline"
+      onClick={() => trackConversion("phone_click", { location: `boot_fitting_stock_${shopId}`, shopId })}
+    >
+      {phone}
+    </a>
+  )
+}
 
 /** Client CTA row for the boot-fitting closing band (tracked email conversion). */
 export default function BootFittingCtas() {
