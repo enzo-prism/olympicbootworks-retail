@@ -95,7 +95,7 @@ export default async function ShopPage({ params }: ShopPageProps) {
                 ? "From Highway 89, take Olympic Valley Road toward Palisades Tahoe."
                 : "From US 50, turn onto Ski Run Boulevard and follow the map to the shop."}
             </p>
-            <p className="mt-2 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
+            <p className="mt-2 text-sm text-muted-foreground">{shop.hoursSummary}.</p>
             <ShopActions shopId={shop.id} address={address} phone={shop.contact.phone} email={shop.contact.email} />
             <p className="mt-4 text-sm text-muted-foreground">
               The shop will reply to confirm availability and arrange your fitting.

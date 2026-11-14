@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { locationUrl, phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { locationUrl, phoneHref, type LocationData } from "@/data/locations"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
@@ -100,7 +100,7 @@ export default function LocationCard({ location, showHours = true, className = "
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
+            <p className="mt-3 text-sm text-muted-foreground">{location.hoursSummary}.</p>
           </div>
         )}
 

@@ -1,7 +1,7 @@
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
-import { locations, seasonalScheduleNotice } from "@/data/locations"
+import { locations, northLakeLocation, seasonalScheduleNotice, southLakeLocation } from "@/data/locations"
 import LocationCardNoImage from "@/components/location-card-no-image"
 
 export default function LocationsSection() {
@@ -28,7 +28,9 @@ export default function LocationsSection() {
         {/* Additional CTA - improved spacing */}
         <div className="mt-16 text-center">
           <p className="text-muted-foreground mb-5">
-            Planning a visit? Call ahead to confirm today's hours, and book your fitting by phone or email.
+            Planning a visit? {northLakeLocation.address.city} is{" "}
+            {northLakeLocation.hoursSummary.replace(/^Open /, "open ")}. {southLakeLocation.hoursSummary} at{" "}
+            {southLakeLocation.name}, and book your fitting by phone or email.
           </p>
           <Button asChild className="shadow-sm px-8">
             <Link href="/contact">

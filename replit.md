@@ -24,7 +24,8 @@ See `README.md` for the canonical project and content guidance. This file record
 - `/shop` permanently redirects (308) to `/e-bikes`; the canonical bike journey lives on the hub and model pages.
 - `/boot-fitting` is the boot-fitting landing page; fitting CTAs use the prefilled template in `lib/fitting-inquiry.ts`.
 - There are no cart, account, checkout, Ecwid, or Lightspeed runtime dependencies.
-- Primary conversion: prefilled email to `buck@olympicbootworks.com`.
+- Primary boot-fitting conversion: prefilled email to `Info@olympicbootworks.com`.
+- Fantic e-bike inquiries still email `buck@olympicbootworks.com`.
 - Do not publish exact stock counts, unverified availability, or inferred technical specifications.
 - Hours and seasonal notices live in `data/locations.ts`.
 - Analytics is consent-gated in `components/tracking-consent.tsx`.

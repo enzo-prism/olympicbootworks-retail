@@ -106,7 +106,7 @@ function ShopCard({ location }: { location: LocationData }) {
           {address.city}, {address.state} {address.zip}
         </span>
       </p>
-      <p className="mt-2 pl-6 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
+      <p className="mt-2 pl-6 text-sm text-muted-foreground">{location.hoursSummary}.</p>
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <Button asChild size="lg" className="h-auto w-full whitespace-normal py-3">
           <a
@@ -496,7 +496,7 @@ export default function HomeClient() {
           <StockPill onDark>Stocked &amp; ready</StockPill>
           <h2 className="mx-auto mt-6 max-w-3xl text-4xl font-semibold md:text-6xl">Your next boots are on the wall.</h2>
           <p className="mx-auto mb-10 mt-5 max-w-xl text-white/80 md:text-lg">
-            Email Buck to book a fitting, or call either shop and come in. We&apos;ll get you skiing in boots that
+            Email the shop to book a fitting, or call either shop and come in. We&apos;ll get you skiing in boots that
             actually fit.
           </p>
           <div className="mx-auto flex w-full max-w-xs flex-col items-center justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap">

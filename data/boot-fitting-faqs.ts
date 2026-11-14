@@ -1,3 +1,5 @@
+import { OLYMPIC_VALLEY_HOURS_SUMMARY } from "@/data/locations"
+
 /** Visible answers shared with the boot-fitting page's structured data. */
 export const bootFittingFaqs = [
   {
@@ -6,7 +8,7 @@ export const bootFittingFaqs = [
   },
   {
     question: "Where can I get custom ski boot fitting in Lake Tahoe?",
-    answer: "Olympic Bootworks offers custom ski boot fitting at two Lake Tahoe shops: Olympic Valley in North Lake Tahoe and Ski Run Boulevard in South Lake Tahoe. Contact your preferred shop to confirm an appointment before visiting.",
+    answer: `Olympic Bootworks offers custom ski boot fitting at two Lake Tahoe shops: Olympic Valley in North Lake Tahoe (${OLYMPIC_VALLEY_HOURS_SUMMARY.replace(/^Open /, "open ")}) and Ski Run Boulevard in South Lake Tahoe. Contact your preferred shop to confirm an appointment before visiting.`,
   },
   {
     question: "What does a ski boot fitting involve?",
