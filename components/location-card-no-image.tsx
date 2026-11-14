@@ -7,7 +7,7 @@ import { MapPin, Clock, Phone, ExternalLink, Award } from "lucide-react"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { phoneHref, seasonalScheduleNotice, type LocationData } from "@/data/locations"
+import { phoneHref, type LocationData } from "@/data/locations"
 
 interface LocationCardNoImageProps {
   location: LocationData
@@ -113,7 +113,7 @@ export default function LocationCardNoImage({
                 </React.Fragment>
               ))}
             </div>
-            <p className="ml-10 mt-3 text-sm text-muted-foreground">{seasonalScheduleNotice.hoursStatus}.</p>
+            <p className="ml-10 mt-3 text-sm text-muted-foreground">{location.hoursSummary}.</p>
             <Button variant="link" asChild className="p-0 h-auto ml-10 mt-3">
               <Link href="/contact">
                 <ButtonIcon label="Book a Fitting" href="/contact" />

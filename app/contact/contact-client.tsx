@@ -36,8 +36,7 @@ export default function ContactClient() {
     },
     {
       question: "Can I walk in?",
-      answer:
-        "Call or email your preferred shop before visiting so the team can confirm today's hours and set aside time for your fitting.",
+      answer: `${northLakeLocation.hoursSummary} at the Olympic Valley flagship; email or call so we can set aside time for your fitting. For South Lake Tahoe, ${southLakeLocation.hoursSummary.charAt(0).toLowerCase()}${southLakeLocation.hoursSummary.slice(1)}.`,
     },
     {
       question: "Do you have ski boots in stock?",
@@ -84,7 +83,8 @@ export default function ContactClient() {
               <div className="bg-card border rounded-lg p-8 shadow-sm">
                 <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">{northLakeLocation.name}</h3>
                 <p className="text-muted-foreground mb-2">Olympic Valley Location</p>
-                <p className="text-sm text-muted-foreground mb-6">{formatStreetAddress(northLakeLocation.address)}</p>
+                <p className="text-sm text-muted-foreground">{formatStreetAddress(northLakeLocation.address)}</p>
+                <p className="text-sm text-muted-foreground mb-6">{northLakeLocation.hoursSummary}</p>
                 <Button asChild size="lg" className="w-full">
                   <a
                     href={fittingInquiryUrl(northInquiryOptions)}

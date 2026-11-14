@@ -127,6 +127,7 @@ export default function Footer() {
               <p className="break-all text-sm text-muted-foreground">
                 <span className="font-medium">Email:</span> {northLakeLocation.contact.email}
               </p>
+              <p className="text-sm text-muted-foreground">{northLakeLocation.hoursSummary}</p>
               <Link href={locationUrl(northLakeLocation)} className="text-sm text-primary hover:underline">
                 Shop details & directions
               </Link>

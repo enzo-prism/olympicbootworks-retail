@@ -22,16 +22,47 @@ test("homepage leads with stocked ski boots while preserving the bike inquiry fl
   assert.doesNotMatch(home, /Shop Now|ShoppingCart|item_id: "shop_now"/)
 })
 
-test("ski-season stock message stays general and invents no hours", async () => {
-  const { seasonalScheduleNotice, locations } = await loadTypescriptModule("../data/locations.ts", import.meta.url)
+test("ski-season stock message stays general; only Olympic Valley publishes confirmed hours", async () => {
+  const { seasonalScheduleNotice, locations, openingHoursSpecification } = await loadTypescriptModule(
+    "../data/locations.ts",
+    import.meta.url,
+  )
   const copy = Object.values(seasonalScheduleNotice).join(" ")
   assert.match(copy, /stocked/i)
   assert.match(copy, /ski boots/i)
   assert.doesNotMatch(copy, /summer|resume in the fall/i)
-  for (const location of locations) {
-    for (const entry of location.hours) {
-      assert.doesNotMatch(entry.hours, /\d{1,2}(?::\d{2})?\s*(?:AM|PM)/i, "Winter hours are unconfirmed")
-    }
+
+  const olympicValley = locations.find((location) => location.id === "olympic-valley")
+  const southLake = locations.find((location) => location.id === "south-lake-tahoe")
+  assert.ok(olympicValley)
+  assert.ok(southLake)
+  assert.equal(olympicValley.hoursSummary, "Open Wednesday–Sunday, 10 AM–3 PM")
+  assert.equal(olympicValley.contact.email, "Info@olympicbootworks.com")
+  assert.equal(southLake.hoursSummary, "Call ahead to confirm today's hours")
+  assert.equal(southLake.contact.email, "SouthLake@Olympicbootworks.com")
+
+  const closedDays = olympicValley.hours.filter((entry) => entry.hours.toLowerCase() === "closed").map((entry) => entry.day)
+  assert.deepEqual(closedDays, ["Monday", "Tuesday"])
+  const openDays = olympicValley.hours.filter((entry) => entry.hours === "10 AM–3 PM").map((entry) => entry.day)
+  assert.deepEqual(openDays, ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
+
+  const spec = openingHoursSpecification(olympicValley.hours)
+  assert.equal(spec.length, 5)
+  assert.ok(spec.every((entry) => entry.opens === "10:00" && entry.closes === "15:00"))
+  assert.deepEqual(
+    spec.map((entry) => entry.dayOfWeek),
+    [
+      "https://schema.org/Wednesday",
+      "https://schema.org/Thursday",
+      "https://schema.org/Friday",
+      "https://schema.org/Saturday",
+      "https://schema.org/Sunday",
+    ],
+  )
+  assert.equal(openingHoursSpecification(southLake.hours).length, 0)
+
+  for (const entry of southLake.hours) {
+    assert.doesNotMatch(entry.hours, /\d{1,2}(?::(\d{2}))?\s*(?:AM|PM)/i, "South Lake Tahoe hours remain unconfirmed")
   }
 })
 

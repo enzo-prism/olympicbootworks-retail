@@ -136,13 +136,14 @@ export default function BootFittingPage() {
               ))}
             </ul>
             <p className="mt-6 text-sm text-muted-foreground">
-              {seasonalScheduleNotice.hoursStatus}:{" "}
               {locations.map((location, index) => (
                 <span key={location.id}>
                   {index > 0 && " · "}
                   <Link href={locationUrl(location)} className="font-medium text-primary underline-offset-4 hover:underline">
                     {location.address.city}
-                  </Link>{" "}
+                  </Link>
+                  {": "}
+                  {location.hoursSummary}{" "}
                   <BootFittingPhoneLink phone={location.contact.phone} shopId={location.id} />
                 </span>
               ))}
@@ -295,7 +296,7 @@ export default function BootFittingPage() {
           </p>
           <h2 className="text-3xl md:text-5xl font-semibold mb-5">Ski a boot built for you.</h2>
           <p className="max-w-xl mx-auto mb-10 text-white/80">
-            The boot wall is stocked. Email Buck with your dates and what you ski, and he&apos;ll set up
+            The boot wall is stocked. Email the shop with your dates and what you ski, and the team will set up
             your fitting at Olympic Valley or South Lake Tahoe.
           </p>
           <BootFittingCtas />

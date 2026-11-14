@@ -13,12 +13,12 @@ export type FittingInquiryOptions = {
  * (CopyEmailButton) can reuse the exact same text as the mailto link.
  */
 export const fittingInquiryParts = (options?: FittingInquiryOptions) => {
-  const email = options?.email ?? "buck@olympicbootworks.com"
+  const email = options?.email ?? "Info@olympicbootworks.com"
   const subject = "Boot fitting appointment request"
   const locationLine = options?.locationName
     ? `Preferred location: ${options.locationName}`
     : "Preferred location (Olympic Valley / South Lake Tahoe):"
-  const body = `Hi Buck,\n\nI'd like to request a custom boot fitting.\n\n${locationLine}\nPreferred dates and times:\nSport and discipline:\nCurrent boots (brand and model, if any):\nMain fit issues or goals:\n\nThank you.`
+  const body = `Hi Olympic Bootworks team,\n\nI'd like to request a custom boot fitting.\n\n${locationLine}\nPreferred dates and times:\nSport and discipline:\nCurrent boots (brand and model, if any):\nMain fit issues or goals:\n\nThank you.`
   return { email, subject, body }
 }
 
