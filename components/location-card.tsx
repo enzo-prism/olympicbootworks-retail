@@ -1,4 +1,5 @@
 "use client"
+import { useShopHours } from "@/components/shop-hours"
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Phone, Mail } from "lucide-react"
@@ -16,6 +17,7 @@ interface LocationCardProps {
 }
 
 export default function LocationCard({ location, showHours = true, className = "" }: LocationCardProps) {
+  const schedule = useShopHours(location)
   const fullAddress = `${location.address.line1}, ${location.address.city}, ${location.address.state} ${location.address.zip}`
   const locationSlug = location.name.toLowerCase().includes('north') ? 'north_lake_tahoe' : 'south_lake_tahoe'
 
@@ -91,16 +93,16 @@ export default function LocationCard({ location, showHours = true, className = "
 
         {showHours && (
           <div className="mb-6">
-            <h4 className="font-semibold mb-2">Current availability:</h4>
+            <h4 className="font-semibold mb-2">Weekly hours</h4>
             <div className="grid grid-cols-1 gap-2 text-sm">
-              {location.hours.map((item, index) => (
+              {schedule.hours.map((item, index) => (
                 <div key={index} className="py-1">
                   <div className="font-medium">{item.day}</div>
                   <div className="text-muted-foreground">{item.hours}</div>
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-sm text-muted-foreground">{location.hoursSummary}.</p>
+            <p className="mt-3 text-sm text-muted-foreground">{schedule.summary}. {schedule.notice}</p>
           </div>
         )}
 

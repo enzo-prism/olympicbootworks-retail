@@ -1,3 +1,6 @@
+import { connection } from "next/server"
+import { ShopDateProvider } from "@/components/shop-hours"
+import { tahoeDate } from "@/data/locations"
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Fraunces, Inter } from "next/font/google"
@@ -73,11 +76,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  await connection()
+  const date = tahoeDate(new Date())
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${fraunces.variable}`}>
       <head>
@@ -93,22 +98,24 @@ export default function RootLayout({
         {/* forcedTheme guards against stale theme localStorage from the old
             dark-mode era applying class="dark" against light-only tokens. */}
         <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" disableTransitionOnChange>
-          <ScrollToTop />
-          <div className="flex min-h-screen flex-col">
-            <div className="fixed top-0 left-0 right-0 z-50 flex flex-col header-container">
-              <LocationBanner />
+          <ShopDateProvider date={date}>
+            <ScrollToTop />
+            <div className="flex min-h-screen flex-col">
+              <div className="fixed top-0 left-0 right-0 z-50 flex flex-col header-container">
+                <LocationBanner />
+                <Suspense fallback={null}>
+                  <Navigation />
+                </Suspense>
+              </div>
+              {/* The main content area with proper spacing for fixed header */}
+              <main id="main" className="flex-1 pt-[calc(4rem+var(--banner-height,2.5rem))]">
+                <Suspense fallback={null}>{children}</Suspense>
+              </main>
               <Suspense fallback={null}>
-                <Navigation />
+                <Footer />
               </Suspense>
             </div>
-            {/* The main content area with proper spacing for fixed header */}
-            <main id="main" className="flex-1 pt-[calc(4rem+var(--banner-height,2.5rem))]">
-              <Suspense fallback={null}>{children}</Suspense>
-            </main>
-            <Suspense fallback={null}>
-              <Footer />
-            </Suspense>
-          </div>
+          </ShopDateProvider>
         </ThemeProvider>
 
         <Suspense fallback={null}>

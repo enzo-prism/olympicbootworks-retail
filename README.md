@@ -17,7 +17,7 @@ Vercel also builds `main` in project `v0-olympic-bootworks-cy` under `enzo-desig
 - Do not publish exact inventory quantities.
 - Do not publish technical specifications until the physical SKU and model year are confirmed.
 - As of Buck’s October 26, 2026 request (“focus on boots, still include bikes, highlight being stocked and ready to go”), the site is boots-first: the homepage hero, banner, navigation order and primary CTAs all point at ski boots and fitting, and Fantic e-bikes follow as a compact secondary section. `/boot-fitting` is the ski boots and fitting page and opens with an in-stock section; fitting inquiry CTAs use the prefilled template in `lib/fitting-inquiry.ts`. The stock message is general — do not infer specific boot models, sizes, or quantities from it, and do not reuse the in-stock treatment for e-bikes.
-- Olympic Valley flagship hours (confirmed November 13, 2026): Wednesday–Sunday, 10 AM–3 PM; closed Monday and Tuesday. South Lake Tahoe hours are still unconfirmed and keep the call-ahead copy. Both live in `data/locations.ts`.
+- Buck confirmed on November 18 that both shops switch to their winter schedule at midnight Pacific on November 21, 2026. Both open daily 8 AM–5 PM with a weekday break from 10 AM to 12:30 PM and closures on Thanksgiving and Christmas Day. Until the change, Olympic Valley opens Wednesday–Sunday 10 AM–3 PM and South Lake asks visitors to call ahead.
 - Boot-fitting appointment inquiries go to `Info@olympicbootworks.com` (`lib/fitting-inquiry.ts` and the Olympic Valley contact email). South Lake Tahoe fitting mailtos stay `SouthLake@Olympicbootworks.com`. Fantic e-bike inquiries and the general-question mailto still use `buck@olympicbootworks.com`.
 - `/shop` is a legacy compatibility route that permanently redirects (308) to `/e-bikes`. There is no storefront, cart, account, or checkout anywhere.
 
@@ -106,7 +106,7 @@ Email, phone, and test-ride actions are the real conversions. Page views, e-bike
 
 ## Seasonal content
 
-The banner, location cards, footer, and JSON-LD read from `seasonalScheduleNotice` and each location’s `hours` / `hoursSummary` in `data/locations.ts`. Olympic Valley currently publishes Wednesday–Sunday, 10 AM–3 PM; South Lake Tahoe still uses the call-ahead notice. Update that file when the schedule changes.
+The banner uses the stock notice in `data/locations.ts`. Shop pages, cards and footers use the same file’s date-based schedule. The request date and browser updates use America/Los_Angeles. The store JSON-LD includes the validity dates, split weekday intervals and dated holiday overrides.
 
 ## Release checks
 
@@ -118,7 +118,7 @@ The July 15 Meta-ready design and redirect release is documented in `docs/releas
 
 - Give every indexable page its own title, description, canonical, Open Graph and Twitter metadata. Canonicals use `https://www.olympicbootworks.com`, including on previews.
 - Keep important answers and links in initial HTML. Use visible questions about the actual fitting and inquiry process; avoid creating duplicate town pages or unverified expert claims.
-- Keep business identity, addresses, phones, seasonal status, and schema aligned with their shared data. Appointment-only periods must not produce invented opening times. Olympic Valley JSON-LD may publish `openingHoursSpecification` only from confirmed clock hours in `data/locations.ts`.
+- Keep business identity, addresses, phones, seasonal status, and schema aligned with their shared data. Appointment-only periods must not produce invented opening times. Store JSON-LD may publish `openingHoursSpecification` only from confirmed clock hours in `data/locations.ts`.
 - Product prices remain catalog-driven. Do not infer availability, condition, shipping terms, reviews, or return policies to fill structured-data fields.
 - Sitemap entries include canonical pages only. Omit modification dates unless backed by actual content edits; never replace every date at build time.
 - Wildcard crawler access allows search engines and AI search crawlers. Search access and model-training permissions are separate decisions. No special AI file or schema guarantees citations.

@@ -22,15 +22,25 @@ export interface LocationData {
   flagship: boolean
   address: LocationAddress
   contact: LocationContact
-  hours: LocationHours[]
-  /** One-line hours copy shown on cards, location pages, and the footer. */
-  hoursSummary: string
+  preWinterHours: LocationHours[]
+  preWinterSummary: string
   description?: string
 }
 
 export const APPOINTMENT_INBOX = "Info@olympicbootworks.com"
 
-export const OLYMPIC_VALLEY_HOURS_SUMMARY = "Open Wednesday–Sunday, 10 AM–3 PM"
+export const WINTER_START = "2026-11-21"
+const winterSummary = "Open daily, 8 AM–5 PM. Closed weekdays from 10 AM to 12:30 PM for Skiesta"
+const holidayNotice = "Closed Thanksgiving Day (Nov 26) and Christmas Day (Dec 25)"
+const winterHolidays: Record<string, string> = {
+  "2026-11-26": "Thanksgiving Day",
+  "2026-12-25": "Christmas Day",
+}
+
+const tahoeCalendar = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit",
+})
+export const tahoeDate = (instant: Date) => tahoeCalendar.format(instant)
 
 const schemaDayMap: Record<string, string> = {
   Monday: "https://schema.org/Monday",
@@ -43,25 +53,20 @@ const schemaDayMap: Record<string, string> = {
 }
 
 /**
- * Ski-season status shared by the banner, location cards, footer, and JSON-LD.
+ * Ski-season stock status shared by the banner, location cards, and footer.
  * Source: Buck's October 26, 2026 email asking the site to highlight that the
  * shops are stocked and ready to go. It is a general stock message only — never
  * publish specific boot models, sizes, or quantities from it.
- *
- * Olympic Valley hours were confirmed November 13, 2026 (Wednesday–Sunday,
- * 10 AM–3 PM, closed Monday and Tuesday). South Lake Tahoe hours have not been
- * confirmed, so that shop still asks visitors to call ahead.
  */
 export const seasonalScheduleNotice = {
   label: "Ski season 2026–27",
   title: "Stocked and ready for ski season",
   summary:
-    "Both Olympic Bootworks shops are stocked with ski boots for the 2026–27 season. The Olympic Valley flagship is open Wednesday–Sunday, 10 AM–3 PM. Call or email South Lake Tahoe to confirm today's hours, and book a fitting at either shop.",
+    "Both Olympic Bootworks shops are stocked with ski boots for the 2026–27 season. Call or email your preferred shop to book a fitting.",
   bannerPrimary: "Ski boots in stock at both Tahoe shops",
   /** Compact variant for the one-line mobile banner. */
   bannerPrimaryShort: "Ski boots in stock",
   bannerSecondary: "Call or email to book your fitting",
-  hoursStatus: "Call ahead to confirm today's hours",
 }
 
 const olympicValleyHours: LocationHours[] = [
@@ -75,7 +80,7 @@ const olympicValleyHours: LocationHours[] = [
 ]
 
 const southLakeStoreHours: LocationHours[] = [
-  { day: "Ski season", hours: "Boots in stock · book a fitting by phone or email" },
+  { day: "Through Nov 20", hours: "Call ahead to confirm hours" },
 ]
 
 export const locations: LocationData[] = [
@@ -93,8 +98,8 @@ export const locations: LocationData[] = [
       phone: "(530) 581-0747",
       email: APPOINTMENT_INBOX,
     },
-    hours: olympicValleyHours,
-    hoursSummary: OLYMPIC_VALLEY_HOURS_SUMMARY,
+    preWinterHours: olympicValleyHours,
+    preWinterSummary: "Open Wednesday–Sunday, 10 AM–3 PM",
     description:
       "Our flagship store in Olympic Valley offers comprehensive ski boot fitting, bike services, and equipment for all your mountain adventures.",
   },
@@ -112,12 +117,33 @@ export const locations: LocationData[] = [
       phone: "(530) 600-4056",
       email: "SouthLake@Olympicbootworks.com",
     },
-    hours: southLakeStoreHours,
-    hoursSummary: seasonalScheduleNotice.hoursStatus,
+    preWinterHours: southLakeStoreHours,
+    preWinterSummary: "Call ahead to confirm today's hours",
     description:
       "Our South Lake Tahoe location provides expert boot fitting and a full range of outdoor gear for skiers and mountain bikers.",
   },
 ]
+
+const winterHours = Object.keys(schemaDayMap).map((day) => ({
+  day,
+  hours: day === "Saturday" || day === "Sunday" ? "8 AM–5 PM" : "8 AM–10 AM, 12:30 PM–5 PM",
+}))
+
+export function shopSchedule(location: LocationData, localDate: string) {
+  if (localDate < WINTER_START) {
+    return {
+      hours: location.preWinterHours,
+      summary: location.preWinterSummary,
+      notice: `Starting Saturday, Nov 21: ${winterSummary}. ${holidayNotice}.`,
+    }
+  }
+  const holiday = winterHolidays[localDate]
+  return {
+    hours: winterHours,
+    summary: holiday ? `Closed today for ${holiday}` : winterSummary,
+    notice: holiday ? `Regular hours: ${winterSummary}. ${holidayNotice}.` : `${holidayNotice}.`,
+  }
+}
 
 function requireLocation(id: string): LocationData {
   const location = locations.find((entry) => entry.id === id)
@@ -183,3 +209,16 @@ export const openingHoursSpecification = (hours: LocationHours[]) =>
       }
     })
   })
+
+/** Date qualifiers keep the search-engine schedule valid on both sides of the change. */
+export function shopHoursSchema(location: LocationData) {
+  return {
+    openingHoursSpecification: [
+      ...openingHoursSpecification(location.preWinterHours).map((entry) => ({ ...entry, validThrough: "2026-11-20" })),
+      ...openingHoursSpecification(winterHours).map((entry) => ({ ...entry, validFrom: WINTER_START })),
+    ],
+    specialOpeningHoursSpecification: Object.keys(winterHolidays).map((date) => ({
+      "@type": "OpeningHoursSpecification", validFrom: date, validThrough: date, opens: "00:00", closes: "00:00",
+    })),
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react"
 import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
-import { locationUrl, locations, openingHoursSpecification, seasonalScheduleNotice } from "@/data/locations"
+import { locationUrl, locations, shopHoursSchema, seasonalScheduleNotice } from "@/data/locations"
 
 // Injects JSON-LD structured data into <head> safely.
 // Replace '<' with '\u003c' to mitigate script injection as recommended. [^1]
@@ -31,8 +31,6 @@ export default function SeoJsonLd() {
   }
 
   const locationJsonLd = locations.map((location) => {
-    const openingHours = openingHoursSpecification(location.hours)
-
     return {
       "@context": "https://schema.org",
       "@type": "SportingGoodsStore",
@@ -42,7 +40,7 @@ export default function SeoJsonLd() {
       image: "https://www.olympicbootworks.com/images/og-default.jpg",
       telephone: location.contact.phone,
       email: location.contact.email,
-      description: [location.description, location.hoursSummary, seasonalScheduleNotice.title].filter(Boolean).join(" "),
+      description: [location.description, seasonalScheduleNotice.title].filter(Boolean).join(" "),
       parentOrganization: {
         "@id": ORGANIZATION_ID,
       },
@@ -54,7 +52,7 @@ export default function SeoJsonLd() {
         postalCode: location.address.zip,
         addressCountry: "US",
       },
-      ...(openingHours.length > 0 ? { openingHoursSpecification: openingHours } : {}),
+      ...shopHoursSchema(location),
     }
   })
 

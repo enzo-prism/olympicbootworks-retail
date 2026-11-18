@@ -1,5 +1,6 @@
 "use client"
 
+import { useShopHours } from "@/components/shop-hours"
 import React from "react"
 import { trackConversion } from "@/lib/track-conversion"
 import Link from "next/link"
@@ -20,8 +21,9 @@ export default function LocationCardNoImage({
   showHours = true,
   className = "",
 }: LocationCardNoImageProps) {
+  const schedule = useShopHours(location)
   const fullAddress = `${location.address.line1}, ${location.address.city}, ${location.address.state} ${location.address.zip}`
-  const groupedHours = location.hours.reduce<Array<{ label: string; hours: string }>>((groups, item) => {
+  const groupedHours = schedule.hours.reduce<Array<{ label: string; hours: string }>>((groups, item) => {
     const previous = groups[groups.length - 1]
 
     if (!previous || previous.hours !== item.hours) {
@@ -102,7 +104,7 @@ export default function LocationCardNoImage({
               <div className="p-2 rounded-full bg-secondary">
                 <Clock className="h-4 w-4 text-primary" aria-hidden="true" />
               </div>
-              <h4 className="font-semibold">Current availability:</h4>
+              <h4 className="font-semibold">Weekly hours</h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm ml-10">
@@ -113,7 +115,7 @@ export default function LocationCardNoImage({
                 </React.Fragment>
               ))}
             </div>
-            <p className="ml-10 mt-3 text-sm text-muted-foreground">{location.hoursSummary}.</p>
+            <p className="ml-10 mt-3 text-sm text-muted-foreground">{schedule.summary}. {schedule.notice}</p>
             <Button variant="link" asChild className="p-0 h-auto ml-10 mt-3">
               <Link href="/contact">
                 <ButtonIcon label="Book a Fitting" href="/contact" />

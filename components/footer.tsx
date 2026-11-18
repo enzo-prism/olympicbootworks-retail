@@ -1,3 +1,4 @@
+import { ShopHours } from "@/components/shop-hours"
 import Link from "next/link"
 import Image from "next/image"
 import { GoogleReviewButton } from "@/components/google-review-button"
@@ -127,7 +128,7 @@ export default function Footer() {
               <p className="break-all text-sm text-muted-foreground">
                 <span className="font-medium">Email:</span> {northLakeLocation.contact.email}
               </p>
-              <p className="text-sm text-muted-foreground">{northLakeLocation.hoursSummary}</p>
+              <p className="text-sm text-muted-foreground"><ShopHours location={northLakeLocation} /></p>
               <Link href={locationUrl(northLakeLocation)} className="text-sm text-primary hover:underline">
                 Shop details & directions
               </Link>
@@ -146,6 +147,7 @@ export default function Footer() {
               <p className="break-all text-sm text-muted-foreground">
                 <span className="font-medium">Email:</span> {southLakeLocation.contact.email}
               </p>
+              <p className="text-sm text-muted-foreground"><ShopHours location={southLakeLocation} /></p>
               <Link href={locationUrl(southLakeLocation)} className="text-sm text-primary hover:underline">
                 Shop details & directions
               </Link>
