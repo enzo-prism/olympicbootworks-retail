@@ -1,4 +1,5 @@
 "use client"
+import { ShopHours } from "@/components/shop-hours"
 import Image from "next/image"
 import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
@@ -30,13 +31,12 @@ export default function ContactClient() {
   const southInquiry = fittingInquiryParts(southInquiryOptions)
   const faqs = [
     {
-      question: "Are you open right now?",
-      answer:
-        seasonalScheduleNotice.summary,
+      question: "What are the Olympic Valley and South Lake Tahoe hours?",
+      answer: "Each shop’s weekly hours, scheduled breaks and holiday closures are listed in the location cards above.",
     },
     {
       question: "Can I walk in?",
-      answer: `${northLakeLocation.hoursSummary} at the Olympic Valley flagship; email or call so we can set aside time for your fitting. For South Lake Tahoe, ${southLakeLocation.hoursSummary.charAt(0).toLowerCase()}${southLakeLocation.hoursSummary.slice(1)}.`,
+      answer: "Call or email your preferred shop before visiting so we can set aside time for your fitting.",
     },
     {
       question: "Do you have ski boots in stock?",
@@ -84,7 +84,7 @@ export default function ContactClient() {
                 <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">{northLakeLocation.name}</h3>
                 <p className="text-muted-foreground mb-2">Olympic Valley Location</p>
                 <p className="text-sm text-muted-foreground">{formatStreetAddress(northLakeLocation.address)}</p>
-                <p className="text-sm text-muted-foreground mb-6">{northLakeLocation.hoursSummary}</p>
+                <p className="text-sm text-muted-foreground mb-6"><ShopHours location={northLakeLocation} /></p>
                 <Button asChild size="lg" className="w-full">
                   <a
                     href={fittingInquiryUrl(northInquiryOptions)}
@@ -126,7 +126,8 @@ export default function ContactClient() {
               <div className="bg-card border rounded-lg p-8 shadow-sm">
                 <h3 className="font-sans tracking-normal text-2xl font-bold mb-4">{southLakeLocation.name}</h3>
                 <p className="text-muted-foreground mb-2">Ski Run Blvd Location</p>
-                <p className="text-sm text-muted-foreground mb-6">{formatStreetAddress(southLakeLocation.address)}</p>
+                <p className="text-sm text-muted-foreground">{formatStreetAddress(southLakeLocation.address)}</p>
+                <p className="text-sm text-muted-foreground mb-6"><ShopHours location={southLakeLocation} /></p>
                 <Button asChild size="lg" className="w-full">
                   <a
                     href={fittingInquiryUrl(southInquiryOptions)}

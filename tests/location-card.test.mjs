@@ -21,6 +21,7 @@ test("both location cards link their displayed email to the actual recipient", a
     require(name) {
       if (name === "react/jsx-runtime") return jsxRuntime
       if (name === "@/data/locations") return locationData
+      if (name === "@/components/shop-hours") return { useShopHours: (shop) => locationData.shopSchedule(shop, "2026-11-21") }
       if (name === "@/lib/fitting-inquiry") return { fittingInquiryUrl: ({ email }) => `mailto:${email}?subject=Fitting` }
       if (name === "@/lib/track-conversion") return { trackConversion: (...args) => conversionCalls.push(args) }
       if (name === "@/lib/utils") return { cn: (...classes) => classes.join(" ") }

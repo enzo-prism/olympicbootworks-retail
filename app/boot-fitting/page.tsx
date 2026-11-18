@@ -1,3 +1,4 @@
+import { ShopHours } from "@/components/shop-hours"
 import { pageMetadata, SITE_URL, ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
 import Link from "next/link"
 import { Award, Check, Footprints, Ruler, Wrench } from "lucide-react"
@@ -143,7 +144,7 @@ export default function BootFittingPage() {
                     {location.address.city}
                   </Link>
                   {": "}
-                  {location.hoursSummary}{" "}
+                  <ShopHours location={location} />{" "}
                   <BootFittingPhoneLink phone={location.contact.phone} shopId={location.id} />
                 </span>
               ))}

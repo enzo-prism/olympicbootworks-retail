@@ -22,8 +22,8 @@ test("homepage leads with stocked ski boots while preserving the bike inquiry fl
   assert.doesNotMatch(home, /Shop Now|ShoppingCart|item_id: "shop_now"/)
 })
 
-test("ski-season stock message stays general; only Olympic Valley publishes confirmed hours", async () => {
-  const { seasonalScheduleNotice, locations, openingHoursSpecification } = await loadTypescriptModule(
+test("ski-season stock message stays general; pre-winter hours apply before the Tahoe cutoff", async () => {
+  const { seasonalScheduleNotice, locations, openingHoursSpecification, shopSchedule, tahoeDate } = await loadTypescriptModule(
     "../data/locations.ts",
     import.meta.url,
   )
@@ -36,17 +36,23 @@ test("ski-season stock message stays general; only Olympic Valley publishes conf
   const southLake = locations.find((location) => location.id === "south-lake-tahoe")
   assert.ok(olympicValley)
   assert.ok(southLake)
-  assert.equal(olympicValley.hoursSummary, "Open Wednesday–Sunday, 10 AM–3 PM")
+  const before = tahoeDate(new Date("2026-11-21T07:59:59.999Z"))
+  assert.equal(before, "2026-11-20")
+  const north = shopSchedule(olympicValley, before)
+  const south = shopSchedule(southLake, before)
+  assert.match(north.notice, /Starting Saturday, Nov 21/)
+  assert.equal(north.notice, south.notice)
+  assert.equal(north.summary, "Open Wednesday–Sunday, 10 AM–3 PM")
   assert.equal(olympicValley.contact.email, "Info@olympicbootworks.com")
-  assert.equal(southLake.hoursSummary, "Call ahead to confirm today's hours")
+  assert.equal(south.summary, "Call ahead to confirm today's hours")
   assert.equal(southLake.contact.email, "SouthLake@Olympicbootworks.com")
 
-  const closedDays = olympicValley.hours.filter((entry) => entry.hours.toLowerCase() === "closed").map((entry) => entry.day)
+  const closedDays = north.hours.filter((entry) => entry.hours.toLowerCase() === "closed").map((entry) => entry.day)
   assert.deepEqual(closedDays, ["Monday", "Tuesday"])
-  const openDays = olympicValley.hours.filter((entry) => entry.hours === "10 AM–3 PM").map((entry) => entry.day)
+  const openDays = north.hours.filter((entry) => entry.hours === "10 AM–3 PM").map((entry) => entry.day)
   assert.deepEqual(openDays, ["Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
 
-  const spec = openingHoursSpecification(olympicValley.hours)
+  const spec = openingHoursSpecification(north.hours)
   assert.equal(spec.length, 5)
   assert.ok(spec.every((entry) => entry.opens === "10:00" && entry.closes === "15:00"))
   assert.deepEqual(
@@ -59,10 +65,36 @@ test("ski-season stock message stays general; only Olympic Valley publishes conf
       "https://schema.org/Sunday",
     ],
   )
-  assert.equal(openingHoursSpecification(southLake.hours).length, 0)
+  assert.equal(openingHoursSpecification(south.hours).length, 0)
 
-  for (const entry of southLake.hours) {
+  for (const entry of south.hours) {
     assert.doesNotMatch(entry.hours, /\d{1,2}(?::(\d{2}))?\s*(?:AM|PM)/i, "South Lake Tahoe hours remain unconfirmed")
+  }
+})
+
+test("both shops switch at local midnight, split weekdays and close on the two holidays", async () => {
+  const { locations, shopSchedule, tahoeDate, shopHoursSchema } = await loadTypescriptModule("../data/locations.ts", import.meta.url)
+  const start = tahoeDate(new Date("2026-11-21T08:00:00.000Z"))
+  assert.equal(start, "2026-11-21")
+  for (const location of locations) {
+    const { hours, summary, notice } = shopSchedule(location, start)
+    assert.match(summary, /Open daily, 8 AM–5 PM/)
+    assert.match(summary, /Closed weekdays from 10 AM to 12:30 PM for Skiesta/)
+    assert.match(notice, /Thanksgiving Day .*Christmas Day/)
+    assert.equal(hours.length, 7)
+    for (const { day, hours: ranges } of hours) {
+      assert.equal(ranges, ["Saturday", "Sunday"].includes(day) ? "8 AM–5 PM" : "8 AM–10 AM, 12:30 PM–5 PM")
+    }
+    const schema = shopHoursSchema(location)
+    assert.equal(schema.openingHoursSpecification.filter((r) => r.validThrough === "2026-11-20").length, location.flagship ? 5 : 0)
+    const winter = schema.openingHoursSpecification.filter((r) => r.validFrom === start)
+    assert.deepEqual(winter.filter((r) => r.dayOfWeek.endsWith("Monday")).map((r) => [r.opens, r.closes]), [["08:00","10:00"],["12:30","17:00"]])
+    assert.equal(winter.filter((r) => r.opens === "08:00" && r.closes === "17:00").length, 2)
+    for (const [date, name] of [["2026-11-26", "Thanksgiving Day"], ["2026-12-25", "Christmas Day"]]) {
+      assert.equal(shopSchedule(location, date).summary, "Closed today for " + name)
+      assert.ok(schema.specialOpeningHoursSpecification.some((r) => r.validFrom === date && r.validThrough === date && r.opens === "00:00" && r.closes === "00:00"))
+    }
+    assert.equal(shopSchedule(location, "2026-12-26").summary, summary)
   }
 })
 

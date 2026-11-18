@@ -1,5 +1,6 @@
 "use client"
 
+import { ShopHours } from "@/components/shop-hours"
 import Link from "next/link"
 import type { ReactNode } from "react"
 import {
@@ -106,7 +107,7 @@ function ShopCard({ location }: { location: LocationData }) {
           {address.city}, {address.state} {address.zip}
         </span>
       </p>
-      <p className="mt-2 pl-6 text-sm text-muted-foreground">{location.hoursSummary}.</p>
+      <p className="mt-2 pl-6 text-sm text-muted-foreground"><ShopHours location={location} /></p>
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <Button asChild size="lg" className="h-auto w-full whitespace-normal py-3">
           <a
