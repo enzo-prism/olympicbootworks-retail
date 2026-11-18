@@ -109,7 +109,7 @@ export default async function RootLayout({
               </div>
               {/* The main content area with proper spacing for fixed header */}
               <main id="main" className="flex-1 pt-[calc(4rem+var(--banner-height,2.5rem))]">
-                <Suspense fallback={null}>{children}</Suspense>
+                {children}
               </main>
               <Suspense fallback={null}>
                 <Footer />
