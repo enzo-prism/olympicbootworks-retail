@@ -41,18 +41,26 @@ this site; that overwrites the visitor's real source.
 
 ## GA4 and Google account settings (one-time, in the Google UIs)
 
-1. **Custom dimensions** (Admin → Custom definitions → Create, scope *Event*): `lead_category`,
-   `shop_id`. (`lead_source`, `contact_method`, `content_id` already exist.) They apply from
-   creation onward; nothing is backfilled.
-2. **Key event**: mark `directions_click` as a key event (Admin → Events). It is the best web
-   signal for a walk-in. Do not import it into Google Ads as a conversion.
-3. **AI assistants channel** (Admin → Channel groups → copy the default group → add a channel
-   above *Referral*): Source matches regex
-   `chatgpt\.com|chat\.openai\.com|perplexity\.ai|gemini\.google\.com|copilot\.microsoft\.com|claude\.ai|you\.com`.
-4. **Search Console link** (Admin → Product links → Search Console) to see the search terms and
-   landing pages behind Organic Search.
-5. **Google Ads link** (Admin → Product links → Google Ads) for `AW-17608821238`, so paid
-   campaigns and their leads appear in GA4.
+Status as of November 20, 2026 (property 508275630):
+
+1. **Custom dimensions** (Admin → Custom definitions, scope *Event*): `lead_category` created
+   Nov 20, 2026; `shop_id` existed since Nov 3. (`lead_source`, `contact_method`, `content_id`
+   already existed.) They apply from creation onward; nothing is backfilled. **Done.**
+2. **Key event**: `directions_click` is a key event (Admin → Events), the best web signal for a
+   walk-in. Do not import it into Google Ads as a conversion. **Done.**
+3. **AI assistants channel**: channel group **"Default + AI assistants"** (a copy of the default
+   group, not primary) has a channel *AI assistants* placed just above *Referral*: Source
+   partially matches regex
+   `chatgpt\.com|openai|perplexity|gemini\.google|bard\.google|copilot\.microsoft|claude\.ai|you\.com`.
+   GA4's own predefined *AI Assistant* channel stays below it and catches anything the regex
+   misses. Pick the group in Traffic acquisition's channel dropdown. Channel groups also apply
+   to past data. **Done.**
+4. **Search Console link**: domain property `olympicbootworks.com` linked to the web stream
+   since Jan 7, 2026. **Done.**
+5. **Google Ads link** (Admin → Product links → Google Ads) for the account that owns
+   `AW-17608821238`, so paid campaigns and their leads appear in GA4. **Open:** that account is
+   not among the Ads accounts the Design Prism login can manage. Whoever owns it links it, or
+   uses "Request access to other Google Ads accounts" with its customer ID.
 6. **Bing Webmaster Tools**: verify the site and submit `https://www.olympicbootworks.com/sitemap.xml`
    (Bing feeds ChatGPT search and Copilot).
 
