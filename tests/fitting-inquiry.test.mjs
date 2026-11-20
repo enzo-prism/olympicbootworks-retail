@@ -29,3 +29,9 @@ test("South Lake fitting inquiries keep the South Lake inbox", () => {
   assert.match(parts.body, /Preferred location: South Lake Tahoe/)
   assert.match(parts.body, /^Hi Olympic Bootworks team,/)
 })
+
+test("fitting inquiries ask how the visitor found the shop", () => {
+  for (const options of [undefined, { email: "SouthLake@Olympicbootworks.com", locationName: "South Lake Tahoe" }]) {
+    assert.match(inquiry.fittingInquiryParts(options).body, /\nHow did you hear about us\?\n/)
+  }
+})

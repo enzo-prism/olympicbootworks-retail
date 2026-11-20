@@ -3,6 +3,7 @@ import { GOOGLE_ADS_CONVERSION_SEND_TO } from "@/lib/analytics-config"
 import { sendGa4Event, waitForGtag } from "@/lib/gtag"
 import { isGa4OnlyConversion } from "@/lib/conversion-policy"
 import { hasAnalyticsConsent } from "@/lib/consent"
+import { leadCategory, type LeadCategory } from "@/lib/lead-category"
 
 export type ConversionType =
   | "email_click"
@@ -25,6 +26,8 @@ interface ConversionOptions {
   shopId?: string
   contentId?: string
   contentName?: string
+  /** Overrides the inferred lead_category (see lib/lead-category.ts). */
+  category?: LeadCategory
 }
 
 function mirrorEngagementToGa4(
@@ -35,6 +38,7 @@ function mirrorEngagementToGa4(
   contentId?: string,
   contentName?: string,
   shopId?: string,
+  category: LeadCategory = "general",
 ) {
   switch (type) {
     case "test_ride_request":
@@ -43,6 +47,8 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         lead_type: "bike_test_ride",
+        lead_category: category,
+        shop_id: shopId,
         content_id: contentId,
         content_name: contentName,
       })
@@ -60,6 +66,7 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         contact_method: "email",
+        lead_category: category,
         shop_id: shopId,
         content_id: contentId,
         content_name: contentName,
@@ -69,6 +76,7 @@ function mirrorEngagementToGa4(
       sendGa4Event("contact", {
         lead_source: location,
         contact_method: "email_copy",
+        lead_category: category,
         shop_id: shopId,
         content_id: contentId,
         content_name: contentName,
@@ -80,6 +88,7 @@ function mirrorEngagementToGa4(
         currency,
         lead_source: location,
         contact_method: "phone",
+        lead_category: category,
         shop_id: shopId,
         content_id: contentId,
         content_name: contentName,
@@ -88,6 +97,7 @@ function mirrorEngagementToGa4(
     case "directions_click":
       sendGa4Event("directions_click", {
         lead_source: location,
+        lead_category: category,
         shop_id: shopId,
       })
       break
@@ -111,6 +121,7 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
 
   const { value = 1.0, currency = "USD", location, contentId, contentName, shopId } = options
   const loc = location ?? "unknown"
+  const category = leadCategory(type, options)
 
   // Vercel events are independent of Google tag readiness. The included plan supports two properties.
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
@@ -124,7 +135,7 @@ export function trackConversion(type: ConversionType, options: ConversionOptions
       return
     }
 
-    mirrorEngagementToGa4(type, value, currency, loc, contentId, contentName, shopId)
+    mirrorEngagementToGa4(type, value, currency, loc, contentId, contentName, shopId, category)
 
     if (isGa4OnlyConversion(type)) {
       return

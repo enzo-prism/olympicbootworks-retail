@@ -58,6 +58,7 @@ test("every bike inquiry starts a useful, model-specific email to Buck", () => {
     assert.match(body, /height \/ usual bike size/i)
     assert.match(body, /test-ride interest/i)
     assert.match(body, /shipping ZIP/i)
+    assert.match(body, /How did you hear about us\?/)
     assert.doesNotMatch(body, /undefined|\[object Object\]/)
   }
 })

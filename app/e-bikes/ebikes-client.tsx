@@ -61,7 +61,7 @@ const trustPoints = [
 
 const testRideSubject = encodeURIComponent("Fantic Test Ride Request")
 const testRideBody = encodeURIComponent(
-  `Hi,\n\nI'd like to request a Fantic test ride.\n\nBike(s) I'm interested in:\nWhere and how I ride:\nPreferred days and times:\n\nThank you.`,
+  `Hi,\n\nI'd like to request a Fantic test ride.\n\nBike(s) I'm interested in:\nWhere and how I ride:\nPreferred days and times:\nHow did you hear about us?\n\nThank you.`,
 )
 
 export default function EBikesClient() {
@@ -235,7 +235,7 @@ export default function EBikesClient() {
                     <a
                       href={`mailto:${location.contact.email}?subject=${testRideSubject}&body=${testRideBody}`}
                       onClick={() =>
-                        trackConversion("test_ride_request", { location: location.id })
+                        trackConversion("test_ride_request", { location: location.id, shopId: location.id })
                       }
                     >
                       <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -245,7 +245,7 @@ export default function EBikesClient() {
                   <Button asChild variant="outline">
                     <a
                       href={phoneHref(location.contact.phone)}
-                      onClick={() => trackConversion("phone_click", { location: location.id, shopId: location.id })}
+                      onClick={() => trackConversion("phone_click", { location: location.id, shopId: location.id, category: "ebikes" })}
                     >
                       <PhoneCall className="mr-2 h-4 w-4" aria-hidden="true" />
                       Call {location.contact.phone}

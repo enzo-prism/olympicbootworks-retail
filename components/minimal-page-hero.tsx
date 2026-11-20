@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import type { ReactNode } from "react"
 import { Button } from "@/components/ui/button"
 import ButtonIcon from "@/components/button-icon"
@@ -35,6 +36,7 @@ export default function MinimalPageHero({
   actions = [],
   className,
 }: MinimalPageHeroProps) {
+  const pathname = usePathname()
   const emailAction = actions.find((action) => action.href.startsWith("mailto:"))
   const contactEmail = emailAction
     ? decodeURIComponent(emailAction.href.slice("mailto:".length).split("?")[0])
@@ -126,7 +128,7 @@ export default function MinimalPageHero({
               className="mt-4 text-sm text-muted-foreground"
               emailClassName="text-foreground"
               buttonClassName="text-primary"
-              trackingLocation="page_hero_email_copy"
+              trackingLocation={`page_hero_${pathname.replace(/^\/|\/$/g, "").replaceAll("/", "_") || "home"}_email_copy`}
             />
           ) : null}
         </div>

@@ -18,7 +18,7 @@ export const fittingInquiryParts = (options?: FittingInquiryOptions) => {
   const locationLine = options?.locationName
     ? `Preferred location: ${options.locationName}`
     : "Preferred location (Olympic Valley / South Lake Tahoe):"
-  const body = `Hi Olympic Bootworks team,\n\nI'd like to request a custom boot fitting.\n\n${locationLine}\nPreferred dates and times:\nSport and discipline:\nCurrent boots (brand and model, if any):\nMain fit issues or goals:\n\nThank you.`
+  const body = `Hi Olympic Bootworks team,\n\nI'd like to request a custom boot fitting.\n\n${locationLine}\nPreferred dates and times:\nSport and discipline:\nCurrent boots (brand and model, if any):\nMain fit issues or goals:\nHow did you hear about us?\n\nThank you.`
   return { email, subject, body }
 }
 

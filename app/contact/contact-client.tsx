@@ -89,7 +89,7 @@ export default function ContactClient() {
                 <Button asChild size="lg" className="w-full">
                   <a
                     href={fittingInquiryUrl(northInquiryOptions)}
-                    onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
+                    onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe', shopId: northLakeLocation.id })}
                   >
                     <ButtonIcon label="Book a Fitting" href={`mailto:${northInquiry.email}`} />
                     Book a Fitting
@@ -108,7 +108,7 @@ export default function ContactClient() {
                   <a
                     href={fittingInquiryUrl(northInquiryOptions)}
                     className="hover:text-primary hover:underline break-all"
-                    onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe' })}
+                    onClick={() => trackConversion('email_click', { location: 'north_lake_tahoe', shopId: northLakeLocation.id })}
                   >
                     {northInquiry.email}
                   </a>
@@ -132,7 +132,7 @@ export default function ContactClient() {
                 <Button asChild size="lg" className="w-full">
                   <a
                     href={fittingInquiryUrl(southInquiryOptions)}
-                    onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
+                    onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe', shopId: southLakeLocation.id })}
                   >
                     <ButtonIcon label="Book a Fitting" href={`mailto:${southInquiry.email}`} />
                     Book a Fitting
@@ -151,7 +151,7 @@ export default function ContactClient() {
                   <a
                     href={fittingInquiryUrl(southInquiryOptions)}
                     className="hover:text-primary hover:underline break-all"
-                    onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe' })}
+                    onClick={() => trackConversion('email_click', { location: 'south_lake_tahoe', shopId: southLakeLocation.id })}
                   >
                     {southInquiry.email}
                   </a>

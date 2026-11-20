@@ -80,6 +80,8 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 | Deployed crawl regression audit | `scripts/verify-seo.mjs` (`pnpm verify:seo --base-url URL`) |
 | Analytics configuration | `lib/analytics-config.ts` |
 | Conversion events | `lib/track-conversion.ts` |
+| Lead category (boot fitting / e-bikes / general) | `lib/lead-category.ts` |
+| Tagged links, GA4 settings and monthly attribution read | `docs/analytics-attribution.md` |
 | Privacy notice | `app/privacy/page.tsx` |
 | Owner-flow and redirect regression tests | `tests/bikes.test.mjs`, `tests/buck-flow.test.mjs`, `tests/legacy-redirects.test.mjs` |
 | Meta destination handoff | `docs/meta-linking-handoff.md` |
@@ -104,7 +106,7 @@ for product accuracy and use these lifestyle images for local context. The Tahoe
 
 ## Conversion tracking
 
-Email, phone, and test-ride actions are the real conversions. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google, Hotjar, and Vercel Web Analytics load only after analytics consent. Development and Vercel preview builds do not mount tracking scripts. Vercel Analytics is enabled on Vercel production builds only; Replit does not provide its first-party collection endpoint. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
+Email, phone, and test-ride actions are the real conversions. Each lead carries `lead_category` and, when known, `shop_id`; every prefilled inquiry email asks "How did you hear about us?". See `docs/analytics-attribution.md` for tagged links and GA4 setup. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google, Hotjar, and Vercel Web Analytics load only after analytics consent. Development and Vercel preview builds do not mount tracking scripts. Vercel Analytics is enabled on Vercel production builds only; Replit does not provide its first-party collection endpoint. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
 
 ## Seasonal content
 

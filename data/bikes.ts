@@ -209,7 +209,7 @@ export const getBikeBySlug = (slug: string) => bikes.find((bike) => bike.slug ==
  */
 export const bikeInquiryParts = (bike: Pick<Bike, "name" | "price">) => {
   const subject = `Fantic ${bike.name} inquiry`
-  const body = `Hi Buck,\n\nI'm interested in the Fantic ${bike.name} listed at ${formatPrice(bike.price)}.\n\nMy height / usual bike size:\nWhere and how I ride:\nTest-ride interest:\nPickup location or shipping ZIP:\n\nPlease let me know about current availability, exact specifications, and next steps.\n\nThank you.`
+  const body = `Hi Buck,\n\nI'm interested in the Fantic ${bike.name} listed at ${formatPrice(bike.price)}.\n\nMy height / usual bike size:\nWhere and how I ride:\nTest-ride interest:\nPickup location or shipping ZIP:\nHow did you hear about us?\n\nPlease let me know about current availability, exact specifications, and next steps.\n\nThank you.`
   return { email: "buck@olympicbootworks.com", subject, body }
 }
 

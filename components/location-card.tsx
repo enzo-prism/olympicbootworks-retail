@@ -82,7 +82,7 @@ export default function LocationCard({ location, showHours = true, className = "
                 <a
                   href={`mailto:${location.contact.email}`}
                   className="break-all text-sm text-primary hover:underline"
-                  onClick={() => trackConversion('email_click', { location: locationSlug })}
+                  onClick={() => trackConversion('email_click', { location: locationSlug, shopId: location.id, category: "general" })}
                 >
                   {location.contact.email}
                 </a>
@@ -110,7 +110,7 @@ export default function LocationCard({ location, showHours = true, className = "
           <Button asChild variant="outline" className="w-full">
             <Link
               href={fittingInquiryUrl({ email: location.contact.email, locationName: location.name })}
-              onClick={() => trackConversion('email_click', { location: locationSlug })}
+              onClick={() => trackConversion('email_click', { location: locationSlug, shopId: location.id })}
             >
               <ButtonIcon label="Book a Fitting" href={`mailto:${location.contact.email}`} />
               Book a Fitting

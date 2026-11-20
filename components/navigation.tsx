@@ -23,6 +23,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetDescription, SheetT
 import { cn } from "@/lib/utils"
 import { locationUrl, locations, northLakeLocation, phoneHref } from "@/data/locations"
 import { trackConversion } from "@/lib/track-conversion"
+import type { LeadCategory } from "@/lib/lead-category"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
 type NavLinkProps = React.ComponentProps<typeof Link> & {
@@ -99,6 +100,7 @@ export default function Navigation() {
   const generalEmailHref = currentShop?.contact.email
     ? fittingHref
     : "mailto:buck@olympicbootworks.com?subject=Olympic%20Bootworks%20Question"
+  const generalEmailCategory: LeadCategory = currentShop?.contact.email ? "boot_fitting" : "general"
   const phoneShop = currentShop ?? northLakeLocation
   const [isOpen, setIsOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
@@ -184,7 +186,7 @@ export default function Navigation() {
         <div className="flex items-center gap-1 md:hidden">
           <a
             href={generalEmailHref}
-            onClick={() => trackConversion("email_click", { location: "mobile_header", shopId })}
+            onClick={() => trackConversion("email_click", { location: "mobile_header", shopId, category: generalEmailCategory })}
             className="h-11 w-11 flex items-center justify-center rounded-full hover:bg-secondary transition-colors"
             aria-label="Email Olympic Bootworks"
           >
@@ -312,7 +314,7 @@ export default function Navigation() {
                       href={generalEmailHref}
                       onClick={() => {
                         setIsOpen(false)
-                        trackConversion("email_click", { location: "mobile_navigation", shopId })
+                        trackConversion("email_click", { location: "mobile_navigation", shopId, category: generalEmailCategory })
                       }}
                     >
                       <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
