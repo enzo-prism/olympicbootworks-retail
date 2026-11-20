@@ -80,7 +80,7 @@ export default function GalleryPage() {
     <div className="flex flex-col">
       <MinimalPageHero
         eyebrow="Inside the shop"
-        title="Gallery"
+        title="Boot Fitting & Shop Gallery"
         description="A quieter look at the people, process, and mountain community behind Olympic Bootworks."
         actions={[
           { href: "#gallery", label: "Explore gallery" },

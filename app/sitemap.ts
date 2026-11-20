@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/testimonials`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/contact`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/privacy`, changeFrequency: "yearly", priority: 0.3 },
-    // We intentionally omit /shop/boots because it redirects to /contact.
+    // /shop and /shop/boots are 308 redirects, so they stay out of the sitemap.
     ...locations.map((location) => ({ url: `${base}${locationUrl(location)}` })),
     ...bikePages,
   ]

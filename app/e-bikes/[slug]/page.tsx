@@ -12,6 +12,7 @@ import { GoogleGIcon } from "@/components/google-g-icon"
 import { GOOGLE_BUSINESS_PROFILE_URL } from "@/lib/google-business"
 import {
   bikeInquiryParts,
+  bikeMetaDescription,
   bikes,
   familyLabels,
   formatPrice,
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: BikeDetailPageProps): Promise
 
   return pageMetadata({
     title: `Fantic ${bike.name} — Price & Inquiry`,
-    description: `${bike.blurb} See the current website price and contact Olympic Bootworks in Lake Tahoe about sizing and availability.`,
+    description: bikeMetaDescription(bike),
     path: `/e-bikes/${bike.slug}`,
     image: bike.image,
     imageAlt: `Fantic ${bike.name}`,

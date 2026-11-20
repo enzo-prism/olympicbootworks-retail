@@ -13,6 +13,7 @@ import {
   phoneHref,
   seasonalScheduleNotice,
   southLakeLocation,
+  winterScheduleSummary,
 } from "@/data/locations"
 import { fittingInquiryParts, fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
@@ -32,7 +33,7 @@ export default function ContactClient() {
   const faqs = [
     {
       question: "What are the Olympic Valley and South Lake Tahoe hours?",
-      answer: "Each shop’s weekly hours, scheduled breaks and holiday closures are listed in the location cards above.",
+      answer: `Starting November 21, 2026, both shops keep the same winter schedule: ${winterScheduleSummary} Call Olympic Valley at ${northLakeLocation.contact.phone} or South Lake Tahoe at ${southLakeLocation.contact.phone} to confirm.`,
     },
     {
       question: "Can I walk in?",

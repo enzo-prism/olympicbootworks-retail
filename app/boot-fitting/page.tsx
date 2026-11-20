@@ -1,5 +1,5 @@
 import { ShopHours } from "@/components/shop-hours"
-import { pageMetadata, SITE_URL, ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/seo"
+import { pageMetadata, SITE_URL, WEBSITE_ID, BOOT_FITTING_SERVICE_ID, breadcrumbJsonLd, serializeJsonLd } from "@/lib/seo"
 import Link from "next/link"
 import { Award, Check, Footprints, Ruler, Wrench } from "lucide-react"
 import MinimalPageHero from "@/components/minimal-page-hero"
@@ -13,7 +13,7 @@ import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 
 export const metadata = pageMetadata({
   title: "Ski Boots & Custom Boot Fitting in Lake Tahoe",
-  description: "Ski boots in stock and expert boot fitting at Olympic Bootworks in Olympic Valley and South Lake Tahoe: biomechanical assessment, shell work, Heel-Loc custom footbeds, and ZipFit liners.",
+  description: "Ski boots in stock with expert fitting in Olympic Valley and South Lake Tahoe: biomechanical assessment, shell work, Heel-Loc custom footbeds and ZipFit liners.",
   path: "/boot-fitting",
 })
 
@@ -65,26 +65,13 @@ const bootFittingJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Service",
-      "@id": `${SITE_URL}/boot-fitting#service`,
-      name: "Custom ski boot fitting",
-      serviceType: "Ski boot fitting",
-      url: `${SITE_URL}/boot-fitting`,
-      description: "Ski boot fitting, shell and liner adjustments, Heel-Loc custom footbeds, and ZipFit liners in Olympic Valley and South Lake Tahoe.",
-      provider: { "@id": ORGANIZATION_ID },
-      areaServed: ["Olympic Valley", "South Lake Tahoe", "Lake Tahoe"],
-      availableChannel: ["olympic-valley", "south-lake-tahoe"].map((id) => ({
-        "@type": "ServiceChannel",
-        serviceLocation: { "@id": `${SITE_URL}/#${id}` },
-      })),
-    },
-    {
       "@type": "FAQPage",
       "@id": `${SITE_URL}/boot-fitting#webpage`,
       url: `${SITE_URL}/boot-fitting`,
       name: "Ski Boots & Custom Boot Fitting in Lake Tahoe",
       isPartOf: { "@id": WEBSITE_ID },
-      about: { "@id": `${SITE_URL}/boot-fitting#service` },
+      about: { "@id": BOOT_FITTING_SERVICE_ID },
+      breadcrumb: breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Ski Boots & Fitting", path: "/boot-fitting" }]),
       mainEntity: bootFittingFaqs.map(({ question, answer }) => ({
         "@type": "Question",
         name: question,

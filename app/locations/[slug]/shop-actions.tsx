@@ -3,7 +3,7 @@
 import { Mail, MapPin, Phone } from "lucide-react"
 import CopyEmailButton from "@/components/copy-email-button"
 import { Button } from "@/components/ui/button"
-import { formatCityLine, phoneHref, type LocationAddress } from "@/data/locations"
+import { directionsUrl, phoneHref, type LocationAddress } from "@/data/locations"
 import { fittingInquiryParts, fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { trackConversion } from "@/lib/track-conversion"
 
@@ -18,8 +18,7 @@ export default function ShopActions({ shopId, address, phone, email }: ShopActio
   const inquiryOptions = { email, locationName: address.city }
   const inquiry = fittingInquiryParts(inquiryOptions)
   const tracking = { location: `location_page_${shopId}`, shopId }
-  const destination = `Olympic Bootworks, ${address.line1}, ${formatCityLine(address)}`
-  const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`
+  const directions = directionsUrl(address)
 
   return (
     <>

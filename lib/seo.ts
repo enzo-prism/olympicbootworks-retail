@@ -4,6 +4,8 @@ import type { Bike } from "@/data/bikes"
 export const SITE_URL = "https://www.olympicbootworks.com"
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`
 export const WEBSITE_ID = `${SITE_URL}/#website`
+export const FOUNDER_ID = `${SITE_URL}/#buck-brown`
+export const BOOT_FITTING_SERVICE_ID = `${SITE_URL}/boot-fitting#service`
 
 /** Define the complete social objects: Next.js replaces, rather than merges, these fields. */
 export function pageMetadata({ title, description, path, image = "/images/og-default.jpg", imageAlt = "Olympic Bootworks in Lake Tahoe" }: {

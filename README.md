@@ -74,7 +74,9 @@ Use Node.js 20.19 or newer. GitHub Actions pins pnpm 11.12. Replit uses the pnpm
 | Model inquiry CTA | `components/bike-inquiry-button.tsx` |
 | Sticky mobile bike inquiry bar | `components/bike-sticky-inquiry-bar.tsx` |
 | Shared image component | `components/site-image.tsx` |
-| Metadata and structured data | `lib/seo.ts`, `components/seo-jsonld.tsx`, page components |
+| Metadata and structured data (sitewide entity `@graph`: organization, founder, shops, fitting service) | `lib/seo.ts`, `components/seo-jsonld.tsx`, page components |
+| Shop-page quick answers (visible + FAQPage schema) | `data/shop-faqs.ts` |
+| Plain-text AI summary built from shared data | `app/llms.txt/route.ts` |
 | Deployed crawl regression audit | `scripts/verify-seo.mjs` (`pnpm verify:seo --base-url URL`) |
 | Analytics configuration | `lib/analytics-config.ts` |
 | Conversion events | `lib/track-conversion.ts` |
@@ -121,12 +123,15 @@ The July 15 Meta-ready design and redirect release is documented in `docs/releas
 - Keep business identity, addresses, phones, seasonal status, and schema aligned with their shared data. Appointment-only periods must not produce invented opening times. Store JSON-LD may publish `openingHoursSpecification` only from confirmed clock hours in `data/locations.ts`.
 - Product prices remain catalog-driven. Do not infer availability, condition, shipping terms, reviews, or return policies to fill structured-data fields.
 - Sitemap entries include canonical pages only. Omit modification dates unless backed by actual content edits; never replace every date at build time.
+- Keep meta descriptions at 160 characters or fewer (`verify:seo` enforces it); model pages lead with name and current price via `bikeMetaDescription`.
+- Answers should stand alone when quoted: name the shop and give the fact, not "see above".
+- `/llms.txt` is generated from the same data files; update data, not the route text.
 - Wildcard crawler access allows search engines and AI search crawlers. Search access and model-training permissions are separate decisions. No special AI file or schema guarantees citations.
 - Google retired FAQ rich results in May 2026. Useful visible answers are maintained for customers, with no promise of FAQ search enhancements.
 - Run `pnpm check`, start the built app, then run `pnpm verify:seo --base-url http://localhost:3000`. Repeat the crawl against the deployed endpoint. Review mobile pages and inquiry links in a browser.
 - Search Console, Bing Webmaster Tools, and Google Business Profile are external follow-through: check indexing, citations, and listing consistency there; a code release alone does not establish ranking gains.
 
-See [September 6 SEO/AEO audit](docs/releases/2026-09-06-seo-aeo.md) for scope, evidence, and hosting follow-through.
+See [September 6 SEO/AEO audit](docs/releases/2026-09-06-seo-aeo.md) for scope, evidence, and hosting follow-through, and the [November 20 entity pass](docs/releases/2026-11-20-seo-aeo-entity-pass.md) for the entity graph, shop Q&A and llms.txt.
 
 The [September 6 analytics audit](docs/releases/2026-09-06-analytics.md) records the verified GA4 stream, saved history-pageview setting, Vercel enablement, event contract, consent behavior and deployment boundary.
 

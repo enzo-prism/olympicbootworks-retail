@@ -25,6 +25,10 @@ export interface LocationData {
   preWinterHours: LocationHours[]
   preWinterSummary: string
   description?: string
+  /** Rooftop coordinates for the street address (OpenStreetMap match, Nov 20, 2026). */
+  geo: { latitude: number; longitude: number }
+  /** Ski area the shop sits beside, as a place name only (no affiliation is implied). */
+  nearbySkiArea: string
 }
 
 export const APPOINTMENT_INBOX = "Info@olympicbootworks.com"
@@ -102,6 +106,8 @@ export const locations: LocationData[] = [
     preWinterSummary: "Open Wednesday–Sunday, 10 AM–3 PM",
     description:
       "Our flagship store in Olympic Valley offers comprehensive ski boot fitting, bike services, and equipment for all your mountain adventures.",
+    geo: { latitude: 39.1992, longitude: -120.2296 },
+    nearbySkiArea: "Palisades Tahoe",
   },
   {
     id: "south-lake-tahoe",
@@ -121,6 +127,8 @@ export const locations: LocationData[] = [
     preWinterSummary: "Call ahead to confirm today's hours",
     description:
       "Our South Lake Tahoe location provides expert boot fitting and a full range of outdoor gear for skiers and mountain bikers.",
+    geo: { latitude: 38.9417, longitude: -119.9525 },
+    nearbySkiArea: "Heavenly Mountain Resort",
   },
 ]
 
@@ -156,6 +164,13 @@ export const northLakeLocation = requireLocation("olympic-valley")
 export const southLakeLocation = requireLocation("south-lake-tahoe")
 
 export const locationUrl = (location: Pick<LocationData, "id">) => `/locations/${location.id}`
+
+/** Google Maps directions link for a shop's street address. */
+export const directionsUrl = (address: LocationAddress) =>
+  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`Olympic Bootworks, ${address.line1}, ${formatCityLine(address)}`)}`
+
+/** Plain-language winter schedule for answers and machine-readable summaries. */
+export const winterScheduleSummary = `${winterSummary}. ${holidayNotice}.`
 
 /** Street line(s) as displayed, e.g. "1235 Ski Run Blvd." */
 export const formatStreetAddress = (address: LocationAddress) =>

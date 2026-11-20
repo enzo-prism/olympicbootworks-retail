@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { ArrowRight } from "lucide-react"
 import StockPill from "@/components/stock-pill"
 import { formatCityLine, locationUrl, locations, seasonalScheduleNotice } from "@/data/locations"
+import { shopFaqs } from "@/data/shop-faqs"
 import { breadcrumbJsonLd, pageMetadata, serializeJsonLd, SITE_URL, WEBSITE_ID } from "@/lib/seo"
 import ShopActions from "./shop-actions"
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: ShopPageProps): Promise<Metad
     title: `Custom Ski Boot Fitting in ${address.city}, CA`,
     description: flagship
       ? "Visit Olympic Bootworks’ North Lake Tahoe flagship in Olympic Valley for ski boots, custom fitting, and Heel-Loc footbeds. Get directions or request a fitting."
-      : "Request a custom ski boot fitting at Olympic Bootworks on Ski Run Boulevard in South Lake Tahoe. Get directions, call the shop, or ask about ski boots and liners.",
+      : "Book a custom ski boot fitting at Olympic Bootworks on Ski Run Boulevard in South Lake Tahoe. Get directions, call the shop, or ask about ski boots and liners.",
     path: locationUrl(shop),
   })
 }
@@ -40,15 +41,21 @@ export default async function ShopPage({ params }: ShopPageProps) {
   const { address, flagship } = shop
   const city = address.city
   const path = locationUrl(shop)
+  const faqs = shopFaqs(shop)
   const structuredData = [
     {
       "@context": "https://schema.org",
-      "@type": "WebPage",
+      "@type": ["WebPage", "FAQPage"],
       "@id": `${SITE_URL}${path}#webpage`,
       url: `${SITE_URL}${path}`,
       name: `Olympic Bootworks in ${city}`,
       isPartOf: { "@id": WEBSITE_ID },
-      mainEntity: { "@id": `${SITE_URL}/#${shop.id}` },
+      about: { "@id": `${SITE_URL}/#${shop.id}` },
+      mainEntity: faqs.map(({ question, answer }) => ({
+        "@type": "Question",
+        name: question,
+        acceptedAnswer: { "@type": "Answer", text: answer },
+      })),
     },
     breadcrumbJsonLd([
       { name: "Home", path: "/" },
@@ -76,8 +83,8 @@ export default async function ShopPage({ params }: ShopPageProps) {
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
               {flagship
-                ? "Visit the original Olympic Bootworks shop in Olympic Valley, near Palisades Tahoe. We fit new ski boots and can assess the pair you already ski in for shell, liner, or footbed work."
-                : "Our South Lake Tahoe shop is on Ski Run Boulevard. Come in for a new ski boot fitting, or bring the boots you already ski in so we can look at pressure points, heel movement, or liner fit."}
+                ? `Visit the original Olympic Bootworks shop in Olympic Valley, near ${shop.nearbySkiArea}. We fit new ski boots and can assess the pair you already ski in for shell, liner, or footbed work.`
+                : `Our South Lake Tahoe shop is on Ski Run Boulevard, near ${shop.nearbySkiArea}. Come in for a new ski boot fitting, or bring the boots you already ski in so we can look at pressure points, heel movement, or liner fit.`}
             </p>
             <div className="mt-6">
               <StockPill>{seasonalScheduleNotice.bannerPrimaryShort}</StockPill>
@@ -114,6 +121,27 @@ export default async function ShopPage({ params }: ShopPageProps) {
             </Link>
           </section>
         </div>
+
+        <section aria-labelledby="shop-questions" className="mt-12 border-t pt-10 md:mt-16 md:pt-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Quick answers</p>
+          <h2 id="shop-questions" className="mt-3 text-3xl font-semibold md:text-4xl">
+            {city} shop questions
+          </h2>
+          <dl className="mt-8 grid gap-x-12 gap-y-8 md:grid-cols-2">
+            {faqs.map(({ question, answer }) => (
+              <div key={question}>
+                <dt className="font-sans text-lg font-semibold tracking-normal">{question}</dt>
+                <dd className="mt-2 break-words leading-relaxed text-muted-foreground">{answer}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-10 text-muted-foreground">
+            Services at this shop include{" "}
+            <Link href="/boot-fitting" className="font-medium text-primary hover:underline">custom ski boot fitting</Link>,
+            shell and liner work, Heel-Loc custom footbeds, and ZipFit liners. Looking for an e-bike?{" "}
+            <Link href="/e-bikes" className="font-medium text-primary hover:underline">Compare Fantic e-bike prices</Link>.
+          </p>
+        </section>
 
         {otherShop && (
           <div className="mt-12 border-t py-6 text-sm text-muted-foreground">

@@ -206,7 +206,7 @@ export default function ProsPage() {
             </div>
 
             {/* Alpine Athletes */}
-            <TabsContent value="alpine" className="space-y-16">
+            <TabsContent value="alpine" forceMount className="space-y-16 data-[state=inactive]:hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <AthleteProfileCard
                   name="Bryce Bennett"
@@ -231,7 +231,7 @@ export default function ProsPage() {
             </TabsContent>
 
             {/* Freeride Athletes */}
-            <TabsContent value="freeride" className="space-y-16">
+            <TabsContent value="freeride" forceMount className="space-y-16 data-[state=inactive]:hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <AthleteProfileCard
                   name="Ralph Backstrom"
@@ -256,7 +256,7 @@ export default function ProsPage() {
             </TabsContent>
 
             {/* Expedition Athletes */}
-            <TabsContent value="expedition" className="space-y-16">
+            <TabsContent value="expedition" forceMount className="space-y-16 data-[state=inactive]:hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <AthleteProfileCard
                   name="Adrian Ballinger"

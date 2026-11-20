@@ -42,3 +42,15 @@ test("model breadcrumbs use ordered canonical URLs", () => {
   assert.deepEqual(breadcrumb.itemListElement.map(item => item.position), [1, 2])
   assert.equal(breadcrumb.itemListElement[1].item, `${seo.SITE_URL}/e-bikes`)
 })
+
+test("model descriptions lead with the current price and fit in a search snippet", async () => {
+  const { bikeMetaDescription, formatPrice } = await loadTypescriptModule("../data/bikes.ts", import.meta.url)
+  const descriptions = new Set()
+  for (const bike of bikes) {
+    const description = bikeMetaDescription(bike)
+    assert.ok(description.length <= 160, `${bike.slug}: ${description.length} characters`)
+    assert.ok(description.startsWith(`Fantic ${bike.name}, ${formatPrice(bike.price)}`), description)
+    descriptions.add(description)
+  }
+  assert.equal(descriptions.size, bikes.length)
+})

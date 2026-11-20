@@ -21,7 +21,7 @@ export default function TestimonialsPage() {
     <div className="flex flex-col">
       <MinimalPageHero
         eyebrow="Real results"
-        title="Testimonials"
+        title="Customer Reviews & Testimonials"
         description="Stories from skiers, riders, and athletes who came in looking for comfort and left with a better foundation."
         actions={[
           {

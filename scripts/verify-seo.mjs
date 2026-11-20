@@ -58,6 +58,7 @@ try {
     const description = meta("description")?.trim()
     check(pageTitles.length === 1 && title.length > 0, `${url.pathname}: expected one nonempty title`)
     check(Boolean(description), `${url.pathname}: missing description`)
+    check(!description || description.length <= 160, `${url.pathname}: description is ${description?.length} characters; search results truncate past ~160`)
     check(!titles.has(title), `${url.pathname}: title duplicates ${titles.get(title)}`)
     check(!descriptions.has(description), `${url.pathname}: description duplicates ${descriptions.get(description)}`)
     titles.set(title, url.pathname)
@@ -108,6 +109,10 @@ try {
   check(robots.status === 200, `robots.txt: HTTP ${robots.status}`)
   check(/User-Agent:\s*\*[\s\S]*?Allow:\s*\/\s*(?:\r?\n|$)/i.test(robotsText) && !/^Disallow:\s*\/\s*$/im.test(robotsText), "robots.txt must allow search crawling")
   check(robotsText.includes(`${canonicalOrigin}/sitemap.xml`), "robots.txt missing canonical sitemap")
+  const llms = await request("/llms.txt")
+  const llmsText = await llms.text()
+  check(llms.status === 200 && /text\/plain/.test(llms.headers.get("content-type") ?? ""), `llms.txt: HTTP ${llms.status}`)
+  check(llmsText.startsWith("# Olympic Bootworks") && llmsText.includes(`${canonicalOrigin}/boot-fitting`), "llms.txt must summarize the business with canonical links")
   if (!args.includes("--skip-redirects")) for (const [path, target] of [["/shop", "/e-bikes"], ["/shop/boots", "/boot-fitting"]]) {
     for (const query of ["", "?utm_source=seo-audit&returnTo=https%3A%2F%2Fexample.com"]) for (const method of ["GET", "HEAD"]) {
       const response = await request(`${path}${query}`, { method })

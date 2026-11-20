@@ -3,7 +3,7 @@ import HomeClient from "@/components/home-client"
 
 export const metadata = pageMetadata({
   title: "Ski Boots In Stock & Custom Boot Fitting in Lake Tahoe",
-  description: "Both Olympic Bootworks shops are stocked with ski boots for the 2026–27 season. Custom boot fitting, Heel-Loc footbeds and ZipFit liners in Olympic Valley and South Lake Tahoe, plus Fantic e-bikes.",
+  description: "Ski boots in stock for 2026–27 with custom fitting, Heel-Loc footbeds and ZipFit liners at our Olympic Valley and South Lake Tahoe shops. Fantic e-bikes too.",
   path: "/",
 })
 

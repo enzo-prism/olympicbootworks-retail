@@ -43,3 +43,11 @@ test("store addresses and phone numbers are only defined in data/locations.ts", 
     }
   }
 })
+
+test("each shop has Lake Tahoe coordinates and a nearby ski area for its page and schema", () => {
+  for (const location of locations) {
+    assert.ok(location.geo.latitude > 38.8 && location.geo.latitude < 39.3, `${location.id} latitude`)
+    assert.ok(location.geo.longitude > -120.3 && location.geo.longitude < -119.9, `${location.id} longitude`)
+    assert.ok(location.nearbySkiArea.length > 0)
+  }
+})

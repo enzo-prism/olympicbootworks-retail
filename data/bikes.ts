@@ -191,6 +191,16 @@ export const featuredBikes = bikes.filter((bike) => bike.featured)
 
 export const bikeDetailUrl = (bike: Pick<Bike, "slug">) => `/e-bikes/${bike.slug}`
 
+/**
+ * Search snippet for a model page: name, current website price and the plain-language blurb,
+ * trimmed at a word boundary so it stays within the ~160 characters search results show.
+ */
+export const bikeMetaDescription = (bike: Pick<Bike, "name" | "price" | "blurb">) => {
+  const text = `Fantic ${bike.name}, ${formatPrice(bike.price)} at Olympic Bootworks in Lake Tahoe. ${bike.blurb}`
+  if (text.length <= 160) return text
+  return `${text.slice(0, 157).replace(/[\s,;:—–-]+\S*$/, "")}…`
+}
+
 export const getBikeBySlug = (slug: string) => bikes.find((bike) => bike.slug === slug)
 
 /**
