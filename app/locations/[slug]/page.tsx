@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowRight } from "lucide-react"
+import { GoogleReviewButton } from "@/components/google-review-button"
+import SiteImage from "@/components/site-image"
 import StockPill from "@/components/stock-pill"
 import { formatCityLine, locationUrl, locations, seasonalScheduleNotice } from "@/data/locations"
 import { shopFaqs } from "@/data/shop-faqs"
@@ -86,6 +88,9 @@ export default async function ShopPage({ params }: ShopPageProps) {
                 ? `Visit the original Olympic Bootworks shop in Olympic Valley, near ${shop.nearbySkiArea}. We fit new ski boots and can assess the pair you already ski in for shell, liner, or footbed work.`
                 : `Our South Lake Tahoe shop is on Ski Run Boulevard, near ${shop.nearbySkiArea}. Come in for a new ski boot fitting, or bring the boots you already ski in so we can look at pressure points, heel movement, or liner fit.`}
             </p>
+            {flagship && (
+              <SiteImage src="/images/shop-exterior.jpg" alt="The Olympic Valley shop near Palisades Tahoe" width={720} height={440} sizes="(min-width: 1024px) 50vw, 100vw" className="mt-6 aspect-video w-full rounded-xl object-cover" />
+            )}
             <div className="mt-6">
               <StockPill>{seasonalScheduleNotice.bannerPrimaryShort}</StockPill>
             </div>
@@ -100,14 +105,15 @@ export default async function ShopPage({ params }: ShopPageProps) {
             </address>
             <p className="mt-4 text-sm text-muted-foreground">
               {flagship
-                ? "From Highway 89, take Olympic Valley Road toward Palisades Tahoe."
+                ? "From Highway 89, take Olympic Valley Road toward Palisades Tahoe. Use the shop pin for directions to the storefront. The Google listing identifies accessible parking."
                 : "From US 50, turn onto Ski Run Boulevard and follow the map to the shop."}
             </p>
             <p className="mt-2 text-sm text-muted-foreground"><ShopHours location={shop} details /></p>
             <ShopActions shopId={shop.id} address={address} phone={shop.contact.phone} email={shop.contact.email} />
             <p className="mt-4 text-sm text-muted-foreground">
-              The shop will reply to confirm availability and arrange your fitting.
+              The shop will reply to confirm availability and arrange your fitting. If you need parking or unloading directions before arriving, call this shop.
             </p>
+            <GoogleReviewButton shop={shop} size="sm" analyticsItemId="google_review_location" className="mt-4" />
           </section>
 
           <section className="space-y-3 border-t pt-6">
@@ -138,7 +144,7 @@ export default async function ShopPage({ params }: ShopPageProps) {
           <p className="mt-10 text-muted-foreground">
             Services at this shop include{" "}
             <Link href="/boot-fitting" className="font-medium text-primary hover:underline">custom ski boot fitting</Link>,
-            shell and liner work, Heel-Loc custom footbeds, and ZipFit liners. Looking for an e-bike?{" "}
+            shell and liner work, <Link className="text-primary underline" href="/boot-fitting/custom-footbeds">Heel-Loc custom footbeds</Link>, and <Link className="text-primary underline" href="/boot-fitting/zipfit-liners">ZipFit liner fitting</Link>. Looking for an e-bike?{" "}
             <Link href="/e-bikes" className="font-medium text-primary hover:underline">Compare Fantic e-bike prices</Link>.
           </p>
         </section>

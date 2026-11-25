@@ -37,6 +37,9 @@ try {
   const urls = [...(await sitemap.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => new URL(decode(match[1])))
   check(urls.length >= 9, `Sitemap must include the main pages; found ${urls.length} URLs`)
   check(new Set(urls.map(String)).size === urls.length, "Sitemap contains duplicate URLs")
+  for (const path of ["/boot-fitting/custom-footbeds", "/boot-fitting/zipfit-liners"]) {
+    check(urls.some((url) => url.pathname === path), `Sitemap missing service guide ${path}`)
+  }
   const pages = new Map()
   const titles = new Map()
   const descriptions = new Map()
@@ -89,6 +92,17 @@ try {
     for (const reference of references) check(definitions.has(reference), `${url.pathname}: unresolved JSON-LD entity ${reference}`)
     check(definitions.has(`${canonicalOrigin}/#organization`), `${url.pathname}: missing organization entity`)
     check(definitions.has(`${canonicalOrigin}/#website`), `${url.pathname}: missing website entity`)
+    if (url.pathname.startsWith("/locations/")) {
+      const main = documentHtml.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? ""
+      const reviewLinks = [...main.matchAll(/<a\b[^>]*>/gi)].map((match) => attrs(match[0]).href)
+        .filter((href) => href?.startsWith("https://search.google.com/local/writereview?placeid="))
+      const expectedPlace = {
+        "/locations/olympic-valley": "ChIJm5ZXkerZm4ARnAq7qThpZok",
+        "/locations/south-lake-tahoe": "ChIJbRWwZVqRmYARBeVTSFXX0Fk",
+      }[url.pathname]
+      check(reviewLinks.length === 1 && new URL(reviewLinks[0]).searchParams.get("placeid") === expectedPlace,
+        `${url.pathname}: location review action must open the matching Google listing`)
+    }
     const ids = new Set([...documentHtml.matchAll(/\bid="([^"]+)"/g)].map((match) => decode(match[1])))
     const links = [...documentHtml.matchAll(/<a\b[^>]*>/gi)].map((match) => attrs(match[0]).href).filter(Boolean).map((href) => new URL(href, url)).filter((link) => link.origin === canonicalOrigin || link.origin === base.origin)
     pages.set(url.pathname.replace(/\/$/, "") || "/", { ids, links })

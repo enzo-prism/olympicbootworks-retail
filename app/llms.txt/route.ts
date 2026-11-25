@@ -1,4 +1,5 @@
 import { bikeDetailUrl, bikes, formatPrice } from "@/data/bikes"
+import { fittingServices, fittingServiceUrl } from "@/data/fitting-services"
 import { bootFittingFaqs } from "@/data/boot-fitting-faqs"
 import {
   WINTER_START,
@@ -48,6 +49,7 @@ function llmsText() {
     "## Ski boots and fitting",
     "",
     link("Ski boots & custom boot fitting", "/boot-fitting", "fitting process, services, Heel-Loc footbeds, ZipFit liners and how to book"),
+    ...fittingServices.map((service) => link(service.name, fittingServiceUrl(service.slug), service.description)),
     ...bootFittingFaqs.map(({ question, answer }) => `- ${question} ${answer}`),
     "",
     "## Fantic e-bikes (current website prices, USD)",

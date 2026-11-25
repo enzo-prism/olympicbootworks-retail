@@ -2,11 +2,11 @@ import Link from "next/link"
 import ButtonIcon from "@/components/button-icon"
 import { Button } from "@/components/ui/button"
 import EnhancedTestimonialCard from "@/components/enhanced-testimonial-card"
+import { locations } from "@/data/locations"
 import { testimonials } from "@/data/testimonials"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { GoogleGIcon } from "@/components/google-g-icon"
 import { GoogleReviewButton } from "@/components/google-review-button"
-import { GOOGLE_BUSINESS_REVIEW_URL } from "@/lib/google-business"
 import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import { pageMetadata } from "@/lib/seo"
 
@@ -25,10 +25,9 @@ export default function TestimonialsPage() {
         description="Stories from skiers, riders, and athletes who came in looking for comfort and left with a better foundation."
         actions={[
           {
-            href: GOOGLE_BUSINESS_REVIEW_URL,
+            href: "/testimonials#review-your-shop",
             label: "Leave a Google review",
             variant: "secondary",
-            external: true,
             leadingIcon: <GoogleGIcon className="h-[1.15rem] w-[0.8rem]" />,
           },
           { href: fittingInquiryUrl(), label: "Request a fitting" },
@@ -60,12 +59,12 @@ export default function TestimonialsPage() {
             ))}
           </div>
 
-          <div className="text-center">
+          <div id="review-your-shop" className="scroll-mt-36 text-center">
             <p className="text-muted-foreground mb-6">
-              Ready to experience the Olympic Bootworks difference for yourself?
+              Which shop did you visit? Share your experience on Google.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap w-full max-w-xs sm:max-w-none mx-auto">
-              <GoogleReviewButton size="lg" analyticsItemId="google_review_testimonials_footer" />
+              {locations.map((shop) => <GoogleReviewButton key={shop.id} shop={shop} size="lg" analyticsItemId="google_review_testimonials" />)}
               <Button asChild size="lg" className="w-full sm:w-auto">
                 <Link href="/contact">
                   <ButtonIcon label="Request a Fitting" href="/contact" />
