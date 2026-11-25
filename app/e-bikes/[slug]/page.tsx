@@ -128,9 +128,9 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
             <div className="mt-8 rounded-lg bg-primary/5 p-6">
               <h2 className="font-sans tracking-normal text-xl font-bold">Ask Buck about this bike</h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                Email Buck with the model already filled in. He can confirm current size and color
-                choices, share the exact technical specifications for the bike being offered, answer
-                questions, and explain pickup, test-ride, or shipping next steps.
+                {bike.slug === "xmf-1-7"
+                  ? "For the XMF 1.7, ask Buck to confirm the model year, motor, battery capacity and suspension travel of the bike in your size. Include your Tahoe dates so he can confirm which shop can arrange a test ride or pickup."
+                  : "Email Buck with the model already filled in. He can confirm current size and color choices, share the exact technical specifications for the bike being offered, and explain pickup, test-ride, or shipping next steps."}
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                 <BikeInquiryButton bike={bike} className="sm:flex-1" />
@@ -148,7 +148,7 @@ export default async function BikeDetailPage({ params }: BikeDetailPageProps) {
                   className="inline-flex items-center gap-1.5 font-medium text-foreground underline-offset-4 hover:underline"
                 >
                   <GoogleGIcon className="h-4 w-4" />
-                  Read our Google reviews
+                  Read Olympic Valley reviews
                 </a>
               </div>
               <CopyEmailButton

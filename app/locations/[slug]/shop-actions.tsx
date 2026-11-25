@@ -17,7 +17,7 @@ type ShopActionsProps = {
 export default function ShopActions({ shopId, address, phone, email }: ShopActionsProps) {
   const inquiryOptions = { email, locationName: address.city }
   const inquiry = fittingInquiryParts(inquiryOptions)
-  const tracking = { location: `location_page_${shopId}`, shopId }
+  const tracking = { category: "boot_fitting" as const, location: `location_page_${shopId}`, shopId }
   const directions = directionsUrl(address)
 
   return (

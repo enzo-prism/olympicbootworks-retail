@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next"
 import { bikeDetailUrl, bikes } from "@/data/bikes"
 import { locationUrl, locations } from "@/data/locations"
 
+import { fittingServices, fittingServiceUrl } from "@/data/fitting-services"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.olympicbootworks.com"
   // Omit lastModified until per-page editorial dates are maintained. Build time is not content freshness.
@@ -24,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/privacy`, changeFrequency: "yearly", priority: 0.3 },
     // /shop and /shop/boots are 308 redirects, so they stay out of the sitemap.
     ...locations.map((location) => ({ url: `${base}${locationUrl(location)}` })),
+    ...fittingServices.map(({ slug }) => ({ url: base + fittingServiceUrl(slug) })),
     ...bikePages,
   ]
 }

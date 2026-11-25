@@ -31,11 +31,13 @@ const services = [
   {
     icon: Footprints,
     title: "Heel-Loc Custom Footbeds",
+    href: "/boot-fitting/custom-footbeds",
     text: "Our proprietary unweighted casting method builds an orthotic foundation for alignment, comfort, and efficient power transfer.",
   },
   {
     icon: Award,
     title: "ZipFit Liner Specialists",
+    href: "/boot-fitting/zipfit-liners",
     text: "Premium cork-composite liners that keep adapting to your feet over time — a precise option for serious skiers and snowboarders.",
   },
 ]
@@ -207,7 +209,7 @@ export default function BootFittingPage() {
                 <div className="mb-4 inline-block rounded-full bg-primary/10 p-3 text-primary">
                   <service.icon className="h-6 w-6" aria-hidden="true" />
                 </div>
-                <h3 className="mb-2 font-sans tracking-normal font-semibold">{service.title}</h3>
+                <h3 className="mb-2 font-sans tracking-normal font-semibold">{service.href ? <Link className="text-primary underline underline-offset-4" href={service.href}>{service.title}</Link> : service.title}</h3>
                 <p className="text-sm text-muted-foreground">{service.text}</p>
               </div>
             ))}
@@ -265,6 +267,14 @@ export default function BootFittingPage() {
               <div key={faq.question} className="rounded-lg border bg-card p-6">
                 <h3 className="font-sans tracking-normal text-lg font-semibold mb-3">{faq.question}</h3>
                 <p className="text-sm leading-6 text-muted-foreground">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {locations.map((shop) => (
+              <div key={shop.id} className="rounded-lg border bg-card p-5">
+                <Link href={locationUrl(shop)} className="font-semibold text-primary underline">{shop.address.city} appointments</Link>
+                <p className="mt-2">Call <BootFittingPhoneLink shopId={shop.id} phone={shop.contact.phone} /> for a quote and visit length.</p>
               </div>
             ))}
           </div>

@@ -168,7 +168,7 @@ export default function AboutPage() {
               <h3 className="font-sans tracking-normal text-xl font-semibold mb-3">
                 <Link href="/boot-fitting" className="text-primary underline underline-offset-4">Custom ski boot fitting</Link>
               </h3>
-              <p className="text-muted-foreground">Explore the fitting process, shell and liner work, Heel-Loc custom footbeds, and ZipFit liners. Request a fitting at Olympic Valley or South Lake Tahoe.</p>
+              <p className="text-muted-foreground">Learn how Buck’s <Link href="/boot-fitting/custom-footbeds" className="text-primary underline">Heel-Loc custom footbeds</Link> are made, or explore <Link href="/boot-fitting/zipfit-liners" className="text-primary underline">ZipFit liner fitting</Link>. Request a fitting at Olympic Valley or South Lake Tahoe.</p>
             </div>
             <div>
               <h3 className="font-sans tracking-normal text-xl font-semibold mb-3">

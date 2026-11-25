@@ -37,7 +37,6 @@ export default function Footer() {
             </p>
             <p className="text-muted-foreground text-sm">{seasonalScheduleNotice.bannerSecondary}.</p>
             <FooterFittingButton />
-            <GoogleReviewButton size="sm" analyticsItemId="google_review_footer" className="w-fit" />
             <div className="flex items-center space-x-4 mt-6">
               <Link
                 href="https://www.facebook.com/olympicbootworks/"
@@ -132,6 +131,7 @@ export default function Footer() {
               <Link href={locationUrl(northLakeLocation)} className="text-sm text-primary hover:underline">
                 Shop details & directions
               </Link>
+              <div><GoogleReviewButton shop={northLakeLocation} size="sm" /></div>
             </div>
           </div>
 
@@ -151,6 +151,7 @@ export default function Footer() {
               <Link href={locationUrl(southLakeLocation)} className="text-sm text-primary hover:underline">
                 Shop details & directions
               </Link>
+              <div><GoogleReviewButton shop={southLakeLocation} size="sm" /></div>
             </div>
           </div>
         </div>

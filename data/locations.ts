@@ -19,6 +19,7 @@ export interface LocationContact {
 export interface LocationData {
   id: string
   name: string
+  googlePlaceId: string
   flagship: boolean
   address: LocationAddress
   contact: LocationContact
@@ -91,6 +92,7 @@ export const locations: LocationData[] = [
   {
     id: "olympic-valley",
     name: "North Lake Tahoe",
+    googlePlaceId: "ChIJm5ZXkerZm4ARnAq7qThpZok",
     flagship: true,
     address: {
       line1: "1602 Squaw Valley Road, Box 3514",
@@ -112,6 +114,7 @@ export const locations: LocationData[] = [
   {
     id: "south-lake-tahoe",
     name: "South Lake Tahoe",
+    googlePlaceId: "ChIJbRWwZVqRmYARBeVTSFXX0Fk",
     flagship: false,
     address: {
       line1: "1235 Ski Run Blvd.",

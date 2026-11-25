@@ -17,7 +17,15 @@ export const bootFittingFaqs = [
     answer: "Olympic Bootworks offers shell and liner adjustments as part of its fitting services. Tell the shop which boots you own and what you notice while skiing so the fitter can assess whether adjustments are appropriate for your boots.",
   },
   {
-    question: "How do I request a fitting, and what does it cost?",
-    answer: "Email your preferred location with your dates, current boots, skiing goals, and any fit concerns. Ask the shop to confirm the appointment, expected visit length, and pricing for the work you need. The website does not list a fixed fitting price.",
+    question: "What does a new boot purchase include?",
+    answer: "Every new pair is sold with a fitting. We assess your feet and stance, check the fit of the shell and recommend any further work. Ask for an itemized quote for custom footbeds, replacement liners or shell work when choosing your boots.",
+  },
+  {
+    question: "How much does fitting cost and how long should I allow?",
+    answer: "Tell the shop whether you are buying new boots, bringing in a pair for adjustment, or booking footbed or liner work. Include your dates and the problem you want assessed. The shop can quote the work and confirm how much time to reserve before you make the trip.",
+  },
+  {
+    question: "What if my boots need another adjustment after I ski?",
+    answer: "Bring both boots back and tell us where you felt pressure or movement, on which foot and after how many runs. When arranging the return visit, say what was done at your first fitting and ask which follow-up work is included and whether there will be a charge.",
   },
 ] as const

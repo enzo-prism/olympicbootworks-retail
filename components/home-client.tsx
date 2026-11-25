@@ -333,7 +333,7 @@ export default function HomeClient() {
       <section className="bg-secondary/60 py-16 md:py-24">
         <div className="container mx-auto grid gap-6 px-4 lg:grid-cols-2">
           <Link
-            href="/boot-fitting"
+            href="/boot-fitting/custom-footbeds"
             className="group relative flex min-h-[440px] items-end overflow-hidden rounded-xl bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 lg:row-span-3 lg:min-h-[560px]"
           >
             <SiteImage
@@ -354,7 +354,7 @@ export default function HomeClient() {
                 footbed supports its natural shape for alignment, comfort, and power transfer.
               </p>
               <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold">
-                Explore boot fitting
+                See how Heel-Loc footbeds are made
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </span>
             </div>

@@ -75,3 +75,9 @@ Status as of November 20, 2026 (property 508275630):
 
 GA4 only counts visitors who accept analytics in the consent banner, so its totals are a sample,
 not the whole audience. Compare channels by share, not absolute counts.
+
+### Winter organic search
+
+Use the verified Search Console domain property for search-result clicks and impressions. Compare the two service URLs and both shop URLs over 28 days against the preceding period and the same dates last winter. Report disclosed non-branded queries separately and retain the unfiltered total because Google suppresses some query rows.
+
+In GA4 property 508275630, filter to Organic Search, then group contact actions by shop and contact method. A phone tap or email launch fires `generate_lead` before a conversation takes place. Use the shops’ existing appointment records and intake source answers for confirmed fittings. Report the counts separately and leave unattributed appointments unattributed.

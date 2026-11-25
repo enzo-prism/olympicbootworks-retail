@@ -3,7 +3,6 @@ import { fittingInquiryUrl } from "@/lib/fitting-inquiry"
 import ContactClient from "./contact-client"
 import MinimalPageHero from "@/components/minimal-page-hero"
 import { GoogleGIcon } from "@/components/google-g-icon"
-import { GOOGLE_BUSINESS_REVIEW_URL } from "@/lib/google-business"
 import { northLakeLocation, phoneHref, seasonalScheduleNotice } from "@/data/locations"
 
 export const metadata = pageMetadata({
@@ -23,10 +22,9 @@ export default function ContactPage() {
           { href: fittingInquiryUrl(), label: "Book a Fitting" },
           { href: phoneHref(northLakeLocation.contact.phone), label: "Call North Lake", shopId: northLakeLocation.id, variant: "secondary" },
           {
-            href: GOOGLE_BUSINESS_REVIEW_URL,
+            href: "/testimonials#review-your-shop",
             label: "Leave a Google review",
             variant: "secondary",
-            external: true,
             leadingIcon: <GoogleGIcon className="h-[1.15rem] w-[0.8rem]" />,
           },
         ]}

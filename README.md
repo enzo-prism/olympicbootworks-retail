@@ -106,7 +106,7 @@ for product accuracy and use these lifestyle images for local context. The Tahoe
 
 ## Conversion tracking
 
-Email, phone, and test-ride actions are the real conversions. Each lead carries `lead_category` and, when known, `shop_id`; every prefilled inquiry email asks "How did you hear about us?". See `docs/analytics-attribution.md` for tagged links and GA4 setup. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google, Hotjar, and Vercel Web Analytics load only after analytics consent. Development and Vercel preview builds do not mount tracking scripts. Vercel Analytics is enabled on Vercel production builds only; Replit does not provide its first-party collection endpoint. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
+Email, phone, and test-ride actions measure contact intent. Shop appointment records establish confirmed fittings. Each lead carries `lead_category` and, when known, `shop_id`; every prefilled inquiry email asks "How did you hear about us?". See `docs/analytics-attribution.md` for tagged links and GA4 setup. Page views, e-bike list views, and copy-email fallbacks are GA4-only and must never use the Google Ads lead action. Google, Hotjar, and Vercel Web Analytics load only after analytics consent. Development and Vercel preview builds do not mount tracking scripts. Vercel Analytics is enabled on Vercel production builds only; Replit does not provide its first-party collection endpoint. The site does not currently load a Meta Pixel or Conversions API integration; Meta campaigns must be treated as Traffic/Landing Page Views unless separately approved measurement is added. Keep `components/tracking-consent.tsx` and `app/privacy/page.tsx` aligned when measurement changes.
 
 ## Seasonal content
 
@@ -120,6 +120,7 @@ The July 15 Meta-ready design and redirect release is documented in `docs/releas
 
 ## SEO and answer-engine maintenance
 
+- The [winter organic search release](docs/releases/2026-11-24-winter-organic-search.md) covers the two fitting guides, location-specific review destinations, and the local listing checks. Edit service copy in `data/fitting-services.ts` and shop Google Place IDs in `data/locations.ts`.
 - Give every indexable page its own title, description, canonical, Open Graph and Twitter metadata. Canonicals use `https://www.olympicbootworks.com`, including on previews.
 - Keep important answers and links in initial HTML. Use visible questions about the actual fitting and inquiry process; avoid creating duplicate town pages or unverified expert claims.
 - Keep business identity, addresses, phones, seasonal status, and schema aligned with their shared data. Appointment-only periods must not produce invented opening times. Store JSON-LD may publish `openingHoursSpecification` only from confirmed clock hours in `data/locations.ts`.
